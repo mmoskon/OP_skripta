@@ -117,8 +117,21 @@ True
 False
 \end{lstlisting}
 
-
-
+Sezname lahko primerjamo z drugimi seznami z uporabo primerjalnih operatorjev. Takole preverjamo enakost oziroma neenakost dveh seznamov:
+\begin{lstlisting}[language=Python]
+>>> [1,2,3] == [1,2,3]
+True
+>>> [1,2,3] != [1,2,3]
+False
+\end{lstlisting}
+Lahko tudi ugotavljamo, če je prvi seznam manjši od drugega (besedico manjši bi lahko zamenjali tudi z večji, manjši ali enak ter večji ali enak):
+\begin{lstlisting}[language=Python]
+>>> [1,2,3] < [1,2,3,4]
+True
+>>> [1,3,3] < [1,2,3]
+False
+\end{lstlisting}
+Primerjalni operatorji nad seznami delujejo podobno kot nad nizi in sicer se gre za leksikografsko primerjanje. Leksikografsko primerjanje je npr. uporabljeno pri sortiranju besed v slovarju, in sicer gre za to, da med seboj primerjamo istoležne elemente seznama, dokler ne pridemo do neenakosti oziroma do konca seznama. V zgornjem primeru smo prišlo do konca prvega seznama. Ker je nekaj kar ne obstaja načeloma manjše kot nekaj kar obstaja, je Python vrnil, da je prvi seznam manjši od drugega. V drugem primeru se je primerjanje ustavilo pri elementih na indeksu 1, saj sta elementa na tem indeksu različna. Ker 3 ni manjše od 2, je Python ugotovil, da prvi seznam ni manjši od drugega in vrnil rezultat \texttt{False}.
 
 \section{Spreminjanje in brisanje elementov seznama}
 
@@ -141,7 +154,9 @@ Do zdaj smo programe večinoma testirali tako, da smo preko funkcije \texttt{inp
 
 \texttt{eval}
 
+\section{Seznami seznamov}
 
+\section{Sortiranje seznamov}
 
 \section{Funkcija \texttt{range}}
 
