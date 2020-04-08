@@ -348,7 +348,8 @@ Alternativen pristop bi bil, da za beleženje podatkov o dolžinah in imenih upo
 \begin{lstlisting}[language=Python]
 >>> skoki = [[121.4, "Andrej"], 
             [143.1, "Bojan"], 
-            [105.2, "Cene"], [99.3, "Dejan"]]
+            [105.2, "Cene"], 
+            [99.3, "Dejan"]]
 \end{lstlisting}
 Kasneje bomo za take primere sicer uporabljali malo drugačno strukturo, ampak zaenkrat te še ne poznamo. Naredili smo torej seznam seznamov. Kaj se nahaja v tem primeru na indeksu 0?
 \begin{lstlisting}[language=Python]
@@ -360,7 +361,7 @@ Seznam, ki vsebuje podatke o ničtem skakalcu. Kako pa bi prišlo do njegovega i
 >>> skoki[0][1]
 "Andrej"
 \end{lstlisting}
-Kaj se bo zgodilo, če tak seznam sortiramo? Nad vgnezdenimi seznami bo za sortiranje uporabljena bo relacija \texttt{<}, ki smo jo v tem poglavju že srečali. Rekli smo, da relacija manjši sezname med seboj primerja leksikografsko. Najprej primerja ničti element prvega seznam z ničtim drugega. Če sta enaka primerja prvi element prvega seznama s prvim elementom druhega seznama in tako naprej. Če bomo torej v vgnezdene sezname na ničto mesto dali dolžine na prvo mesto pa imena, bo sortiranje izvedeno po dolžinah. Po imenih bo sortiranje potekalo samo v primeru, če bosta dolžini pri dveh podseznaih enaki. Poskusimo:
+Kaj se bo zgodilo, če tak seznam sortiramo? Nad vgnezdenimi seznami bo za sortiranje uporabljena relacija \texttt{<}, ki smo jo v tem poglavju v povezavi s primerjanjem seznamov že srečali. Rekli smo, da relacija manjše sezname med seboj primerja leksikografsko. Najprej primerja ničti element prvega seznam z ničtim drugega. Če sta enaka, primerja prvi element prvega seznama s prvim elementom drugega seznama in tako naprej. Če bomo torej v vgnezdene sezname na ničto mesto dali dolžine na prvo mesto pa imena, bo sortiranje izvedeno po dolžinah. Po imenih bo sortiranje potekalo samo v primeru, če bosta dolžini pri dveh podseznamih enaki. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> skoki.sort(reverse=True)
 >>> skoki
@@ -376,7 +377,7 @@ Ker smo zdaj sortirali dolžine skokov skupaj z imeni tekmovalcev, informacije o
 >>> skoki[2,1]
 'Cene'
 \end{lstlisting}
-Zapišimo celoten zgled.
+To so zmagovalci. Zapišimo celoten zgled.
 \begin{zgled}
 Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka in imenu tekmovalca. V primeru, da sodnik za dolžino vnese število večje od 0, naj program dolžino in ime shrani v seznam. Če sodnik vpiše številko 0, naj program izpiše zmagovalce in dolžine njihovih skokov.
 \end{zgled}
@@ -388,7 +389,7 @@ d = float(input("Vpisi dolzino: ")) # prvo branje
 while d > 0: # dokler je dolzina veljavna
     ime = input("Vpisi ime tekmovalca: ")
     skoki.append([d,ime]) # dodajanje podseznama
-    d = float(input("Vpisi dolzino: ")) # prvo branje
+    d = float(input("Vpisi dolzino: ")) # nadaljnja branja
 skoki.sort(reverse=True)
 print("1. mesto:", skoki[0][1], ", dolzina skoka:", skoki[0][0])
 print("2. mesto:", skoki[1][1], ", dolzina skoka:",  skoki[1][0])
