@@ -1,0 +1,150 @@
+\chapter{Seznami in metode}
+
+\section{Sekvenčni podatkovni tipi}
+
+Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (1) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnati ločeno, kar nas bo pripeljalo do ogrome količine nepregledne \emph{copy--paste} kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bomo imeli (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Dodatna prednost sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
+
+\section{Kaj so seznami?}
+
+Drug predstavnik sekvenčnih podatkovnih tipov je seznam oziroma \texttt{list}. Za razliko od nizov lahko vanj shranimo poljubne podatke, kot so npr. števila, nizi in tudi drugi seznami. Dodatna prednost uporabe seznamov je ta, da lahko elemente v seznamu dodajamo sproti, zato dolžine seznama ni treba vnaprej definirati. Lahko torej začnemo s praznim seznamom in vsakič, ko dobimo podatek o novi meritvi, tega v seznam dodamo. 
+
+Sezname definiramo z oglatimi oklepaji \texttt{[} in \texttt{]}, znotraj katerih naštejemo elemente. Prazen seznam bi naredili takole
+\begin{lstlisting}[language=Python]
+>>> prazen_seznam = []
+\end{lstlisting}
+Seznam, ki vsebuje približno naključne dolžine skokov smučarjev skakalcev pa takole
+\begin{lstlisting}[language=Python]
+>>> dolzine = [121.4, 143.1, 105.2, 99.3]
+\end{lstlisting}
+V isti seznam bi lahko zapisali tudi različne podatkovne tipe, npr. 3 cela števila, 1 decimalko, 5 nizov itd., čeprav v praksi tega ne srečamo pogosto. Ponavadi v sezname shranjujejmo podatke, ki pripadajo istemu podatkovnemu tipu, saj se ti podatke nanašajo na ponavljajoče izvajanje npr. določene meritve. Na koncu lahko zato z uporabo seznamov izvedemo določene statistike, npr. kdo je skočil najdlje, kakšna je povprečna dolžina skoka, koliko ljudi je skočilo itd.
+
+\section{Indeksiranje seznamov}
+Seznami so urejeni. To pomeni, da je vrstni red, v katerem naštejemo elemente seznama, pomemben. Vsak element v seznamu ima namreč svoj \emph{indeks}. Pri tem se indeksiranje začne z najmanjšim pozitivnim številom, ki v računalništvu ni 1, ampak 0. Indeksi bodo torej šli od števila 0 do dolžine seznama -- 1. V primeru zgoraj definiranega seznama \texttt{dolzine} gredo torej indeksi od 0 do 3, saj seznam vsebuje 4 elemente:
+
+\begin{tabular}{cccccc}
+\textbf{indeksi} & & 0 & 1 & 2 & 3\\
+%\hline
+\texttt{dolzine} & = & \texttt{[121.4,}& \texttt{143.1,} & \texttt{105.2,} & \texttt{99.3]}
+\end{tabular}
+
+Do elementa na določenem indeksu lahko pridemo z indeksiranjem, ki ga izvedemo tako, da za imenom spremenljivke indeks zapišemo v oglatih oklepajih:
+\begin{lstlisting}[language=Python]
+ime_seznama[indeks]
+\end{lstlisting}
+Do dolžine skoka 0-tega skakalca bi torej prišli takole:
+\begin{lstlisting}[language=Python]
+>>> dolzine[0]
+121.4
+\end{lstlisting}
+
+Kaj pa do zadnjega skakalca? Do dolžine seznama lahko pridemo preko vgrajene funkcije \texttt{len}:
+\begin{lstlisting}[language=Python]
+>>> len(dolzine)
+4
+\end{lstlisting}
+Funkcijo lahko torej uporabimo pri indeksiranju, kadar ne vemo točno, koliko elementov ima seznam. Do zadnjega elementa torej pridemo takole:
+\begin{lstlisting}[language=Python]
+>>> dolzine[len(dolzine)-1]
+99.3
+\end{lstlisting}
+Zakaj moramo od dolžine seznama odšteti 1? Ker smo začeli šteti s številom 0, bo zadnji indeks enak dolžini seznama -- 1. Kaj pa če vseeno poskusimo indeksirati po indeksu, ki ga v seznamu ni? V tem primeru seveda dobimo napako:
+\begin{lstlisting}[language=Python]
+>>> dolzine[len(dolzine)]
+Traceback (most recent call last):
+  File "<pyshell#16>", line 1, in <module>
+    dolzine[len(dolzine)]
+IndexError: list index out of range
+\end{lstlisting}
+Kot smo do zdaj že večkrat videli ima Python veliko lepih lastnosti. Ena izmed njih je tudi ta, da lahko uporabljamo negativno indeksiranje, pri čemer indeks -1 predstavlja zadnji element, indeks -2 predzadnji in tako naprej. Dolžine skokov imajo torej tudi negativne indekse:
+
+\begin{tabular}{cccccc}
+\textbf{indeksi} & & -4 & -3 & -2 & -1\\
+%\hline
+\texttt{dolzine} & = & \texttt{[121.4,}& \texttt{143.1,} & \texttt{105.2,} & \texttt{99.3]}
+\end{tabular}
+
+Prednost takega načina indeksiranja je v tem, da lahko na zelo enostaven način pridemo do zadnjega elementa seznama (brez funkcije \texttt{len}):
+\begin{lstlisting}[language=Python]
+>>> dolzine[-1]
+99.3
+\end{lstlisting}
+
+Mimogrede, podobno kot lahko indeksiramo elemente seznamov, lahko indeksiramo tudi elemente nizov. Prav tako lahko dolžino niza preverimo s funkcijo \texttt{len}.
+\begin{lstlisting}[language=Python]
+>>> niz = "banana"
+>>> niz[0]
+"b"
+>>> niz[-1]
+"a"
+>>> len(niz)
+6
+\end{lstlisting}
+
+\section{Operatorji nad seznami}
+
+Nad seznami lahko uporabimo različne operatorje, ki smo jih do zdaj uporabljali že npr. nad nizi. Nize smo npr. lahko med seboj seštevali (temu smo sicer rekli konkatenacija oziroma lepljenje). Med seboj lahko seštevamo tudi sezname:
+\begin{lstlisting}[language=Python]
+>>> [1,2,3] + [4,5,6]
+[1,2,3,4,5,6]
+\end{lstlisting}
+Ne moremo pa seznamom prišteti nečesa, kar ni seznam, npr. števila:
+\begin{lstlisting}[language=Python]
+>>> [1,2,3]+4
+Traceback (most recent call last):
+  File "<pyshell#20>", line 1, in <module>
+    [1,2,3]+4
+TypeError: can only concatenate list (not "int") to list
+\end{lstlisting}
+Lahko pa sezname množimo s celimi števili:
+\begin{lstlisting}[language=Python]
+>>> [1,2,3]*4
+[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+\end{lstlisting}
+S čim drugim jih ni smiselno množiti, zato Python tega ne podpira:
+\begin{lstlisting}[language=Python]
+>>> [1,2,3]*[4,5,6]
+Traceback (most recent call last):
+  File "<pyshell#22>", line 1, in <module>
+    [1,2,3]*[4,5,6]
+TypeError: can't multiply sequence by non-int of type 'list'
+\end{lstlisting}
+
+Nad seznami lahko uporabimo tudi operatorja vsebovanosti \texttt{in} in \texttt{not in}, ki vrneta \texttt{True} ali \texttt{False} v odvisnosti od tega ali je nekaj v seznamu vsebovano ali ne:
+\begin{lstlisting}[language=Python]
+>>> 1 in [1,2,3]
+True
+>>> 1 not in [1,2,3]
+False
+\end{lstlisting}
+
+
+
+
+\section{Spreminjanje in brisanje elementov seznama}
+
+Ne gre nad nizi
+
+\section{Vgrajene funkcije nad seznami}
+Srečali smo že funkcijo \texttt{len}, s pomočjo katere lahko ugotovimo kakšna je dolžina seznama. Nad seznami 
+
+\section{Metode}
+
+\section{Metode seznamov}
+
+
+
+\section{Dodajanje elementov}
+
+\section{Branje seznamov iz ukazne vrstice}
+Do zdaj smo programe večinoma testirali tako, da smo preko funkcije \texttt{input} prebrali 
+
+
+\texttt{eval}
+
+
+
+\section{Funkcija \texttt{range}}
+
+\section{Rezine}
+
+\section{Sprehajanje čez sezname}

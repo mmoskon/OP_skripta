@@ -1,0 +1,92 @@
+\chapter{Uporaba in pisanje modulov}
+
+\section{Kaj so moduli?}
+
+Moduli predstavljajo Pythonove datoteke, ki vsebujejo implementacijo določenih funkcij, spremenljivk in razredov \angl{classes}. Module lahko vključimo v svoje programe in na ta način razširimo osnovne funkcionalnosti jezika Python. Primeri že vgrajenih modulov, ki jih ni potrebno posebej namestiti, so modul \texttt{math}, v katerem so definirane določene matematične funkcije in konstante, modul \texttt{time} za vračanje podatkov o času in tvorjenje zakasnitev ter modul \texttt{random} za delo s (psevdo)naključnimi števili.
+
+\section{Uporaba modulov}
+
+Module lahko v svoje programe vključimo na različne načine, v vseh primerih pa uporabljamo rezervirano besedo \texttt{import}. Če želimo npr. v naš program uvoziti celoten modul \texttt{math}, lahko to naredimo s sledečo vrstico:
+\begin{lstlisting}[language=Python]
+import math
+\end{lstlisting}
+oziroma v splošnem
+\begin{lstlisting}[language=Python]
+import ime_modula
+\end{lstlisting}
+Najprej lahko preverimo kaj uvožen modul dejansko ponuja. Če je pisec modula bil priden in napisal tudi dokumentacijo, bomo za to lahko uporabili funkcijo \texttt{help}
+\begin{lstlisting}[language=Python]
+help(ime_modula)
+\end{lstlisting}
+Funkcija nam bo izpisala nekaj osnovnih informacij o modulu, tako da bo uporaba lažja. Seveda pa lahko informacije o modulu poiščemo tudi na internetu, ki pa včasih ni na voljo (npr. v času pisanja kolokvijev in izpitov), zato se je dobro navaditi tudi uporabe zgoraj omenjene funkcije.
+
+Če bi zdaj želeli dostopati do posamezen funkcije, ki je v uvoženem modulu definirana, bi to naredili na sledeč način
+\begin{lstlisting}[language=Python]
+ime_modula.ime_funkcije(argumenti)
+\end{lstlisting}
+Če bi npr. želeli izračunati sinus števila shranjenega v spremenljivki \texttt{x} in rezultat shraniti v spremenljivko \texttt{y}, bi za to uporabil funkcijo \texttt{sin}, ki je vsebovana v modulu \texttt{math}. Poklicali bi jo takole
+\begin{lstlisting}[language=Python]
+y=math.sin(x)
+\end{lstlisting}
+
+Včasih imajo moduli zelo dolga in težko berljiva imena. Če želimo modul uvoziti pod drugačnim imenom (lahko bi rekli psevdonimom), uvoz dopolnimo z \texttt{as} stavkom:
+\begin{lstlisting}[language=Python]
+import dolgo_ime_modula as psevdonim
+\end{lstlisting}
+Tako lahko pri klicanju funkcij (ali pa česarkoli že) modula podajamo le kratko ime modula. V prejšnjem primeru bi kodo lahko spremenili na sledeč način:
+\begin{lstlisting}[language=Python]
+import math as m
+y=m.sin(x)
+\end{lstlisting}
+
+V določenih primerih pa želimo iz modula uvoziti le določeno funkcijo (spremenljivko, razred). Takrat lahko uporabimo rezervirano besedo \texttt{from}, in sicer takole
+\begin{lstlisting}[language=Python]
+from ime_modula import ime_funkcije
+\end{lstlisting}
+S takim načinom uvažanja smo uvozili le tisto kar potrebujemo, poleg tega pa zdaj pri klicu funkcije imena modula ni potrebno več podajati. Primer sinusa bi se spremenil v sledečo kodo
+\begin{lstlisting}[language=Python]
+from math import sin
+y=sin(x)
+\end{lstlisting}
+Zdaj smo iz modula uvozili zgolj funkcijo \texttt{sin} -- če bi želeli imeti še kakšno drugo funkcijo, npr. kosinus, bi jo morali uvoziti ločeno oziroma hkrati s funkcijo \texttt{sin}. To bi naredili takole:
+\begin{lstlisting}[language=Python]
+from math import sin,cos
+\end{lstlisting}
+Lahko pa naredimo še nekaj, kar ponavadi ni priporočljivo. Uvozimo lahko vse, kar je v modulu definirano, in sicer namesto imena funkcije podamo \texttt{*}, ki se v računalništvu velikokrat uporablja kot simbol za \emph{vse}. Rekli bomo torej \emph{iz modula uvozi vse}:
+\begin{lstlisting}[language=Python]
+from ime_modula import *
+\end{lstlisting}
+V primeru modula \texttt{math} bomo zapisali takole:
+\begin{lstlisting}[language=Python]
+from math import *
+\end{lstlisting}
+Zakaj tak način uvažanja ni priporočljiv? Vse funkcije, spremenljivke in razrede modula smo zdaj dobili v naš globalni imenski prostor. Pri tem je velika verjetnost, da smo si s tem povozili kakšno od spremenljivk, ki jo tam že uporabljamo in ima enako ime kot kakšna izmed funkcij ali spremenljivk definiranih v modulu. Zato se takemu način uvažanja modulov izogibamo.
+
+\section{Definicija in uporaba lastnih modulov}
+Vsi programi, ki smo jih do zdaj napisali, predstavljajo module, ki jih lahko uvozimo v druge programe. To pomeni, da pri reševanju nekega (bolj kompleksnega) problema ni potrebno vse kode napisati v isti datoteki, ampak lahko datoteko razdelimo po smiselnih modulih, pri čemer lahko funkcije prvega modula uporabljamo v drugem in obratno. Pri tem lahko uporabimo kodo opisano v prejšnjem razdelku. Paziti moramo le na to, da se modul, ki ga uvažamo nahaja v isti mapi kot modul, v katerega kodo uvažamo. V nasprotnem primeru moramo pri uvažanju modula do drugega modula podati še pot do njega. Če se modul, ki ga želimo uvoziti, npr. nahaja v podmapi mapi \texttt{podmapa}, ga bomo uvozili na sledeč način:
+\begin{lstlisting}[language=Python]
+import podmapa.ime_modula
+\end{lstlisting}
+Če v tem primeru ne želimo, da modul vsakič posebej kličemo z imenom \texttt{podmapa.ime\_modula}, ga je smiselno uvoziti pod krajšim imenom takole
+\begin{lstlisting}[language=Python]
+import podmapa.ime_modula as ime_modula
+\end{lstlisting}
+Mogoče se sprašujete zakaj poti ni bilo potrebno podajati pri uvažanju modula \texttt{math}. Dejstvo je, da so določeni moduli v Python že vgrajeni, sicer pa Python module, poleg v trenutni delovni mapi, išče tudi v mapi \texttt{lib$\backslash$site-packages}, kamor se shranijo namestitve vseh modulov, ki jih bomo v prihodnosti potencialno še namestili.
+
+\section{Nameščanje novih modulov}
+Na spletu obstaja veliko modulov, ki so jih razvili programerji pred nami. Te lahko uporabimo, kadar želimo pri reševanju določenega problema uporabiti višjenivojske sestavine. Če želimo npr. narisati graf povprečne mesečne plače v Sloveniji, nam ni potrebno študirati, kako se lotili kakršnegakoli risanja v jeziku Python, ampak enostavno uporabimo paket (paket ni nič drugega kot zbirka modulov) \texttt{matplotlib} in njegove funkcije za risanje grafov. Problem, s katerim se srečamo, je, da tovrstni paketi v osnovni različici Pythona še niso nameščeni (razen, če si nismo namestili distribucije Anaconda \footnote{Anaconda je distribucija Pythona za znanstveno računanje, ki ima nameščenih že večino paketov, ki jih za tako računanje potrebujemo. Dostopna je na povezavi \url{https://www.anaconda.com/}.}) Pred uporabo jih moramo torej namestiti. Problem nameščanja tovrstnih paketov je, poleg včasih mukotrpnega procesa iskanja ustreznih namestitvenih datotek in ročne namestitive, tudi v tem, da za svoje delovanje večina paketov uporablja druge pakete, ti paketi spet druge in tako naprej. Temu rečemo odvisnost med paketi \angl{package dependency}. Da pa se s tem običajnemu uporabniku Pythona ni potrebno ukvarjati, Python okolje vsebuje orodje \texttt{pip} \angl{pip installs packages}, ki preko repozitorija PyPI \angl{Python package index} poišče in namesti ustrezne pakete avtomatsko. Nameščen je že skuppaj z osnovno distribucijo Pythona. Vse kar poleg tega potrebujemo je še internetna povezava in ime paketa, ki ga želimo namestiti. Orodje \texttt{pip} bomo pognali iz sistemske ukazne vrstice (v operacijskem sistemu Widnows jo zaženemo tako, da v start meni vpišemo \texttt{cmd}). V primeru, da smo ob namestitivi Pythona obkljukali opcijo \emph{Add Python to path}, lahko orodje \texttt{pip} poženemo iz poljubne lokacije. V nasprotnem primeru se moramo premakniti v mapo, kjer \texttt{pip} nameščen (podmapa \texttt{Scripts} mape, kjer je nameščen Python). Paket z imenom \texttt{ime\_paketa}  zdaj namestimo s sledečim ukazom
+\begin{lstlisting}[language=bash]
+>>> pip install ime_paketa
+\end{lstlisting}
+in \texttt{pip} bo poskrbel za vse ostalo.
+
+%\section{Primeri uporabe modulov}
+
+%\subsection{Modul \texttt{math}}
+
+%\begin{lstlisting}[language=Python]
+%help(math)
+%\end{lstlisting}
+
+
+

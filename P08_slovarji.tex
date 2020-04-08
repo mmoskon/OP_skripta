@@ -1,0 +1,224 @@
+\chapter{Slovarji}
+
+\section{Zakaj slovarji?}
+
+Zdaj smo se že pobliže spoznali z različnimi sekvenčnimi podatkovnimi tipi, med katere smo uvrstili nize, sezname in terke. V spremenljivke, ki so pripadale tem tipom, smo lahko shranili več podatkov, pri čemer je bil podatek vedno povezan z določenim indeksom. Če se osredotočimo na sezname (kar bomo povedali velja sicer tudi za nize in terke), lahko rečemo, da so podatki v njih na nek način urejeni, ko smo v sezname dodajali nove podatke, smo te ponavadi dodajali na konec seznama, iskanje pa je potekalo tako, da smo se morali z zanko \texttt{for} sprehoditi čez celoten seznam in iskati dokler elementa nismo našli. Sezname smo lahko tudi sortirali po nekem ključu (recimo glede na relacijo <), pri čemer je bil rezultat sortiranja tak, da je manjši ključ imel manjšo vrednost glede na uporabljeno relacijo. 
+
+V določenih primerih pa je bolj priročno, če lahko do vrednosti v spremenljivki dostopamo še preko česa drugega kot njenega indeksa. Pomislimo npr. na telefonski imenik števil, kjer lahko do telefonske številke neke osebe, dostopamo preko imena te osebe. Rekli bi lahko, da je ime osebe \emph{ključ} preko katerega dostopamo do telefonske številke oziroma \emph{vrednosti}. Na podoben način iščemo gesla v Slovarju slovenskega knjižnjega jezika (ali pač kakšnem drugem slovarju), kjer kot ključ nastopa iskana beseda oziroma geslo, kot vrednost pa razlaga iskane besede. Za razlago določene besede nam torej ni potrebno preiskati celotnega slovarja, ampak njeno razlago poiščemo preko gesla, ki ga je v slovarju načeloma enostavno najti.
+
+Takim imenikom in slovarjem ustreza podatkovna struktura \texttt{dict} \angl{dictionary} oziroma po slovensko kar \emph{slovar}. V primeru slovarjev posamezna \emph{vrednost} \angl{value} ni vezana na določen indeks, ampak je povezana na  \emph{ključ} \angl{key}. Elemente slovarja torej vedno podajamo kot pare \emph{ključ:vrednost}. Kakšna je prednost takega načina shranjevanja podatkov? Uporabna je takrat, ko ključe, po katerih shranjujemo in kasneje iščemo vrednosti, poznamo. V tem primeru je iskanje zelo hitro, saj nam ni potrebo preiskati celotnega slovarja, ampak slovarju zgolj podamo ključ in do vrednosti pridemo takoj. Operacija iskanja je torej zelo hitra v primerjavi s seznami ali terkami.
+
+\section{Kako uporabljamo slovarje?}
+
+Slovarje zapisujemo z zavitimi oklepaji, torej \texttt{\{} in \texttt{\}}, pri čemer elemente naštejemo kot pare ključ in vrednost ločene z dvopičjem (\texttt{:}). Prazen slovar bi naredili takole
+\begin{lstlisting}[language=Python]
+>>> prazen_slovar = {}
+\end{lstlisting}
+Slovar, ki vsebuje enostaven telefonski imenik bi lahko zapisali kot
+\begin{lstlisting}[language=Python]
+>>> imenik = {"Janez":"083455544", 
+            "Ana":"084566732", 
+            "Nika":"099563123"}
+\end{lstlisting}
+V tem primeru so ključi slovarja nizi, ki predstavljajo imena oseb, preko katerih lahko pridemo vrednosti, ki v tem primeru predstavljajo telefonske številke zapisane kot nizi. 
+
+Mimogrede, slovar je spremenljiv podatkovni tip, kot smo zapisali že v tabeli \ref{tab:spremenljivost}.
+
+\section{Iskanje vrednosti}
+Telefonsko številko osebe lahko torej najdemo tako, da podamo njeno ime, kar je smiselno, saj imena svojih prijateljev ponavadi poznamo na pamet, njihovih telefonskih številk pa ne. Telefonsko številko od Janeza lahko npr. dobimo tako, da slovar indeksiramo po ključu \texttt{"Janez"}:
+\begin{lstlisting}[language=Python]
+>>> imenik["Janez"]
+083455544
+\end{lstlisting}
+Indeksiranje se torej v primeru slovarjev namesto po indeksih izvaja po ključih. Kaj pa če bi želeli poiskati telefonsko številko od Dejana. Potem bi slovar indeksirali po ključu \texttt{"Dejan"}, kar pa nam v konkretnem primeru vrne napako:
+\begin{lstlisting}[language=Python]
+>>> imenik["Dejan"]
+Traceback (most recent call last):
+  File "<pyshell#1>", line 1, in <module>
+    imenik["Dejan"]
+KeyError: 'Dejan'
+\end{lstlisting}
+Problem je v tem, da ključa \texttt{"Dejan"} v našem slovarju (še) ni, zato preko njega slovarja ne moremo indeksirati (tako kot nismo mogli indeksirati seznam z indeksom, ki ga v seznamu ni bilo). Obstoj ključa v slovarju lahko preverimo z operatorjem \texttt{in}:
+\begin{lstlisting}[language=Python]
+>>> "Dejan" in imenik
+False
+>>> "Nika" in imenik
+True
+\end{lstlisting}
+Preden do določenega ključa v slovarju dostopamo je torej smiselno, da preverimo, če ključ v slovarju sploh obstaja.
+\begin{zgled}
+Napiši funkcijo \texttt{poisci}, ki kot argument sprejme imenik in ime osebe. Če imena ni v imeniku naj funkcija vrne vrednost \texttt{False}, sicer pa njeno telefonsko številko.
+\end{zgled}
+\begin{resitev} Rešitev mora pred indeksiranjem po podanem ključu, preveriti, če ključ v slovarju obstaja. V nasprotnem primeru vrne vrednost \texttt{False}. 
+\begin{lstlisting}[language=Python]
+def poisci(imenik, ime):
+    if ime in imenik:
+        return imenik[ime]
+    else:
+        return False
+\end{lstlisting}
+\end{resitev}
+
+\section{Dodajanje in spreminjanje vrednosti}
+
+Indeksiranje po ključih, ki jih v slovarju ni, pa je v določenih primerih dovoljeno, in sicer takrat, ko želimo v slovar dodati nov par ključ, vrednost. Dodajanje novega elementa lahko torej izvedemo tako, da slovar indeksiramo po novem (neobstoječem) ključu in takemu indeksrianju priredimo vrednost, ki jo želimo s tem ključem povezati. Če bi npr. želeli v slovar dodati Dejana in z njim povezati neko telefonsko številko, npr. 089543678, bi to naredili takole:
+\begin{lstlisting}[language=Python]
+>>> imenik["Dejan"] = "089543678"
+\end{lstlisting}
+V tem primeru napake nismo dobili, v slovarju pa se je ponavil nov par ključ, vrednost.
+\begin{lstlisting}[language=Python]
+>>> imenik
+{'Janez': '083455544', 'Ana': '084566732', 
+'Nika': '099563123', 'Dejan': '089543678'}
+\end{lstlisting}
+
+Kaj pa se zgodi, če poskusimo v slovar dodati še enega Dejana? Ker v slovarju do vrednosti dostopamo preko ključev, morajo biti ključi enolični, kar pomeni, da se posamezen ključ lahko v slovarju pojavi največ enkrat. Če torej naredimo prireditev vrednosti preko ključa, ki v slovarju že obstaja, bomo s tem izvedli spreminjanje vrednosti, ki je povezana s tem ključem. Prireditev
+\begin{lstlisting}[language=Python]
+>>> imenik["Dejan"] = "000000000"
+\end{lstlisting}
+bo torej spremenila telefonsko številko Dejana na 000000000.
+\begin{lstlisting}[language=Python]
+>>> imenik
+{'Janez': '083455544', 'Ana': '084566732', 
+'Nika': '099563123', 'Dejan': '000000000'}
+\end{lstlisting}
+
+Če bi se želeli torej omejiti samo na dodajanje elementov, bi lahko prej preverili, če ključ preko katerega dodajamo v slovarju že obstaja in dodajanje izvedli le, če takega ključa še ni.
+\begin{zgled}
+Napiši funkcijo \texttt{dodaj}, ki kot argumente prejme imenik, ime osebe in telefonsko številko osebe. Osebo in njeno telefonsko številko naj v slovar doda samo v primeru, če te osebe še ni v slovarju. Sicer naj izpiše, da ta oseba že obstaja.
+\end{zgled}
+\begin{resitev}
+V funkciji bomo tokrat izvedli prirejanje vrednosti, samo če podanega ključa še ni v slovarju. Poraja pa se dodatno vprašanje. Ali mora funkcija spremenjen slovar vračati? Odgovor je ne, saj je slovar spremenljiv podatkovni tip in sprememembe slovarja, ki jih bomo v funkciji naredili in ki ga je funkcija prejela kot argument, se bodo odražale tudi izven funkcije.
+\begin{lstlisting}[language=Python]
+def dodaj(imenik, ime, stevilka):
+    if ime not in imenik:
+        imenik[ime] = stevilka
+    else:
+        print("Ta oseba ze obstaja")
+\end{lstlisting}
+\end{resitev}
+
+Če bi se želeli samo na spreminjanje elementov, bi morali spremeniti pogoj v stavku \texttt{if}, tako da številko prirejamo samo v primeru, če je ključ v slovarju že vsebovan.
+\begin{zgled}
+Napiši funkcijo \texttt{spremeni}, ki kot argumente prejme imenik, ime osebe in telefonsko številko osebe. Telefonsko številko naj spremeni samo v primeru, če je oseba v imeniku že vsebovana. Sicer naj izpiše, da te osebe v imeniku ni.
+\end{zgled}
+\begin{resitev}
+Tokrat bomo v funkciji izvedli prirejanje vrednosti samo v primeru, če podan ključ v slovarju je. V nasprtonem primeru ne bi izvajali spreminjanja vrednosti za ključem, ampak bi izvajali dodajanje novega para ključ, vrednost.
+\begin{lstlisting}[language=Python]
+def spremeni(imenik, ime, stevilka):
+    if ime in imenik:
+        imenik[ime] = stevilka
+    else:
+        print("Te osebe ni v imeniku")
+\end{lstlisting}
+\end{resitev}
+
+V določenih primerih, npr. pri štetju pojavitev nečesa, moramo v slovar dodati nov ključ, če tega ključa v slovarju še ni, ali spreminjati nanj vezano vrednost, če ta ključ v slovarju že obstaja. Poglejmo si sledeč primer:
+
+\begin{zgled}
+Napiši funkcijo \texttt{prestej\_baze}, ki kot argument prejme nukleotidno zaporedje baz zapisano kot niz. Funkcija naj vrne slovar, ki za posamezno bazo vsebuje število ponovitev.
+\end{zgled}
+\begin{resitev}
+Za razliko od prej bo funkcija slovar vračala, saj ji ga kot argument nismo podali. V programu bi lahko predpostavljali, da delamo samo z bazami A, T, C in G. Tako bi si na začetku naredili slovar, v katerem kot ključi nastopajo oznake baz, nanje pa so vezane vrednosti 0. Takole:
+\begin{lstlisting}[language=Python]
+baze = {'A':0, 'T':0, 'C':0, 'G':0}
+\end{lstlisting}
+Slabost takega pristopa je ta, da smo se omejili samo na ključe A, T, C in G. Kaj pa če kot vhod dobimo RNA zaporedje? Ali pa če se v zaporedju pojavi še kakšna oznaka, ki je nismo predvideli?
+
+Boljši pristop bi bil, da na začetku naredimo prazen slovar in ko v nizu najdemo bazo, ki je v slovarju še ni, nanjo vežemo vrednost 1 (če smo jo našli v nizu prvič, potem to pomeni, da smo jo našli enkrat). V primeru, da v nizu najdemo bazo, ki v slovarju že obstaja, število njenih pojavitev povečamo za 1. 
+\begin{lstlisting}[language=Python]
+def prestej_baze(zaporedje):
+    baze = {} # prazen slovar
+    for baza in zaporedje:
+        if baza not in baze: # baza v slovarju? 
+            baze[baza] = 1 # ne
+        else:
+            baze[baza] += 1 # da
+    return baze
+\end{lstlisting}
+
+\end{resitev}
+
+
+\section{Brisanje vrednosti}
+
+V določenih primerih želimo elemente iz slovarjev tudi brisati. To lahko naredimo z besedico \texttt{del}, ki smo jo srečali že pri brisanju elementov iz seznama. Podobno kot pri seznamih tudi iz slovarjrv brišemo z indeksiranjem vrednosti, ki jo želimo izbrisati:
+\begin{lstlisting}[language=Python]
+del slovar[kljuc]
+\end{lstlisting}
+Tudi tokrat je smiselno, da pred brisanjem preverimo, če podan ključ v slovarju obstaja (brisanje po neobstoječem ključu bo spet vrnilo napako).
+
+\begin{zgled}
+Napiši funkcijo \texttt{izbrisi}, ki kot argumente prejme imenik in ime osebe, ki jo želimo iz imenika izbrisati. Brisanje naj se izvede samo v primeru, ko oseba v imeniku obstaja. Sicer naj funkcija izpiše, da te osebe v imeniku ni.
+\end{zgled}
+\begin{resitev}
+Spet bomo najprej preverili obstoj ključa, nato pa izvedli brisanje.
+\begin{lstlisting}[language=Python]
+def izbrisi(imenik, ime):
+    if ime in imenik:
+        del imenik[ime]
+    else:
+        print("Te osebe ni v imeniku")
+\end{lstlisting}
+\end{resitev}
+
+\section{Ključi in vrednosti}
+
+Posamezen ključe se lahko v slovarju pojavi največ enkrat. Ključi so torej enolični identifikatorji, preko katerih pridemo do posamezne vrednost. Za ključe pa velja tudi to, da morajo biti nespremenljivi. Zakaj? Vrednost, ki je vezana na posamezen ključ, se zapiše na lokacijo v pomnilniku, ki je določena s preslikavo ključa \angl{hash function}. Če ključ spreminjamo, se bo spremenila tudi vrednost preslikave. Za pravilno delovanje torej ključev ne smemo spreminjati (ko so enkrat shranjeni v slovarju). Zato je smiselno, da so ključi nespremenljivi podatki. Za vrednosti ni nobene omejitve -- uporabimo lahko poljuben podatkovni tip vključno z drugim, vgnezdenim, slovarjem.
+
+Sicer lahko do vseh ključev v slovarju pridemo z uporabo metode \texttt{keys}, do vseh vrednosti z uporabo metode \texttt{values}, do vseh parov pa z uporabo metode \texttt{items}. 
+\begin{lstlisting}[language=Python]
+>>> imenik.keys()
+dict_keys(['Janez', 'Ana', 'Nika', 'Dejan'])
+>>> imenik.values()
+dict_values(['083455544', '084566732', '099563123', 
+'089543678'])
+>>> imenik.items()
+dict_items([('Janez', '083455544'), ('Ana', '084566732'), 
+('Nika', '099563123'), ('Dejan', '089543678')])
+\end{lstlisting}
+Metode vračajo nekaj kar je zelo podobno seznamom. Pri metodi \texttt{keys} tako dobimo seznam ključev, pri metodi \texttt{values} seznam vrednosti, pri metodi \texttt{items} pa seznam terk. Nad rezultatom, ki ga posamezna metoda vrne, se lahko sprehajamo z zanko \texttt{for}. Zanko \texttt{for} pa lahko izvedemo tudi direktno nad slovarjem, pri čemer se bomo tako sprehajali čez ključe slovarja:
+\begin{lstlisting}[language=Python]
+>>> for k in imenik()
+        print(k)
+Janez
+Ana
+Nika
+Dejan
+\end{lstlisting}
+Preko ključev seveda lahko dostopamo tudi do vrednosti. 
+\begin{zgled}
+Napiši funkcijo \texttt{izpisi\_imenik}, ki kot argument prejme imenik. Funkcija naj izpiše vsebino imenika, tako da se vsak vnos nahaja v svoji vrstici, ime in telefonska številka pa naj bosta ločena z dvopičjem.
+\end{zgled}
+\begin{resitev}
+V zanki \texttt{for} se lahko sprehajamo direktno čez slovar (sprehod čez ključe), čez ključe preko metode \texttt{keys} ali pa čez pare preko metode \texttt{items}. Uporabimo tokrat zadnjo možnost.
+\begin{lstlisting}[language=Python]
+def izpisi_imenik(imenik):
+    for ime, stevilka in slovar.items():
+        print(ime, ":", stevilka)   
+\end{lstlisting}
+\end{resitev}
+
+Podoben sprehod bi lahko naredili tudi kadar npr. iščemo največjo vrednost v slovarju. 
+\begin{zgled}
+Napiši funkcijo \texttt{naj\_baza}, ki kot argument sprejme zaporedje baz, vrne pa ime baze, ki se v zaporedju pojavi največkrat. Pri tem si pomagaj s funkcijo \texttt{prestej\_baze}. 
+\end{zgled}
+\begin{resitev}
+Najprej bomo poklicali funkcijo \texttt{prestej\_baze}, ki bo iz niza naredila slovar pojavitev baz. V naslednjem koraku moramo najti bazo, ki ima največ pojavitev. To bomo naredili na podoben način, kot smo izvedli iskanje največjega (ali najmanjšega) elementa v seznamu -- s sprehodom z uporabo zanke \texttt{for}.
+
+\begin{lstlisting}[language=Python]
+def naj_baza(zaporedje):
+    baze = prestej_baze(zaporedje)
+    
+    naj_B = "" # naj baza
+    M = 0 # stevilo pojavitev
+    for baza in baze:
+        pojavitev = baze[baza]
+        if pojavitev > M:
+            naj_B = baza
+            M = pojavitev
+    return naj_B 
+\end{lstlisting}
+
+
+\end{resitev}
