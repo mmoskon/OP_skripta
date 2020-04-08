@@ -2,7 +2,7 @@
 
 \section{Sekvenčni podatkovni tipi}
 
-Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (1) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnati ločeno, kar nas bo pripeljalo do ogrome količine nepregledne \emph{copy--paste} kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bomo imeli (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Dodatna prednost sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
+Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (en) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnati ločeno, kar nas bo pripeljalo do ogrome količine nepregledne \emph{copy--paste} kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bomo imeli (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Dodatna prednost sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
 
 \section{Kaj so seznami?}
 
@@ -217,13 +217,13 @@ Oziroma na prejšnjem zgledu takole:
 \end{lstlisting}
 
 \begin{zgled}
-Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka. V primeru, da sodnik vnese število večje od 0, naj program to število shrani v seznam. Če sodnik vpiše številko 0, naj program izpiše dolžino najdaljšega skoka in povprečno dolžino skoka
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka. V primeru, da sodnik vnese število večje od 0, naj program to število shrani v seznam. Če sodnik vpiše številko 0, naj program izpiše dolžino najdaljšega skoka in povprečno dolžino skoka.
 \end{zgled}
 \begin{resitev}
 Sodnikova števila lahko beremo preko funkcije \texttt{input}, katere rezultat moramo pretvoriti še v tip \texttt{float}. Beremo dokler sodnik ne vnese števila 0, medtem pa dolžine shranjujemo v seznam. Na koncu samo še izračunamo povprečno dolžino skoka, poleg tega pa izpišemo tudi najdaljši skok. Program je sledeč:
 \begin{lstlisting}[language=Python,numbers=left]
-d = float(input("Vpisi dolzino: ")) # prvo branje
 dolzine = [] # na zacetku ni nobene dolzine
+d = float(input("Vpisi dolzino: ")) # prvo branje
 while d > 0: # dokler je dolzina veljavna
     dolzine.append(d) # dodaj dolzino
     d = float(input("Vpisi dolzino: ")) # ponovno branje
@@ -321,7 +321,8 @@ Prej smo videli, da metoda \texttt{sort} sprejema tudi izbirni argument \texttt{
 Sezname (in še kaj drugega) pa bi lahko sortirali tudi preko vgrajene funkcije \texttt{sorted}. Ta funkcija deluje na enak način kot metoda \texttt{sort}, le da podanega seznama ne sortira, ampak vrne sortiran seznam. Poglejmo si na zgledu:
 \begin{lstlisting}[language=Python]
 >>> seznam = [-100, 10, -1, -5, 50]
->>> sorted(seznam)
+>>> # funkciji kot argument podamo tisto kar zelimo posortirati
+>>> sorted(seznam) 
 [-1, -5, 10, 50, -100]
 >>> seznam
 [-100, 10, -1, -5, 50]
@@ -330,8 +331,70 @@ Funkcija torej vrne sortiran seznam, izhodiščni seznam pa je ostal nespremenje
 
 \section{Seznami seznamov}
 
+Vemo že veliko več kot prej, še vedno pa ne vemo kdo je skočil največ in komu moramo podeliti medalje. Poleg dolžin bi si namreč v ta namen morali beležiti tudi imena tekmovalcev skakalcev. To lahko rešimo tako, da imamo pač dva seznama, tj. seznam dolžin in seznam tekmovalcev. Na istoležnem indeksu imamo v obeh seznamih podatke o istem skakalcu. Takole:
+\begin{lstlisting}[language=Python]
+>>> dolzine = [121.4, 143.1, 105.2, 99.3]
+>>> skakalci = ["Andrej", "Bojan", "Cene", "Dejan"]
+\end{lstlisting}
+Andrej je torej skočil 121.4 metra, Dejan pa zgolj 99.3 metra. Zmagovalne tri skoke še vedno lahko dobimo tako, da sortiramo seznam dolžin:
+\begin{lstlisting}[language=Python]
+>>> dolzine.sort(reverse=True)
+>>> dolzine
+[143.1, 121.4, 105.2, 99.3]
+\end{lstlisting}
+Do problema pa pride, ker zdaj ne vemo več kateremu imenu pripada posamezna dolžina, saj smo indekse v seznamu dolžin s sortiranjem premešali. Kaj lahko naredimo? 
 
-
+Alternativen pristop bi bil, da za beleženje podatkov o dolžinah in imenih uporabimo nov, vgnezden seznam. Torej naredimo seznam seznamov. Takole:
+\begin{lstlisting}[language=Python]
+>>> skoki = [[121.4, "Andrej"], 
+            [143.1, "Bojan"], 
+            [105.2, "Cene"], [99.3, "Dejan"]]
+\end{lstlisting}
+Kasneje bomo za take primere sicer uporabljali malo drugačno strukturo, ampak zaenkrat te še ne poznamo. Naredili smo torej seznam seznamov. Kaj se nahaja v tem primeru na indeksu 0?
+\begin{lstlisting}[language=Python]
+>>> skoki[0]
+[121.4, "Andrej"]
+\end{lstlisting}
+Seznam, ki vsebuje podatke o ničtem skakalcu. Kako pa bi prišlo do njegovega imena? Z uporabo verižnega indeksiranja oziroma tako, da po indeksiranju zunanjega seznama pač še enkrat indeksiramo notranji seznam:
+\begin{lstlisting}[language=Python]
+>>> skoki[0][1]
+"Andrej"
+\end{lstlisting}
+Kaj se bo zgodilo, če tak seznam sortiramo? Nad vgnezdenimi seznami bo za sortiranje uporabljena bo relacija \texttt{<}, ki smo jo v tem poglavju že srečali. Rekli smo, da relacija manjši sezname med seboj primerja leksikografsko. Najprej primerja ničti element prvega seznam z ničtim drugega. Če sta enaka primerja prvi element prvega seznama s prvim elementom druhega seznama in tako naprej. Če bomo torej v vgnezdene sezname na ničto mesto dali dolžine na prvo mesto pa imena, bo sortiranje izvedeno po dolžinah. Po imenih bo sortiranje potekalo samo v primeru, če bosta dolžini pri dveh podseznaih enaki. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> skoki.sort(reverse=True)
+>>> skoki
+[[143.1, 'Bojan'], [121.4, 'Andrej'], [105.2, 'Cene'],
+[99.3, 'Dejan']]
+\end{lstlisting}
+Ker smo zdaj sortirali dolžine skokov skupaj z imeni tekmovalcev, informacije o tem kdo je skočil koliko nismo izgubili in lahko izpišemo zmagovalce, ki se nahajajo v prvih treh podseznamih na indeksu 1:
+\begin{lstlisting}[language=Python]
+>>> skoki[0,1]
+'Bojan'
+>>> skoki[1,1]
+'Andrej'
+>>> skoki[2,1]
+'Cene'
+\end{lstlisting}
+Zapišimo celoten zgled.
+\begin{zgled}
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka in imenu tekmovalca. V primeru, da sodnik za dolžino vnese število večje od 0, naj program dolžino in ime shrani v seznam. Če sodnik vpiše številko 0, naj program izpiše zmagovalce in dolžine njihovih skokov.
+\end{zgled}
+\begin{resitev}
+Ponovno bomo brali dolžino po dolžino, le da bomo tokrat v primeru, da bo vnesena dolžina večja kot 0, prebrali še ime tekmovalca. Potem bomo oboje dodali v seznam skokov. Pomembno je, da na ničto mesto v podseznam shranimo dolžino skoka, saj želimo podsezname sortirati po dolžini skokov. Na koncu skoke sortiramo in izpišemo zmagovalce in dolžine zmagovalnih skokov.
+\begin{lstlisting}[language=Python,numbers=left]
+skoki = [] # na zacetku ni nobenega skoka
+d = float(input("Vpisi dolzino: ")) # prvo branje
+while d > 0: # dokler je dolzina veljavna
+    ime = input("Vpisi ime tekmovalca: ")
+    skoki.append([d,ime]) # dodajanje podseznama
+    d = float(input("Vpisi dolzino: ")) # prvo branje
+skoki.sort(reverse=True)
+print("1. mesto:", skoki[0][1], ", dolzina skoka:", skoki[0][0])
+print("2. mesto:", skoki[1][1], ", dolzina skoka:",  skoki[1][0])
+print("3. mesto:", skoki[2][1], ", dolzina skoka:", skoki[2][0])
+\end{lstlisting}
+\end{resitev}
 
 \section{Funkcija \texttt{range}}
 
