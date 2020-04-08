@@ -235,18 +235,103 @@ Prednost zgornjega programa je v tem, da deluje ne glede na to koliko skokov je 
 
 
 
-
-
-
 \section{Branje seznamov iz ukazne vrstice}
-Do zdaj smo programe večinoma testirali tako, da smo preko funkcije \texttt{input} prebrali 
+Včasih pa bi si želeli celoten seznam prebrati z enim samim uporabnikovim vnosom. Torej bomo spet uporabili funkcijo \texttt{input}. Spomnimo se, da funkcija \texttt{input} uporabnikov vnos vedno zapiše v niz oziroma podatkovni tip \texttt{str}, ne glede na to kaj je uporabnik vnesel. Tak niz smo v prejšnjih s funkcijo \texttt{int} pretvorili v celo število ali pa s funkcijo \texttt{float} v decimalno, smo želeli podan vnos v nadaljevanju obravnavati kot število. Kaj pa če bi želeli niz, ki ga je vnesel uporabnik, pretvoriti v seznam? Na prvo žogo bi lahko rekli, da pač uporabimo funkcijo \texttt{str}. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> seznam = list(input("Vnesi seznam: "))
+Vnesi seznam: [1,2,3]
+>>> seznam
+['[', '1', ',', '2', ',', '3', ']']
+\end{lstlisting}
+To torej ni točno tisto, kar smo želeli. Dobili smo namreč seznam vseh znakov, ki v podanem vnosu nastopajo.
 
+Kaj bi pravzaprav radi dosegli? To, da se niz, ki ga uporabnik poda funkciji \texttt{input} obravnava na enak način, kot če bi isti niz vpisal v ukazno vrstico. Temu namenu je namenjena funkcija \texttt{eval}, ki kot argument sprejme niz in ga izvede kot Python kodo. Poskusimo še to:
+\begin{lstlisting}[language=Python]
+>>> seznam = eval(input("Vnesi seznam: "))
+Vnesi seznam: [1,2,3]
+>>> seznam
+[1,2,3]
+\end{lstlisting}
+V tem primeru stvar deluje, kot bi si želeli. Povadimo še na zgledu.
 
-\texttt{eval}
+\begin{zgled}
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj sodnik vnese seznam dolžin smučarskih skokov, program pa naj izpiše dolžino najdaljšega skoka in povprečno dolžino skoka.
+\end{zgled}
+\begin{resitev}
+Rešitev bo podobna kot prej, le da tokrat ne potrebujemo zanke.
+\begin{lstlisting}[language=Python,numbers=left]
+dolzine = eval(input("Vnesi dolzine: "))
+print("Najdaljsi skok:", max(dolzine))
+print("Povprecna dolzina:", sum(dolzine)/len(dolzine))
+\end{lstlisting}
+Slabost programa je ta, da mora sodnik zdaj vse dolzine vnesti naenkrat. 
+\end{resitev}
+
+Uporaba funkcije \texttt{eval} je sicer lahko v določenih primerih nevarna (če imamo zlobne uporabnike), saj bo slepo izvedla kodo, ki jo bo uporabnik podal.
+
+\section{Sortiranje seznamov}
+
+Zaenkrat znamo določiti najdaljši skok, ne znamo p določiti najdaljše tri. Najdaljše tri skoke bi lahko poiskali tako, da seznam posortiramo, tako da vsebuje skoke od najdaljšega do najkrajšega, potem pa izpišemo skoke na indeksih 0, 1 in 2. 
+
+Sortiranje seznamov lahko izvedemo z metodo \texttt{sort}:
+\begin{lstlisting}[language=Python]
+>>> dolzine.sort()
+>>> dolzine
+[99.3, 105.2, 121.4, 143.1]
+\end{lstlisting}
+Metoda \texttt{sort} torej sortira seznam, nad katerim smo jo poklicali, in ničesar ne vrača. Opazimo tudi, da je seznam sortirala od najmanjše vrednosti do največje. Najboljše skoke bi torej lahko izpisali tako, da bi izpisali zadnje tri dolžine iz seznama. Lahko pa seznam sortiramo v obratnem vrstnem redu, tako da metodi \texttt{sort} nastavimo opcijski (izbirni) argument \texttt{reverse} na vrednost \texttt{True}. Do dokumentacije metode \texttt{sort} lahko pridemo preko funkcije \texttt{help}:
+\begin{lstlisting}[language=Python]
+>>> help(list.sort)
+Help on method_descriptor:
+
+sort(self, /, *, key=None, reverse=False)
+    Stable sort *IN PLACE*.
+\end{lstlisting}
+Dokumentacija ni nič kaj preveč izčrpna, vidimo pa lahko, da metoda sort sprejema tudi dva opcijska argumenta, in sicer \texttt{key}, ki je privzeto enak vrednosti \texttt{None} in \texttt{reverse}, ki je privzeto enak vrednosti \texttt{False}. Opcijski argumenti so tisti argumenti, ki imajo nastavljene privzete vrednosti. Če ob klicu ne specificiramo drugačnih vrednosti, bodo pač uporabljene privzete vrednosti. Privzete vrednosti pa lahko \emph{povozimo}, tako da specificiramo drugačne vrednosti. Vrstni red urejanja bi lahko spremenili tako, da bi argument \texttt{reverse} nastavili na vrednost \texttt{True}. V našem primeru takole:
+\begin{lstlisting}[language=Python]
+>>> dolzine.sort(reverse=True)
+>>> dolzine
+[143.1, 121.4, 105.2, 99.3]]
+\end{lstlisting}
+
+Rešimo zdaj celoten zgled od začetka do konca.
+\begin{zgled}
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj sodnik vnese seznam dolžin smučarskih skokov, program pa naj izpiše najdaljše tri skoke.
+\end{zgled}
+
+\begin{resitev}
+Zdaj bo branju seznama sledilo sortiranje in izpis zmagovalnih dolžin.
+\begin{lstlisting}[language=Python,numbers=left]
+dolzine = eval(input("Vnesi dolzine: "))
+dolzine.sort(reverse=True)
+print("1. mesto", dolzine[0])
+print("2. mesto", dolzine[1])
+print("3. mesto", dolzine[2])
+\end{lstlisting}
+\end{resitev}
+
+Prej smo videli, da metoda \texttt{sort} sprejema tudi izbirni argument \texttt{key}, s katerim lahko določimo, preko katerega naj funkcija sortira. Če bi želeli npr. sortirati seznam po absolutnih vrednostih, bi argumentu \texttt{key} priredili funkcijo \texttt{abs}. Takole:
+\begin{lstlisting}[language=Python]
+>>> seznam = [-100, 10, -1, -5, 50]
+>>> seznam.sort(key=abs)
+>>> seznam
+[-1, -5, 10, 50, -100]
+\end{lstlisting}
+
+Sezname (in še kaj drugega) pa bi lahko sortirali tudi preko vgrajene funkcije \texttt{sorted}. Ta funkcija deluje na enak način kot metoda \texttt{sort}, le da podanega seznama ne sortira, ampak vrne sortiran seznam. Poglejmo si na zgledu:
+\begin{lstlisting}[language=Python]
+>>> seznam = [-100, 10, -1, -5, 50]
+>>> sorted(seznam)
+[-1, -5, 10, 50, -100]
+>>> seznam
+[-100, 10, -1, -5, 50]
+\end{lstlisting}
+Funkcija torej vrne sortiran seznam, izhodiščni seznam pa je ostal nespremenjen. 
 
 \section{Seznami seznamov}
 
-\section{Sortiranje seznamov}
+
+
 
 \section{Funkcija \texttt{range}}
 
