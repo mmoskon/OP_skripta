@@ -131,16 +131,16 @@ True
 >>> [1,3,3] < [1,2,3]
 False
 \end{lstlisting}
-Primerjalni operatorji nad seznami delujejo podobno kot nad nizi in sicer se gre za leksikografsko primerjanje. Leksikografsko primerjanje je npr. uporabljeno pri sortiranju besed v slovarju, in sicer gre za to, da med seboj primerjamo istoležne elemente seznama, dokler ne pridemo do neenakosti oziroma do konca seznama. V zgornjem primeru smo prišlo do konca prvega seznama. Ker je nekaj kar ne obstaja načeloma manjše kot nekaj kar obstaja, je Python vrnil, da je prvi seznam manjši od drugega. V drugem primeru se je primerjanje ustavilo pri elementih na indeksu 1, saj sta elementa na tem indeksu različna. Ker 3 ni manjše od 2, je Python ugotovil, da prvi seznam ni manjši od drugega in vrnil rezultat \texttt{False}.
+Primerjalni operatorji nad seznami delujejo podobno kot nad nizi, in sicer se gre za leksikografsko primerjanje. Leksikografsko primerjanje je npr. uporabljeno pri sortiranju besed v slovarju. Deluje tako, da med seboj primerjamo istoležne elemente seznama, dokler ne pridemo do neenakosti oziroma do konca enega izmed obeh seznamov. V zgornjem primeru smo prišli do konca prvega seznama. Ker je nekaj kar ne obstaja načeloma manjše kot nekaj kar obstaja, je Python vrnil, da je prvi seznam manjši od drugega. V drugem primeru se je primerjanje ustavilo pri elementih na indeksu 1, saj sta elementa na tem indeksu različna. Ker 3 ni manjše od 2, je Python ugotovil, da prvi seznam ni manjši od drugega in vrnil rezultat \texttt{False}.
 
 \section{Spreminjanje in brisanje elementov seznama}
 
-Videli smo že, da lahko do elementov seznama dostopamo preko indeksiranja. Preko indeksiranja pa lahko vrednosti v seznamih tudi spreminjamo. Kako? Tako, da vrednosti na določenem indeksu priredimo neko novo vrednost:
+Videli smo že, da lahko do elementov seznama dostopamo preko indeksiranja. Preko indeksiranja pa lahko vrednosti v seznamih tudi spreminjamo. Kako? Tako, da indeksiranje seznama dopolnimo s prireditvenim stavkom:
 \begin{lstlisting}[language=Python]
 seznam[indeks] = nova_vrednost
 \end{lstlisting}
 
-Tudi brisanje elementov iz seznama lahko izvajamo s pomočjo indeksiranje, le da tokrat pred indeksrianjem uporabimo besedico \textbf{\texttt{del}}:
+Tudi brisanje elementov iz seznama lahko izvajamo s pomočjo indeksiranje, le da tokrat pred indeksiranjem uporabimo besedico \textbf{\texttt{del}}:
 \begin{lstlisting}[language=Python]
 del seznam[indeks]
 \end{lstlisting}
@@ -148,7 +148,7 @@ del seznam[indeks]
 \section{Vgrajene funkcije nad seznami}
 Srečali smo že funkcijo \texttt{len}, s pomočjo katere lahko ugotovimo kakšna je dolžina seznama. Nad seznami pogosto uporabljamo še druge vgrajene funkcije, izmed katerih so pogosto uporabljene \texttt{min}, \texttt{max} in \texttt{sum}.
 
-Funkcija \texttt{min} vrne najmanjši funkcija \texttt{max} pa največji element v seznamu glede na relacijo \texttt{<}. Zdaj lahko končno ugotovimo kakšna je bila dolžina najdaljšega skoka:
+Funkcija \texttt{min} vrne najmanjši, funkcija \texttt{max} pa največji element v seznamu glede na relacijo \texttt{<}. Zdaj lahko končno ugotovimo kakšna je bila dolžina najdaljšega skoka:
 \begin{lstlisting}[language=Python]
 >>> max(dolzine)
 143.1
@@ -163,27 +163,27 @@ Nad seznami lahko uporabimo še druge vgrajene funkcije. Nekatere izmed njih bom
 
 \section{Metode}
 
-Nad seznami lahko torej uporabljamo vgrajene funkcije, ki so pač v Pythonu na voljo. Te funkcije lahko sicer uporabimo na poljubnem podatku, ki ni nujno seznam. Obstaja poseben nabor funkcij, ki jih lahko uporabljamo samo nad seznami. 
+Nad seznami lahko torej uporabljamo vgrajene funkcije, ki so pač v Pythonu na voljo. Te funkcije lahko sicer uporabimo na poljubnem podatku, ki ni nujno seznam. Obstaja poseben nabor funkcij, ki pa jih lahko uporabljamo samo nad seznami. 
 
 Tem funkcijam pravimo \emph{metode seznamov}. V splošnem se izraz \emph{metode} uporablja za posebno družino funkcij, ki pripadajo določenemu \emph{objektu}. Kaj je objekt zaenkrat ne bomo podrobneje razlagali. Lahko pa povemo, da so seznami objekti (pravzaprav je skoraj vse v Pythonu objekt). Kakorkoli že metode so tiste funkcije, ki pripadajo določenemu objektu. Do posamezne metode seznama lahko pridemo s spodnjim klicem:
 \begin{lstlisting}[language=Python]
 ime_seznama.ime_metode(argumenti)
 \end{lstlisting}
-Klic metode je torej podoben kot klicu običajne funkcije, le da moramo pred imenom metode podati ime objekta, preko katerega oziroma nad katerim metodo kličemo, imeni pa ločimo s piko (\texttt{.}).
+Klic metode je torej podoben klicu običajne funkcije, le da moramo pred imenom metode podati ime objekta, preko katerega oziroma nad katerim metodo kličemo, imeni pa ločimo s piko (\texttt{.}).
 
-Če delamo v okolju IDLE ali v kakšnem še pametnejšem okolju, nam bo to po izpisu imena seznama in pikice podalo seznam metod, ki jih imamo na razpolago. Ko v okolju IDLE npr. napišemo
+Če delamo v okolju IDLE ali v kakšnem še pametnejšem okolju, nam bo to po izpisu imena seznama in pikice podalo nabor metod, ki jih imamo na razpolago. Ko v okolju IDLE npr. napišemo
 \begin{lstlisting}[language=Python]
 >>> dolzine.
 \end{lstlisting}
-se po nekaj sekundah pojavi seznam metod: \texttt{append}, \texttt{copy}, \texttt{clear} itd.
+se po nekaj sekundah pojavijo imena metod, ki jih lahko nad seznamom uporabimo: \texttt{append}, \texttt{copy}, \texttt{clear} itd.
 
-Metode torej razširjajo vgrajene funkcije okolja Python in so vezane na točko določen podatkovni tip. Če bi npr. enako stvar kot zgoraj poskusili z nizom, bi dobili drug seznam metod, ki so vezane nad nizom. Metodam kot argument za razliko od vgrajenih funkcij ni potrebno podati seznama (ali pa niza) nad katerim jih želimo izvesti, saj smo seznam (ali pa niz) podali že pred piko -- že s samim klicom smo povedali nad čim želimo metodo pognati. Metode vseeno velikokrat vsebujejo določene argumente, ki pač določijo kaj in kako naj metoda nad objektom naredi. 
+Metode torej razširjajo vgrajene funkcije okolja Python in so vezane na točko določen podatkovni tip. Če bi npr. enako stvar kot zgoraj poskusili z nizom, bi dobili drug seznam metod, ki jih lahko poženemo nad nizom. Metodam kot argument za razliko od vgrajenih funkcij ni potrebno podati seznama (ali pa niza) nad katerim jih želimo izvesti, saj smo seznam (ali pa niz) podali že pred piko -- že s samim klicom smo povedali nad čim želimo metodo pognati. Metode vseeno velikokrat vsebujejo določene argumente, ki pač določijo kaj in kako naj metoda nad objektom naredi. 
 
 Prav tako kot obstaja kar veliko vgrajenih funkcij, obstaja tudi veliko metod nad seznami. Natančneje si bomo v nadaljevanju tega poglavja pogledali tiste, ki jih uporabljamo pogosteje.
 
 \section{Dodajanje elementov}
 
-Dodajanje elementov v seznam je pogosta operacija, zato jo lahko izvedemo na več načinov. Enega smo pravzaprav še srečali, saj lahko za dodajanje elementov v seznam uporabimo kar operator \texttt{+}, ki omogoča lepljenje seznamov. Če želimo element seznamu dodati, bomo obstoječemu seznamu prišteli seznam, ki vsebuje ta element. Takole:
+Dodajanje elementov v seznam je pogosta operacija, zato jo lahko izvedemo na več načinov. Enega smo pravzaprav že srečali, saj lahko za dodajanje elementov v seznam uporabimo kar operator \texttt{+}, ki omogoča lepljenje seznamov. Če želimo element seznamu dodati, bomo obstoječemu seznamu prišteli seznam, ki vsebuje ta element. Takole:
 \begin{lstlisting}[language=Python]
 seznam = seznam + [element]
 \end{lstlisting}
@@ -193,7 +193,7 @@ seznam += [element]
 \end{lstlisting}
 Tole dvoje sicer ni popolnoma enako, ampak zaenkrat recimo, da je bolje uporabiti spodnjo različico. 
 
-Elemente lahko v sezname dodajamo tudi preko metode \texttt{append} in metode \texttt{extend}. Obe metodi bosta dodajali na koncu seznama. Razlika je v tem, da v primeru \texttt{append} dodajamo en element, zato ta metoda kot argument prejme poljuben element, ki ga bomo v seznam dodali. Dodajanje bi torej izvedli takole:
+Elemente lahko v sezname dodajamo tudi preko metode \texttt{append} in metode \texttt{extend}. Obe metodi bosta dodajali na koncu seznama. Razlika je v tem, da v primeru metode \texttt{append} dodajamo en element, zato ta metoda kot argument prejme element, ki ga bomo v seznam dodali. Dodajanje bi torej izvedli takole:
 \begin{lstlisting}[language=Python]
 seznam.append(element)
 \end{lstlisting}
@@ -206,7 +206,7 @@ Metoda sicer ne bo ničesar vrnila, bo pa naš seznam spremenila. Primer uporabe
 \end{lstlisting}
 Podobno lahko uporabimo metodo \texttt{extend}, ki v seznam dodaja drug seznam. Kot argument moramo torej metodi \texttt{extend} podati seznam, ki ga želimo v obstoječ seznam dodati. Takole:
 \begin{lstlisting}[language=Python]
-seznam.extend([element])
+seznam.extend(seznam2)
 \end{lstlisting}
 Oziroma na prejšnjem zgledu takole:
 \begin{lstlisting}[language=Python]
@@ -216,11 +216,12 @@ Oziroma na prejšnjem zgledu takole:
 [1,2,3,4]
 \end{lstlisting}
 
+Povadimo dodajanje elementov v seznam na praktičnem zgledu.
 \begin{zgled}
-Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka. V primeru, da sodnik vnese število večje od 0, naj program to število shrani v seznam. Če sodnik vpiše številko 0, naj program izpiše dolžino najdaljšega skoka in povprečno dolžino skoka.
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka. V primeru, da sodnik vnese število večje od 0, naj program to število doda v seznam in sodnika vpraša po novi dolžini. Če sodnik vpiše številko 0, naj program izpiše dolžino najdaljšega skoka in povprečno dolžino skoka.
 \end{zgled}
 \begin{resitev}
-Sodnikova števila lahko beremo preko funkcije \texttt{input}, katere rezultat moramo pretvoriti še v tip \texttt{float}. Beremo dokler sodnik ne vnese števila 0, medtem pa dolžine shranjujemo v seznam. Na koncu samo še izračunamo povprečno dolžino skoka, poleg tega pa izpišemo tudi najdaljši skok. Program je sledeč:
+Sodnikova števila lahko beremo preko funkcije \texttt{input}, katere rezultat moramo pretvoriti v podatkovni tip \texttt{float}, saj so dolžine decimalna števila. Beremo dokler sodnik ne vnese števila 0, medtem pa dolžine dodajamo v seznam. Na koncu izračunamo povprečno dolžino skoka, poleg tega pa izpišemo tudi najdaljši skok. Program je sledeč:
 \begin{lstlisting}[language=Python,numbers=left]
 dolzine = [] # na zacetku ni nobene dolzine
 d = float(input("Vpisi dolzino: ")) # prvo branje
@@ -233,19 +234,17 @@ print("Povprecna dolzina:", sum(dolzine)/len(dolzine))
 \end{resitev}
 Prednost zgornjega programa je v tem, da deluje ne glede na to koliko skokov je v seznamu. Vse dokler sodnik ne vnese kakšne neumnosti.
 
-
-
 \section{Branje seznamov iz ukazne vrstice}
-Včasih pa bi si želeli celoten seznam prebrati z enim samim uporabnikovim vnosom. Torej bomo spet uporabili funkcijo \texttt{input}. Spomnimo se, da funkcija \texttt{input} uporabnikov vnos vedno zapiše v niz oziroma podatkovni tip \texttt{str}, ne glede na to kaj je uporabnik vnesel. Tak niz smo v prejšnjih s funkcijo \texttt{int} pretvorili v celo število ali pa s funkcijo \texttt{float} v decimalno, smo želeli podan vnos v nadaljevanju obravnavati kot število. Kaj pa če bi želeli niz, ki ga je vnesel uporabnik, pretvoriti v seznam? Na prvo žogo bi lahko rekli, da pač uporabimo funkcijo \texttt{str}. Poskusimo:
+Včasih pa bi si želeli celoten seznam prebrati z enim samim uporabnikovim vnosom. Torej bomo spet uporabili funkcijo \texttt{input}. Spomnimo se, da funkcija \texttt{input} uporabnikov vnos vedno zapiše v niz oziroma v podatkovni tip \texttt{str}, ne glede na to kaj je uporabnik vnesel. Tak niz smo v prejšnjih primerih s funkcijo \texttt{int} pretvorili v celo število ali pa s funkcijo \texttt{float} v decimalno, če smo želeli podan vnos v nadaljevanju obravnavati kot število. Kaj pa če bi želeli niz, ki ga je vnesel uporabnik, pretvoriti v seznam? Na prvo žogo bi lahko rekli, da pač uporabimo funkcijo \texttt{list}. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> seznam = list(input("Vnesi seznam: "))
 Vnesi seznam: [1,2,3]
 >>> seznam
 ['[', '1', ',', '2', ',', '3', ']']
 \end{lstlisting}
-To torej ni točno tisto, kar smo želeli. Dobili smo namreč seznam vseh znakov, ki v podanem vnosu nastopajo.
+To torej ni tisto, kar smo želeli. Dobili smo namreč seznam vseh znakov, ki v podanem nizu nastopajo (vključno z vejicami in oklepaji).
 
-Kaj bi pravzaprav radi dosegli? To, da se niz, ki ga uporabnik poda funkciji \texttt{input} obravnava na enak način, kot če bi isti niz vpisal v ukazno vrstico. Temu namenu je namenjena funkcija \texttt{eval}, ki kot argument sprejme niz in ga izvede kot Python kodo. Poskusimo še to:
+Kaj bi pravzaprav radi dosegli? To, da se niz, ki ga uporabnik poda funkciji \texttt{input} obravnava na enak način, kot če bi isti niz vpisal v ukazno vrstico. Temu je namenjena funkcija \texttt{eval}, ki kot argument sprejme niz in ga izvede kot Python kodo. Poskusimo še to:
 \begin{lstlisting}[language=Python]
 >>> seznam = eval(input("Vnesi seznam: "))
 Vnesi seznam: [1,2,3]
@@ -264,14 +263,14 @@ dolzine = eval(input("Vnesi dolzine: "))
 print("Najdaljsi skok:", max(dolzine))
 print("Povprecna dolzina:", sum(dolzine)/len(dolzine))
 \end{lstlisting}
-Slabost programa je ta, da mora sodnik zdaj vse dolzine vnesti naenkrat. 
+Slabost programa je ta, da mora sodnik zdaj vse dolžine vnesti naenkrat. 
 \end{resitev}
 
-Uporaba funkcije \texttt{eval} je sicer lahko v določenih primerih nevarna (če imamo zlobne uporabnike), saj bo slepo izvedla kodo, ki jo bo uporabnik podal.
+Uporaba funkcije \texttt{eval} je sicer lahko v določenih primerih nevarna (če imamo zlobne uporabnike), saj bo slepo izvedla kodo, ki jo bo uporabnik preko vnosa podal.
 
 \section{Sortiranje seznamov}
 
-Zaenkrat znamo določiti najdaljši skok, ne znamo p določiti najdaljše tri. Najdaljše tri skoke bi lahko poiskali tako, da seznam posortiramo, tako da vsebuje skoke od najdaljšega do najkrajšega, potem pa izpišemo skoke na indeksih 0, 1 in 2. 
+Zaenkrat znamo določiti najdaljši skok, ne znamo pa določiti najdaljših treh skokov. Najdaljše tri skoke bi lahko poiskali tako, da seznam uredimo (posortiramo), tako da vsebuje skoke od najdaljšega do najkrajšega. Potem izpišemo skoke na indeksih 0, 1 in 2. 
 
 Sortiranje seznamov lahko izvedemo z metodo \texttt{sort}:
 \begin{lstlisting}[language=Python]
@@ -296,7 +295,7 @@ Dokumentacija ni nič kaj preveč izčrpna, vidimo pa lahko, da metoda sort spre
 
 Rešimo zdaj celoten zgled od začetka do konca.
 \begin{zgled}
-Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj sodnik vnese seznam dolžin smučarskih skokov, program pa naj izpiše najdaljše tri skoke.
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj sodnik poda seznam dolžin smučarskih skokov, program pa naj izpiše najdaljše tri skoke.
 \end{zgled}
 
 \begin{resitev}
@@ -324,10 +323,16 @@ Sezname (in še kaj drugega) pa bi lahko sortirali tudi preko vgrajene funkcije 
 >>> # funkciji kot argument podamo tisto kar zelimo posortirati
 >>> sorted(seznam) 
 [-1, -5, 10, 50, -100]
->>> seznam
+>>> seznam # podan seznam je ostal nespremenjen
 [-100, 10, -1, -5, 50]
 \end{lstlisting}
-Funkcija torej vrne sortiran seznam, izhodiščni seznam pa je ostal nespremenjen. 
+Funkcija torej vrne sortiran seznam, izhodiščni seznam pa je ostal nespremenjen. Kako bi dosegli, da se ime spremenljivke, preko katerega smo funkcijo poklicali, spremeni, tako da vsebuje sortiran seznam? Tako, da bi rezultat funkcije \texttt{sorted} priredili spremenljivki:
+\begin{lstlisting}[language=Python]
+>>> seznam = [-100, 10, -1, -5, 50]
+>>> seznam = sorted(seznam)
+>>> seznam
+[-1, -5, 10, 50, -100]
+\end{lstlisting}
 
 \section{Seznami seznamov}
 
@@ -379,7 +384,7 @@ Ker smo zdaj sortirali dolžine skokov skupaj z imeni tekmovalcev, informacije o
 \end{lstlisting}
 To so zmagovalci. Zapišimo celoten zgled.
 \begin{zgled}
-Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka in imenu tekmovalca. V primeru, da sodnik za dolžino vnese število večje od 0, naj program dolžino in ime shrani v seznam. Če sodnik vpiše številko 0, naj program izpiše zmagovalce in dolžine njihovih skokov.
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj sodnika sprašuje po dolžini skoka in imenu tekmovalca. V primeru, da sodnik za dolžino vnese število večje od 0, naj program dolžino in ime doda v seznam. Če sodnik vpiše številko 0, naj program izpiše zmagovalce in dolžine njihovih skokov.
 \end{zgled}
 \begin{resitev}
 Ponovno bomo brali dolžino po dolžino, le da bomo tokrat v primeru, da bo vnesena dolžina večja kot 0, prebrali še ime tekmovalca. Potem bomo oboje dodali v seznam skokov. Pomembno je, da na ničto mesto v podseznam shranimo dolžino skoka, saj želimo podsezname sortirati po dolžini skokov. Na koncu skoke sortiramo in izpišemo zmagovalce in dolžine zmagovalnih skokov.
@@ -387,9 +392,9 @@ Ponovno bomo brali dolžino po dolžino, le da bomo tokrat v primeru, da bo vnes
 skoki = [] # na zacetku ni nobenega skoka
 d = float(input("Vpisi dolzino: ")) # prvo branje
 while d > 0: # dokler je dolzina veljavna
-    ime = input("Vpisi ime tekmovalca: ")
+    ime = input("Vpisi ime tekmovalca: ") # branje imena
     skoki.append([d,ime]) # dodajanje podseznama
-    d = float(input("Vpisi dolzino: ")) # nadaljnja branja
+    d = float(input("Vpisi dolzino: ")) # ponovno branje
 skoki.sort(reverse=True)
 print("1. mesto:", skoki[0][1], ", dolzina skoka:", skoki[0][0])
 print("2. mesto:", skoki[1][1], ", dolzina skoka:",  skoki[1][0])
