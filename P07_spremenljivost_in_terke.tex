@@ -242,7 +242,7 @@ Kako pa bi lahko iz treh seznamov naredili seznam terk, s katerim smo delali zgo
 >>> meritve
 <zip object at 0x0000019A2A865D48>
 \end{lstlisting}
-Tale izpis je malo čuden, ampak ni z njim nič narobe. Funkcija \texttt{zip} je podobno kot funkcija \texttt{range} t.i. \emph{generator}, ki dejanski seznam elementov naredi, šele ko ga potrebujemo oziroma posamezne elemente seznama generira sproti. Če bi želeli imeti lepši izpis, bi lahko do njega prišli tako, da rezultat funkcije \texttt{zip} eksplicitno pretvorimo v seznam s funkcijo \texttt{list}:
+Tale izpis je malo čuden, ampak ni z njim nič narobe. Funkcija \texttt{zip} je t.i. \emph{iterator}, ki dejanski seznam elementov vrne, šele ko ga potrebujemo oziroma posamezne elemente seznama vrača sproti. Če bi želeli imeti lepši izpis, bi lahko do njega prišli tako, da rezultat funkcije \texttt{zip} eksplicitno pretvorimo v seznam s funkcijo \texttt{list}:
 \begin{lstlisting}[language=Python]
 >>> meritve = list(zip(imena, visine, teze))
 >>> meritve

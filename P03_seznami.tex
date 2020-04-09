@@ -402,8 +402,260 @@ print("3. mesto:", skoki[2][1], ", dolzina skoka:", skoki[2][0])
 \end{lstlisting}
 \end{resitev}
 
-\section{Funkcija \texttt{range}}
+\section{Generiraje seznamov s funkcijo \texttt{range}}
+
+Do zdaj smo sezname generirali oziroma dopolnjevali na podlagi vrednosti, ki jih je podal uporabnik. Taki seznami so lahko vsebovali poljubne elemente -- pač tisto, kar je uporabnik vnesel.
+
+V določenih primerih želimo imeti sezname s števili v podanem razponu. Praktično uporabo takih seznamov bomo podrobneje spoznali v naslednjem poglavju, zaenkrat pa si poglejmo, kako jih lahko generiramo.
+
+Generiranje seznamov v podanem razponu omogoča vgrajena funkcija \texttt{range}. Funkcijo \texttt{range} lahko uporabljamo na tri različne načine, in sicer preko podajanja sledečih argumentov:
+\begin{itemize}
+\item \texttt{start}: določa začetek seznama (celo število),
+\item \texttt{stop}: določa konec seznama (celo število),
+\item \texttt{step}: določa korak (celo število).
+\end{itemize}
+
+Pri prvem načinu uporabe funkciji \texttt{range} podamo zgolj argument \texttt{stop}. V tem primeru bomo dobili seznam vrednosti do do argumenta \texttt{stop}--1 s korakom 1. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> razpon = range(10)
+>>> razpon
+range(0, 10)
+\end{lstlisting}
+Tale izpis je malo čuden. Poklicali smo funkcijo \texttt{range} in dobili \texttt{range}. Poglejmo si kakšen je podatkovni tip rezultata:
+\begin{lstlisting}[language=Python]
+>>> type(razpon)
+<class 'range'>
+\end{lstlisting}
+Rezultat funkcije \texttt{range} torej pripada \texttt{razredu} \texttt{range}, ki nam vrednosti iz razpona vrača sproti, ko jih pač potrebujemo. Zakaj tako? Funkcija \texttt{range} je varčna in ponavadi ni nobene potrebe po tem, da bi morali celoten razpon ustvariti naenkrat, ampak naenkrat potrebujemo samo en element iz razpona. S tem, ko funkcija \texttt{range} ustvari objekt, ki nam po potrebi vrne željeni element, varčuje tako s procesorjevim časom (hitrost), saj je generiranje dolgih seznamov zamudno, kot tudi s pomnlniškim prostorom, saj dolgi seznami zasedejo veliko prostora. Še vedno pa lahko nad rezultatom funkcije \texttt{range} delamo podobne stvari, kot nad seznami. Lahko jih npr. indeksiramo:
+\begin{lstlisting}[language=Python]
+>>> razpon[2]
+2
+\end{lstlisting}
+Ne moremo pa nad njimi klicati metod, ki so definirane nad običajnimi seznami:
+\begin{lstlisting}[language=Python]
+>>> razpon.sort()
+Traceback (most recent call last):
+  File "<pyshell#98>", line 1, in <module>
+    razpon.sort()
+AttributeError: 'range' object has no attribute 'sort'
+\end{lstlisting}
+Poleg tega funkcija \texttt{print}, kot smo videli že zgoraj, ne izpiše vrednosti elementov v razponu. Če bi želeli preko funkcije \texttt{range} dobiti običajen seznam, lahko uporabimo pretvorbo v seznam preko funkcije \texttt{list}:
+\begin{lstlisting}[language=Python]
+>>> razpon = range(10)
+>>> seznam = list(razpon)
+>>> seznam
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> type(seznam)
+<class 'list'>
+\end{lstlisting}
+Za to pa ponavadi ni potrebe. Primerjajmo ekonomičnost funkcije \texttt{range} in generiranja običajnega seznama. To lahko poskusimo tako, da s funkcijo \texttt{range} naredimo nek relativno velik razpon števil. Npr. od 0 do $10^8$-1:
+\begin{lstlisting}[language=Python]
+>>> razpon = range(10**8)
+\end{lstlisting}
+Tudi če imate počasen računalnik, bo generiranje razpona narejeno v trenutku. Zdaj pa poskusimo iz tega razpona narediti klasičen seznam:
+\begin{lstlisting}[language=Python]
+>>> seznam = list(razpon)
+\end{lstlisting}
+Če vam Python ni javil napake \texttt{MemoryError}, je tole verjetno nekaj časa trajalo. Če ni in vas nisem prepričal, poskusite stvar ponoviti z večjim številom, npr. $10^10$. 
+
+Vrnimo se k osnovni uporabi funkcije \texttt{range}. Mogoče se sprašujetete zakaj razpon ne vključuje vrednosti \texttt{stop}. Razlogov za to je več. Zaenkrat podajmo najbolj očitnega. Ker funkcija \texttt{range} začne šteti z vrednostjo 0 (in ne z 1), bo razpon, ki ga bo vračala, vseboval točno \texttt{stop} elementov. Če bi funkciji \texttt{range} za argument \texttt{argument} podali dolžino nekega seznama, bi razpon vseboval vse indekse tega seznama (ena izmed možnih uporab funkcije \texttt{range} se že počasi odkriva). 
+
+S funkcijo \texttt{range} lahko generiramo razpon elementov, ki se ne začne s številom 0. V tem primeru bomo funkciji poleg argumenta \texttt{stop} podali še argument \texttt{start}. Najprej seveda navedemo \texttt{start}, potem pa \texttt{stop}:
+\begin{lstlisting}[language=Python]
+>>> range(start, stop)
+\end{lstlisting}
+Če bi npr. želeli generirati seznam v razponu od 5 do 10, bi napisali takole
+\begin{lstlisting}[language=Python]
+>>> razpon = range(5, 10)
+\end{lstlisting}
+Poglejmo si seznam, ki ga s takim razponom dobimo:
+\begin{lstlisting}[language=Python]
+>>> list(razpon)
+[5, 6, 7, 8, 9]
+\end{lstlisting}
+Seznam torej vsebuje argument \texttt{start}, argumenta \texttt{stop} pa ne. Podobno kot prej. Razpon od 0 do 10 (brez števila 10) bi torej lahko dobili tudi takole:
+\begin{lstlisting}[language=Python]
+>>>  razpon = range(0, 10)
+>>> list(razpon)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+\end{lstlisting}
+
+Do zdaj je bil korak med sosednjima elementoma v razponu vedno enak. To lahko spremenimo tako, da podamo še argument \texttt{step}. V tem primeru bomo funkcijo poklicali takole:
+\begin{lstlisting}[language=Python]
+>>> range(start, stop, step)
+\end{lstlisting}
+Argument \texttt{step} je opcijski, njegova privzeta vrednost pa je 1. Lahko ga nastavimo na kaj drugega, npr. na 2. Če bi hoteli zgenerirati seznam lihih števil v razponu od 0 do 100, bi to lahko narediili takole:
+\begin{lstlisting}[language=Python]
+>>>  razpon = range(1, 101, 2)
+>>> list(razpon)
+[1, 3, 5, ..., 97, 99]
+\end{lstlisting}
+Zakaj smo argument \texttt{start} postavili na 1? Če bi začeli šteti z 0, bi dobili seznam sodih števil.
+\begin{lstlisting}[language=Python]
+>>>  razpon = range(0, 101, 2)
+>>> list(razpon)
+[0, 2, 4, ..., 98, 100]
+\end{lstlisting}
+Korak lahko nastavimo tudi na negativno vrednost:
+\begin{lstlisting}[language=Python]
+>>> razpon = range(0, 101, -2)
+>>> list(razpon)
+[]
+\end{lstlisting}
+Tokrat smo dobili prazen seznam. Zakaj? Negativen korak pomeni, da štejemo navzdol. Torej mora imeti argument \texttt{start} večjo vrednost kot argument \texttt{stop}:
+\begin{lstlisting}[language=Python]
+>>> razpon = range(101, 0, -2)
+>>> list(razpon)
+[101, 99, 97,..., 3, 1]
+\end{lstlisting}
+Spet smo dobili seznam lihih števil. Zakaj? Zato ker smo začeli šteti z lihim številom. Poleg tega razpon zdaj vklučuje število 101, ker je argument \texttt{start} v razponu vključen. Razpon sodih števil bi dobili takole
+\begin{lstlisting}[language=Python]
+>>> razpon = range(100, 0, -2)
+>>> list(razpon)
+[100, 98, 96,..., 4, 2]
+\end{lstlisting}
+Število 0 tokrat v razponu ni vključeno, ker razpon argumenta \texttt{stop} ne vključuje. 
 
 \section{Rezine}
 
+V določenih primerih želimo namesto indeksiranja enega samega elementa izvesti indeksiranje razpona elementov v seznamu. Dobimo torej kos oziroma \emph{rezino} \angl{slice} seznama. Razpon seznama podamo na zelo podoben način, kot smo ga uporabljali pri funkciji \texttt{range}, in sicer preko začetka (\texttt{start}) rezine, konca (\texttt{stop}) rezine in koraka \emph{rezinjenja} (\texttt{step}).
+
+Podamo lahko samo začetek rezine: \texttt{seznam[start:}.  V tem primeru bo rezina odrezana do konca seznama. Če bi npr. radi dobili vse elemente seznama od vkjučno petega indeksa naprej, bi napisali takole:
+\begin{lstlisting}[language=Python]
+>>> seznam = list(range(10))
+>>> seznam[5:]
+[5, 6, 7, 8, 9]
+\end{lstlisting}
+Izhodiščni seznam je kot pri običajnem indeksiranju ostal nespremenjen:
+\begin{lstlisting}[language=Python]
+>>> seznam
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+\end{lstlisting}
+
+Podamo lahko samo konec rezine: \texttt{seznam[:stop}.  V tem primeru se bo začela na začetku seznama in zaključila na indeksu \texttt{stop -- 1}. Podobno kot pri funkciji \texttt{range} tudi pri rezinah \texttt{stop} ni vključen v razpon. Če bi npr. radi dobili vse elemente seznama od začetka do petega indeksa (pri tem peti indeks ne bo vključen), bi napisali takole:
+\begin{lstlisting}[language=Python]
+>>> seznam = list(range(10))
+>>> seznam[:5]
+[0, 1, 2, 3, 4]
+\end{lstlisting}
+Z nevključenostjo indeksa \texttt{stop} smo zopet prišli do točno \texttt{stop} vrednosti, saj se štetje začne z indeksom 0. 
+
+Pri rezinjenju lahko podajamo tudi zgolj korak: \texttt{seznam[::step]}. V tem primeru bo rezina odrezana od začetka do konca seznama, pri čemer bo uporabljen podan korak. Če bi npr. hoteli dobiti vsak drugi element seznama, bi napisali takole:
+\begin{lstlisting}[language=Python]
+>>> seznam = list(range(10))
+>>> seznam[::2]
+[0, 2, 4, 6, 8]
+\end{lstlisting}
+Korak je lahko tudi negativen. Če bi kot korak npr. napisali vrednost --1, bi s tem seznam obrnili. S tem smo namreč povedali, da gremo čez cel seznam s korakom --1, torej od konca do začetka:
+\begin{lstlisting}[language=Python]
+>>> seznam = list(range(10))
+>>> seznam[::-1]
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+\end{lstlisting}
+
+Vse zgoraj naštete kombinacije lahko seveda po mili volji kombiniramo. Če bi npr. hoteli vzeti vsak drug element seznama v razponu od 3 do 9, bi napisali takole:
+\begin{lstlisting}[language=Python]
+>>> seznam = list(range(10))
+>>> seznam[2:9:3]
+[2, 5, 8]
+\end{lstlisting}
+Če je korak negativen, moramo zopet paziti na to, da ima začetek (\texttt{start}) večjo vrednost od konca (\texttt{stop})
+\begin{lstlisting}[language=Python]
+>>> seznam = list(range(10))
+>>> seznam[2:9:-1]
+[]
+>>> seznam[9:2:-1]
+[9, 8, 7, 6, 5, 4, 3]
+\end{lstlisting}
+Če bi želeli iti od konca, do nekega indeksa proti začetku, bi to lahko specificirali kot \texttt{seznam[:stop:-1]}, npr.
+\begin{lstlisting}[language=Python]
+>>> seznam = list(range(10))
+>>> seznam[:1:-1]
+[9, 8, 7, 6, 5, 4, 3, 2]
+\end{lstlisting}
+\texttt{stop} tudi tokrat ni vključen.
+
+Povadimo rezine še na enem zgledu.
+\begin{zgled}
+Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj sodnik poda seznam dolžin smučarskih skokov, program pa naj izpiše najdaljše tri skoke.
+\end{zgled}
+
+\begin{resitev}
+Podobno kot prej bomo seznam prebrali in uredili. Zmagovalce lahko zdaj izpišemo v eni vrstici. Tokrat bo program za razliko od prej deloval tudi v primeru, če bo sodnik vnesel manj kot 3 skoke. Rezine pač režejo dokler gre in primeru da je razpon preseže indekse seznama, napake ne javljajo.
+\begin{lstlisting}[language=Python,numbers=left]
+dolzine = eval(input("Vnesi dolzine: "))
+dolzine.sort(reverse=True)
+print(dolzine[:3])
+\end{lstlisting}
+\end{resitev}
+
+\section{Indeksiranje nizov}
+Kot smo že omenili lahko podobno kot sezname indeksiramo tudi nize. Prav tako lahko nad nizi izvajamo rezine. Povadimo najprej rezinjenje.
+
+\begin{zgled}
+Napiši program, ki bo od uporabnika prebral dve zaporedji baz (zapisani kot niza) in med njima na sredini izvedel križanje, tako da bo sestavil dve novi zaporedji baz in jih izpisal
+\end{zgled}
+
+\begin{resitev}
+Program bo torej od uporabnika prejel dva niza. Najprej bomo določili indeksa, kjer bomo križanje naredili. To bo na polovici posameznega zaporedja. Dolžino posameznega zaporedja bomo delili z 2, pri čemer bomo uporabili celoštevilsko deljenje (\texttt{//}), saj morajo biti indeksi cela števila. Potem bomo odrezali rezine in jih med seboj sestavili (z operatorjem lepljenja \texttt{+}) ter izpisali.
+\begin{lstlisting}[language=Python,numbers=left]
+gen1 = input("Vpisi prvo zaporedje baz: ")
+gen2 = input("Vpisi drugo zaporedje baz: ")
+
+# kje prerezemo gen 1
+i1 = len(gen1)//2 # celostevilsko deljenje z 2
+# kje prerezemo gen 2
+i2 = len(gen2)//2 # celostevilsko deljenje z 2
+
+gen11 = gen1[:i1] # prva polovica gena 1
+gen12 = gen1[i1:] # druga polovica gena 1
+gen21 = gen2[:i2] # prva polovica gena 2
+gen22 = gen2[i2:] # druga polovica gena 2
+
+# lepljenje iz izpis
+print(gen11 + gen22) 
+print(gen21 + gen12)
+\end{lstlisting}
+\end{resitev}
+Iz zgornjega zgleda vidimo še eno prednost tega, da \texttt{stop} v rezino ni vključen. Če prvo rezino režemo do indeksa \texttt{stop}, drugo pa od istega indeksa naprej, bosta rezini nepresečni, kar pomeni, da element na indeksu \texttt{stop} ne bo podvojen.
+
+Povadimo zdaj še običajno indeksiranje, ki ga bomo potem pohitrili z rezinami.
+
+\begin{zgled}
+Palindrom je niz, ki se na enak način bere naprej kot nazaj. Napiši program, ki od uporabnika prebere niz in izpiše, če podani niz je oziroma ni palindrom.
+\end{zgled}
+
+\begin{resitev}
+Prva rešitev bo temeljila na zanki \texttt{while}, s katero se bomo sprehajali od začetka proti koncu niza. Zanko \texttt{while} lahko torej ponavljamo, dokler z nekim števcem (npr. \texttt{i}) ne preštejemo do konca niza. Začeli bomo pa seveda na začetku, torej pri vrednosti 0 (\texttt{i=0}). V zanki \texttt{while} bomo primerjali enakost znaka na indeksu \texttt{i} z znakom na indeksu \texttt{-i-1}. Če se bodo ti pari ujemali \textbf{povsod}, bomo lahko sklepali, da je niz palindrom. Takoj, ko bomo našli \textbf{en} primer, kjer se par ne ujema (protiprimer), pa bomo lahko sklepali, da niz ni palindrom.
+\begin{lstlisting}[language=Python,numbers=left]
+niz = input("Vpisi niz: ")
+i = 0 # zaceli bomo na zacetku niza
+while i < len(niz): # do konca niza
+    if niz[i] != niz[-i-1]: # protiprimer
+        print("Niz ni palindrom")
+        break
+    i += 1 # gremo na naslednji par
+else: # ce smo prisli do konca brez break-a
+    print("Niz je palindrom")
+\end{lstlisting}
+Program bi sicer lahko nekoliko pohitrili, saj se nam ni treba premikati do konca niza, ampak je dovolj, da končamo, ko števec \texttt{i} pride do polovice niza. Pogoj v zanki \texttt{while} bi torej lahko spremenili v \texttt{i < len(niz)//2}.
+
+Do bistveno lepše rešitve pa pridemo, če uporabimo rezine. Niz je palindrom, če se bere naprej enako kot nazaj. Torej mora biti naprej prebran niz (\texttt{niz}) enak nazaj prebranemu niz (\texttt{niz[::-1]}). Program je torej sledeč:
+\begin{lstlisting}[language=Python,numbers=left]
+niz = input("Vpisi niz: ")
+if niz == niz[::-1]:
+    print("Niz je palindrom")
+else:
+    print("Niz ni palindrom")
+\end{lstlisting}
+\end{resitev}
+
 \section{Sprehajanje čez sezname}
+Do zdaj smo se temu sicer izogibali, ampak pri delu s seznami je ena izmed najpogostejši operacij sprehajanje nad seznami. Kako narediti tak sprehod? Zgoraj smo se z zanko \texttt{while} sprehajali nad indeksi niza. Podoben sprehod bi lahko naredili tudi nad seznami. Posamezen element seznama bi lahko izpisali npr. takole:
+\begin{lstlisting}[language=Python]
+i = 0
+while i < len(seznam):
+    print(seznam[i])
+    i += 1
+\end{lstlisting}
+Sprehajamo se torej po indeksih od začetka (0) do konca seznama (len(seznam)-1). Zgornja koda je sicer popolnoma pravilna, ni pa najlepša, saj je sprehajanju nad seznami in seznamu podobnimi podatki v Pythonu namenjena posebna zanka, zanka \texttt{for}.
