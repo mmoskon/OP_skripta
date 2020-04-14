@@ -402,7 +402,7 @@ print("3. mesto:", skoki[2][1], ", dolzina skoka:", skoki[2][0])
 \end{lstlisting}
 \end{resitev}
 
-\section{Generiraje seznamov s funkcijo \texttt{range}}
+\section{Generiranje seznamov s funkcijo \texttt{range}}
 
 Do zdaj smo sezname generirali oziroma dopolnjevali na podlagi vrednosti, ki jih je podal uporabnik. Taki seznami so lahko vsebovali poljubne elemente -- pač tisto, kar je uporabnik vnesel.
 
@@ -415,7 +415,7 @@ Generiranje seznamov v podanem razponu omogoča vgrajena funkcija \texttt{range}
 \item \texttt{step}: določa korak (celo število).
 \end{itemize}
 
-Pri prvem načinu uporabe funkciji \texttt{range} podamo zgolj argument \texttt{stop}. V tem primeru bomo dobili seznam vrednosti do do argumenta \texttt{stop}--1 s korakom 1. Poskusimo:
+Pri prvem načinu uporabe funkciji \texttt{range} podamo zgolj argument \texttt{stop}. V tem primeru bomo dobili seznam vrednosti do argumenta \texttt{stop}--1 s korakom 1. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> razpon = range(10)
 >>> razpon
@@ -456,9 +456,9 @@ Tudi če imate počasen računalnik, bo generiranje razpona narejeno v trenutku.
 \begin{lstlisting}[language=Python]
 >>> seznam = list(razpon)
 \end{lstlisting}
-Če vam Python ni javil napake \texttt{MemoryError}, je tole verjetno nekaj časa trajalo. Če ni in vas nisem prepričal, poskusite stvar ponoviti z večjim številom, npr. $10^10$. 
+Če vam Python ni javil napake \texttt{MemoryError}, je tole verjetno nekaj časa trajalo. Če ni in vas nisem prepričal, poskusite stvar ponoviti z večjim številom, npr. $10^{10}$. 
 
-Vrnimo se k osnovni uporabi funkcije \texttt{range}. Mogoče se sprašujetete zakaj razpon ne vključuje vrednosti \texttt{stop}. Razlogov za to je več. Zaenkrat podajmo najbolj očitnega. Ker funkcija \texttt{range} začne šteti z vrednostjo 0 (in ne z 1), bo razpon, ki ga bo vračala, vseboval točno \texttt{stop} elementov. Če bi funkciji \texttt{range} za argument \texttt{argument} podali dolžino nekega seznama, bi razpon vseboval vse indekse tega seznama (ena izmed možnih uporab funkcije \texttt{range} se že počasi odkriva). 
+Vrnimo se k osnovni uporabi funkcije \texttt{range}. Mogoče se sprašujetete zakaj razpon ne vključuje vrednosti \texttt{stop}. Razlogov za to je več. Zaenkrat podajmo najbolj očitnega. Ker funkcija \texttt{range} začne šteti z vrednostjo 0 (in ne z 1), bo razpon, ki ga bo vračala, vseboval točno \texttt{stop} elementov. Če bi funkciji \texttt{range} za argument \texttt{stop} podali dolžino nekega seznama, bi razpon vseboval vse indekse tega seznama (ena izmed možnih uporab funkcije \texttt{range} se že počasi odkriva). 
 
 S funkcijo \texttt{range} lahko generiramo razpon elementov, ki se ne začne s številom 0. V tem primeru bomo funkciji poleg argumenta \texttt{stop} podali še argument \texttt{start}. Najprej seveda navedemo \texttt{start}, potem pa \texttt{stop}:
 \begin{lstlisting}[language=Python]
@@ -520,7 +520,7 @@ Spet smo dobili seznam lihih števil. Zakaj? Zato ker smo začeli šteti z lihim
 
 V določenih primerih želimo namesto indeksiranja enega samega elementa izvesti indeksiranje razpona elementov v seznamu. Dobimo torej kos oziroma \emph{rezino} \angl{slice} seznama. Razpon seznama podamo na zelo podoben način, kot smo ga uporabljali pri funkciji \texttt{range}, in sicer preko začetka (\texttt{start}) rezine, konca (\texttt{stop}) rezine in koraka \emph{rezinjenja} (\texttt{step}).
 
-Podamo lahko samo začetek rezine: \texttt{seznam[start:}.  V tem primeru bo rezina odrezana do konca seznama. Če bi npr. radi dobili vse elemente seznama od vkjučno petega indeksa naprej, bi napisali takole:
+Podamo lahko samo začetek rezine: \texttt{seznam[start:]}.  V tem primeru bo rezina odrezana do konca seznama. Če bi npr. radi dobili vse elemente seznama od vkjučno petega indeksa naprej, bi napisali takole:
 \begin{lstlisting}[language=Python]
 >>> seznam = list(range(10))
 >>> seznam[5:]
@@ -532,7 +532,7 @@ Izhodiščni seznam je kot pri običajnem indeksiranju ostal nespremenjen:
 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 \end{lstlisting}
 
-Podamo lahko samo konec rezine: \texttt{seznam[:stop}.  V tem primeru se bo začela na začetku seznama in zaključila na indeksu \texttt{stop -- 1}. Podobno kot pri funkciji \texttt{range} tudi pri rezinah \texttt{stop} ni vključen v razpon. Če bi npr. radi dobili vse elemente seznama od začetka do petega indeksa (pri tem peti indeks ne bo vključen), bi napisali takole:
+Podamo lahko samo konec rezine: \texttt{seznam[:stop]}.  V tem primeru se bo začela na začetku seznama in zaključila na indeksu \texttt{stop -- 1}. Podobno kot pri funkciji \texttt{range} tudi pri rezinah \texttt{stop} ni vključen v razpon. Če bi npr. radi dobili vse elemente seznama od začetka do petega indeksa (pri tem peti indeks ne bo vključen), bi napisali takole:
 \begin{lstlisting}[language=Python]
 >>> seznam = list(range(10))
 >>> seznam[:5]
