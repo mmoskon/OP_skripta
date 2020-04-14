@@ -78,15 +78,55 @@ i = i + 1 # povecanje stevca za 1
 \begin{lstlisting}[language=Python]
 i += 1 # povecanje stevca za 1
 \end{lstlisting}
+Bistvo zgornjega stavka je, da izvedemo aritmetično operacijo seštevanja in rezultat priredimo spremenljivki, nad katero smo operacijo izvedli. Na podoben način lahko operator prirejanja \texttt{=} kombiniramo z drugimi aritmetičnimi operatorji in števili:
+\begin{lstlisting}[language=Python]
+>>> x = 10
+>>> x += 1 # povecaj za 1
+>>> x
+11
+>>> x -= 2 # zmanjsaj za 2
+>>> x
+9
+>>> x *= 5 # pomnozi s 5
+>>> x
+45
+>>> x /= 9 # deli z 9
+>>> x
+5.0
+>>> x **= 2 # potenciraj na 2
+>>> x
+25.0
+\end{lstlisting}
 
+\section{Mrtva zanka}
 
-Kaj pa bi se zgodilo, če bi števec znotraj zanke pozabili povečati? Spremenljivka \texttt{i} oziroma števec bi ostala na vrednosti 0 tudi po izvedbi zanke, kar pomeni, da bi bil pogoj za vedno izpolnjen. Kdaj bi se taka zanka končala? Ker je pogoj vedno resničen, se taka zanka nikoli ne konča in tak program je potrebno končati na silo (v okolju Python je temu namenjena kombinacija tipk \texttt{ctrl + c}). Na take stvari moramo torej pri programiranju z zanko \texttt{while} paziti. Zanki, ki se nikoli ne konča pravimo \emph{mrtva zanka} \angl{deadlock}.
+Kaj pa bi se zgodilo, če bi števec v prejšnjem zgledu znotraj zanke pozabili povečati? Spremenljivka \texttt{i} (oziroma števec) bi ostala na vrednosti 0 tudi po izvedbi zanke, kar pomeni, da bi bil pogoj za vedno izpolnjen (\texttt{True}). Kdaj bi se taka zanka končala? Ker je pogoj vedno resničen, se taka zanka nikoli ne konča in tak program je potrebno končati na silo (v okolju Python je temu namenjena kombinacija tipk \texttt{ctrl + c}). Na take stvari moramo torej pri programiranju z zanko \texttt{while} paziti. Zanki, ki se nikoli ne konča pravimo \emph{mrtva zanka} \angl{deadlock}.
 
 \section{Stavek \texttt{break}}
-
+Zanko pa lahko prekinemo tudi drugače kot z neizpolnjenostjo pogoja v glavi zanke. Uporabimo lahko namreč stavek \texttt{break}, ki prekine izvajanje zanke brez preverjanja pogoja v glavi zanke. Primer uporabe stavka \texttt\textbf{break} ponazarja spodnja koda
+\begin{lstlisting}[language=Python]
+while pogoj:
+    # telo zanke
+    ...
+    if dodaten_pogoj: 
+        break # prekine izvajanje zanke
+# nadaljevanje programa
+...
+\end{lstlisting}
+Izvedbo primera prikazuje slika \ref{img:while2}. 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/while2.pdf}
-    \caption{...}
+    \caption{Primer uporabe stavka \texttt{break} znotraj zanke \texttt{while}.}
     \label{img:while2}
 \end{figure}
+
+Stavek \texttt{break} ponavadi uporabljamo v kombinaciji z dodatnim pogojem. V primeru, da je slednji izpolnjen. se izvajanje zanke prekine predčasno. Poglejmo si še en zgled, na katerem bomo potrenirali uporabo stavka \texttt{break}. 
+
+\begin{zgled}
+...
+\end{zgled}
+\begin{resitev}
+...
+
+\end{resitev}
