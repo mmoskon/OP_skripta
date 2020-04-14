@@ -103,7 +103,7 @@ Bistvo zgornjega stavka je, da izvedemo aritmetično operacijo seštevanja in re
 Kaj pa bi se zgodilo, če bi števec v prejšnjem zgledu znotraj zanke pozabili povečati? Spremenljivka \texttt{i} (oziroma števec) bi ostala na vrednosti 0 tudi po izvedbi zanke, kar pomeni, da bi bil pogoj za vedno izpolnjen (\texttt{True}). Kdaj bi se taka zanka končala? Ker je pogoj vedno resničen, se taka zanka nikoli ne konča in tak program je potrebno končati na silo (v okolju Python je temu namenjena kombinacija tipk \texttt{ctrl + c}). Na take stvari moramo torej pri programiranju z zanko \texttt{while} paziti. Zanki, ki se nikoli ne konča pravimo \emph{mrtva zanka} \angl{deadlock}.
 
 \section{Stavek \texttt{break}}
-Zanko pa lahko prekinemo tudi drugače kot z neizpolnjenostjo pogoja v glavi zanke. Uporabimo lahko namreč stavek \texttt{break}, ki prekine izvajanje zanke brez preverjanja pogoja v glavi zanke. Primer uporabe stavka \texttt\textbf{break} ponazarja spodnja koda
+Zanko pa lahko prekinemo tudi drugače kot z neizpolnjenostjo pogoja v glavi zanke. Uporabimo lahko namreč stavek \texttt{break}, ki prekine izvajanje zanke brez preverjanja pogoja v glavi zanke. Primer uporabe stavka \texttt{break} ponazarja spodnja koda
 \begin{lstlisting}[language=Python]
 while pogoj:
     # telo zanke
@@ -132,29 +132,29 @@ Nalogo bi lahko rešili tako, da bi poiskali največji skupni delitelj podanih �
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
-kandidat = 2 # zacetna vrednost kandidata
+delitelj = 2 # zacetna vrednost kandidata
 
-while kandidat <= min(st1, st2): # kandidat gre do manjsega
+while delitelj <= min(st1, st2): # kandidat gre do manjsega
     # ali kandidat deli obe stevili?
-    if st1 % kandidat == 0 and st2 % kandidat == 0:
+    if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Stevili nista tuji")
-    kandidat += 1
+    delitelj += 1
 \end{lstlisting}
 Rešitev je še nepopolna, saj izpis poda samo v primeru, ko števili nista tuji. Kako bi lahko program dopolnili, tako da bi izpis podal tudi v primeru, ko sta števili tuji. Tak izpis lahko podamo samo v primeru, ko smo pregledali vse kandidate in nismo našli nobenega, ki deli obe števili. Pomagamo si lahko s pomožno spremenljivko tipa \texttt{bool}, v katero bomo shranili informacijo o tem, ali smo že našli kašnega delitelja. Pri tem bomo na začetku predpostavljali, da delitelja ni. Če ga bomo našli, bomo predpostavko popravili. Na koncu bomo preverili, če smo kakšnega delitelja našli. Če bo odgovor ne, bomo izpisali, da sta si števili tuji.
 \begin{lstlisting}[language=Python,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
-kandidat = 2 # zacetna vrednost kandidata
+delitelj = 2 # zacetna vrednost kandidata
 # predspostavljamo, da skupnega delitelja se nismo nasli:
 nasli = False 
 
-while kandidat <= min(st1, st2): # kandidat gre do manjsega
+while delitelj <= min(st1, st2): # kandidat gre do manjsega
     # ali kandidat deli obe stevili?
-    if st1 % kandidat == 0 and st2 % kandidat == 0:
+    if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Stevili nista tuji")
         nasli = True # popravimo predpostavko
-    kandidat += 1
+    delitelj += 1
 
 # ce do tu skupnega delitelja nismo nasli, potem ga ni        
 if nasli == False: 
@@ -166,17 +166,17 @@ Poleg tega bi lahko izvajanje zanke \texttt{while} prekinili takoj, ko smo našl
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
-kandidat = 2 # zacetna vrednost kandidata
+delitelj = 2 # zacetna vrednost kandidata
 # predspostavljamo, da skupnega delitelja se nismo nasli:
 nasli = False 
 
-while kandidat <= min(st1, st2): # kandidat gre do manjsega
+while delitelj <= min(st1, st2): # kandidat gre do manjsega
     # ali kandidat deli obe stevili?
-    if st1 % kandidat == 0 and st2 % kandidat == 0:
+    if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Stevili nista tuji")
         nasli = True # popravimo predpostavko
         break # lahko prenehamo z iskanjem
-    kandidat += 1 
+    delitelj += 1 
 
 # ce do tu skupnega delitelja nismo nasli, potem ga ni        
 if nasli == False: 
@@ -229,14 +229,14 @@ Del programa, kjer izpisujemo, da si števili nista tuji, bo ostal bolj ali manj
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
-kandidat = 2 # zacetna vrednost kandidata
+delitelj = 2 # zacetna vrednost kandidata
 
-while kandidat <= min(st1, st2): # kandidat gre do manjsega
+while delitelj <= min(st1, st2): # kandidat gre do manjsega
     # ali kandidat deli obe stevili?
-    if st1 % kandidat == 0 and st2 % kandidat == 0:
+    if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Stevili nista tuji")
         break # lahko prenehamo z iskanjem
-    kandidat += 1 
+    delitelj += 1 
 else: # ali se je zanka odvrtela do konca
     # zanke nismo prekinili s stavkom break
     print("Stevili sta tuji")
