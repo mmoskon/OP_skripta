@@ -32,7 +32,7 @@ Zapis zanke \texttt{while} je torej zelo podoben zapisu stavka \texttt{if}. Glav
 
 Zanke torej lahko uporabljamo takrat, ko želimo nekaj ponavljati dokler je določen pogoj izpolnjen. Npr., dokler uporabnik ne poda veljavnega vnosa, dokler ni števec dosegel določene vrednosti ali dokler sta števili različni. Končno lahko rešimo program, ki išče največji skupni delitelj dveh števil.
 \begin{zgled}
-Napiši program, ki od uporabnika prebere dve celi števili in poišče največji skupni delitelj teh dveh števil
+Napiši program, ki od uporabnika prebere dve celi števili in poišče največji skupni delitelj teh dveh števil z uporabo Evklidovega algoritma.
 \end{zgled}
 \begin{resitev}
 Program bo manjše število odšteval od večjega, dokler sta števili različni. Uporabili bomo torej zanko \texttt{while} (dokler sta števili različni).  Znotraj zanke bomo uporabili še stavek \texttt{if}, s pomočjo katerega bomo ugotovili, katero število je manjše. 
@@ -124,9 +124,121 @@ Izvedbo primera prikazuje slika \ref{img:while2}.
 Stavek \texttt{break} ponavadi uporabljamo v kombinaciji z dodatnim pogojem. V primeru, da je slednji izpolnjen. se izvajanje zanke prekine predčasno. Poglejmo si še en zgled, na katerem bomo potrenirali uporabo stavka \texttt{break}. 
 
 \begin{zgled}
-...
+Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta števili tuji. Števili sta tuji, če nimata nobenega skupnega delitelja, ki je večji od 1.
 \end{zgled}
 \begin{resitev}
-...
+Nalogo bi lahko rešili tako, da bi poiskali največji skupni delitelj podanih števil (naj bosta to števili \texttt{st1} in \texttt{st2})in pogledali, če je ta večji od 1. Tokrat se bomo rešitve lotili na malo drugačen način. Preverili bomo, če med kandidati za skupne delitelji obstaja kakšno število, ki deli obe števili, pri čemer bodo kandidati v razponu od števila 2 do manjšega števila, torej do vrednosti \texttt{min(st1, st2)}. V primeru, da med kandidati najdemo eno število, ki deli obe podani števili (ostanek po deljenju posameznega števila s kandidatom je enak 0 (\texttt{st \% kandidat == 0}), lahko takoj izpišemo, da števili nista tuji.
+\begin{lstlisting}[language=Python,numbers=left]
+st1 = int(input("Vnesi prvo stevilo: "))
+st2 = int(input("Vnesi drugo stevilo: "))
 
+kandidat = 2 # zacetna vrednost kandidata
+
+while kandidat <= min(st1, st2): # kandidat gre do manjsega
+    # ali kandidat deli obe stevili?
+    if st1 % kandidat == 0 and st2 % kandidat == 0:
+        print("Stevili nista tuji")
+    kandidat += 1
+\end{lstlisting}
+Rešitev je še nepopolna, saj izpis poda samo v primeru, ko števili nista tuji. Kako bi lahko program dopolnili, tako da bi izpis podal tudi v primeru, ko sta števili tuji. Tak izpis lahko podamo samo v primeru, ko smo pregledali vse kandidate in nismo našli nobenega, ki deli obe števili. Pomagamo si lahko s pomožno spremenljivko tipa \texttt{bool}, v katero bomo shranili informacijo o tem, ali smo že našli kašnega delitelja. Pri tem bomo na začetku predpostavljali, da delitelja ni. Če ga bomo našli, bomo predpostavko popravili. Na koncu bomo preverili, če smo kakšnega delitelja našli. Če bo odgovor ne, bomo izpisali, da sta si števili tuji.
+\begin{lstlisting}[language=Python,numbers=left]
+st1 = int(input("Vnesi prvo stevilo: "))
+st2 = int(input("Vnesi drugo stevilo: "))
+
+kandidat = 2 # zacetna vrednost kandidata
+# predspostavljamo, da skupnega delitelja se nismo nasli:
+nasli = False 
+
+while kandidat <= min(st1, st2): # kandidat gre do manjsega
+    # ali kandidat deli obe stevili?
+    if st1 % kandidat == 0 and st2 % kandidat == 0:
+        print("Stevili nista tuji")
+        nasli = True # popravimo predpostavko
+    kandidat += 1
+
+# ce do tu skupnega delitelja nismo nasli, potem ga ni        
+if nasli == False: 
+    print("Stevili sta tuji")
+\end{lstlisting}
+Program sicer deluje pravilno, je pa njegov izpis moteč, v primeru, da najdemo več skupnih deliteljev dveh števil. Vsakič, ko najdemo skupnega delitelja, namreč izpišemo, da smo ga našli
+Poleg tega bi lahko izvajanje zanke \texttt{while} prekinili takoj, ko smo našli enega skupnega delitelja, saj je to zadosten pogoj, da si števili nista tuji. Uporabimo lahko torej stavek \texttt{break}. Končna rešitev bo sledeča.
+\begin{lstlisting}[language=Python,numbers=left]
+st1 = int(input("Vnesi prvo stevilo: "))
+st2 = int(input("Vnesi drugo stevilo: "))
+
+kandidat = 2 # zacetna vrednost kandidata
+# predspostavljamo, da skupnega delitelja se nismo nasli:
+nasli = False 
+
+while kandidat <= min(st1, st2): # kandidat gre do manjsega
+    # ali kandidat deli obe stevili?
+    if st1 % kandidat == 0 and st2 % kandidat == 0:
+        print("Stevili nista tuji")
+        nasli = True # popravimo predpostavko
+        break # lahko prenehamo z iskanjem
+    kandidat += 1 
+
+# ce do tu skupnega delitelja nismo nasli, potem ga ni        
+if nasli == False: 
+    print("Stevili sta tuji")
+\end{lstlisting}
+\end{resitev}
+
+\section{Veja \texttt{else}}
+Ena izmed posebnosti jezika Python je tudi to, da lahko vejo \texttt{else} uporabljamo tudi v kombinaciji z zanko \texttt{while}. Takole:
+\begin{lstlisting}[language=Python]
+while pogoj:
+    # telo zanke
+    ...
+else:
+    # ko pogoj ni vec izpolnjen
+    ...
+# nadaljevanje programa
+...
+\end{lstlisting}
+Veja \texttt{else} se torej izvede, ko pogoj ni več izpolnjen. Vprašanje pa je ali se veja \texttt{else} izvede vsakič, ko se izvajanje zanke zaključi? Kakšna je razlika med stavki, ki sledijo zanki \texttt{while}, in stavki znotraj veje \texttt{else} zanke \texttt{while}? 
+
+Do bistvene razlike med vejo \texttt{else} in običajnimi stavki, ki sledijo zanki \texttt{while}, pride, kadar zanko prekinemo s stavkom \texttt{break}. V tem primeru namreč skočimo iz zanke, s čimer preskočimo tudi njeno \texttt{else} vejo. Slednja se izvede samo v primeru, ko smo zanko prekinili po \emph{običajni} poti, tj. z neizpolnjenostjo pogoja v glavi zanke.  
+\begin{lstlisting}[language=Python]
+while pogoj:
+    # telo zanke
+    ...
+    if dodaten_pogoj:
+        break # preki izvajanje zanke
+else: # samo v primeru, ko zanka ni bila prekinjena z break
+    # ko pogoj ni vec izpolnjen
+    ...
+# nadaljevanje programa
+...
+\end{lstlisting}
+Delovanje zgornjega programa ponazarja slika \ref{img:while3}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{img/while3.pdf}
+    \caption{Primer uporabe stavka \texttt{break} v kombinaciji z vejo \texttt{else} za zanko \texttt{while}.}
+    \label{img:while3}
+\end{figure}
+Določene stavke lahko po zaključku zanke \texttt{while} izvedemo samo v primeru, ko zanka ni bila prekinjena s stavkom \texttt{break}. Povadimo na prejšnjem zgledu še to.
+
+\begin{zgled}
+Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta števili tuji. Števili sta tuji, če nimata nobenega skupnega delitelja, ki je večji od 1.
+\end{zgled}
+\begin{resitev}
+Del programa, kjer izpisujemo, da si števili nista tuji, bo ostal bolj ali manj nespremenjen. Skrajšamo pa lahko tiste dela programa, ki jih potrebujemo za izpis, da sta si števili tuji. Števili sta si tuji, ko nismo našli nobenega skupnega delitelja. To se zgodi takrat, ko se je zanka \texttt{while} \emph{odvrtela} do konca in nismo našli nobenega skupnega delitelja, torej je posledično nismo prekinili s stavkom \texttt{break}. Če zanko \texttt{while} dopolnimo z \texttt{else} vejo, se bo ta izvedla natanko takrat, ko zanka ni bila prekinjena s stavkom \texttt{break}, torej takrat, ko nismo našli nobenega skupnega delitelja. Znotraj veje \texttt{else} lahko torej zapišemo, da sta si števili tuji. Na tak način se lahko znebimo spremenljivke \texttt{nasli} in naredimo program krajši in bistveno bolj pregleden.
+\begin{lstlisting}[language=Python,numbers=left]
+st1 = int(input("Vnesi prvo stevilo: "))
+st2 = int(input("Vnesi drugo stevilo: "))
+
+kandidat = 2 # zacetna vrednost kandidata
+
+while kandidat <= min(st1, st2): # kandidat gre do manjsega
+    # ali kandidat deli obe stevili?
+    if st1 % kandidat == 0 and st2 % kandidat == 0:
+        print("Stevili nista tuji")
+        break # lahko prenehamo z iskanjem
+    kandidat += 1 
+else: # ali se je zanka odvrtela do konca
+    # zanke nismo prekinili s stavkom break
+    print("Stevili sta tuji")
+\end{lstlisting}
 \end{resitev}
