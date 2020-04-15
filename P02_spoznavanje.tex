@@ -1,1 +1,225 @@
 \chapter{Spoznavanje z okoljem}
+
+\section{Okolje IDLE}
+
+Tekom razvoja enostavnejših ali kompleksnih programov ponavadi uporabljamo različna razvojna okolja \angl{Integrated Development Environment, \emph{IDE}}, ki združujejo orodja za pisanje, poganjanje in razhroščevanje \angl{debugging} programov. Ti pripomočki nam nekoliko olajšajo delo in naredijo razvoj kompleksnejših (ali pa tudi enostavnejših) programov nekoliko bolj pregleden. Z namestitvijo osnovnega okolja Python smo na svoj računalnik namestili tudi okolje IDLE, ki predstavlja enostaven IDE in katerega bomo uporabljali pri spoznavanju osnov programiranja. Zaženimo ga in začnimo (v operacijskem sistemu Windows boste IDLE zagnali tako, da v Start meni napišete \texttt{idle} in pritisnete tipko \texttt{Enter}).
+
+\section{Ukazna vrstica}
+Pred nami se je pojavila \emph{ukazna} oziroma \emph{pozivna vrstica}, s pomočjo katere lahko začnemo naš pogovor s tolmačem Python \angl{Python interpreter}. Mi mu bomo v obliki stavkov podajali ukaze, on pa jih bo izvršil in nam ponavadi tudi vrnil ali pa izpisal nek rezultat. Ukaz napišemo in tolmaču pošljemo tako, da pritisnemo tipko \texttt{Enter}. 
+
+Poskusimo nekaj osnovnih stvari.
+\begin{lstlisting}[language=Python]
+>>> 1 + 2
+3
+>>> 1 - 2
+-1
+>>> 1 * 2
+2
+>>> 1 - 3 * 4
+-11
+\end{lstlisting}
+Python torej lahko podam nek izraz sestavljen iz operandov (v tem primeru števil) in operatorjev(npr. \texttt{+}, \texttt{*} in \texttt{-}) in on mi bo vrnil rezultat. Iz zadnjega izraza vidimo tudi, da ima množenje prednost pred odštevanjem. Uporabim lahko tudi oklepaje, s katerimi določim vrstni red računanja:
+\begin{lstlisting}[language=Python]
+>>> (1 - 3) * 4
+-8
+\end{lstlisting}
+Kaj pa deljenje? 
+\begin{lstlisting}[language=Python]
+>>> 5 / 4
+1.25
+>>> 10 / 5
+2.0
+\end{lstlisting}
+Uporabim lahko tudi celoštevilsko deljenje (\texttt{//}) in ostanek pri deljemju oziroma operacijo modulo (\texttt{\%}): 
+\begin{lstlisting}[language=Python]
+>>> 5 // 4
+1
+>>> 10 // 5
+2.0
+>>> 10 % 4
+2
+\end{lstlisting}
+
+\section{Podatkovni tipi}
+
+Celoštevilsko deljenje očitno vedno vrne celo število, običajno deljenje pa vrne decimalno število, tudi če je rezultat celo število. Operaciji sta pač definirani tako, da vsakič vrneta določen \texttt{podatkovni tip}. Podatkovni tip? Vse vrednosti, ki smo jih tolmaču podali, so imele določen podatkovni tip, in sicer smo v vseh primerih zgoraj podajali cela števila \angl{integer}, ki jim Python pravi \texttt{int}. Rezultati izvedbe gornjih stavkov so v določenih primerih prav tako predstavljali cela števila, pri deljenju pa smo dobili decimalna števila oziroma \emph{števila v plavajoči vejici} \angl{floating point number}, ki jim Python pravi \texttt{float}. Decimalna števila lahko tolmaču damo tudi kot vhodne podatke:
+\begin{lstlisting}[language=Python]
+>>> 5.4 + 4.6
+10.0
+>>> 6.3 / 2
+3.15
+>>> 4 ** 0.5
+2.0
+\end{lstlisting}
+Mimogrede, operator \texttt{**} določa potenciranje, potenciranje z vrednostjo 0.5 pa je enako kvadratnemu korenu. 
+
+Python zna poleg s števili delati tudi z drugimi podatkovnimi tipi, npr. nizi \angl{string}, oziroma po njegovo podatkovnim tipom \texttt{str}. Nizi vsebujejo sekvenco poljubnih znakov (črke, števila, ločila, posebni simboli ipd.), zapisujemo pa jih znotraj dvojnih (\texttt{"}) ali enojnih navednic (\texttt{'}). Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> "niz1"
+'niz1'
+>>> 'niz2'
+'niz2'
+\end{lstlisting}
+Python očitno ne loči med dvojnimi in enojnimi navednicami. Mi jih lahko uporabljamo glede na naš okus. Kako pa znotraj niza zapisati enojne navednice? Tako da jih ovijemo v dvojne navednice. In obratno. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> 'Rekel je: "Daj mi mir!"'
+'Rekel je: "Daj mi mir!"'
+>>> "'Znamo' programirati."
+"'Znamo' programirati."
+\end{lstlisting}
+Ali lahko tudi nad nizi izvajamo operacije od prej. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> 'niz1' + 'niz2'
+'niz1niz2'
+>>> 'niz1' + ' ' + 'niz2'
+'niz1 niz2'
+>>> 'niz1' * 3
+'niz1niz1niz1'
+>>> 'niz1' * 'niz2'
+Traceback (most recent call last):
+  File "<pyshell#36>", line 1, in <module>
+    'niz1' * 'niz2'
+TypeError: can't multiply sequence by non-int of type 'str'
+\end{lstlisting}
+Python nam je v zadnjem primeru vrnil napako, kar pomeni, da operacija, ki smo jo hoteli izvesti ni podprta. Ko dobimo napako, se je ne ustrašimo, ampak jo preberimo, saj nam sporoča kaj je narobe. Python torej množenja dveh nizov med seboj ne podpira.
+Tudi seštevanje in množenje je nad nizi definirano nekoliko drugače kot nad števili. Kaj pa če niz vsebuje števila?
+\begin{lstlisting}[language=Python]
+>>> '3' + '5'
+'35'
+>>> '3' * '5'
+Traceback (most recent call last):
+  File "<pyshell#41>", line 1, in <module>
+    '3' * '5'
+TypeError: can't multiply sequence by non-int of type 'str'
+\end{lstlisting}
+Rezultat je podoben kot prej. Podatkovni tip operanda oziroma podatka torej določa kaj in kako lahko s posameznim podatkom počnemo. Števila lahko npr. seštevamo, če pa poskusimo sešteti dva niza, izvajamo operacijo lepljenja nizov oziroma njihovo \emph{konkatenacijo}. 
+
+\section{Funkcije}
+Poleg osnovnih operatorjev so v osnovnem Python okolju vgrajene tudi določene \emph{funkcije}. Podobno kot v matematiki funkcije sprejemajo določene vhode oziroma \emph{argumente}. Funkcijo pokličemo tako, da podamo njeno ime in vhode funkciji zapišemo znotraj oklepajev. Takole:
+\begin{lstlisting}[language=Python]
+ime_funkcije(argument_1, argument_2, ..., argument_n)
+\end{lstlisting}
+Po klicu se bo funkcija izvedla in nekaj koristnega naredila in / ali vrnila nek uporaben rezultat. Če bi želeli izvedeti, kateremu podatkovnem tipu pripada nek podatek, bi lahko npr. poklicali funkcijo \texttt{type}:
+\begin{lstlisting}[language=Python]
+>>> type(1)
+<class 'int'>
+>>> type(1.0)
+<class 'float'>
+>>> type('niz')
+<class 'str'>
+\end{lstlisting}
+Poglejmo si še funkcijo \texttt{abs}, ki izračuna absolutno vrednost podanega argumenta:
+\begin{lstlisting}[language=Python]
+>>> abs(-1)
+1
+>>> abs(-1.4)
+1.4
+>>> abs(5)
+5
+>>> abs('niz')
+Traceback (most recent call last):
+  File "<pyshell#57>", line 1, in <module>
+    abs('niz')
+TypeError: bad operand type for abs(): 'str'
+\end{lstlisting}
+Tudi argumenti funkcij so torej omejeni na določene podatkovne tipe, kar je smiselno, saj v konkretnem primeru absolutne vrednosti niza pač ne moremo izračunati.
+
+Python ima vgrajenih še kar nekaj funkcij, ki jih bomo pa večinoma spoznavali sproti. 
+
+\section{Spremenljivke}
+Do zdaj smo v ukazno vrstico pisali izraze sestavljene in operatorjev in operandov oziroma podatkov. Python je po vsakem pritisku tipke \texttt{Enter} podan izraz pognal in vrnil rezultat, ki pa ga je takoj zatem pozabil. Do dobljenega rezultata tako ne moremo več priti drugače, kot da še enkrat podamo enak izraz, ki ga bo Python ponovno ovrednotil in vrnil enak rezultat. Pogosto pa si želimo rezultate izvedenih stavkov zapomniti oziroma želimo, da jih Python spravi za kasneje. Na ta način lahko sestavljamo kompleksnejše izraze (brez da bi pisali dolge kače čez več vrstic), izračunan podatek uporabimo večkrat in z njim delamo različne stvari (npr. uporaba v drugih izrazih, izpis na zaslon, shranjevanje na trdi disk itd.). Python omogoča, da posameznemu podatku dodelimo ime, preko katerega bomo lahko do tega podatka dostopali še kasneje. Takole:
+\begin{lstlisting}[language=Python]
+>>> x = 1
+>>> y = 2 - 3.5
+>>> niz = 'abc'
+\end{lstlisting}
+Zdaj Python ni ničesar izpisal, je pa vrednost na desni strani \emph{prireditvenega stavka} priredil imenu na levi strani prireditvenega stavka. Izvedli smo torej prireditev vrednosti na desni imenu na levi, ki mu pravimo tudi \texttt{spremenljivka}. Pri tem smo uporabili prireditveni operator \texttt{=}. Pozor: to ni operator enakosti, saj vedno deluje samo v eno smer, in sicer tistemu, kar napišemo na levi strani, priredi tisto, kar napišemo na desni strani. Če npr. napišemo
+\begin{lstlisting}[language=Python]
+>>> x = x + 2
+\end{lstlisting}
+to ni nerešljiva enačba (kot bi bila v primeru, da enačaj obravnavamo kot operator enakosti), ampak zgolj pomeni, da vzamemo vrednost, ki stoji za imenom \texttt{x}, to vrednost povečamo za 2 in priredimo imenu \texttt{x}. Zgornji stavek torej vrednost v spremenljivki \texttt{x} poveča za 2. Kako pa dostopamo do vrednosti posamezne spremenljivke oziroma do vrednosti, ki stoji za določenim imenom? To smo naredili že zgoraj -- tako da podamo ime spremenljivke. Ko smo zgoraj napisal ime \texttt{x} na desni strani prireditvenega stavka, je Python pogledal kaj za tem imenom stoji in ime zamenjal z vrednostjo za njim. Drugače je, če ime uporabimo na levi strani prireditvenega stavka. S tem namreč imenu priredimo novo vrednost, če pa imena še nismo definirali, s tem ustvarimo tudi novo ime. Temu rečemo \texttt{definicija spremenljivke}.
+
+Do vrednosti spremenljivke \texttt{x} ali \texttt{y} bi zdaj torej lahko dostopali tako, da zgolj podamo njeno ime:
+\begin{lstlisting}[language=Python]
+>>> x
+3
+>>> y
+-1.5
+\end{lstlisting}
+Ime spremenljivke lahko uporabimo tudi kot argument funkcije, npr. takole:
+\begin{lstlisting}[language=Python]
+>>> abs(x)
+3
+>>> abs(y)
+1.5
+\end{lstlisting}
+Prav tako lahko izhod funkcije priredimo novi (ali obstoječi) spremenljivki:
+\begin{lstlisting}[language=Python]
+>>> z = abs(y)
+\end{lstlisting}
+Zdaj Python ni izpisal ničesar, je pa ustvaril novo spremenljivko, do katere lahko dostopamo:
+\begin{lstlisting}[language=Python]
+>>> z
+1.5
+\end{lstlisting}
+Kaj pa bi se zgodilo, če pokličemo ime spremenljivke, ki je še nimamo:
+\begin{lstlisting}[language=Python]
+>>> novo_ime
+Traceback (most recent call last):
+  File "<pyshell#63>", line 1, in <module>
+    novo_ime
+NameError: name 'novo_ime' is not defined
+\end{lstlisting}
+Ker tega imena Python ne pozna, saj ga še nismo definirali, javi napako. Dostopamo lahko torej le do imen, ki smo jih bodisi definirali mi ali pa so že definirana (kot npr. \texttt{abs}). 
+
+Kaj pa bi se zgodilo, če bi imenu vgrajene funkcije priredili novo vrednost? Če bi npr. izvedli prireditev
+\begin{lstlisting}[language=Python]
+>>> abs = 5
+\end{lstlisting}
+bo Python to brez pritoževanja tudi izvedel. Poksusimo zdaj še enkrat izračunati absolutno vrednost tistega, kar se skriva za spremenljivko \texttt{y}:
+\begin{lstlisting}[language=Python]
+Traceback (most recent call last):
+  File "<pyshell#68>", line 1, in <module>
+    abs(y)
+TypeError: 'int' object is not callable
+\end{lstlisting}
+Seveda bo prišlo do napake, saj smo si funkcijo za izračun absolutne vrednosti \emph{povozili} z vrednostjo tipa \texttt{int}. Za imenom \texttt{abs} po novem Python nima shranjene funkcije za izračun absolutne vrednosti, ampak število 5. Nerodno. Stvar lahko rešimo tako, da okolje IDLE resetiramo (\texttt{Shell} $\rightarrow$ \texttt{Restart Shell} oziroma kombinacija tipk \texttt{ctrl + F6}).
+
+V splošnem velja, da se moramo pri poimenovanju spremenljivk držati določenih pravil. Kot smo videli prej, uporaba imen, ki so že rezervirana oziroma uporabljena, ni priporočena. Prireditev vrednosti rezerviranim imenom ni zgolj slaba, ampak celo vrne napako:
+\begin{lstlisting}[language=Python]
+>>> if = 5
+SyntaxError: invalid syntax
+\end{lstlisting}
+Zgoraj vidimo, da je besedica \texttt{if} t.i. \texttt{rezervirano ime}, saj jo IDLE obarva drugače kot ostale besede oziroma jo odebeli. Njeno uporabo bomo spoznali prav kmalu. Pri imenih spremenljivk nam Python poleg tega ne bo pustil uporabe presledkov:
+\begin{lstlisting}[language=Python]
+>>> moje ime = 'Miha'
+SyntaxError: invalid syntax
+\end{lstlisting}
+Stvar lahko rešimo tako, da presledke zamenjamo s podčrtaji (\texttt{\_}):
+\begin{lstlisting}[language=Python]
+>>> moje_ime = 'Miha'
+>>> moje_ime
+'Miha'
+\end{lstlisting}
+Poleg tega se je pri poimenovanju spremenljivk dobro držati še določenih priporočil. Navedimo jih nekaj:
+\begin{itemize}
+    \item spremenljivke naj imajo smiselna imena, ki programerju sporočajo pomen spremenljivke;
+    \item pri poimenovanju spremenljivk se izogibajmo črkam, ki ne nastopajo v osnovni angleški abecedi (izogibamo se npr. črkam \texttt{č}, \texttt{ž} in \texttt{š});
+    \item imena so lahko sestavljena iz več besed, pri čemer te ločimo s podčrtaji.
+\end{itemize}
+
+\section{Pisanje programov}
+
+
+\section{Funkcija \texttt{print}}
+
+
+\section{Funkcija \texttt{input}}
+
+
+\section{Pretvarjanje med podatkovnimi tipi}
+
+
+\section{Pisanje komentarjev}
+
+\section{Funkcija \texttt{help}}
