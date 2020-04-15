@@ -2,7 +2,11 @@
 
 \section{Kaj so zanke?}
 
-Z uporabo stavka \texttt{if} lahko torej izbrane stavke izvedemo samo v primeru, ko je nek pogoj izpolnjen. Včasih pa bi želeli izbrane stavke izvajati vse \textbf{dokler} \angl{while} je nek pogoj izpolnjen. Slednje omogočajo \textbf{zanke}. V sledečem poglavju si bomo podrobneje pogledali zanko \texttt{while}. Razliko med izvedbo pogojnega stavka \texttt{if} in zanko \texttt{while} prikazuje slika \ref{img:while_vs_if}.
+Z uporabo stavka \texttt{if} lahko torej izbrane stavke izvedemo samo v primeru, ko je nek pogoj izpolnjen. Včasih pa bi želeli izbrane stavke izvajati vse \textbf{dokler} \angl{while} je nek pogoj izpolnjen. To omogočajo \textbf{zanke}. V sledečem poglavju si bomo podrobneje pogledali zanko \texttt{while}. 
+
+\section{Zanka \texttt{while}}
+
+Razliko med izvedbo pogojnega stavka \texttt{if} in zanko \texttt{while} prikazuje slika \ref{img:while_vs_if}.
 
 \begin{figure}
     \centering
@@ -10,10 +14,7 @@ Z uporabo stavka \texttt{if} lahko torej izbrane stavke izvedemo samo v primeru,
     \caption{Razlika med izvedbo pogojnega stavka \texttt{if} (črtkana linija rdeče barve) in zanko \texttt{while} (polna linija rdeče barve). }
     \label{img:while_vs_if}
 \end{figure}
-
-\section{Zanka \texttt{while}}
-
-Po izvedbi pogojnega dela stavka \texttt{if} se izvajanje programa nadaljuje v delu, ki sledi pogojnim stavkom. Po drugi strani se po izvedbi pogojnega dela zanke \texttt{while}, recimo tem stavkom raje \emph{telo zanke}, izpolnjenost pogoja v \emph{glavi zanke} ponovno preverja. Telo (vsebina) zanke se bo torej izvajalo vse dokler bo pogoj izpolnjen. Zanko \texttt{while} lahko zapišemo takole:
+Po izvedbi pogojnega dela stavka \texttt{if} se izvajanje programa nadaljuje v delu, ki sledi pogojnim stavkom. Po drugi strani se po izvedbi pogojnega dela zanke \texttt{while}, recimo tem stavkom raje \emph{telo zanke}, izpolnjenost pogoja v \emph{glavi zanke} ponovno preveri. Telo (vsebina) zanke se bo torej izvajalo vse dokler bo pogoj izpolnjen. Zanko \texttt{while} lahko zapišemo takole:
 \begin{lstlisting}[language=Python]
 while pogoj: # glava zanke
     # telo zanke
@@ -30,7 +31,7 @@ Zapis zanke \texttt{while} je torej zelo podoben zapisu stavka \texttt{if}. Glav
     \label{img:while1}
 \end{figure}
 
-Zanke torej lahko uporabljamo takrat, ko želimo nekaj ponavljati dokler je določen pogoj izpolnjen. Npr., dokler uporabnik ne poda veljavnega vnosa, dokler ni števec dosegel določene vrednosti ali dokler sta števili različni. Končno lahko rešimo program, ki išče največji skupni delitelj dveh števil.
+Zanke torej lahko uporabljamo takrat, ko želimo nekaj ponavljati, dokler je določen pogoj izpolnjen. Npr., dokler uporabnik ne poda veljavnega vnosa, dokler ni števec dosegel določene vrednosti ali pa dokler sta števili različni. Končno lahko rešimo program, ki išče največji skupni delitelj dveh števil.
 \begin{zgled}
 Napiši program, ki od uporabnika prebere dve celi števili in poišče največji skupni delitelj teh dveh števil z uporabo Evklidovega algoritma.
 \end{zgled}
@@ -54,12 +55,12 @@ Opomba: vsebina stavka \texttt{if} je zamaknjena dvakrat, saj je zapisana tako z
 
 \section{Štetje z zanko \texttt{while}}
 
-Zanko \texttt{while} bi lahko uporabili tudi za štetje. Za ta namen je sicer boljša zanka \texttt{for}, do katere pridemo kasneje. Poglejmo si zgled.
+Zanko \texttt{while} bi lahko uporabili tudi za štetje. Za ta namen je sicer boljša zanka \texttt{for}, ki jo bomo spoznali malo kasneje. Poglejmo si zgled.
 \begin{zgled}
 Napiši program, ki šteje od 0 do števila, ki ga je vnesel uporabnik. Vsa števila naj program tudi izpiše
 \end{zgled}
 \begin{resitev}
-Število, do katerega smo prešteli, si bomo morali nekam zabeležiti, npr. v spremeneljivko z imenom \texttt{i}. Šteti bomo glede na navodila začeli s številom 0. Torej bomo spremenljivko \texttt{i} na začetku postavili na 0. Končali bomo s številom, ki ga je vnesel uporabnik, recimo \texttt{n}. Pogoj za štetje naprej bo torej \texttt{i <= n}. Znotraj zanke \texttt{while} bomo trenutno število (\texttt{i}) izpisali, poleg tega moramo pa trenutno število tudi povečati, saj bo sicer pogoj za vedno izpolnjen. 
+Število, do katerega smo prešteli, si bomo morali nekam zabeležiti, npr. v spremenljivko z imenom \texttt{i}. Šteti bomo glede na navodila začeli s številom 0. Torej bomo spremenljivko \texttt{i} na začetku postavili na 0. Končali bomo s številom, ki ga je vnesel uporabnik, recimo \texttt{n}. Pogoj za štetje naprej bo torej \texttt{i <= n}. Znotraj zanke \texttt{while} bomo trenutno število (\texttt{i}) izpisali, poleg tega moramo trenutno število tudi povečati, saj bo sicer pogoj za vedno izpolnjen. 
 \begin{lstlisting}[language=Python,numbers=left]
 n = int(input("Vpisi stevilo do katerega zelis steti: "))
 i = 0 # stevec s katerim bomo steli
@@ -70,7 +71,7 @@ while i <= n: # smo ze presteli?
 \end{resitev}
 
 \section{Stavek \texttt{+=}}
-Znotraj zanke smo števec povečali za 1 z izvedbo prireditve
+Znotraj zanke smo števec povečali za 1 z izvedbo prireditvenega stavka
 \begin{lstlisting}[language=Python]
 i = i + 1 # povecanje stevca za 1
 \end{lstlisting}
@@ -100,7 +101,7 @@ Bistvo zgornjega stavka je, da izvedemo aritmetično operacijo seštevanja in re
 
 \section{Mrtva zanka}
 
-Kaj pa bi se zgodilo, če bi števec v prejšnjem zgledu znotraj zanke pozabili povečati? Spremenljivka \texttt{i} (oziroma števec) bi ostala na vrednosti 0 ne glede na to koliko iteracij zanke bi se izvedlo. To pomeni, da bi bil pogoj za vedno izpolnjen (\texttt{True}). Kdaj bi se taka zanka končala? Ker je pogoj vedno resničen, se taka zanka nikoli ne konča in tak program je potrebno končati na silo (v okolju Python je temu namenjena kombinacija tipk \texttt{ctrl + c}). Na take stvari moramo torej pri programiranju z zanko \texttt{while} paziti. Zanki, ki se nikoli ne konča pravimo \emph{mrtva zanka} \angl{deadlock}.
+Kaj pa bi se zgodilo, če bi števec v prejšnjem zgledu znotraj zanke pozabili povečati? Spremenljivka \texttt{i} (oziroma števec) bi ostala na vrednosti 0 ne glede na to koliko iteracij zanke bi se izvedlo. To pomeni, da bi bil pogoj za vedno izpolnjen (\texttt{True}). Kdaj bi se taka zanka končala? Ker je pogoj vedno resničen, se taka zanka nikoli ne konča in tak program je potrebno končati na silo (v okolju Python je temu namenjena kombinacija tipk \texttt{ctrl + c}). Na take stvari moramo torej pri programiranju z zanko \texttt{while} paziti. Zanki, ki se nikoli ne konča, pravimo \emph{mrtva zanka} \angl{deadlock}.
 
 \section{Stavek \texttt{break}}
 Zanko pa lahko prekinemo tudi drugače kot z neizpolnjenostjo pogoja v glavi zanke. Uporabimo lahko namreč stavek \texttt{break}, ki prekine izvajanje zanke brez preverjanja pogoja v glavi zanke. Primer uporabe stavka \texttt{break} ponazarja spodnja koda
@@ -121,13 +122,13 @@ Izvedbo primera prikazuje slika \ref{img:while2}.
     \label{img:while2}
 \end{figure}
 
-Stavek \texttt{break} ponavadi uporabljamo v kombinaciji z dodatnim pogojem. V primeru, da je slednji izpolnjen. se izvajanje zanke prekine predčasno. Poglejmo si še en zgled, na katerem bomo potrenirali uporabo stavka \texttt{break}. 
+Stavek \texttt{break} ponavadi uporabljamo v kombinaciji z dodatnim pogojem. V primeru, da je slednji izpolnjen, se izvajanje zanke prekine predčasno. Poglejmo si še en zgled, na katerem bomo potrenirali uporabo stavka \texttt{break}. 
 
 \begin{zgled}
 Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta števili tuji. Števili sta tuji, če nimata nobenega skupnega delitelja, ki je večji od 1.
 \end{zgled}
 \begin{resitev}
-Nalogo bi lahko rešili tako, da bi poiskali največji skupni delitelj podanih števil (naj bosta to števili \texttt{st1} in \texttt{st2})in pogledali, če je ta večji od 1. Tokrat se bomo rešitve lotili na malo drugačen način. Preverili bomo, če med kandidati za skupne delitelji obstaja kakšno število, ki deli obe števili, pri čemer bodo kandidati v razponu od števila 2 do manjšega števila, torej do vrednosti \texttt{min(st1, st2)}. V primeru, da med kandidati najdemo eno število, ki deli obe podani števili (ostanek po deljenju posameznega števila s kandidatom je enak 0 (\texttt{st \% kandidat == 0}), lahko takoj izpišemo, da števili nista tuji.
+Nalogo bi lahko rešili tako, da bi poiskali največji skupni delitelj podanih števil (naj bosta to števili \texttt{st1} in \texttt{st2}) in pogledali, če je ta večji od 1. Tokrat se bomo rešitve lotili na malo drugačen način. Preverili bomo, če med kandidati za skupne delitelje obstaja kakšno število, ki deli obe števili, pri čemer bodo kandidati v razponu od števila 2 do manjšega števila, torej do vrednosti \texttt{min(st1, st2)}. V primeru, da med kandidati najdemo eno število, ki deli obe podani števili (ostanek po deljenju posameznega števila s kandidatom je enak 0 (\texttt{st \% delitelj == 0}), lahko takoj izpišemo, da števili nista tuji.
 \begin{lstlisting}[language=Python,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
@@ -140,7 +141,7 @@ while delitelj <= min(st1, st2): # kandidat gre do manjsega
         print("Stevili nista tuji")
     delitelj += 1
 \end{lstlisting}
-Rešitev je še nepopolna, saj izpis poda samo v primeru, ko števili nista tuji. Kako bi lahko program dopolnili, tako da bi izpis podal tudi v primeru, ko sta števili tuji. Tak izpis lahko podamo samo v primeru, ko smo pregledali vse kandidate in nismo našli nobenega, ki deli obe števili. Pomagamo si lahko s pomožno spremenljivko tipa \texttt{bool}, v katero bomo shranili informacijo o tem, ali smo že našli kašnega delitelja. Pri tem bomo na začetku predpostavljali, da delitelja ni. Če ga bomo našli, bomo predpostavko popravili. Na koncu bomo preverili, če smo kakšnega delitelja našli. Če bo odgovor ne, bomo izpisali, da sta si števili tuji.
+Rešitev je še nepopolna, saj izpis poda samo v primeru, ko števili nista tuji. Kako bi lahko program dopolnili, tako da bi izpis podal tudi v primeru, ko sta števili tuji. Tak izpis lahko podamo samo v primeru, ko smo pregledali vse kandidate in nismo našli nobenega, ki deli obe števili. Pomagamo si lahko s pomožno spremenljivko tipa \texttt{bool}, v katero bomo shranili informacijo o tem, ali smo že našli kašnega delitelja. Pri tem bomo na začetku predpostavljali, da delitelja ni. Če ga bomo našli, bomo predpostavko popravili. Na koncu bomo preverili, če smo kakšnega delitelja našli. Če bo odgovor ne (\texttt{nasli == False}), bomo izpisali, da sta si števili tuji.
 \begin{lstlisting}[language=Python,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
@@ -167,7 +168,7 @@ st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
 delitelj = 2 # zacetna vrednost kandidata
-# predspostavljamo, da skupnega delitelja se nismo nasli:
+# predpostavljamo, da skupnega delitelja se nismo nasli:
 nasli = False 
 
 while delitelj <= min(st1, st2): # kandidat gre do manjsega
@@ -218,13 +219,13 @@ Delovanje zgornjega programa ponazarja slika \ref{img:while3}.
     \caption{Primer uporabe stavka \texttt{break} v kombinaciji z vejo \texttt{else} za zanko \texttt{while}.}
     \label{img:while3}
 \end{figure}
-Določene stavke lahko po zaključku zanke \texttt{while} izvedemo samo v primeru, ko zanka ni bila prekinjena s stavkom \texttt{break}. Povadimo na prejšnjem zgledu še to.
+Z vejo \texttt{else} lahko določene stavke po zaključku zanke \texttt{while} izvedemo samo v primeru, ko zanka ni bila prekinjena s stavkom \texttt{break}. Povadimo na prejšnjem zgledu še tole.
 
 \begin{zgled}
 Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta števili tuji. Števili sta tuji, če nimata nobenega skupnega delitelja, ki je večji od 1.
 \end{zgled}
 \begin{resitev}
-Del programa, kjer izpisujemo, da si števili nista tuji, bo ostal bolj ali manj nespremenjen. Skrajšamo pa lahko tiste dela programa, ki jih potrebujemo za izpis, da sta si števili tuji. Števili sta si tuji, ko nismo našli nobenega skupnega delitelja. To se zgodi takrat, ko se je zanka \texttt{while} \emph{odvrtela} do konca in nismo našli nobenega skupnega delitelja, torej je posledično nismo prekinili s stavkom \texttt{break}. Če zanko \texttt{while} dopolnimo z \texttt{else} vejo, se bo ta izvedla natanko takrat, ko zanka ni bila prekinjena s stavkom \texttt{break}, torej takrat, ko nismo našli nobenega skupnega delitelja. Znotraj veje \texttt{else} lahko torej zapišemo, da sta si števili tuji. Na tak način se lahko znebimo spremenljivke \texttt{nasli} in naredimo program krajši in bistveno bolj pregleden.
+Del programa, kjer izpisujemo, da si števili nista tuji, bo ostal bolj ali manj nespremenjen. Skrajšamo pa lahko tiste dela programa, ki jih potrebujemo za izpis, da sta si števili tuji. Števili sta si tuji, ko nismo našli nobenega skupnega delitelja. To se zgodi takrat, ko se je zanka \texttt{while} \emph{odvrtela} do konca in nismo našli nobenega skupnega delitelja, torej je posledično nismo prekinili s stavkom \texttt{break}. Če zanko \texttt{while} dopolnimo z vejo \texttt{else}, se bo ta izvedla natanko takrat, ko zanka ni bila prekinjena s stavkom \texttt{break}, torej takrat, ko nismo našli nobenega skupnega delitelja. Znotraj veje \texttt{else} lahko torej zapišemo, da sta si števili tuji. Na tak način se lahko znebimo spremenljivke \texttt{nasli} in naredimo program krajši in bistveno bolj pregleden.
 \begin{lstlisting}[language=Python,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
