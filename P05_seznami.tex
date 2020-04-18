@@ -553,7 +553,7 @@ Korak je lahko tudi negativen. Če bi kot korak npr. napisali vrednost --1, bi s
 [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 \end{lstlisting}
 
-Vse zgoraj naštete kombinacije lahko seveda po mili volji kombiniramo. Če bi npr. hoteli vzeti vsak drug element seznama v razponu od 3 do 9, bi napisali takole:
+Vse zgoraj naštete kombinacije lahko seveda po mili volji kombiniramo. Če bi npr. hoteli vzeti vsak tretji element seznama v razponu od 2 do 9, bi napisali takole:
 \begin{lstlisting}[language=Python]
 >>> seznam = list(range(10))
 >>> seznam[2:9:3]
@@ -567,7 +567,7 @@ Vse zgoraj naštete kombinacije lahko seveda po mili volji kombiniramo. Če bi n
 >>> seznam[9:2:-1]
 [9, 8, 7, 6, 5, 4, 3]
 \end{lstlisting}
-Če bi želeli iti od konca, do nekega indeksa proti začetku, bi to lahko specificirali kot \texttt{seznam[:stop:-1]}, npr.
+Če bi želeli iti od konca, do nekega indeksa proti začetku, bi to lahko podali kot \texttt{seznam[:stop:-1]}, npr.
 \begin{lstlisting}[language=Python]
 >>> seznam = list(range(10))
 >>> seznam[:1:-1]
