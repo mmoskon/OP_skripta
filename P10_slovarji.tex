@@ -2,11 +2,11 @@
 
 \section{Zakaj slovarji?}
 
-Zdaj smo se že pobliže spoznali z različnimi sekvenčnimi podatkovnimi tipi, med katere smo uvrstili nize, sezname in terke. V spremenljivke, ki so pripadale tem tipom, smo lahko shranili več podatkov, pri čemer je bil podatek vedno povezan z določenim indeksom. Če se osredotočimo na sezname (kar bomo povedali velja sicer tudi za nize in terke), lahko rečemo, da so podatki v njih na nek način urejeni, ko smo v sezname dodajali nove podatke, smo te ponavadi dodajali na konec seznama, iskanje pa je potekalo tako, da smo se morali z zanko \texttt{for} sprehoditi čez celoten seznam in iskati dokler elementa nismo našli. Sezname smo lahko tudi sortirali po nekem ključu (recimo glede na relacijo <), pri čemer je bil rezultat sortiranja tak, da je manjši ključ imel manjšo vrednost glede na uporabljeno relacijo. 
+Zdaj smo se že pobliže spoznali z različnimi sekvenčnimi podatkovnimi tipi, med katere smo uvrstili nize, sezname in terke. V spremenljivke, ki so pripadale tem tipom, smo lahko shranili več podatkov, pri čemer je bil podatek vedno povezan z določenim indeksom. Če se osredotočimo na sezname (kar bomo povedali velja sicer tudi za nize in terke), lahko rečemo, da so podatki v njih na nek način urejeni, ko smo v sezname dodajali nove podatke, smo te ponavadi dodajali na konec seznama, iskanje pa je potekalo tako, da smo se morali z zanko \texttt{for} sprehoditi čez celoten seznam in iskati dokler elementa nismo našli. Sezname smo lahko tudi sortirali po nekem ključu (recimo glede na relacijo <). Pri tem je bil rezultat sortiranja tak, da smo na manjših indeksih dobili elemente, ki so imeli manjšo vrednost od tistih na večjem indeksu, pri čemer je bila upoštevana uporabljena relacija. 
 
-V določenih primerih pa je bolj priročno, če lahko do vrednosti v spremenljivki dostopamo še preko česa drugega kot njenega indeksa. Pomislimo npr. na telefonski imenik števil, kjer lahko do telefonske številke neke osebe, dostopamo preko imena te osebe. Rekli bi lahko, da je ime osebe \emph{ključ} preko katerega dostopamo do telefonske številke oziroma \emph{vrednosti}. Na podoben način iščemo gesla v Slovarju slovenskega knjižnjega jezika (ali pač kakšnem drugem slovarju), kjer kot ključ nastopa iskana beseda oziroma geslo, kot vrednost pa razlaga iskane besede. Za razlago določene besede nam torej ni potrebno preiskati celotnega slovarja, ampak njeno razlago poiščemo preko gesla, ki ga je v slovarju načeloma enostavno najti.
+V določenih primerih pa je bolj priročno, če lahko do vrednosti v spremenljivki dostopamo še preko česa drugega kot njenega indeksa. Pomislimo npr. na telefonski imenik števil, kjer lahko do telefonske številke neke osebe, dostopamo preko imena te osebe. Rekli bi lahko, da je ime osebe \emph{ključ} preko katerega dostopamo do telefonske številke oziroma \emph{vrednosti}. Na podoben način iščemo gesla v Slovarju slovenskega knjižnjega jezika (ali pač kakšnem drugem slovarju), kjer kot ključ nastopa iskana beseda oziroma geslo, kot vrednost pa razlaga iskane besede. Za razlago določene besede nam torej ni potrebno preiskati celotnega slovarja, ampak njeno razlago poiščemo preko gesla, ki ga je v slovarju načeloma enostavno (in predvsem hitro) najti.
 
-Takim imenikom in slovarjem ustreza podatkovna struktura \texttt{dict} \angl{dictionary} oziroma po slovensko kar \emph{slovar}. V primeru slovarjev posamezna \emph{vrednost} \angl{value} ni vezana na določen indeks, ampak je povezana na  \emph{ključ} \angl{key}. Elemente slovarja torej vedno podajamo kot pare \emph{ključ:vrednost}. Kakšna je prednost takega načina shranjevanja podatkov? Uporabna je takrat, ko ključe, po katerih shranjujemo in kasneje iščemo vrednosti, poznamo. V tem primeru je iskanje zelo hitro, saj nam ni potrebo preiskati celotnega slovarja, ampak slovarju zgolj podamo ključ in do vrednosti pridemo takoj. Operacija iskanja je torej zelo hitra v primerjavi s seznami ali terkami.
+V takih primerih lahko uporabimo v Python že vgrajen podatkovni tip \texttt{dict} \angl{dictionary} oziroma po slovensko kar \emph{slovar}. V primeru slovarjev posamezna \emph{vrednost} \angl{value} ni vezana na določen indeks, ampak je povezana na  \emph{ključ} \angl{key}. Elemente slovarja torej vedno podajamo kot pare \emph{ključ:vrednost}. Kakšna je prednost takega načina shranjevanja podatkov? Uporabna je takrat, ko ključe, po katerih shranjujemo in kasneje iščemo vrednosti, poznamo. V tem primeru je iskanje zelo hitro, saj nam ni potrebo preiskati celotnega slovarja, ampak slovarju zgolj podamo ključ in do vrednosti pridemo takoj. Operacija iskanja je torej zelo hitra v primerjavi s seznami ali terkami.
 
 \section{Kako uporabljamo slovarje?}
 
@@ -222,3 +222,33 @@ def naj_baza(zaporedje):
 
 
 \end{resitev}
+
+\section{Imenski prostor in slovarji}
+Poleg tega, da slovarje lahko navadni smrtniki uporabljamo za reševanje svojih programerskih problemov, slovarje za svoje delovanja uporablja tudi Python sam. Omenili smo že, da Python v svojem imenskem prostoru vsebuje vsa imena, preko katerih lahko dostopamo do vrednosti spremenljivk, funkcij in še česa drugega. Do imenskega prostora lahko pridemo s funkcijo \texttt{globals}. Poglejmo si, kaj ta funkcija vrne:
+\begin{lstlisting}[language=Python]
+>>> globals()
+{'__name__': '__main__', '__doc__': None, '__package__': None, 
+'__loader__': <class '_frozen_importlib.BuiltinImporter'>, 
+'__spec__': None, '__annotations__': {}, '__builtins__':
+<module 'builtins' (built-in)>}
+\end{lstlisting}
+Funkcija vrne imena v imenskem prostoru in vrednosti, ki se za imeni skrivajo. Definirajmo novo spremenljivko in pokličimo gornjo funkcijo še enkrat.
+\begin{lstlisting}[language=Python]
+>>> x = 1
+>>> globals()
+{'__name__': '__main__', '__doc__': None, '__package__': None, 
+'__loader__': <class '_frozen_importlib.BuiltinImporter'>, 
+'__spec__': None, '__annotations__': {}, '__builtins__':
+<module 'builtins' (built-in)>, 'x': 1}
+\end{lstlisting}
+V imenskem prostoru se je zdaj očitno pojavilo ime \texttt{x}, za katerem se skriva vrednost 1. Če pogledamo bolj natančno, lahko vidimo, da je funkcija \texttt{globals} vrnila slovar.
+\begin{lstlisting}[language=Python]
+>>> type(globals())
+<class 'dict'>
+\end{lstlisting}
+V tem slovarju so ključi imena spremenljivk, funkcij itd., vrednosti pa tisto, kar se za imeni skriva. Ko v ukazno vrstico torej napišem \texttt{x} bo Python v svojem slovarju, ki predstavlja imenski prostor, pogledal, če tam obstaja ime \texttt{x} in vrnil vrednost, ki se za tem imenom skriva. To bi lahko naredili tudi takole:
+\begin{lstlisting}[language=Python]
+>>> globals()['x']
+1
+\end{lstlisting}
+Vsakič, ko definiram novo funkcijo ali spremenljivko, se njeno ime in vrednost doda v Pythonov slovar, podobno kot smo prej ključe in vrednosti v slovarje dodajali mi. Kaj se zgodi, ko določeni spremenljivki vrednost \emph{povozimo} - vrednost za ključem z imenom te spremenljivke se enostavno povozi, saj lahko posamezen ključ v slovarju nastopa največ enkrat.
