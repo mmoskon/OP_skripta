@@ -212,7 +212,8 @@ prijatelji = {'Ana': ['Janez', 'Peter', 'Polona'],
               'Peter': ['Ana', 'Janez'],
               'Polona': ['Ana', 'Janez', 'Nejc']}
 \end{lstlisting}
-S tem smo rešili problem iskanja prijateljev podane osebe, saj do teh pridemo z enostavnim indeksiranjem po imenu osebe, ki nas zanima. Še vedno pa je problematično npr. iskanje skupnih prijateljev dveh oseb, saj zahteva ugnezdeno zanko po seznamih prijateljev teh dveh oseb. Spet je ta operacija lahko časovno potratna, če so ti seznami dolgi, kar v socialnih omrežjih zagotovo ni izključeno. Temu problemu bi se lahko izognili tako, da prijatelje podane osebe predstavimo z množicami, nad katerimi so operacije kot je presek bolj učinkovite. Poleg tega glede na podan opis problema vrstni red prijateljev ni pomemben, posamezna oseba pa kot prijatelj druge osebe nastopa največ enkrat. Predstavitev bi bila torej sledeča:\begin{lstlisting}[language=Python]
+S tem smo rešili problem iskanja prijateljev podane osebe, saj do teh pridemo z enostavnim indeksiranjem po imenu osebe, ki nas zanima. Še vedno pa je problematično npr. iskanje skupnih prijateljev dveh oseb, saj zahteva ugnezdeno zanko po seznamih prijateljev teh dveh oseb. Spet je ta operacija lahko časovno potratna, če so ti seznami dolgi, kar v socialnih omrežjih zagotovo ni izključeno. Temu problemu bi se lahko izognili tako, da prijatelje podane osebe predstavimo z množicami, nad katerimi so operacije kot je presek bolj učinkovite. Poleg tega glede na podan opis problema vrstni red prijateljev ni pomemben, posamezna oseba pa kot prijatelj druge osebe nastopa največ enkrat. Predstavitev bi bila torej sledeča:
+\begin{lstlisting}[language=Python]
 prijatelji = {'Ana': {'Janez', 'Peter', 'Polona'},
               'Janez': {'Ana', 'Nejc', 'Peter', 'Polona'},
               'Nejc': {'Janez', 'Polona'},
@@ -268,6 +269,19 @@ def spoprijatelji(prijatelji, oseba1, oseba2):
     else:
         print("Osebi sta ze v prijateljstvu")
 \end{lstlisting}
+Primer klica:
+\begin{lstlisting}[language=Python]
+>>> spoprijatelji(prijatelji, 'Ana', 'Nejc')
+>>> prijatelji
+{'Ana': {'Janez', 'Peter', 'Nejc', 'Polona'}, 
+ 'Janez': {'Peter', 'Ana', 'Nejc', 'Polona'}, 
+ 'Nejc': {'Janez', 'Ana', 'Polona'}, 
+ 'Peter': {'Janez', 'Ana', 'Polona'}, 
+ 'Polona': {'Janez', 'Peter', 'Ana', 'Nejc'}}
+>>> spoprijatelji(prijatelji, 'Ana', 'Nejc')
+Osebi sta ze v prijateljstvu
+\end{lstlisting}
+
 \end{resitev}
 
 \begin{zgled}
@@ -289,58 +303,136 @@ def skregaj(prijatelji, oseba1, oseba2):
     prijatelji[oseba1].remove(oseba2)
     prijatelji[oseba2].remove(oseba1)
 \end{lstlisting}
+Primer klica:
+\begin{lstlisting}[language=Python]
+>>> skregaj(prijatelji, 'Ana', 'Nejc')
+{'Ana': {'Janez', 'Peter', 'Polona'}, 
+'Janez': {'Peter', 'Ana', 'Nejc', 'Polona'}, 
+'Nejc': {'Janez', 'Polona'}, 
+'Peter': {'Janez', 'Ana', 'Polona'}, 
+'Polona': {'Janez', 'Peter', 'Ana', 'Nejc'}}
+>>> skregaj(prijatelji, 'Ana', 'Nejc')
+Osebi nista prijatelja!
+\end{lstlisting}
 \end{resitev}
 
 Zdaj pa se lotimo še analize omrežja.
 
 \begin{zgled}
-Napiši funkcijo \texttt{najbolj\_popularni}...
+Napiši funkcijo \texttt{najbolj\_popularni}, ki kot argument sprejme omrežje prijateljstev in vrne ime osebe, ki ima največ prijateljev.
 \end{zgled}
 \begin{resitev}
-...
+Spet rešujemo nalogo z iskanjem največjega elementa v slovarju, tokrat glede na dolžino množice, ki se skriva za posameznim ključem. Rešitev se ne bo dosti razlikovala od programa, ki je iskal oznako nukleotida, ki se v nukleotidnem zaporedju pojavi največkrat.
 \begin{lstlisting}[language=Python,numbers=left]
-
+def najbolj_popularni(prijatelji):
+    naj_oseba = ""
+    naj_prijateljev = 0
+    
+    for oseba in prijatelji: # sprehod cez kljuce
+        prijateljev = len(prijatelji[oseba]) # stevilo prijateljev
+        if prijateljev > naj_prijateljev:
+            naj_oseba = oseba
+            naj_prijateljev = prijateljev
+    return naj_oseba
 \end{lstlisting}
+Primer klica:
+\begin{lstlisting}[language=Python]
+>>> najbolj_popularni(prijatelji)
+'Janez'
+\end{lstlisting}
+
+Rešitev predpostavlja, da je \emph{enako najbolj popularna} samo ena oseba, kar lahko rešimo z manjšo dopolnitvijo, tako da si najbolj popularne osebe shranimo v seznam. 
+\begin{lstlisting}[language=Python,numbers=left]
+def najbolj_popularni(prijatelji):
+    naj_osebe = []
+    naj_prijateljev = 0
+    
+    for oseba in prijatelji: # sprehod cez kljuce
+        prijateljev = len(prijatelji[oseba]) # stevilo prijateljev
+        if prijateljev > naj_prijateljev:
+            naj_osebe = [oseba]
+            naj_prijateljev = prijateljev
+        elif prijateljev == naj_prijateljev:
+            naj_osebe.append(oseba)
+    return naj_osebe
+\end{lstlisting}
+Primer klica:
+\begin{lstlisting}[language=Python]
+>>> spoprijatelji(prijatelji, 'Polona','Peter')
+>>> najbolj_popularni(prijatelji)
+['Janez', 'Polona']
+\end{lstlisting}
+
+
 \end{resitev}
 
 \begin{zgled}
-Napiši funkcijo \texttt{najmanj\_popularni}...
+Napiši funkcije \texttt{skupni\_prijatelji}, \texttt{vsaj\_od\_enega} in \texttt{brez\_njegovih}. Vse tri funkcije naj prejmejo omrežje prijateljstev in dve osebi ter izpišejo njune skupne prijatelje, prijatelje vsaj od ene izmed podanih oseb ter tiste, ki so prijatelji prve osebe ne pa prijatelji druge. V primeru, da v omrežju ni obeh podanih oseb, funkcije izpišejo, da vsaj ene podane osebe v omrežju ni.
 \end{zgled}
 \begin{resitev}
-...
+V tej rešitvi bomo povadili uporabo preseka (skupni prijatelji), unije (vsaj od enega) ter razlike (brez njegovih). 
 \begin{lstlisting}[language=Python,numbers=left]
+def skupni(prijatelji, oseba1, oseba2):
+    if oseba1 not in prijatelji or oseba2 not in prijatelji:
+        print("Vsaj ene osebe ni v omrezju!")
+    else:
+        # presek
+        print(prijatelji[oseba1] & prijatelji[oseba2])
 
+def vsaj_od_enega(prijatelji, oseba1, oseba2):
+    if oseba1 not in prijatelji or oseba2 not in prijatelji:
+        print("Vsaj ene osebe ni v omrezju!")
+    else:
+        # unija
+        print(prijatelji[oseba1] | prijatelji[oseba2])
+
+def brez_njegovih(prijatelji, oseba1, oseba2):
+    if oseba1 not in prijatelji or oseba2 not in prijatelji:
+        print("Vsaj ene osebe ni v omrezju!")
+    else:
+        # razlika
+        print(prijatelji[oseba1] - prijatelji[oseba2])
+\end{lstlisting}
+Primer klica:
+\begin{lstlisting}[language=Python]
+>>> skupni(prijatelji, 'Ana', 'Janez')
+{'Peter', 'Polona'}
+>>> skupni(prijatelji, 'Ana', 'Jan')
+Vsaj ene osebe ni v omrezju!
+>>> vsaj_od_enega(prijatelji, 'Ana', 'Janez')
+{'Janez', 'Peter', 'Ana', 'Nejc', 'Polona'}
+>>> brez_njegovih(prijatelji, 'Ana', 'Janez')
+{'Janez'}
 \end{lstlisting}
 \end{resitev}
+
 
 \begin{zgled}
-Napiši funkcije \texttt{skupni\_prijatelji}, \texttt{vsaj\_od\_enega} in \texttt{brez\_njegovih}...
+Napiši funkcijo \texttt{prijatelji\_prijateljev}, ki kot argumenta sprejme omrezje prijateljev in ime osebe ter izpiše prijatelje prijateljev podane osebe, pri čemer naj iz izpisa izpusti prijatelje podane osebe ter podano osebo samo.
 \end{zgled}
 \begin{resitev}
-...
+Tokrat se bomo sprehodili čez prijatelje podane osebe z uporabo zanke \texttt{for} ter s prijatelji prijateljev dopolnili na začetku prazno množico. Potem bomo iz te množice izločili prijatelje podane osebe in osebo samo.
 \begin{lstlisting}[language=Python,numbers=left]
+def prijatelji_prijateljev(prijatelji, oseba):
+    vsi_pp = set() #prijatelji prijateljev je na zacetku prazna
+    
+    # sprehod cez prijatelje osebe
+    for prijatelj in prijatelji[oseba]:
+        pp = prijatelji[prijatelj]
+        vsi_pp |= pp # z unijo dodam prijatelje prijatelja
+    # odstranim osebo
+    vsi_pp.remove(oseba)
+    # odstranim neposredne prijatelje osebe
+    vsi_pp -= prijatelji[oseba]
+    
+    print(vsi_pp)
 
+\end{lstlisting}
+Primer klica:
+\begin{lstlisting}[language=Python]
+>>> prijatelji_prijateljev(prijatelji, 'Nejc')
+{'Ana', 'Peter'}
 \end{lstlisting}
 \end{resitev}
 
 
-\begin{zgled}
-Napiši funkcijo \texttt{prijatelji\_prijateljev}...
-\end{zgled}
-\begin{resitev}
-...
-\begin{lstlisting}[language=Python,numbers=left]
-
-\end{lstlisting}
-\end{resitev}
-
-
-\begin{zgled}
-Napiši funkcijo \texttt{najvec_skupnih}...
-\end{zgled}
-\begin{resitev}
-...
-\begin{lstlisting}[language=Python,numbers=left]
-
-\end{lstlisting}
-\end{resitev}
