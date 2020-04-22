@@ -268,33 +268,33 @@ Včasih pa to ni dovolj in bi bili radi z izpisovanjem nekoliko bolj ustvarjalni
 >>> "{} meter/ov/a je {} centimeter/ov/a".format(m, m*100)
 '1 meter/ov/a je 100 centimeter/ov/a'
 \end{lstlisting}
-Prvo pojavitev zavitega oklepaja je metoda \texttt{format} torej zamenjala s prvim argumentom, drugo pa z drugim. Znotraj zavitih oklepajev lahko tudi eksplicitno navedem, kateri argument naj se uporabi pri zamenjavi. Takole:
+Prvo pojavitev zavitega oklepaja je metoda \texttt{format} torej zamenjala s prvim argumentom, drugo pa z drugim. Znotraj zavitih oklepajev lahko tudi eksplicitno navedemo, kateri argument naj se uporabi pri zamenjavi. Takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> m = 1
 >>> "{0} m = {1} cm, torej je {1} cm = {0} m".format(m, m*100)
 '1 m = 100 cm, torej je 100 cm = 1 m'
 \end{lstlisting}
-Do malo gršega izpisa pride kar imamo veliko decimalk:
+Do malo gršega izpisa pride, kadar imamo veliko decimalk:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> cm = 12.673
 >>> "{} cm = {} m".format(cm, cm/100)
 '12.673 cm = 0.12673 m'
 \end{lstlisting}
-Rezultate lahko sicer zaokrožujemo z vgrajeno funkcijo \text{round}, ki ji kot argument podamo število decimalk. Alternativa je, da zaokroževanje podamo samo pri izpisu, tako da znotraj zavitih oklepajev podamo kako naj se izpis formatira. Takole:
+Rezultate lahko sicer zaokrožujemo z vgrajeno funkcijo \text{round}, ki ji kot argument podamo število decimalk. Alternativa je, da zaokroževanje podamo samo pri izpisu, tako da znotraj zavitih oklepajev malo bolj natančno povemo kako naj se izpis formatira. Takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> cm = 12.673
 >>> "{:5.1f} cm = {:5.2f} m".format(cm, cm/100)
 ' 12.7 cm =  0.13 m'
 \end{lstlisting}
-Kaj smo s tem povedali? Z dvopičjem povemo, da želimo izpis malo oblikovati. Število 5 podaja število mest, ki naj jih izpis zasede. Iz izpisa je vidno, da je metoda format pred posamezno število vstavila presledek, saj je izpisano število dolgo 4 znake, mi pa smo povedali, da naj bo izpis dolg 5 znakov. Če bi bilo število pred piko manjše od 4, rezanja ne bi bilo, ampak bi \texttt{format} izpisal 4 znake. Za piko smo podali število decimalk, ki naj bodo v izpisu. Pri centimetrih smo uporabili 1, pri metrih pa 2 decimalki. Oznaka \texttt{f} pomeni, da formatiramo decimalno število \angl{float}.
+Kaj smo s tem povedali? Z dvopičjem povemo, da želimo izpis malo oblikovati. Število 5 podaja (najmanjše) število mest, ki naj jih izpis zasede. Iz izpisa je vidno, da je metoda format pred posamezno število vstavila presledek, saj je izpisano število dolgo 4 znake, mi pa smo povedali, da naj bo izpis dolg 5 znakov. Če bi bilo naše število daljše od 5 znakov, rezanja ne bi bilo, ampak bi \texttt{format} pač izpisal vse znake. Za piko smo podali število decimalk, ki naj bodo v izpisu. Pri centimetrih smo uporabili 1, pri metrih pa 2 decimalki. Oznaka \texttt{f} pomeni, da formatiramo decimalno število \angl{float}.
 
-Oblikovanje celih števil in nizov je enostavneje. V tem primeru podamo število mest, ki jih število zavzame. 
+Oblikovanje celih števil in nizov je enostavneje. V tem primeru podamo število mest, ki naj jih število (minimalno) zavzame. 
 
 \begin{lstlisting}[language=Python, showstringspaces=false,literate={°}{${^\circ}$}1]
 >>> "{:3}: {:15}...{:5.2f}°C".format(1, "Ljubljana", 25.3)
 '  1: Ljubljana      ...25.30°C'
 \end{lstlisting}
-Povem lahko še ali naj posamezen izpis poravna levo (\texttt{<}), desno (\texttt{>}) ali sredinsko (\texttt{\^}):
+Povemo lahko še ali naj se posamezen izpis poravna levo (\texttt{<}), desno (\texttt{>}) ali sredinsko (\texttt{\^}):
 \begin{lstlisting}[language=Python, showstringspaces=false,literate={°}{${^\circ}$}1]
 >>> "{:<3}: {:<15}...{:>5.2f}°C".format(1, "Ljubljana", 25.3)
 '1  : Ljubljana      ...25.30°C'
