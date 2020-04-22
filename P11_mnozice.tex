@@ -223,7 +223,7 @@ prijatelji = {'Ana': {'Janez', 'Peter', 'Polona'},
 \end{resitev}
 
 \begin{zgled}
-Napiši funkcijo \texttt{prijatelji\_od}, ki kot argument sprejme omrežje prijateljstev in ime osebe in izpiše vse prijatelje podane osebe. V primeru, da podane osebe ni v omrežju, naj funkcija to izpiše.
+Napiši funkcijo \texttt{prijatelji\_od}, ki kot argument sprejme omrežje prijateljstev in ime osebe in vrne vse prijatelje podane osebe. V primeru, da podane osebe ni v omrežju, naj funkcija to izpiše.
 \end{zgled}
 \begin{resitev}
 Kot smo videli že prej, je zaradi izbrane predstavitve omrežja, iskanje prijateljev podane osebe enostavno. Preveriti moramo samo, če oseba v omrežju obstaja.
@@ -232,7 +232,7 @@ def prijatelji_od(prijatelji, oseba):
     if oseba not in prijatelji: # ali je oseba v omrezju?
         print("Ta oseba ne obstaja!")
     else:
-        print(prijatelji[oseba])
+        return prijatelji[oseba]
 \end{lstlisting}
 \end{resitev}
 
@@ -367,7 +367,7 @@ Primer klica:
 \end{resitev}
 
 \begin{zgled}
-Napiši funkcije \texttt{skupni\_prijatelji}, \texttt{vsaj\_od\_enega} in \texttt{brez\_njegovih}. Vse tri funkcije naj prejmejo omrežje prijateljstev in dve osebi ter izpišejo njune skupne prijatelje, prijatelje vsaj od ene izmed podanih oseb ter tiste, ki so prijatelji prve osebe ne pa prijatelji druge. V primeru, da v omrežju ni obeh podanih oseb, funkcije izpišejo, da vsaj ene podane osebe v omrežju ni.
+Napiši funkcije \texttt{skupni\_prijatelji}, \texttt{vsaj\_od\_enega} in \texttt{brez\_njegovih}. Vse tri funkcije naj prejmejo omrežje prijateljstev in dve osebi ter vrnejo njune skupne prijatelje, prijatelje vsaj od ene izmed podanih oseb ter tiste, ki so prijatelji prve osebe ne pa prijatelji druge. V primeru, da v omrežju ni obeh podanih oseb, funkcije izpišejo, da vsaj ene podane osebe v omrežju ni.
 \end{zgled}
 \begin{resitev}
 V tej rešitvi bomo povadili uporabo preseka (skupni prijatelji), unije (vsaj od enega) ter razlike (brez njegovih). 
@@ -377,21 +377,21 @@ def skupni(prijatelji, oseba1, oseba2):
         print("Vsaj ene osebe ni v omrezju!")
     else:
         # presek
-        print(prijatelji[oseba1] & prijatelji[oseba2])
+        return prijatelji[oseba1] & prijatelji[oseba2]
 
 def vsaj_od_enega(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
         print("Vsaj ene osebe ni v omrezju!")
     else:
         # unija
-        print(prijatelji[oseba1] | prijatelji[oseba2])
+        return prijatelji[oseba1] | prijatelji[oseba2]
 
 def brez_njegovih(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
         print("Vsaj ene osebe ni v omrezju!")
     else:
         # razlika
-        print(prijatelji[oseba1] - prijatelji[oseba2])
+        return prijatelji[oseba1] - prijatelji[oseba2]
 \end{lstlisting}
 Primer klica:
 \begin{lstlisting}[language=Python]
@@ -408,7 +408,7 @@ Vsaj ene osebe ni v omrezju!
 
 
 \begin{zgled}
-Napiši funkcijo \texttt{prijatelji\_prijateljev}, ki kot argumenta sprejme omrezje prijateljev in ime osebe ter izpiše prijatelje prijateljev podane osebe, pri čemer naj iz izpisa izpusti prijatelje podane osebe ter podano osebo samo.
+Napiši funkcijo \texttt{prijatelji\_prijateljev}, ki kot argumenta sprejme omrezje prijateljev in ime osebe ter vrne prijatelje prijateljev podane osebe, pri čemer naj izpusti prijatelje podane osebe ter podano osebo samo.
 \end{zgled}
 \begin{resitev}
 Tokrat se bomo sprehodili čez prijatelje podane osebe z uporabo zanke \texttt{for} ter s prijatelji prijateljev dopolnili na začetku prazno množico. Potem bomo iz te množice izločili prijatelje podane osebe in osebo samo.
@@ -425,7 +425,7 @@ def prijatelji_prijateljev(prijatelji, oseba):
     # odstranim neposredne prijatelje osebe
     vsi_pp -= prijatelji[oseba]
     
-    print(vsi_pp)
+    return vsi_pp
 
 \end{lstlisting}
 Primer klica:

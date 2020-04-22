@@ -1,0 +1,94 @@
+\chapter{Oblikovanje nizov}
+
+\section{Delo z nizi}
+
+Nize smo do zdaj že dodobra spoznali, preden se lotimo dela z datotekami pa si moramo pogledati še nekaj metod za delo z njimi.
+
+Ponovimo najprej osnovne operacije, ki smo jih do zdaj že izvajali nad nizi. Nad nizi lahko izvajamo zanko \texttt{for}, pri čemer v vsaki iteraciji zanke, dostopamo do enega znaka niza. Takole:
+\begin{lstlisting}[language=Python]
+>>> niz = "abeceda"
+>>> for znak in niz:
+	print(znak)
+a
+b
+e
+c
+e
+d
+\end{lstlisting}
+Nize lahko med sabo seštevamo, čemur smo rekli lepljenje ali konkatenacija, poleg tega pa jih lahko množimo s celimi števili:
+\begin{lstlisting}[language=Python]
+>>> "abc" + " " + "def"
+'abc def'
+>>> "abc" * 3
+'abcabcabc'
+\end{lstlisting}
+Njihove elemente lahko tudi indeksiramo in delamo rezine. Ne moremo pa jih spreminjati. Odstranjevanja podniza z besedico \texttt{del} torej ne bo šlo skozi:
+\begin{lstlisting}[language=Python]
+>>> niz = "abeceda"
+>>> niz[2:5]
+'ece'
+>>> del niz[2:5]
+TypeError: 'str' object does not support item deletion
+\end{lstlisting}
+Zakaj ne? Ker so nizi nespremenljivi. Alternativa je seveda ta, da naredimo nov niz, ki odraža željeno spremembo. V zgornjem primeru bi torej lahko naredili nov niz z lepljenjem dveh rezin. Eno pred podnizom, ki ga želimo odstraniti, in drugo po podnizu, ki ga želimo odstraniti. Takole:
+\begin{lstlisting}[language=Python]
+>>> niz = "abeceda"
+>>> niz[:2] + niz[5:]
+'abda'
+\end{lstlisting}
+Iz niza smo tako odstranili podniz \texttt{"ece"}. Če želimo, da se sprememba odraža tudi preko spremenljivke niz, bomo nov (spremenjen) niz priredili še vrednosti te spremenljivke:
+\begin{lstlisting}[language=Python]
+>>> niz = "abeceda"
+>>> niz = niz[:2] + niz[5:]
+>>> niz
+'abda'
+\end{lstlisting}
+Zapakirajmo vse skupaj v funkcijo.
+\begin{zgled}
+Napiši funkcijo \texttt{odstrani}, ki sprejme dva niza in iz prvega niza odstrani prvo pojavitev drugega niza ter spremenjen niz vrne. Če se drugi podniz v prvem ne pojavi, naj funkcija vrne nespremenjen niz.
+\end{zgled}
+
+\begin{resitev}
+V funkciji moramo najprej preveriti, če in kje se v nizu nahaja podniz. To lahko naredimo tako, da se sprehajamo od začetka do konca niza in režemo rezine dolžine podniza. Da lahko delamo rezine, se moramo seveda sprehajati po indeksih niza. To bi izgledalo nekako takole:
+\begin{lstlisting}[language=Python]
+>>> niz = "abeceda"
+>>> pondiz = "ece"
+>>> for i in range(len(niz)):
+	niz[i:i+len(podniz)]
+'abe'
+'bec'
+'ece'
+'ced'
+'eda'
+'da'
+'a'
+\end{lstlisting}
+Znotraj zanke bomo preverjali, če je odrezana rezina enaka podnizu. V tem primeru ga bomo odstranili (podobno kot prej) in vrnili rezultat. Smiselno je tudi, da sprehod ustavimo, kot postane dolžina rezine krajša od dolžine podniza, saj si dva niza različnih dolžin ne moreta biti enaka. Napišimo celotno funkcijo.
+\begin{lstlisting}[language=Python,numbers=left]
+def odstrani(niz, podniz):
+    for i in range(len(niz)):
+        rezina = niz[i:i+len(podniz)]
+        if len(rezina) < len(podniz):
+            return niz # prisel do konca in nisem nasel pojavitve
+        if rezina == podniz:
+            zacetek = i # zacetek rezanja
+            konec = i + len(podniz) # konec rezanja
+            return niz[:zacetek] + niz[konec:]
+    return niz # vrne nespremenjen niz
+\end{lstlisting}
+Vprašanje je še ali mora funkcija res vračati spremenjen niz ali je dovolj, če niz, ki ga funkcija sprejme kot argument, spreminjamo znotraj funkcije (kot smo to delali pri seznamih, slovarjih in množicah). Odgovor je seveda ne, saj je niz nespremenljiv. Spremembe, ki jih vršimo nad imenom, za katerim se skriva niz, se izven funkcije ne bodo ohranile, zato je potrebno nov (spremenjen) niz vrniti s stavkom \texttt{return}. 
+\end{resitev}
+
+Tole je bilo še kar zakomplicirano. Izkaže pa se, da nam te in podobnih funkcij ni treba pisati, saj večinoma že obstajajo. Najdemo jih med metodami nizov, ki si jih bomo podrobneje pogledali v nadaljevanju poglavja.
+
+\section{Odstranjevanje in spreminjanje (pod)nizov}
+\texttt{replace}
+
+
+\section{Iskanje podnizov}
+
+\section{Razdruževanje in združevanje nizov}
+
+\section{Formatiranje nizov}
+
