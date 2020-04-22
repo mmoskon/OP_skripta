@@ -7,68 +7,68 @@ Moduli predstavljajo Pythonove datoteke, ki vsebujejo implementacijo določenih 
 \section{Uporaba modulov}
 
 Module lahko v svoje programe vključimo na različne načine, v vseh primerih pa uporabljamo rezervirano besedo \texttt{import}. Če želimo npr. v naš program uvoziti celoten modul \texttt{math}, lahko to naredimo s sledečo vrstico:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 import math
 \end{lstlisting}
 oziroma v splošnem
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 import ime_modula
 \end{lstlisting}
 Najprej lahko preverimo kaj uvožen modul dejansko ponuja. Če je pisec modula bil priden in napisal tudi dokumentacijo, bomo za to lahko uporabili funkcijo \texttt{help}
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 help(ime_modula)
 \end{lstlisting}
 Funkcija nam bo izpisala nekaj osnovnih informacij o modulu, tako da bo uporaba lažja. Seveda pa lahko informacije o modulu poiščemo tudi na internetu, ki pa včasih ni na voljo (npr. v času pisanja kolokvijev in izpitov), zato se je dobro navaditi tudi uporabe zgoraj omenjene funkcije.
 
 Če bi zdaj želeli dostopati do posamezen funkcije, ki je v uvoženem modulu definirana, bi to naredili na sledeč način
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 ime_modula.ime_funkcije(argumenti)
 \end{lstlisting}
 Če bi npr. želeli izračunati sinus števila shranjenega v spremenljivki \texttt{x} in rezultat shraniti v spremenljivko \texttt{y}, bi za to uporabil funkcijo \texttt{sin}, ki je vsebovana v modulu \texttt{math}. Poklicali bi jo takole
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 y=math.sin(x)
 \end{lstlisting}
 
 Včasih imajo moduli zelo dolga in težko berljiva imena. Če želimo modul uvoziti pod drugačnim imenom (lahko bi rekli psevdonimom), uvoz dopolnimo z \texttt{as} stavkom:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 import dolgo_ime_modula as psevdonim
 \end{lstlisting}
 Tako lahko pri klicanju funkcij (ali pa česarkoli že) modula podajamo le kratko ime modula. V prejšnjem primeru bi kodo lahko spremenili na sledeč način:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 import math as m
 y=m.sin(x)
 \end{lstlisting}
 
 V določenih primerih pa želimo iz modula uvoziti le določeno funkcijo (spremenljivko, razred). Takrat lahko uporabimo rezervirano besedo \texttt{from}, in sicer takole
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 from ime_modula import ime_funkcije
 \end{lstlisting}
 S takim načinom uvažanja smo uvozili le tisto kar potrebujemo, poleg tega pa zdaj pri klicu funkcije imena modula ni potrebno več podajati. Primer sinusa bi se spremenil v sledečo kodo
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 from math import sin
 y=sin(x)
 \end{lstlisting}
 Zdaj smo iz modula uvozili zgolj funkcijo \texttt{sin} -- če bi želeli imeti še kakšno drugo funkcijo, npr. kosinus, bi jo morali uvoziti ločeno oziroma hkrati s funkcijo \texttt{sin}. To bi naredili takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 from math import sin,cos
 \end{lstlisting}
 Lahko pa naredimo še nekaj, kar ponavadi ni priporočljivo. Uvozimo lahko vse, kar je v modulu definirano, in sicer namesto imena funkcije podamo \texttt{*}, ki se v računalništvu velikokrat uporablja kot simbol za \emph{vse}. Rekli bomo torej \emph{iz modula uvozi vse}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 from ime_modula import *
 \end{lstlisting}
 V primeru modula \texttt{math} bomo zapisali takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 from math import *
 \end{lstlisting}
 Zakaj tak način uvažanja ni priporočljiv? Vse funkcije, spremenljivke in razrede modula smo zdaj dobili v naš globalni imenski prostor. Pri tem je velika verjetnost, da smo si s tem povozili kakšno od spremenljivk, ki jo tam že uporabljamo in ima enako ime kot kakšna izmed funkcij ali spremenljivk definiranih v modulu. Zato se takemu način uvažanja modulov izogibamo.
 
 \section{Definicija in uporaba lastnih modulov}
 Vsi programi, ki smo jih do zdaj napisali, predstavljajo module, ki jih lahko uvozimo v druge programe. To pomeni, da pri reševanju nekega (bolj kompleksnega) problema ni potrebno vse kode napisati v isti datoteki, ampak lahko datoteko razdelimo po smiselnih modulih, pri čemer lahko funkcije prvega modula uporabljamo v drugem in obratno. Pri tem lahko uporabimo kodo opisano v prejšnjem razdelku. Paziti moramo le na to, da se modul, ki ga uvažamo nahaja v isti mapi kot modul, v katerega kodo uvažamo. V nasprotnem primeru moramo pri uvažanju modula do drugega modula podati še pot do njega. Če se modul, ki ga želimo uvoziti, npr. nahaja v podmapi mapi \texttt{podmapa}, ga bomo uvozili na sledeč način:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 import podmapa.ime_modula
 \end{lstlisting}
 Če v tem primeru ne želimo, da modul vsakič posebej kličemo z imenom \texttt{podmapa.ime\_modula}, ga je smiselno uvoziti pod krajšim imenom takole
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 import podmapa.ime_modula as ime_modula
 \end{lstlisting}
 Mogoče se sprašujete zakaj poti ni bilo potrebno podajati pri uvažanju modula \texttt{math}. Dejstvo je, da so določeni moduli v Python že vgrajeni, sicer pa Python module, poleg v trenutni delovni mapi, išče tudi v mapi \texttt{lib$\backslash$site-packages}, kamor se shranijo namestitve vseh modulov, ki jih bomo v prihodnosti potencialno še namestili.
@@ -84,7 +84,7 @@ in \texttt{pip} bo poskrbel za vse ostalo.
 
 %\subsection{Modul \texttt{math}}
 
-%\begin{lstlisting}[language=Python]
+%\begin{lstlisting}[language=Python, showstringspaces=false]
 %help(math)
 %\end{lstlisting}
 

@@ -2,7 +2,7 @@
 
 \section{Sprehajanje čez sezname z zanko \texttt{for}}
 Kot smo videli na koncu prejšnjega poglavja, se lahko čez seznam (ali niz) sprehodimo z uporabo zanke \texttt{while}, pri čemer sprehod vršimo preko indeksov seznama (ali niza). Preko indeksov lahko potem posredno pridemo tudi do vrednosti elementov seznama (ali niza). Veliko bolj elegantno pa se čez seznam (ali pač niz) sprehodimo z uporabo zanke \texttt{for}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 for element in seznam:
     # telo zanke
     # spremenljivka element vsebuje trenuten element
@@ -18,7 +18,7 @@ Potek izvedbe osnovne oblike zanke \texttt{for} ponazarja slika \ref{img:for1}
     \label{img:for1}
 \end{figure}
 Izvajanje zanke torej ponavljamo vse dokler je v seznamu (ali nizu) še kakšen element, pri čemer se spremenljivka \texttt{element} pomika od začetka proti koncu seznama (ali niza). Če bi npr. želeli izpisati vse elemente v seznamu, pri čemer bi vsak element izpisali v svoji vrstici, bi to lahko naredili takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> seznam = [1,2,3]
 >>> for element in seznam:
 	print(element)
@@ -27,7 +27,7 @@ Izvajanje zanke torej ponavljamo vse dokler je v seznamu (ali nizu) še kakšen 
 3
 \end{lstlisting}
 Na podoben način bi se lahko sprehodili tudi čez niz:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> niz = "ABC"
 >>> for znak in niz:
 	print(znak)
@@ -43,7 +43,7 @@ Napiši program, ki od uporabnika preko funkcije \texttt{eval} prebere seznam in
 \end{zgled}
 \begin{resitev}
 Najmanjši element bomo našli tako, da se bomo z zanko \texttt{for} sprehodili čez seznam in si zapomnili element, ki je pač najmanjši. Kako pa vemo, da je nek element najmanjši, če ostalih še nismo pregledali? Težko. Vemo pa, če je nek element manjši od vseh elementov, ki smo jih pregledali preden smo do njega prišli. Nalogo lahko rešimo tako, da naredimo predpostavko, da je najmanjši ničti element v seznamu. Potem naredimo sprehod čez celoten seznam. Če bomo našli kakšen element, ki je manjši od trenutno najmanjšega, bomo trenutno najmanjši element postavili na tega, ki je očitno manjši. To bomo nadaljevali, dokler ne pridemo do konca seznama.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
 najmanjsi = seznam[0] # trenutno najmanjsi
@@ -60,14 +60,14 @@ Program sicer deluje pravilno, ampak bi ga lahko še nekoliko optimizirali. Tren
 \section{Sprehajanje s funkcijo \texttt{range} in sprehajanje čez indekse}
 
 Z zanko \texttt{for} se lahko sprehajamo tudi čez sezname, ki jih generira funkcija \texttt{range}. Na tak način se lahko sprehajamo čez vrednosti elementov v določenem razponu. Vsa števila od 0 do vključno števila, ki ga je vnesel uporabnik, bi torej lahko izpisali takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 n = int(input("Vnesi stevilo: "))
 for i in range(n+1):
     print(i)
 \end{lstlisting}
 
 Zanko \texttt{for} bi lahko na podoben način uporabili za sprehajanje po indeksih seznama. Vrednosti v seznamu na posameznih indeksih bi lahko izpisali takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 for i in range(len(seznam)):
     print(i, seznam[i])
 \end{lstlisting}
@@ -82,7 +82,7 @@ Napiši program, ki od uporabnika preko funkcije \texttt{eval} prebere seznam in
 \end{zgled}
 \begin{resitev}
 Najmanjši element bomo našli na podoben način kot prej, le da si moramo tokrat zapomniti tudi njegov indeks. Ker preko direktnega sprehoda čez elemente seznama informacije o indeksih elementov nimamo, se bomo morali sprehoditi čez indekse seznama.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
 najmanjsi = seznam[0] # trenutno najmanjsi element
@@ -107,7 +107,7 @@ Napiši program, ki od uporabnika preko funkcije \texttt{eval} prebere seznam in
 \end{zgled}
 \begin{resitev}
 Rešitev bo podobna kot prej, le da si bomo indekse pojavitve najmanjšega elementa zabeležili kar v seznam. V primeru, da bomo našli manjši element od trenutnega, bomo naredili nov seznam, ki bo vseboval samo en indeks (trenutni indeks). V primeru, da bomo našli element, ki bo enak trenutno najmanjšemu, bomo v seznam indeksov dodali trenutni indeks. V zgornjih dveh rešitvah smo na koncu dodali boljšo rešitev, ki pri sprehodu izpusti ničti element seznama, saj smo tega upoštevali že pred zanko. Tokrat bo program brez te "optimizacije" deloval narobe. V primeru, da bo najmanjši element na ničtem mestu, bo njegov indeks v seznamu najmanjših indeksov namreč nastopal dvakrat.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
 najmanjsi = seznam[0] # trenutno najmanjsi element
@@ -128,7 +128,7 @@ print(najmanjsi_i)
 
 \section{Spreminjanje elementov seznama z zanko \texttt{for}}
 Kaj pa v primeru da želimo seznam v zanki spremeniti, npr. da želimo vse negativne vrednosti seznama spremeniti v pozitivne (izračunati želimo absolutne vrednosti elementov seznama in seznam skladno s tem posodobiti). Poskusimo z običajnim sprehodom čez elemente seznama.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> seznam = [-1, 10, -5, 15, 0, -3]
 >>> for element in seznam:
 	element = abs(element)
@@ -143,7 +143,7 @@ Kaj pa v primeru da želimo seznam v zanki spremeniti, npr. da želimo vse negat
 [-1, 10, -5, 15, 0, -3]
 \end{lstlisting}
 Elemente smo torej uspešno postavili na njihove absolutne vrednosti, na kar nakazujejo izpisi, ki smo jih izvedli v telesu zanke. Kot pa vidimo iz izpisa, ki je sledil zanki, se seznam ni spremenil, saj še vedno vsebuje negativne elemente. Spreminjali smo torej vrednosti elementov, ne pa samega seznama. Če bi želeli spreminjati seznam, bi to lahko naredili preko indeksiranja:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> seznam = [-1, 10, -5, 15, 0, -3]
 >>> for i in range(len(seznam)):
 	seznam[i] = abs(seznam[i])
@@ -167,7 +167,7 @@ Vprašajmo se, kaj je skupnega primerom, kjer zanka \texttt{for} odpove. V obeh 
 \section{Stavek \texttt{break}}
 
 V kombinaciji z zanko \texttt{for} lahko prav tako kot pri zanki \texttt{while} uporabljamo stavek \texttt{break}. Ta izvajanje zanke prekine, kljub temu, da ta še ni prišla do konca seznama (ali česa drugega). Primer uporabe stavka \texttt{break} znotraj zanke \texttt{while} ponazarja spodnja koda:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 for element in seznam:
     # telo zanke
     ...
@@ -188,7 +188,7 @@ Potek izvedbe kode iz primera prikazuje slika \ref{img:for2}.
 \section{Veja \texttt{else}}
 
 Podobno kot lahko vejo \texttt{else} kombiniramo z zanko \texttt{while}, jo lahko kombiniramo tudi z zanko \texttt{for}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 for element in seznam:
     # telo zanke
     ...
@@ -209,7 +209,7 @@ Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta 
 \begin{resitev}
 Program bo strukturiran zelo podoben kot v primeru zanke \texttt{while}, le da bomo tokrat razpon števil, čez katera se sprehaja kandidat, ustvarili z uporabo funkcije \texttt{range}. 
 
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
@@ -230,7 +230,7 @@ else: # ali se je zanka odvrtela do konca
 \section{Gnezdenje zank}
 
 Podobno kot smo gnezdili stavke \texttt{if} lahko gnezidmo tudi zanke. To pomeni, da bomo zanko izvajali znotraj druge zanke. Primer gnezdenja zanke \texttt{for} prikazuje spodnji izsek kode:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> for i in range(5):
         for j in range(5):
             print(i,j)
@@ -259,7 +259,7 @@ Napiši program, ki od uporabnika prebere celo število in izpiše poštevanko �
 \end{zgled}
 \begin{resitev}
 Števila od 1 do podanega števila \texttt{n} bomo najprej množili z 1, potem z 2, potem s 3 in tako naprej, dokler ne pridemo do števila \texttt{n}. To lahko enostavno rešimo z uporaba ugnezdene zanke.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 n = int(input("Vnesi stevilo: "))
 
 for i in range(1, n+1): # zunanja zanka
@@ -268,7 +268,7 @@ for i in range(1, n+1): # zunanja zanka
     print() #nova vrstica
 \end{lstlisting}
 V primeru, da uporabnik vpiše število 3, bo izpis sledeč:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 1
 2
 3
@@ -284,7 +284,7 @@ V primeru, da uporabnik vpiše število 3, bo izpis sledeč:
 \end{resitev}
 
 V zgornjih primerih je bila notranja zanka neodvisna od tega, kako daleč se je že odvila zunanja zanka. Ponavadi pa temu ni tako. Primer ugnezdene zanke, pri kateri je razpon notranje zanke odvisen od števila izvedenih iteracij zunanje zanke, prikazuje spodnji izsek kode:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> for i in range(5):
         for j in range(i,5):
             print(i,j)
@@ -312,7 +312,7 @@ Napiši program, ki od uporabnika prebere celo število in izpiše vsa števila,
 \end{zgled}
 \begin{resitev}
 Kandidati, ki jih moramo torej obravnavati, se gibljejo v razponu od števila 1 (ki je vsem številom tuje število) do števila \texttt{n-1}, pri čemer je \texttt{n} število, ki ga je vnesel uporabnik. Kako za posameznega kandidata preverimo, če je tuj številu \texttt{n}? Podobno kot prej -- tako da se sprehodimo od števila 2, do manjšega od obeh števil. Če smo našli kakšnega delitelja, si števili očitno nista tuji.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 n = int(input("Vnesi stevilo: "))
 
 for kandidat in range(1, n): # razpon cez kandidate
@@ -342,7 +342,7 @@ Tole sicer ni neposredno povezano z zanko \texttt{for}, bo pa služilo kot osnov
 Povedali smo že, da funkcije sprejemajo argumente, ki jih ob klicu pač podamo. V določenih primerih pa imajo funkcije tudi t.i. \emph{izbirne} ali \emph{opcijske} argumente, za katere velja da imajo (pred)nastavljeno \emph{privzeto} vrednost. V primeru, da vrednosti teh argumentov eksplicitno ne podamo, bodo ti nastavljeni na njihove privzete vrednosti. V primeru, da vrednosti tem argumentom podamo, bomo s tem \emph{povozili} privzete vrednosti in uporabljene bodo podane (naše) vrednosti.
 
 Poglejmo si dva izbirna argumenta funkcije \texttt{print} in primer njune uporabe. Do dokumentacije funkcije \texttt{print} lahko pridemo preko funkcije \texttt{help}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> help(print)
 Help on built-in function print in module builtins:
 
@@ -359,7 +359,7 @@ print(...)
     flush: whether to forcibly flush the stream.
 \end{lstlisting}
 Zaenkrat nas bosta zanimala predvsem argumenta \texttt{sep} in \texttt{end}. Funkcija \texttt{print} deluje tako, da sprejme poljubno število številk, nizov in še česa drugega, to med seboj združi in izpiše na zaslon. Pri tem argument \texttt{sep} določa s čim naj podane številke, nize in še kaj drugega med seboj združi. Privzeto je ta argument postavljen na vrednost \texttt{' '}, kar vidimo iz zgleda klica funkcije (\texttt{sep=' '}). To pomeni, da bo izpis narejen tako, da bodo med podanimi argumenti za izpis vstavljeni presledki. Povadimo:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> print(1,2,3) # privzeta vrednost argumenta
 1 2 3
 >>> print(1,2,3, sep='') # brez presledka
@@ -377,7 +377,7 @@ Napiši program, ki od uporabnika prebere celo število in izpiše poštevanko �
 \begin{resitev}
 Rešitev bo podobna kot prej, le da se tokrat ne bomo pomikali v novo vrstico po vsakem izpisu. To lahko naredimo tako, da opcijski argument  \texttt{end} nastavimo na znak \texttt{' '}.
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 n = int(input("Vnesi stevilo: "))
 
 for i in range(1, n+1): # zunanja zanka
@@ -386,7 +386,7 @@ for i in range(1, n+1): # zunanja zanka
     print() #nova vrstica
 \end{lstlisting}
 V primeru, da uporabnik vpiše število 3, bo tokrat izpis sledeč:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 1 2 3
 2 4 6
 3 6 9

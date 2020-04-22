@@ -11,11 +11,11 @@ V takih primerih lahko uporabimo v Python že vgrajen podatkovni tip \texttt{dic
 \section{Kako uporabljamo slovarje?}
 
 Slovarje zapisujemo z zavitimi oklepaji, torej \texttt{\{} in \texttt{\}}, pri čemer elemente naštejemo kot pare ključ in vrednost ločene z dvopičjem (\texttt{:}). Prazen slovar bi naredili takole
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> prazen_slovar = {}
 \end{lstlisting}
 Slovar, ki vsebuje enostaven telefonski imenik bi lahko zapisali kot
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik = {"Janez":"083455544", 
             "Ana":"084566732", 
             "Nika":"099563123"}
@@ -26,12 +26,12 @@ Mimogrede, slovar je spremenljiv podatkovni tip, kot smo zapisali že v tabeli \
 
 \section{Iskanje vrednosti}
 Telefonsko številko osebe lahko torej najdemo tako, da podamo njeno ime, kar je smiselno, saj imena svojih prijateljev ponavadi poznamo na pamet, njihovih telefonskih številk pa ne. Telefonsko številko od Janeza lahko npr. dobimo tako, da slovar indeksiramo po ključu \texttt{"Janez"}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik["Janez"]
 083455544
 \end{lstlisting}
 Indeksiranje se torej v primeru slovarjev namesto po indeksih izvaja po ključih. Kaj pa če bi želeli poiskati telefonsko številko od Dejana. Potem bi slovar indeksirali po ključu \texttt{"Dejan"}, kar pa nam v konkretnem primeru vrne napako:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik["Dejan"]
 Traceback (most recent call last):
   File "<pyshell#1>", line 1, in <module>
@@ -39,7 +39,7 @@ Traceback (most recent call last):
 KeyError: 'Dejan'
 \end{lstlisting}
 Problem je v tem, da ključa \texttt{"Dejan"} v našem slovarju (še) ni, zato preko njega slovarja ne moremo indeksirati (tako kot nismo mogli indeksirati seznam z indeksom, ki ga v seznamu ni bilo). Obstoj ključa v slovarju lahko preverimo z operatorjem \texttt{in}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> "Dejan" in imenik
 False
 >>> "Nika" in imenik
@@ -50,7 +50,7 @@ Preden do določenega ključa v slovarju dostopamo je torej smiselno, da preveri
 Napiši funkcijo \texttt{poisci}, ki kot argument sprejme imenik in ime osebe. Če imena ni v imeniku naj funkcija vrne vrednost \texttt{False}, sicer pa njeno telefonsko številko.
 \end{zgled}
 \begin{resitev} Rešitev mora pred indeksiranjem po podanem ključu, preveriti, če ključ v slovarju obstaja. V nasprotnem primeru vrne vrednost \texttt{False}. 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def poisci(imenik, ime):
     if ime in imenik:
         return imenik[ime]
@@ -62,22 +62,22 @@ def poisci(imenik, ime):
 \section{Dodajanje in spreminjanje vrednosti}
 
 Indeksiranje po ključih, ki jih v slovarju ni, pa je v določenih primerih dovoljeno, in sicer takrat, ko želimo v slovar dodati nov par ključ, vrednost. Dodajanje novega elementa lahko torej izvedemo tako, da slovar indeksiramo po novem (neobstoječem) ključu in takemu indeksrianju priredimo vrednost, ki jo želimo s tem ključem povezati. Če bi npr. želeli v slovar dodati Dejana in z njim povezati neko telefonsko številko, npr. 089543678, bi to naredili takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik["Dejan"] = "089543678"
 \end{lstlisting}
 V tem primeru napake nismo dobili, v slovarju pa se je ponavil nov par ključ, vrednost.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik
 {'Janez': '083455544', 'Ana': '084566732', 
 'Nika': '099563123', 'Dejan': '089543678'}
 \end{lstlisting}
 
 Kaj pa se zgodi, če poskusimo v slovar dodati še enega Dejana? Ker v slovarju do vrednosti dostopamo preko ključev, morajo biti ključi enolični, kar pomeni, da se posamezen ključ lahko v slovarju pojavi največ enkrat. Če torej naredimo prireditev vrednosti preko ključa, ki v slovarju že obstaja, bomo s tem izvedli spreminjanje vrednosti, ki je povezana s tem ključem. Prireditev
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik["Dejan"] = "000000000"
 \end{lstlisting}
 bo torej spremenila telefonsko številko Dejana na 000000000.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik
 {'Janez': '083455544', 'Ana': '084566732', 
 'Nika': '099563123', 'Dejan': '000000000'}
@@ -89,7 +89,7 @@ Napiši funkcijo \texttt{dodaj}, ki kot argumente prejme imenik, ime osebe in te
 \end{zgled}
 \begin{resitev}
 V funkciji bomo tokrat izvedli prirejanje vrednosti, samo če podanega ključa še ni v slovarju. Poraja pa se dodatno vprašanje. Ali mora funkcija spremenjen slovar vračati? Odgovor je ne, saj je slovar spremenljiv podatkovni tip in sprememembe slovarja, ki jih bomo v funkciji naredili in ki ga je funkcija prejela kot argument, se bodo odražale tudi izven funkcije.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def dodaj(imenik, ime, stevilka):
     if ime not in imenik:
         imenik[ime] = stevilka
@@ -104,7 +104,7 @@ Napiši funkcijo \texttt{spremeni}, ki kot argumente prejme imenik, ime osebe in
 \end{zgled}
 \begin{resitev}
 Tokrat bomo v funkciji izvedli prirejanje vrednosti samo v primeru, če podan ključ v slovarju je. V nasprtonem primeru ne bi izvajali spreminjanja vrednosti za ključem, ampak bi izvajali dodajanje novega para ključ, vrednost.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def spremeni(imenik, ime, stevilka):
     if ime in imenik:
         imenik[ime] = stevilka
@@ -120,13 +120,13 @@ Napiši funkcijo \texttt{prestej\_baze}, ki kot argument prejme nukleotidno zapo
 \end{zgled}
 \begin{resitev}
 Za razliko od prej bo funkcija slovar vračala, saj ji ga kot argument nismo podali. V programu bi lahko predpostavljali, da delamo samo z bazami A, T, C in G. Tako bi si na začetku naredili slovar, v katerem kot ključi nastopajo oznake baz, nanje pa so vezane vrednosti 0. Takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 baze = {'A':0, 'T':0, 'C':0, 'G':0}
 \end{lstlisting}
 Slabost takega pristopa je ta, da smo se omejili samo na ključe A, T, C in G. Kaj pa če kot vhod dobimo RNA zaporedje? Ali pa če se v zaporedju pojavi še kakšna oznaka, ki je nismo predvideli?
 
 Boljši pristop bi bil, da na začetku naredimo prazen slovar in ko v nizu najdemo bazo, ki je v slovarju še ni, nanjo vežemo vrednost 1 (če smo jo našli v nizu prvič, potem to pomeni, da smo jo našli enkrat). V primeru, da v nizu najdemo bazo, ki v slovarju že obstaja, število njenih pojavitev povečamo za 1. 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def prestej_baze(zaporedje):
     baze = {} # prazen slovar
     for baza in zaporedje:
@@ -143,7 +143,7 @@ def prestej_baze(zaporedje):
 \section{Brisanje vrednosti}
 
 V določenih primerih želimo elemente iz slovarjev tudi brisati. To lahko naredimo z besedico \texttt{del}, ki smo jo srečali že pri brisanju elementov iz seznama. Podobno kot pri seznamih tudi iz slovarjrv brišemo z indeksiranjem vrednosti, ki jo želimo izbrisati:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 del slovar[kljuc]
 \end{lstlisting}
 Tudi tokrat je smiselno, da pred brisanjem preverimo, če podan ključ v slovarju obstaja (brisanje po neobstoječem ključu bo spet vrnilo napako).
@@ -153,7 +153,7 @@ Napiši funkcijo \texttt{izbrisi}, ki kot argumente prejme imenik in ime osebe, 
 \end{zgled}
 \begin{resitev}
 Spet bomo najprej preverili obstoj ključa, nato pa izvedli brisanje.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def izbrisi(imenik, ime):
     if ime in imenik:
         del imenik[ime]
@@ -167,7 +167,7 @@ def izbrisi(imenik, ime):
 Posamezen ključe se lahko v slovarju pojavi največ enkrat. Ključi so torej enolični identifikatorji, preko katerih pridemo do posamezne vrednost. Za ključe pa velja tudi to, da morajo biti nespremenljivi. Zakaj? Vrednost, ki je vezana na posamezen ključ, se zapiše na lokacijo v pomnilniku, ki je določena s preslikavo ključa \angl{hash function}. Če ključ spreminjamo, se bo spremenila tudi vrednost preslikave. Za pravilno delovanje torej ključev ne smemo spreminjati (ko so enkrat shranjeni v slovarju). Zato je smiselno, da so ključi nespremenljivi podatki. Za vrednosti ni nobene omejitve -- uporabimo lahko poljuben podatkovni tip vključno z drugim, vgnezdenim, slovarjem.
 
 Sicer lahko do vseh ključev v slovarju pridemo z uporabo metode \texttt{keys}, do vseh vrednosti z uporabo metode \texttt{values}, do vseh parov pa z uporabo metode \texttt{items}. 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik.keys()
 dict_keys(['Janez', 'Ana', 'Nika', 'Dejan'])
 >>> imenik.values()
@@ -178,7 +178,7 @@ dict_items([('Janez', '083455544'), ('Ana', '084566732'),
 ('Nika', '099563123'), ('Dejan', '089543678')])
 \end{lstlisting}
 Metode vračajo nekaj kar je zelo podobno seznamom. Pri metodi \texttt{keys} tako dobimo seznam ključev, pri metodi \texttt{values} seznam vrednosti, pri metodi \texttt{items} pa seznam terk. Nad rezultatom, ki ga posamezna metoda vrne, se lahko sprehajamo z zanko \texttt{for}. Zanko \texttt{for} pa lahko izvedemo tudi direktno nad slovarjem, pri čemer se bomo tako sprehajali čez ključe slovarja:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> for k in imenik()
         print(k)
 Janez
@@ -192,7 +192,7 @@ Napiši funkcijo \texttt{izpisi\_imenik}, ki kot argument prejme imenik. Funkcij
 \end{zgled}
 \begin{resitev}
 V zanki \texttt{for} se lahko sprehajamo direktno čez slovar (sprehod čez ključe), čez ključe preko metode \texttt{keys} ali pa čez pare preko metode \texttt{items}. Uporabimo tokrat zadnjo možnost.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def izpisi_imenik(imenik):
     for ime, stevilka in slovar.items():
         print(ime, ":", stevilka)   
@@ -206,7 +206,7 @@ Napiši funkcijo \texttt{naj\_baza}, ki kot argument sprejme zaporedje baz, vrne
 \begin{resitev}
 Najprej bomo poklicali funkcijo \texttt{prestej\_baze}, ki bo iz niza naredila slovar pojavitev baz. V naslednjem koraku moramo najti bazo, ki ima največ pojavitev. To bomo naredili na podoben način, kot smo izvedli iskanje največjega (ali najmanjšega) elementa v seznamu -- s sprehodom z uporabo zanke \texttt{for}.
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def naj_baza(zaporedje):
     baze = prestej_baze(zaporedje)
     
@@ -225,7 +225,7 @@ def naj_baza(zaporedje):
 
 \section{Imenski prostor in slovarji}
 Poleg tega, da slovarje lahko navadni smrtniki uporabljamo za reševanje svojih programerskih problemov, slovarje za svoje delovanja uporablja tudi Python sam. Omenili smo že, da Python v svojem imenskem prostoru vsebuje vsa imena, preko katerih lahko dostopamo do vrednosti spremenljivk, funkcij in še česa drugega. Do imenskega prostora lahko pridemo s funkcijo \texttt{globals}. Poglejmo si, kaj ta funkcija vrne:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> globals()
 {'__name__': '__main__', '__doc__': None, '__package__': None, 
 '__loader__': <class '_frozen_importlib.BuiltinImporter'>, 
@@ -233,7 +233,7 @@ Poleg tega, da slovarje lahko navadni smrtniki uporabljamo za reševanje svojih 
 <module 'builtins' (built-in)>}
 \end{lstlisting}
 Funkcija vrne imena v imenskem prostoru in vrednosti, ki se za imeni skrivajo. Definirajmo novo spremenljivko in pokličimo gornjo funkcijo še enkrat.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> x = 1
 >>> globals()
 {'__name__': '__main__', '__doc__': None, '__package__': None, 
@@ -242,12 +242,12 @@ Funkcija vrne imena v imenskem prostoru in vrednosti, ki se za imeni skrivajo. D
 <module 'builtins' (built-in)>, 'x': 1}
 \end{lstlisting}
 V imenskem prostoru se je zdaj očitno pojavilo ime \texttt{x}, za katerem se skriva vrednost 1. Če pogledamo bolj natančno, lahko vidimo, da je funkcija \texttt{globals} vrnila slovar.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> type(globals())
 <class 'dict'>
 \end{lstlisting}
 V tem slovarju so ključi imena spremenljivk, funkcij itd., vrednosti pa tisto, kar se za imeni skriva. Ko v ukazno vrstico torej napišem \texttt{x} bo Python v svojem slovarju, ki predstavlja imenski prostor, pogledal, če tam obstaja ime \texttt{x} in vrnil vrednost, ki se za tem imenom skriva. To bi lahko naredili tudi takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> globals()['x']
 1
 \end{lstlisting}

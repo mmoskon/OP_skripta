@@ -14,14 +14,14 @@ To kodo bi lahko delili tudi z drugimi programerji. Če smo npr. napisali zelo d
 
 Vsaki funkciji, ki jo želimo v naših programih ponovno uporabiti, moramo dati seveda neko ime, preko katerega jo bomo lahko po potrebi poklicali. Skupaj s seznamom argumentov, ki jih bo naša funkcija sprejala, to podamo v definiciji funkcije. Definicijo funkcije začnemo z rezervirano besedo \texttt{def} in končamo z dvopičjem:
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def ime_funkcije(argument_1, argument_2,..., argument_n):
 \end{lstlisting}
 
 Definiciji funkcije sledi njena vsebina. Stavke, ki so v funkciji vsebovani tudi tokrat določimo z zamikanjem na začetku vrstice (podobno kot pri pogojnemu stavku in zankah). Ko želimo Pythonu sporočiti, da koda ni več del funkcije, enostavno nehamo zamikati.
 
 Spodnji primer predstavlja definicijo enostavne funkcije, ki sešteje vrednosti dveh spremenljivk (\texttt{a} in \texttt{b}) v novo spremenljivko (\texttt{c}) in rezultat seštevanja izpiše.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def sestej(a, b):
     c = a + b
     print(c)
@@ -30,13 +30,13 @@ def sestej(a, b):
 \end{lstlisting}
 
 Kaj pa se zgodi, ko program s tole definicijo poženemo. Navidez se ne zgodi nič, če pa v ukazno vrstico napišemo ime pravkar definirane funkcije, bi moral Python izpisati nekaj podobnega temu:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 <function sestej at 0x000001C24E1481E0>
 \end{lstlisting}
 Kaj to pomeni? To pomeni, da se je v našem imenskem prostoru (pojem bomo razložili v kratkem) pojavilo ime \texttt{sestej}, ki ima v ozadju funkcijo, ta pa je shranjena nekje v pommnilniku (natančneje na pomnilniškem naslovu \texttt{0x000001C24E1481E0}). Ko smo izvedli zgornjo kodo, smo torej dobili definicijo funkcije \texttt{sestej}, ki jo zdaj lahko pokličemo.
 
 Do zdaj smo funkcije vedno klicali tako, da so imenu funkcije sledili oklepaji, znotraj katerih smo našteli vrednosti argumentov, nad katerimi smo želeli funkcijo poklicati. In seveda je tako tudi v primeru funkcij, ki jih definiramo sami. Če bi torej želeli izpisati vsoto števil 5 in 7, bi lahko izvedli klic
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>>sestej(5,7)
 12
 \end{lstlisting}
@@ -45,7 +45,7 @@ Ko smo funkcijo definirali se torej koda znotraj funkcije sploh ni izvedla. Izve
 
 \section{Globalni imenski prostor}
 Vsakič, ko v Pythonu definiramo novo spremenljivko, se ime, preko katerega bomo dostopali do vrednosti te spremenljivke shrani v t.i. \emph{imenski prostor}. Podobno se zgodi ob definiciji funkcije, le da se v tem primeru za imenom funkcije skriva vsebina funkcije, ki se bo izvedla, ko jo bomo poklicali. Ko npr. definiramo spremenljivki \texttt{x} in \texttt{y} z uporabo kode
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> x = 5
 >>> y = 7
 \end{lstlisting}
@@ -67,7 +67,7 @@ Kot smo že omenili, se ob definiciji funkcije v globalnem imenskem prostoru ust
 \end{figure}
 
 Dopolnimo program, v katerem smo napisali funkcijo \texttt{sestej}, še z njenim klicem.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def sestej(a, b): # definicija funkcije
     c = a + b
     print(c)
@@ -76,7 +76,7 @@ y = 7
 sestej(x,y) # klic funkcije
 \end{lstlisting}
 Vrstice programa od 1, 4 in 5 bi morale biti zdaj že popolnoma jasne. Kaj pa se zgodi, ko program pride do vrstice 6? Ustvari se lokalni imenski prostor funkcije \texttt{sestej}, znotraj katerega bo funkcija ustvarila svoje lokalne spremenljivke. V lokalnem imenskem se najprej ustvarita lokalni spremenljivki z imeni \texttt{a} in \texttt{b}, ki predstavljata \emph{plitvi} kopiji spremenljivk \texttt{x} in {y}, tj. spremenljivk, s katerimi smo funkcijo poklicali. Enako posledico bi imela prireditev
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> a = x
 >>> b = y
 \end{lstlisting}
@@ -116,7 +116,7 @@ Vprašanje, na katerega moramo še odgovoriti je, kaj se zgodi, ko se funkcija i
 Iz globalnega imenskega prostora do lokalnih imenskih prostorov uporabljenih funkcij torej ne moremo dostopati, saj se po zaključku izvajanja funkcij (ko izvedba programa preide spet v globalni imenski prostor), lokalni imenski prostori izbrišejo. Kaj pa obratno? Iz lokalnega imenskega prostora funkcije, lahko dostopamo do globalnega (tudi zato se mu reče globalni), kar pomeni, da lahko dostopamo do vrednosti globalnih spremenljivk. Še pomembneje pa je to, da lahko iz lokalnega imenskega prostora funkcij, dostopamo do imen globalno definiranih funkcij. To pomeni, da lahko iz posamezne funkcije pokličemo druge funkcije (gnezdenje funkcij) ali pa tudi samo sebe. Slednjemu se reče \emph{rekurzija}, ampak pustimo to za kdaj drugič. 
 
 Napišimo malo razširjen program, ki bo seštel vrednosti dveh seznamov. Pri tem si bomo pomagali z definicijo dveh funkcij.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def sestej(a, b): # sestej in izpisi
     c = a + b
     print(c)
@@ -148,14 +148,14 @@ Vprašanje za razmislek -- zakaj se znotraj funkcije \texttt{sestej} ne ustvarit
 
 \section{Vsaka funkcija vrača rezultat}
 V splošnem pri programiranju ločimo dva tipa funkcij, in sicer tiste, ki nekaj uporabnega vrnejo in tiste, ki nekaj uporabnega naredijo (vrnejo pa nič). V določenih programskih jezikih ti dve skupini nosijo celo posebna imena in so tudi drugače definirane. Kaj pa v jeziku Python? V skupino funkcij, ki nekaj uporabnega vračajo bi lahko uvrstili npr. funkcijo \texttt{input}, ki prebere uporabnikov vnos in tega vrne kot podatkovni tip \texttt{str}. V skupino funkcijo, ki ne vračajo nič kaj preveč uporabnega, je pa uporabno tisto, kar naredijo, pa spada funkcija \texttt{print}. Dejstvo je, da v Pythonu vsaka funkcija nekaj vrne pa tudi, če to ni čisto nič uporabnega. Poglejmo si kaj vrne funkcija \texttt{print}. Kako? Rezultat funkcije \texttt{print} bomo shranili v spremenljivko in vrednost te spremenljivke izpisali.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>>a = print("testni izpis")
 testni izpis
 >>>print(a)
 None
 \end{lstlisting}
 Kaj se torej skriva v rezultatu funkcije \texttt{print}? Dobesedno nič oziroma \texttt{None}. Funkcija nekaj vrne, in sicer vrne nič. Preverimo lahko tudi njegov podatkovni tip.
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>>print(type(a))
 <class 'NoneType'>
 \end{lstlisting}
@@ -164,20 +164,20 @@ Nič oziroma \texttt{None} je torej poseben podatek, ki pripada podatkovnemu tip
 Kaj pa če bi želeli, da naša funkcija vrne nekaj uporabnega? V tem primeru moramo od nje to eksplicitno zahtevati, in sicer s stavkom \texttt{return}.
 
 Spremenimo funkcijo \texttt{sestej}, tako da bo vsoto dveh števil vračala in ne izpisovala.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def sestej(a, b): # sestej in izpisi
     c = a + b
     return c
 \end{lstlisting}
 Z uporabo stavka \texttt{return} smo torej povedali, da želimo, da naša funkcija vrne vrednost spremenljivke \texttt{c}. Ali nismo tega naredili že prej? Ne. V prejšnji različici je funkcija vrednost spremenjivke \texttt{c} zgolj izpisovala. Ko se je funkcija končala, je njen lokalni imenski prostor izginil in z njim tudi vrednost spremenljivke \texttt{c}. Pogosto pa želimo rezultate funkcij uporabiti tudi v drugih delih naših programov (npr. ko uporabljamo funkcijo \texttt{input} želimo z uporabnikovim vnosom ponavadi nekaj uporabnega narediti in ga ne zgolj izpisati na zaslon). To lahko dosežemo s stavkom return. Kaj se zgodi, če funkcijo v našem programu zdaj še pokličemo. Razširimo program na sledeč način.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def sestej(a, b): # sestej in vrni
     c = a + b
     return c
 sestej(4,5)
 \end{lstlisting}
 Program tokrat ne izpiše ničesar. Zakaj ne? Ker tega od njega nismo nikjer zahtevali. Kaj torej naredi klic funkcije \texttt{sestej}. V konkretnem primeru nič uporabnega, saj izračuna vsoto števil 4 in 5, rezultat shrani v spremenljivko \texttt{c} in ko se funkcija zaključi, le-ta izgine, saj nanj ne kaže nobeno ime več. Kako pa bi lahko dobljeno vrednost uporabili še kje druge v našem programu? Podobno kot pri uporabi funkcije \texttt{input} -- tako, da bi rezultat funkcije priredili spremenljivki.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def sestej(a, b): # sestej in vrni
     c = a + b
     return c
@@ -197,7 +197,7 @@ Napiši funkcijo, ki kot argument prejme celo število in izpiše, če je podano
 \end{zgled}
 
 \begin{resitev} \  
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prastevilo(stevilo):
     for i in range(2,stevilo): # razpon preiskovanja
         if stevilo % i == 0:
@@ -212,7 +212,7 @@ Podoben program smo napisali že, ko smo se srečali z zanko \texttt{for}, tako 
 Napiši funkcijo, ki kot argument prejme celo število in \textbf{vrne} vrednost \texttt{True}, če je to število praštevilo, sicer pa \textbf{vrne} vrednost \texttt{False}.
 \end{zgled}
 \begin{resitev} \  
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prastevilo(stevilo):
     for i in range(2,stevilo): # razpon preiskovanja
         if stevilo % i == 0:
@@ -227,7 +227,7 @@ Dodatna prednost te rešitve je tudi to, da lahko zdaj rezultat preverjanja upor
 Napiši funkcijo, ki kot argument prejme celo število in izpiše vsa praštevila do vključno podanega števila.
 \end{zgled}
 \begin{resitev} \  
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prastevila(stevilo):
     for kandidat in range(2,stevilo+1): # kandidati
         if prastevilo(kandidat): # ali je prastevilo
@@ -238,12 +238,12 @@ Rešitev je izjemno enostavna. Sprehodili smo se čez vse možne kandidate za pr
 
 \section{Izbirni argumenti}
 V določenih primerih želimo, da imajo določeni argumenti funkcije svoje vrednosti že vnaprej določene, razen v primeru, da uporabnik želi za te argumente uporabiti druge vrednosti. Če torej uporabnik vrednosti argumentov ne bo podal, bodo uporabljene njihove privzete vrednosti. V nasprotnem primeru bodo uporabljene uporabnikove vrednosti. Tak primer uporabe funkcij smo srečali že pri funkciji \texttt{print}, ki ima kar nekaj izbirnih argumentov. Privzeto gre funkcija \texttt{print} po vsakem klicu v novo vrstico (argument \texttt{end} je privzeto enak znaku za novo vrstico -- \texttt{\\n}), v primeru več podanih vrednosti pa te izpišejo tako, da se med njih vrine presledke (argument \texttt{sep} je privzeto enak presledku). Njune privzete vrednosti lahko povozimo, tako da jih specificiramo ob klicu, npr. kot
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> print(1,2,3,sep='+',end=' ')
 1+2+3
 \end{lstlisting}
 Podobno lahko specificiramo izbirne argumente in njihove vrednosti pri definiciji svojih funkcij. 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 def ime_funkcije(arg1, arg2,..., opc1=v1, opc2=v2,...):
 \end{lstlisting}
 Paziti moramo samo na to, da so tisti argumenti, ki nimajo privzetih vrednosti vedno podani pred tistimi, ki privzete vrednosti imajo.
@@ -253,7 +253,7 @@ Povadimo to na malo bolj splošnem Fibonaccijevem zaporedju. Najprej poskusimo b
 Napiši funkcijo, ki vrne Fibonaccijevo zaporedje števil, pri čemer naj uporabik poda dolžino zaporedja in prvi dve števili v zaporedju.
 \end{zgled}
 \begin{resitev} \  
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def fibonacci(n, a, b):
     if n == 1:
         return [a]
@@ -268,7 +268,7 @@ V primeru, da uporabnik želi imeti zaporedje dolžine 1, funkcija vrne zaporedj
 Napiši funkcijo, vrne Fibonaccijevo zaporedje števil, pri čemer naj uporabik poda dolžino zaporedja. Uporabnik lahko poda tudi prvi dve števili v zaporedju, ki sta privzeto enaki 1.
 \end{zgled}
 \begin{resitev} \  
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def fibonacci(n, a=1, b=1):
     if n == 1:
         return [a]

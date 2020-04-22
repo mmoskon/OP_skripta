@@ -15,7 +15,7 @@ Razliko med izvedbo pogojnega stavka \texttt{if} in zanko \texttt{while} prikazu
     \label{img:while_vs_if}
 \end{figure}
 Po izvedbi pogojnega dela stavka \texttt{if} se izvajanje programa nadaljuje v delu, ki sledi pogojnim stavkom. Po drugi strani se po izvedbi pogojnega dela zanke \texttt{while}, recimo tem stavkom raje \emph{telo zanke}, izpolnjenost pogoja v \emph{glavi zanke} ponovno preveri. Telo (vsebina) zanke se bo torej izvajalo vse dokler bo pogoj izpolnjen. Zanko \texttt{while} lahko zapišemo takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 while pogoj: # glava zanke
     # telo zanke
     ...
@@ -37,7 +37,7 @@ Napiši program, ki od uporabnika prebere dve celi števili in poišče največj
 \end{zgled}
 \begin{resitev}
 Program bo manjše število odšteval od večjega, dokler sta števili različni. Uporabili bomo torej zanko \texttt{while} (dokler sta števili različni).  Znotraj zanke bomo uporabili še stavek \texttt{if}, s pomočjo katerega bomo ugotovili, katero število je manjše. 
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
@@ -61,7 +61,7 @@ Napiši program, ki šteje od 0 do števila, ki ga je vnesel uporabnik. Vsa šte
 \end{zgled}
 \begin{resitev}
 Število, do katerega smo prešteli, si bomo morali nekam zabeležiti, npr. v spremenljivko z imenom \texttt{i}. Šteti bomo glede na navodila začeli s številom 0. Torej bomo spremenljivko \texttt{i} na začetku postavili na 0. Končali bomo s številom, ki ga je vnesel uporabnik, recimo \texttt{n}. Pogoj za štetje naprej bo torej \texttt{i <= n}. Znotraj zanke \texttt{while} bomo trenutno število (\texttt{i}) izpisali, poleg tega moramo trenutno število tudi povečati, saj bo sicer pogoj za vedno izpolnjen. 
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 n = int(input("Vpisi stevilo do katerega zelis steti: "))
 i = 0 # stevec s katerim bomo steli
 while i <= n: # smo ze presteli?
@@ -72,15 +72,15 @@ while i <= n: # smo ze presteli?
 
 \section{Stavek \texttt{+=}}
 Znotraj zanke smo števec povečali za 1 z izvedbo prireditvenega stavka
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 i = i + 1 # povecanje stevca za 1
 \end{lstlisting}
 Ker je tak način povečevanja vrednosti zelo pogost, v jeziku Python obstaja bližnjica
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 i += 1 # povecanje stevca za 1
 \end{lstlisting}
 Bistvo zgornjega stavka je, da izvedemo aritmetično operacijo seštevanja in rezultat priredimo spremenljivki, nad katero smo operacijo izvedli. Na podoben način lahko operator prirejanja \texttt{=} kombiniramo z drugimi aritmetičnimi operatorji in števili:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> x = 10
 >>> x += 1 # povecaj za 1
 >>> x
@@ -105,7 +105,7 @@ Kaj pa bi se zgodilo, če bi števec v prejšnjem zgledu znotraj zanke pozabili 
 
 \section{Stavek \texttt{break}}
 Zanko pa lahko prekinemo tudi drugače kot z neizpolnjenostjo pogoja v glavi zanke. Uporabimo lahko namreč stavek \texttt{break}, ki prekine izvajanje zanke brez preverjanja pogoja v glavi zanke. Primer uporabe stavka \texttt{break} ponazarja spodnja koda
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 while pogoj:
     # telo zanke
     ...
@@ -129,7 +129,7 @@ Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta 
 \end{zgled}
 \begin{resitev}
 Nalogo bi lahko rešili tako, da bi poiskali največji skupni delitelj podanih števil (naj bosta to števili \texttt{st1} in \texttt{st2}) in pogledali, če je ta večji od 1. Tokrat se bomo rešitve lotili na malo drugačen način. Preverili bomo, če med kandidati za skupne delitelje obstaja kakšno število, ki deli obe števili, pri čemer bodo kandidati v razponu od števila 2 do manjšega števila, torej do vrednosti \texttt{min(st1, st2)}. V primeru, da med kandidati najdemo eno število, ki deli obe podani števili (ostanek po deljenju posameznega števila s kandidatom je enak 0 (\texttt{st \% delitelj == 0}), lahko takoj izpišemo, da števili nista tuji.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
@@ -142,7 +142,7 @@ while delitelj <= min(st1, st2): # kandidat gre do manjsega
     delitelj += 1
 \end{lstlisting}
 Rešitev je še nepopolna, saj izpis poda samo v primeru, ko števili nista tuji. Kako bi lahko program dopolnili, tako da bi izpis podal tudi v primeru, ko sta števili tuji. Tak izpis lahko podamo samo v primeru, ko smo pregledali vse kandidate in nismo našli nobenega, ki deli obe števili. Pomagamo si lahko s pomožno spremenljivko tipa \texttt{bool}, v katero bomo shranili informacijo o tem, ali smo že našli kašnega delitelja. Pri tem bomo na začetku predpostavljali, da delitelja ni. Če ga bomo našli, bomo predpostavko popravili. Na koncu bomo preverili, če smo kakšnega delitelja našli. Če bo odgovor ne (\texttt{nasli == False}), bomo izpisali, da sta si števili tuji.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
@@ -163,7 +163,7 @@ if nasli == False:
 \end{lstlisting}
 Program sicer deluje pravilno, je pa njegov izpis moteč, v primeru, da najdemo več skupnih deliteljev dveh števil. Vsakič, ko najdemo skupnega delitelja, namreč izpišemo, da smo ga našli
 Poleg tega bi lahko izvajanje zanke \texttt{while} prekinili takoj, ko smo našli enega skupnega delitelja, saj je to zadosten pogoj, da si števili nista tuji. Uporabimo lahko torej stavek \texttt{break}. Končna rešitev bo sledeča.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 
@@ -187,7 +187,7 @@ if nasli == False:
 
 \section{Veja \texttt{else}}
 Ena izmed posebnosti jezika Python je tudi to, da lahko vejo \texttt{else} uporabljamo tudi v kombinaciji z zanko \texttt{while}. Takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 while pogoj:
     # telo zanke
     ...
@@ -200,7 +200,7 @@ else:
 Veja \texttt{else} se torej izvede, ko pogoj ni več izpolnjen. Vprašanje pa je ali se veja \texttt{else} izvede vsakič, ko se izvajanje zanke zaključi? Kakšna je razlika med stavki, ki sledijo zanki \texttt{while}, in stavki znotraj veje \texttt{else} zanke \texttt{while}? 
 
 Do bistvene razlike med vejo \texttt{else} in običajnimi stavki, ki sledijo zanki \texttt{while}, pride, kadar zanko prekinemo s stavkom \texttt{break}. V tem primeru namreč skočimo iz zanke, s čimer preskočimo tudi njeno \texttt{else} vejo. Slednja se izvede samo v primeru, ko smo zanko prekinili po \emph{običajni} poti, tj. z neizpolnjenostjo pogoja v glavi zanke.  
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 while pogoj:
     # telo zanke
     ...
@@ -226,7 +226,7 @@ Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta 
 \end{zgled}
 \begin{resitev}
 Del programa, kjer izpisujemo, da si števili nista tuji, bo ostal bolj ali manj nespremenjen. Skrajšamo pa lahko tiste dela programa, ki jih potrebujemo za izpis, da sta si števili tuji. Števili sta si tuji, ko nismo našli nobenega skupnega delitelja. To se zgodi takrat, ko se je zanka \texttt{while} \emph{odvrtela} do konca in nismo našli nobenega skupnega delitelja, torej je posledično nismo prekinili s stavkom \texttt{break}. Če zanko \texttt{while} dopolnimo z vejo \texttt{else}, se bo ta izvedla natanko takrat, ko zanka ni bila prekinjena s stavkom \texttt{break}, torej takrat, ko nismo našli nobenega skupnega delitelja. Znotraj veje \texttt{else} lahko torej zapišemo, da sta si števili tuji. Na tak način se lahko znebimo spremenljivke \texttt{nasli} in naredimo program krajši in bistveno bolj pregleden.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 st1 = int(input("Vnesi prvo stevilo: "))
 st2 = int(input("Vnesi drugo stevilo: "))
 

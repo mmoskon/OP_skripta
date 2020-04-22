@@ -7,7 +7,7 @@ Zadnji izmed vgrajenih podatkovnih tipov, ki si ga moramo pogledati, so množice
 \section{Uporaba množic}
 
 Množice podobno kot slovarje zapisujemo v zavite oklepaje, znotraj katerih naštejemo elemente. Množico elementov 1, 2 in 3, bi torej naredili takole:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> mnozica
 {1, 2, 3}
@@ -15,7 +15,7 @@ Množice podobno kot slovarje zapisujemo v zavite oklepaje, znotraj katerih naš
 <class 'set'>
 \end{lstlisting}
 Kljub temu, da množice uporabljajo podoben zapis kot slovarji, ju Python med seboj brez problemov loči, saj slovarji za razliko od množic vsebujejo pare ključ: vrednost. Do težave pride le takrat, ko je množica oziroma slovar prazen. Do praznega slovarja pridemo tako, da podamo zavite oklepaje brez elementov:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> slovar = {}
 >>> slovar
 {}
@@ -23,7 +23,7 @@ Kljub temu, da množice uporabljajo podoben zapis kot slovarji, ju Python med se
 <class 'dict'>
 \end{lstlisting}
 Do prazne množice pridemo z uporabo funkcije \texttt{set}, ki jo pokličemo brez argumentov:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = set()
 >>> mnozica
 set()
@@ -36,13 +36,13 @@ set()
 Elementi množic imajo zelo podobne omejitve kot ključi slovarji, za katere prav tako velja, da lahko posamezno vrednost vsebujejo največ enkrat. Prav tako kot za ključe slovarjev tudi za množice velja, da lahko vsebujejo le nespremenljive podatkovne tipe. 
 
 Množice predstavljajo neurejeno strukturo, kar pomeni, da vrstni red elementov množice ni pomemben in tudi ni določen. Elementi torej niso vezani na indekse, zato množic ne moremo indeksirati in nad njimi delati rezine:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> mnozica[0]
 TypeError: 'set' object is not subscriptable
 \end{lstlisting}
 Prav tako nad množicami ne moremo izvajati aritmetičnih operacij, kot smo jih npr. lahko izvajali nad nizi:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> {1,2,3}*3
 TypeError: unsupported operand type(s) for *: 'set' and 'int'
 >>> {1,2,3} + {4,5,6}
@@ -52,7 +52,7 @@ TypeError: unsupported operand type(s) for +: 'set' and 'set'
 \section{Osnovne operacije nad množicami}
 
 Kaj pa pravzaprav potem z množicami sploh lahko počnemo. Ko množico enkrat imamo se lahko čez njo sprehajamo z zanko \texttt{for}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> for element in mnozica:
 	print(element)
@@ -61,7 +61,7 @@ Kaj pa pravzaprav potem z množicami sploh lahko počnemo. Ko množico enkrat im
 3
 \end{lstlisting} 
 Poleg tega lahko preverjamo ali množica določen element vsebuje (ali ne) z operatorjema vsebovanosti:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> 1 in mnozica
 True
@@ -72,7 +72,7 @@ False
 \end{lstlisting}
 
 Številu elementov v množici pravimo tudi moč množice, do katere pridemo enostavno s klicem vgrajene funkcije \texttt{len}
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> len({1,2,3})
 3
 \end{lstlisting}
@@ -82,7 +82,7 @@ Napiši funkcijo \texttt{razlicni}, ki kot argument sprejme niz, kot rezultat pa
 \end{zgled}
 \begin{resitev}
 Najprej bomo niz pretvorili v množico s funkcijo \texttt{set}. Ker množica posamezen element vsebuje največ enkrat, se bomo s tem znebili vseh potencialnih ponovitev znakov. Potem samo še izračunamo in vrnemo moč množice.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def razlicni(niz):
     mnozica = set(niz) # odstranitev duplikatov
     return len(mnozica) # moc mnozice
@@ -90,7 +90,7 @@ def razlicni(niz):
 \end{resitev}
 
 Tudi primerjalni operatorji so zdaj prilagojeni matematični interpretaciji množic. Ali je prva množica podmnožica druge, lahko npr. ugotovimo z operatorjem \texttt{<=}:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> {1,2,3} <= {1,2,3,4}
 True
 \end{lstlisting}
@@ -107,7 +107,7 @@ Primeri najbolj tipičnih operacij, ki jih prikazujejo diagrami na sliki \ref{im
     \label{img:mnozice}
 \end{figure}
 Primer uporabe gornjih operacij je sledeč:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> {1,2,3} & {3,4,5} # presek
 {3}
 >>> {1,2,3} | {3,4,5} # unija
@@ -118,14 +118,14 @@ Primer uporabe gornjih operacij je sledeč:
 
 \section{Metode množic: dodajanje in brisanje elementov}
 Dodajanje elementa v množico lahko izvedemo z uporabo metode \texttt{add}, ki kot argument sprejme element, ki ga želimo dodati:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> mnozica.add(4)
 >>> mnozica
 {1, 2, 3, 4}
 \end{lstlisting}
 V primeru, da dodajamo element, ki v množici že obstaja, metoda ne naredi ničesar. Dodajanje bi lahko izvedli tudi z operatorjem \texttt{|=}, ki naredi unijo množice z neko drugo množico. V tem primeru lahko dodamo več elementov naenkrat:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> mnozica |= {4,5}
 >>> mnozica
@@ -133,7 +133,7 @@ V primeru, da dodajamo element, ki v množici že obstaja, metoda ne naredi nič
 \end{lstlisting}
 
 Brisanje elementov iz množice vršimo z metodo \texttt{remove}. Ta v primeru neobstoja elementa vrne napako. Uporabimo lahko tudi metodo \texttt{discard}, ki v primeru neobstoja napake ne vrne, sicer pa deluje enako kot metode remove:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> mnozica.remove(3)
 >>> mnozica
@@ -146,7 +146,7 @@ KeyError: 3
 >>> mnozica.discard(2)
 \end{lstlisting}
 Podobno kot prej, lahko uporabimo tudi operator \texttt{-=}, ki naredi razliko med množico in neko drugo množico in to priredi izhodiščni množici:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> mnozica = {1,2,3}
 >>> mnozica -= {2,3}
 >>> mnozica
@@ -197,7 +197,7 @@ Izberi si podatkovno strukturo, ki jo boš lahko uporabil pri predstavitvi in an
 \end{zgled}
 \begin{resitev}
 Omrežje bi lahko predstavili na različne načine, a vendar težimo k tisti predstavitvi, ki nam bo pri nadaljnjih operacijah nad omrežjem prihranila največ dela, hkrati pa bodo operacije nad omrežjem potekale kar se da hitro. Začnimo z mogoče najbolj intuitivno, a ne preveč dobro predstavitvijo, in sicer s seznamom terk. V tem primeru vsaka terka v seznamu vsebuje ime osebe in seznam njenih prijateljev. Omrežje s slike \ref{img:prijatelji} bi na tak način zapisali kot:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 prijatelji = [('Ana', ['Janez', 'Peter', 'Polona']),
               ('Janez', ['Ana', 'Nejc', 'Peter', 'Polona']),
               ('Nejc', ['Janez', 'Polona']),
@@ -205,7 +205,7 @@ prijatelji = [('Ana', ['Janez', 'Peter', 'Polona']),
               ('Polona', ['Ana', 'Janez', 'Nejc'])]
 \end{lstlisting}
 Zakaj predstavitev ni najboljša? Zatakne se nam že pri izpisovanje vseh prijateljev podane osebe, saj že ta zahteva iskanje podane osebe s sprehodom čez (v najslabšem primeru) celoten seznam prijateljev. Če je ta seznam dolg, je lahko ta operacija časovno zelo potratna. Stvar bi lahko izboljšali, če bi namesto seznama terk uporabili kar slovar, v katerem so ključi imena oseb, vrednosti pa seznami prijateljev. Takole: 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 prijatelji = {'Ana': ['Janez', 'Peter', 'Polona'],
               'Janez': ['Ana', 'Nejc', 'Peter', 'Polona'],
               'Nejc': ['Janez', 'Polona'],
@@ -213,7 +213,7 @@ prijatelji = {'Ana': ['Janez', 'Peter', 'Polona'],
               'Polona': ['Ana', 'Janez', 'Nejc']}
 \end{lstlisting}
 S tem smo rešili problem iskanja prijateljev podane osebe, saj do teh pridemo z enostavnim indeksiranjem po imenu osebe, ki nas zanima. Še vedno pa je problematično npr. iskanje skupnih prijateljev dveh oseb, saj zahteva ugnezdeno zanko po seznamih prijateljev teh dveh oseb. Spet je ta operacija lahko časovno potratna, če so ti seznami dolgi, kar v socialnih omrežjih zagotovo ni izključeno. Temu problemu bi se lahko izognili tako, da prijatelje podane osebe predstavimo z množicami, nad katerimi so operacije kot je presek bolj učinkovite. Poleg tega glede na podan opis problema vrstni red prijateljev ni pomemben, posamezna oseba pa kot prijatelj druge osebe nastopa največ enkrat. Predstavitev bi bila torej sledeča:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 prijatelji = {'Ana': {'Janez', 'Peter', 'Polona'},
               'Janez': {'Ana', 'Nejc', 'Peter', 'Polona'},
               'Nejc': {'Janez', 'Polona'},
@@ -227,7 +227,7 @@ Napiši funkcijo \texttt{prijatelji\_od}, ki kot argument sprejme omrežje prija
 \end{zgled}
 \begin{resitev}
 Kot smo videli že prej, je zaradi izbrane predstavitve omrežja, iskanje prijateljev podane osebe enostavno. Preveriti moramo samo, če oseba v omrežju obstaja.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prijatelji_od(prijatelji, oseba):
     if oseba not in prijatelji: # ali je oseba v omrezju?
         print("Ta oseba ne obstaja!")
@@ -241,7 +241,7 @@ Napiši funkcijo \texttt{dodaj\_osebo}, ki kot argument sprejme omrežje prijate
 \end{zgled}
 \begin{resitev}
 V omrežje bomo torej dodali novo osebo (nov ključ), na katerega bomo vezali prazno množico. Smiselno je tudi, da preverimo, če oseba v omrežju že obstaja. Ali mora funkcija vračati spremenjen slovar? Odgovor je seveda ne, saj je slovar spremenljiv podatkovni tip in se bo spreminjanje tega znotraj funkcije odražalo tudi izven funkcije.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def dodaj_osebo(prijatelji, oseba):
     if oseba not in prijatelji: # dodaj samo, ce je se ni
         prijatelji[oseba] = set() # prazna mnozica
@@ -253,7 +253,7 @@ Napiši funkcijo \texttt{spoprijatelji}, ki kot argument sprejme omrežje prijat
 \end{zgled}
 \begin{resitev}
 Spoprijateljevanje bomo naredili tako, da bomo prvo osebo dodali v množico prijateljev druge osebe in obratno. Pri tem lahko uporabimo metodo \texttt{add}. Še prej bomo po potrebi posamezno osebo dodali v omrežje, če je tam še ni.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def spoprijatelji(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji:
         dodaj_osebo(prijatelji, oseba1) 
@@ -270,7 +270,7 @@ def spoprijatelji(prijatelji, oseba1, oseba2):
         print("Osebi sta ze v prijateljstvu")
 \end{lstlisting}
 Primer klica:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> spoprijatelji(prijatelji, 'Ana', 'Nejc')
 >>> prijatelji
 {'Ana': {'Janez', 'Peter', 'Nejc', 'Polona'}, 
@@ -289,7 +289,7 @@ Napiši funkcijo \texttt{skregaj}, ki kot argument sprejme omrežje prijateljste
 \end{zgled}
 \begin{resitev}
 Pri skreganju bomo prvo osebo odstranili iz množice prijateljev druge osebe in obratno. Pri tem lahko uporabimo metodo \texttt{remove}. Še prej bomo preverili, če osebi sploh sta v omrežju in če sta v relaciji prijateljstva.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def skregaj(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
         print("Ene izmed oseb ni v omrezju!")
@@ -304,7 +304,7 @@ def skregaj(prijatelji, oseba1, oseba2):
     prijatelji[oseba2].remove(oseba1)
 \end{lstlisting}
 Primer klica:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> skregaj(prijatelji, 'Ana', 'Nejc')
 {'Ana': {'Janez', 'Peter', 'Polona'}, 
 'Janez': {'Peter', 'Ana', 'Nejc', 'Polona'}, 
@@ -323,7 +323,7 @@ Napiši funkcijo \texttt{najbolj\_popularni}, ki kot argument sprejme omrežje p
 \end{zgled}
 \begin{resitev}
 Spet rešujemo nalogo z iskanjem največjega elementa v slovarju, tokrat glede na dolžino množice, ki se skriva za posameznim ključem. Rešitev se ne bo dosti razlikovala od programa, ki je iskal oznako nukleotida, ki se v nukleotidnem zaporedju pojavi največkrat.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def najbolj_popularni(prijatelji):
     naj_oseba = ""
     naj_prijateljev = 0
@@ -336,13 +336,13 @@ def najbolj_popularni(prijatelji):
     return naj_oseba
 \end{lstlisting}
 Primer klica:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> najbolj_popularni(prijatelji)
 'Janez'
 \end{lstlisting}
 
 Rešitev predpostavlja, da je \emph{enako najbolj popularna} samo ena oseba, kar lahko rešimo z manjšo dopolnitvijo, tako da si najbolj popularne osebe shranimo v seznam. 
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def najbolj_popularni(prijatelji):
     naj_osebe = []
     naj_prijateljev = 0
@@ -357,7 +357,7 @@ def najbolj_popularni(prijatelji):
     return naj_osebe
 \end{lstlisting}
 Primer klica:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> spoprijatelji(prijatelji, 'Polona','Peter')
 >>> najbolj_popularni(prijatelji)
 ['Janez', 'Polona']
@@ -371,7 +371,7 @@ Napiši funkcije \texttt{skupni\_prijatelji}, \texttt{vsaj\_od\_enega} in \textt
 \end{zgled}
 \begin{resitev}
 V tej rešitvi bomo povadili uporabo preseka (skupni prijatelji), unije (vsaj od enega) ter razlike (brez njegovih). 
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def skupni(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
         print("Vsaj ene osebe ni v omrezju!")
@@ -394,7 +394,7 @@ def brez_njegovih(prijatelji, oseba1, oseba2):
         return prijatelji[oseba1] - prijatelji[oseba2]
 \end{lstlisting}
 Primer klica:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> skupni(prijatelji, 'Ana', 'Janez')
 {'Peter', 'Polona'}
 >>> skupni(prijatelji, 'Ana', 'Jan')
@@ -412,7 +412,7 @@ Napiši funkcijo \texttt{prijatelji\_prijateljev}, ki kot argumenta sprejme omre
 \end{zgled}
 \begin{resitev}
 Tokrat se bomo sprehodili čez prijatelje podane osebe z uporabo zanke \texttt{for} ter s prijatelji prijateljev dopolnili na začetku prazno množico. Potem bomo iz te množice izločili prijatelje podane osebe in osebo samo.
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prijatelji_prijateljev(prijatelji, oseba):
     vsi_pp = set() #prijatelji prijateljev je na zacetku prazna
     
@@ -429,7 +429,7 @@ def prijatelji_prijateljev(prijatelji, oseba):
 
 \end{lstlisting}
 Primer klica:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 >>> prijatelji_prijateljev(prijatelji, 'Nejc')
 {'Ana', 'Peter'}
 \end{lstlisting}
