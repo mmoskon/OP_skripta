@@ -1,1 +1,172 @@
 \chapter{Delo z datotekami}
+
+\section{Zakaj pisati v datoteke in brati iz njih?}
+
+Programi, ki smo jih napisali do zdaj, so podatke hranili le za čas njihovega izvajanja v t.i. \emph{delovnem pomnilniku}. Ko se je nek program končal, so ti podatki izginili in ko smo program ponovno zagnali, smo morali te podatke ponovno zgenerirati, npr. tako, da smo jih prebrali od uporabnika (če smo bolj natančni, so podatki izginili, ko smo resetirali okolje IDLE npr. z zagonom drugega ali istega programa). Ko smo torej dopolnjevali telefonski imenik z novimi vnosi, so vsi ti vnosi ob končanju programa izginili. To običajno predstavlja problem zaradi več razlogov:
+\begin{itemize}
+    \item Ko se program neha izvajati, podatki izginejo. V primeru imenika se ta torej ob vsakem ponovnem zagonu programa resetira na začetno, npr. prazno, vsebino.
+    \item Nimamo varnostnih kopij podatkov. Če se npr. telefon, ki uporablja naš imenik, ugasne, moramo celotno vsebino imenika ustvariti od začetka.
+    \item Podatkov, ki smo jih ustvarili v enem programu, ne moremo oziroma težko uporabljamo v drugih programih. 
+\end{itemize}
+Na srečo lahko podatke v svojih programih iz delovnega pomnilnika oziroma iz vsebine spremenljivk, kadarkoli shranimo v t.i. \emph{trajni pomnilnik} oziroma po domače na \emph{disk}. S tem omogočimo njihovo trajno hrambo, kar pomeni, da lahko do teh podatkov pridemo tudi po zaključku izvajanja programa, na disku podatki ostanejo tudi po izklopu računalnika, do njih pa lahko pridemo tudi iz drugih programov. 
+
+Kako pa podatke shranimo na disk? Podobno, kot smo do zdaj na disk shranjevali naše programe v obliki datotek s končnico \texttt{py}, lahko v (druge) datoteke shranjujemo tudi podatke, s katerimi delamo. 
+
+Tako shranjene datoteke lahko kasneje v svojih programih preberemo in s tem \emph{obnovimo} stanje svojega delovnega pomnilnika oziroma določimo vrednosti spremenljivk na podlagi vsebine datoteke. Dodatna prednost tega je to, da se nam zdaj ni treba več zanašati na vnos podatkov s strani uporabnika, ampak lahko podatke, ki jih želimo obdelati, v svoje programe preberemo kar iz datotek. Če bi npr. želeli pregledati podatke o povprečnih mesečnih plačah v Sloveniji, najpogostejših imenih ali inflaciji, bi te lahko prenesli iz spletne strani Statističnega urada republike Slovenije (SURS, \url{https://www.stat.si/statweb}), jih v svojem programu prebrali in ustrezno obdelali. V tem poglavju si bomo pogledali kako podatke iz datoteke prebrati in kako v datoteko podatke zapisati.
+
+\section{Kaj je datoteka?}
+
+Datoteke predstavljajo osnovni način zapisovanja podatkov na disku (ali na kakšnem drugem mediju). Datoteke predstavljajo trajno hrambo podatkov, omogočajo prenašanje podatkov med različnimi uporabniki in lahko vsebujejo različne tipe podatkov od teksta, besedil, slik in filmov, do datotek, ki jih operacijskih sistem uporablja za svoje delovanje. Ponavadi tip datoteke označuje njena končnica. Programi v Pythonu na primer uporabljajo končinco \texttt{py}, slike pa končnice kot \texttt{jpg}, \texttt{png} ali \texttt{gif}. 
+
+V grobem lahko datoteke ločimo v dve skupini, in sicer \emph{tekstovne datoteke} in \emph{binarne datoteke}. V obeh primerih vsebino datoteke predstavlja zaporedje števil, ki si jih lahko v primeru tekstovnih datotek interpretiramo kot zaporedje znakov oziroma nek (neoblikovan) tekst. Primer tekstovne datoteke je recimo datoteka s končnico \texttt{py} ali datoteka s končnico \texttt{txt}. Za tekstovne datoteke velja, da jih lahko odpremo z beležnico ali beležnici podobnimi orodji (npr. \emph{Notepad++}) in je njihova vsebina bolj ali manj berljiva. Kaj pa binarne datoteke? V skupino binarnih datotek uvrščamo vse ostalo, npr. slike, filme in oblikovana besedila. Če poskusite z beležnico odpreti datoteko s končnico \texttt{docx} (besedilo oblikovano v orodju Microsoft Word), boste hitro videli, da to ni tekstovna datoteka. Tako kot pri tekstovnih datotekah je zapis s števili uporabljen tudi pri binarnih datotekah. Različna je le interpretacija teh števil. Medtem, ko lahko vsebino tekstovnih datotek orodja, kot je beležnica, enostavno dekodirajo kot zaporedje znakov, potrebujemo za binarne datoteke druga orodja oziroma programe, ki znajo njihovo vsebino dekodirati, glede na tip zapisa. Ena orodja pretvarjajo številke v slike, druga v filme, tretja v oblikovano besedilo. Katero orodje bo posamezno datoteko ob dvojnem kliku nanju odprlo, določa njena končnica. Če se končnica datoteke ne ujema z njeno vsebino, bo orodje vrnilo napako ali pa v najboljšem primeru prikazalo nekaj nenavadnega, podobno kot če datoteko s končnico \texttt{docx} odpremo z beležnico. 
+
+\section{Tekstovne datoteke}
+Tekstovne datoteke torej vsebujejo neoblikovan tekst, ki lahko predstavlja na primer neko besedilo, program v Pythonu ali pa podatke, ki smo jih zgenerirali tekom delovanja našega programa. V okviru spoznavanja osnov programiranja se bomo neposredno ukvarjali zgolj s tekstovnimi datotekami. 
+
+\section{Odpiranje datoteke}
+
+Če želimo neko datoteko v našem programu prebrati ali vanjo pisati, jo moramo najprej seveda odpreti. To lahko naredimo z vgrajeno funkcijo \texttt{open}, ki ji bomo za začetek podali zgolj ime datoteke, do katere želimo dostopati. Naredimo tekstovno datoteko \texttt{stevila.txt} s sledečo vsebino\footnote{Datoteko naredimo tako, da odpremo beležnico, vpišemo vsebino datoteke in datoteko shranimo.}:
+\begin{lstlisting}[showstringspaces=false,numbers=left]
+4
+5.6
+2
+100
+15
+\end{lstlisting}
+Datoteko shranimo v mapo kamor pač najpogosteje shranjujemo svoje datoteke. Zdaj jo poskusimo odpreti v Pythonu:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> open('stevila.txt')
+FileNotFoundError: [Errno 2] No such file or directory: 
+'stevila.txt'
+\end{lstlisting}
+Python pravi, da datoteke ne najde, čeprav smo jo pravkar ustvarili. Problem je v tem, da Python datoteko išče v svoji trenutni delovni mapi, ki očitno ni enaka tisti, kamor smo mi shranili svojo datoteko\footnote{Do trenutne delovne mape lahko pridemo preko funkcije \texttt{getcwd} iz vgrajenega modula \texttt{os}.}. Problem bi lahko rešili na dva načina.
+
+Prvi način je, da Pythonu podamo \emph{absolutno pot} do lokacije datoteke. Pythonu smo do datoteke v gornjem primeru podali t.i. \emph{relativno pot}, kar pomeni, da bo datoteko iskal relativno glede na trenutno delovno mapo. Če je njegova delovna mapa npr. \texttt{C:$\backslash$Windows$\backslash$system32}, pričakuje, da se datoteka nahaja tu. Lahko pa Pythonu podamo celotno oziroma \texttt{absolutno} pot. Če smo datoteko npr. shranili v mapo \texttt{C:$\backslash$Programiranje}, jo zdaj lahko odpremo takole:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> open('C:\\Programiranje\\stevila.txt')
+<_io.TextIOWrapper name='C:\\Programiranje\\stevila.txt' mode='r'
+encoding='cp65001'>
+\end{lstlisting}
+Tokrat smo datoteko le našli. Mimogrede, zakaj je bilo pri podajanju poti potrebno podati dve poševnici (\texttt{$\backslash$}). Kot smo videli v prejšnjem poglavju, poševnico Python obravnava kot začetek posebnega znaka. Z njo lahko npr. zapišemo tabulator (\texttt{$\backslash$t}) ali pa znak za novo vrstico (\texttt{$\backslash$n}). Če bi radi zapisali poševnico pa enostavno napišemo dve poševnici (\texttt{$\backslash\backslash$}).
+
+Drugi način, ki je nekoliko enostavnejši in bolj pogost, je, da pač spremenimo svojo delovno mapo in potem do datoteke podamo relativno pot. To ponavadi v praksi pomeni, da podamo samo ime datoteke (kot v primeru, ko je Python javil napako). Kako pa spremenimo trenutno delovno mapo? Načeloma nam za to ni potrebno posebej skrbeti, saj bo Python ob zagonu programa svojo delovno mapo avtomatsko zamenjal za tisto, v kateri se program nahaja. Če bomo datoteko odprli iz programa, ki se bo nahajal v isti mapi kot datoteka, lahko torej podamo zgolj njeno ime. Če torej naredimo program \texttt{branje.py} in ga shranimo v mapo, v katero smo prej shranili \texttt{stevila.txt}, lahko iz njega datoteko odpremo takole:
+\begin{lstlisting}[language=Python, showstringspaces=false, numbers=left]
+open('stevila.txt')
+\end{lstlisting}
+
+\section{Branje datoteke}
+Datoteko smo torej uspešno odprli, zdaj pa jo bomo poskusili prebrati. Dostopanje do datoteke lahko izvedemo preko objekta, ki ga vrne funkcija \texttt{read}. Če hočemo datoteko prebrati, moramo ta objekt torej shraniti v neko spremenljivko, preko katere ga bomo lahko kasneje še poklicali. Takole:
+\begin{lstlisting}[language=Python, showstringspaces=false, numbers=left]
+f = open('stevila.txt')
+\end{lstlisting}
+Do metod za delo z datoteko lahko zdaj dostopamo preko spremenljivke \texttt{f}. Prvi način za branje datoteke je uporaba metode \texttt{read}, ki prebere datoteko od začetka do konca in vrne niz z njeno vsebino. V našem primeru bo rezultat sledeč:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f.read()
+'4\n5.6\n2\n100\n15'
+\end{lstlisting}
+To je torej zapisano v datoteki. Niz vsebuje števila, ki so med seboj ločena z znaki za novo vrstico \texttt{$\backslash$n}. Če bi želeli imeti lepši izpis, bi stvar izpisali s funkcijo \texttt{print}, ki znake za novo vrstico izpiše kot nove vrstice. Poskusimo:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> print(f.read())
+
+\end{lstlisting}
+Zakaj se tokrat ni nič izpisalo? Poleg tega, da lahko preko spremenljivke \texttt{f} dostopamo do datoteke, le-ta beleži, do kje je bila datoteka že prebrana. Datoteko lahko namreč beremo tudi po kosih (npr. vrstico po vrstico) in si ne želimo, da bi vedno brali npr. samo prvo vrstico, ampak bi radi slej ko prej prišli do konca datoteke. Ker smo našo datoteko že prebrali, jo moramo za ponovno branje ponovno odpreti. Ker je trenutna delovna mapa zdaj že enaka mapi, kjer se nahaja naša datoteka, lahko odpiranje tokrat naredimo kar iz ukazne vrstice:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open('stevila.txt')
+>>> print(f.read())
+4
+5.6
+2
+100
+15
+\end{lstlisting}
+
+Že prej smo omenili, da lahko datoteko beremo tudi po vrsticah. Lahko npr. uporabimo metodo \texttt{readline}:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f.readline()
+''
+\end{lstlisting}
+Tole spet ne deluje, ker se nahajamo na koncu datoteke. Ponovno jo odprimo in preberimo prvo vrstico:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open('stevila.txt')
+>>> f.readline()
+'4\n'
+\end{lstlisting}
+Branje po vrsticah lahko izvedemo tudi z zanko \texttt{for}. Takole:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> for vrstica in f:
+	print(vrstica)
+5.6
+
+2
+
+100
+
+15
+\end{lstlisting}
+Prva vrstica seveda manjka, ker smo jo prej prebrali že z metodo \texttt{readline}. Zakaj se v izpisu pojavlja prazna vrstica? En znak za prazno vrstico je prispevala funkcija \texttt{print}, drugega pa smo dobili iz prebrane datoteke. Znake za prazno vrstico lahko iz niza, ki predstavlja trenutno prebrano vrstico, odstranimo z metodo \texttt{strip}, ki odstrani prazen prostor pred začetkom in po koncu \emph{prave} vsebine niza:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open('stevila.txt')
+>>> for vrstica in f:
+	print(vrstica.strip())
+4
+5.6
+2
+100
+15
+\end{lstlisting}
+
+Zadnja metoda, preko katere lahko preberemo datoteko, je metoda \texttt{readline}, ki podobno kot metoda \texttt{read} prebere celo datoteko, jo razbije po vrsticah in te zapiše v seznam.
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open('stevila.txt')
+>>> f.readlines()
+['4\n', '5.6\n', '2\n', '100\n', '15']
+\end{lstlisting}
+
+Datoteko lahko torej preberemo na več različnih načinov, pri čemer je vsem skupno to, da vsebino datoteke preberejo kot niz. Če bi želeli vsebino obravnavati kot kaj drugega, jo bomo morali torej prej ustrezno obdelati (podobno kot moramo npr. v ustrezen podatkovni tip pretvoriti rezultat funkcije \texttt{input}).
+
+Poskusimo branje na zgledu.
+\begin{zgled}
+Napiši funkcijo \texttt{povprecje}, ki kot argument prejme niz z imenom datoteke in izračuna povprečje števil, ki so shranjena v datoteki. Predpostavljaš lahko, da je vsako število v datoteki zapisano v svoji vrstici. V primeru, da je datoteka prazna, naj funkcija vrne število 0.
+\end{zgled}
+\begin{resitev}
+Funkcijo lahko napišemo s sprehodom čez vrstice, pri čemer vsebino vsake vrstice prištevamo skupni vsoti, ki jo na koncu delimo s številom vrstic. Vsebino vrstice moramo prej seveda očistiti (metoda \texttt{strip}) in pretvoriti v število (funkcija \texttt{float}). 
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+def povprecje(ime_datoteke):
+    f = open(ime_datoteke)
+    s = 0
+    n = 0
+    for vrstica in f:
+        stevilo = float(vrstica.strip())
+        s += stevilo
+        n += 1
+    if n > 0:
+        return s/n
+    else:
+        return 0
+\end{lstlisting}
+\end{resitev}
+
+Kaj pa če bi imeli v eni vrstici več števil? V tem primeru je potrebno vrstico več števil prej še razbiti na posamezna števila. To lahko naredimo z uporabo metode \texttt{strip}, ki ji podamo ustrezno ločilo.
+
+\begin{zgled}
+Napiši funkcijo \texttt{povprecje}, ki kot argument prejme niz z imenom datoteke in izračuna povprečje števil, ki so shranjena v datoteki. Predpostavljaš lahko, da je v posamezni vrstici lahko zapisano več števil, ki so med seboj ločena z vejicami.
+\end{zgled}
+\begin{resitev}
+Tokrat bomo posamezno vrstico z metodo \texttt{split} razbili na seznam, čez katerega se bomo sprehodili z vgezdeno zanko \texttt{for}. Še vedno pa moramo posamezen element tega seznama pred prištevanjem skupni vsoti pretvoriti v število.
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+def povprecje(ime_datoteke):
+    f = open(ime_datoteke)
+    s = 0
+    n = 0
+    for vrstica in f:
+        vrstica = vrstica.strip()
+        for element in vrstica.split(","):
+            stevilo = float(element)
+            s += stevilo    
+            n += 1
+    if n > 0:
+        return s/n
+    else:
+        return 0
+\end{lstlisting}
+\end{resitev}
