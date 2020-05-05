@@ -240,7 +240,7 @@ Tokrat smo dobili drugo napako. Vidimo, da pisanje ni mogoče, ker smo datoteko 
 >>> f
 <_io.TextIOWrapper name='stevila.txt' mode='r' encoding='cp65001'>
 \end{lstlisting}
-Iz izpisa vidimo, da smo odprli datoteko z imenom \texttt{'stevila.txt'} (kar že vemo) in da je \texttt{mode} oziroma način odpiranja datoteke enak vrednosti \texttt{'r'}, ki se nanaša na branje oziroma \emph{read}. Način odpiranja datoteke lahko funkcijo \texttt{open} nastavimo z izbirnim argumentom \texttt{mode}, ki je privzeto enak vrednosti \texttt{'r'}. Če argumenta ne nastavimo, bomo torej datoteko odprli za branje. Pogosto uporabljena načina odpiranja datoteke sta še \texttt{'w'} oziroma pisanje \angl{write} in \texttt{'a'} dodajanje \angl{append}. Pisanju bi lahko, če bi bili nekoliko bolj natančni, rekli tudi prepisovanje, saj bomo s takim načinom pisanja obstoječo datoteko prepisali. Dodajanju bi v podobnem kontekstu lahko rekli dopisovanje, saj bomo obstoječi datoteki vsebino dodajali (na koncu obstoječe vsebine). Pri obeh načinih pa zdaj napake, če datoteka s podanim imenom ne bo obstajala, ne bomo dobili, ampak bo Python to datoteko pač ustvaril. Poskusimo zdaj v datoteko \texttt{'stevila.txt'} zapisati par stevil. Najprej jo odpremo za pisanje:
+Iz izpisa vidimo, da smo odprli datoteko z imenom \texttt{'stevila.txt'} (kar že vemo) in da je \texttt{mode} oziroma način odpiranja datoteke enak vrednosti \texttt{'r'}, ki se nanaša na branje oziroma \emph{read}. Način odpiranja datoteke lahko funkciji \texttt{open} nastavimo z izbirnim argumentom \texttt{mode}, ki je privzeto enak vrednosti \texttt{'r'}. Če argumenta ne nastavimo, bomo torej datoteko odprli za branje. Pogosto uporabljena načina odpiranja datoteke sta še \texttt{'w'} oziroma pisanje \angl{write} in \texttt{'a'} dodajanje \angl{append}. Pisanju bi lahko, če bi bili nekoliko bolj natančni, rekli tudi prepisovanje, saj bomo s takim načinom pisanja obstoječo datoteko prepisali. Dodajanju bi v podobnem kontekstu lahko rekli dopisovanje, saj bomo obstoječi datoteki vsebino dodajali (na koncu obstoječe vsebine). Pri obeh načinih pa zdaj napake, če datoteka s podanim imenom ne bo obstajala, ne bomo dobili, ampak bo Python to datoteko pač ustvaril. Poskusimo zdaj v datoteko \texttt{'stevila.txt'} zapisati par stevil. Najprej jo odpremo za pisanje:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f = open('stevila.txt', mode = 'w')
 \end{lstlisting}
@@ -417,9 +417,15 @@ Kodne tabele \angl{code page} kodiranje ASCII razširjajo z dodatnim bitom, kar 
 
 Kljub temu, da se kodne tabele še vedno uporabljajo, je v današnjem času v večinski rabi standard \emph{unicode}, katerega pomemben predstavnik je kodiranje UTF-8. Pri tem je posamezen znak zapisan z minimalno 8 biti. V primeru, da se v našem besedilu pojavijo znaki, ki ne nastopajo v osnovnem ASCII kodiranju (npr. č), se zapis posameznega znaka razširi (V konkretnem primeru na 16-bitni zapis).
 
-Zakaj se moramo s kodiranjem znakov ukvarjati v okviru osnov programiranja? Pri branju in pisanju datotek je zaželeno, da izrecno podamo kodiranje, ki ga želimo uporabiti. S tem se namreč izognemo težavam z napačno interpretacijo znakov. Če je nekdo zapisal datoteko z uporabo kodiranje UTF-8, mi pa jo poskusimo odpreti s kodiranjem cp1250, bo prišlo do napake ali pa bodo znaki dekodirani narobe. Če kodiranja ne podamo (kot ga nismo podali v primerih zgoraj), bo uporabljeno privzeto kodiranje našega operacijskega sistema. Operacijski sistem Windows pogosto uporablja kodiranje cp1250, Linux pa UTF-8. To lahko povzroči nemalo težave, zato se dogovorimo, da bomo od zdaj naprej pri delu z datotekami vedno podali način kodiranja, ki naj bo kar UTF-8. 
+Zakaj se moramo s kodiranjem znakov ukvarjati v okviru osnov programiranja? Pri branju in pisanju datotek je zaželeno, da izrecno podamo kodiranje, ki ga želimo uporabiti. S tem se namreč izognemo težavam z napačno interpretacijo znakov. Če je nekdo zapisal datoteko z uporabo kodiranje UTF-8, mi pa jo poskusimo odpreti s kodiranjem cp1250, bo prišlo do napake ali pa bodo znaki dekodirani narobe. Če kodiranja ne podamo (kot ga nismo podali v primerih zgoraj), bo uporabljeno privzeto kodiranje našega operacijskega sistema. Poglejmo si še enkrat kaj se skriva za spremenljivko, preko katere odpremo datoteko:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open('stevila.txt')
+>>> f 
+<_io.TextIOWrapper name='stevila.txt' mode='r' encoding='cp65001'>
+\end{lstlisting}
+Kodiranje \angl{encoding} je v konkretnem primeru nastavljeno na \texttt{'cp650010'}, ki predstavlja nekakšen ekvivalent kodiranja UTF-8 v operacijskem sistemu Windows. Operacijski sistem Windows sicer pogosto uporablja kodiranje cp1250, Linux pa UTF-8. Zmešnjava je torej popolna. To lahko povzroči nemalo težav, zato je pri delu z datotekami pomembno, da vedno podamo način kodiranja. Dogovorimo se, da bomo od zdaj naprej pri delu z datotekami vedno podali način kodiranja, ki naj bo kar UTF-8. 
 
-Kodiranje, ki ga želimo uporabiti pri pisanju ali branju datoteke, navedemo pri odpiranju datoteke s funkcijo \texttt{open} preko izbirnega argumenta \texttt{encoding}. Zapišimo datoteko z uporabo kodiranja UTF-8:
+Kodiranje, ki ga želimo uporabiti pri pisanju ali branju datoteke, navedemo pri odpiranju datoteke s funkcijo \texttt{open} preko izbirnega argumenta \texttt{encoding}. Zapišimo datoteko z uporabo kodiranja UTF-8\footnote{Argument \texttt{encoding} bomo nastavili na vrednost \texttt{'utf8'}, \texttt{'utf-8'}, \texttt{'UTF8'} ali \texttt{'UTF-8'}.}:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f = open("posebni_znaki.txt", mode='w', encoding="utf8")
 >>> f.write("čžš")
@@ -449,13 +455,15 @@ Napiši funkciji za branje in shranjevanje telefonskega imenika v in iz datoteke
 Rešitev bo praktično enaka kot v prej, le da bomo pri odpiranju datoteke izbirni argument \texttt{encoding} postavili na vrednost \texttt{'utf8'}.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def shrani_imenik(ime_datoteke, imenik):
+    # pri odpiranju podamo kodiranje datoteke
     f = open(ime_datoteke, mode='w', encoding='utf8')
     for ime, stevilka in imenik.items():
         print(ime, stevilka, sep=',', file=f)
     f.close()
 
 def preberi_imenik(ime_datoteke):
-    f = open(ime_datoteke, encoding='utf8') # dodano kodiranje
+    # pri odpiranju podamo kodiranje datoteke
+    f = open(ime_datoteke, encoding='utf8') 
     imenik = {} # prazen slovar
     for vrstica in f:
         vrstica = vrstica.strip() # odstrani '\n'
