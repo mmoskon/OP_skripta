@@ -46,10 +46,10 @@ Najmanjši element bomo našli tako, da se bomo z zanko \texttt{for} sprehodili 
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
-najmanjsi = seznam[0] # trenutno najmanjsi
+najmanjsi = seznam[0] # trenutno najmanjši
 
-for element in seznam: # sprehod cez elemente
-    if element < najmanjsi: # nasli manjsega?
+for element in seznam: # sprehod čez elemente
+    if element < najmanjsi: # našli manjšega?
         najmanjsi = element # popravimo vrednost
 
 print(najmanjsi)
@@ -61,7 +61,7 @@ Program sicer deluje pravilno, ampak bi ga lahko še nekoliko optimizirali. Tren
 
 Z zanko \texttt{for} se lahko sprehajamo tudi čez sezname, ki jih generira funkcija \texttt{range}. Na tak način se lahko sprehajamo čez vrednosti elementov v določenem razponu. Vsa števila od 0 do vključno števila, ki ga je vnesel uporabnik, bi torej lahko izpisali takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
-n = int(input("Vnesi stevilo: "))
+n = int(input("Vnesi število: "))
 for i in range(n+1):
     print(i)
 \end{lstlisting}
@@ -85,12 +85,12 @@ Najmanjši element bomo našli na podoben način kot prej, le da si moramo tokra
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
-najmanjsi = seznam[0] # trenutno najmanjsi element
+najmanjsi = seznam[0] # trenutno najmanjši element
 najmanjsi_i = 0 # zapomnimo si tudi njegov indeks
 
-for i in range(len(seznam)): # sprehod cez indekse
+for i in range(len(seznam)): # sprehod čez indekse
     element = seznam[i] # preko indeksa do elementa
-    if element < najmanjsi: # nasli manjsega?
+    if element < najmanjsi: # našli manjšega?
         najmanjsi = element # popravimo vrednost
         najmanjsi_i = i # popravimo indeks
 
@@ -110,15 +110,15 @@ Rešitev bo podobna kot prej, le da si bomo indekse pojavitve najmanjšega eleme
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
-najmanjsi = seznam[0] # trenutno najmanjsi element
+najmanjsi = seznam[0] # trenutno najmanjši element
 najmanjsi_i = [0] # v seznam shranimo njegov indeks
 
-for i in range(1, len(seznam)): # sprehod cez indekse
+for i in range(1, len(seznam)): # sprehod čez indekse
     element = seznam[i] # preko indeksa do elementa
-    if element < najmanjsi: # nasli manjsega?
+    if element < najmanjsi: # našli manjšega?
         najmanjsi = element # popravimo vrednost
         najmanjsi_i = [i] # resetiramo seznam indeksov
-    elif element == najmanjsi: # nasli enako majhnega
+    elif element == najmanjsi: # našli enako majhnega
         najmanjsi_i.append(i) # dodamo indeks
 
 print(najmanjsi)
@@ -210,19 +210,19 @@ Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta 
 Program bo strukturiran zelo podoben kot v primeru zanke \texttt{while}, le da bomo tokrat razpon števil, čez katera se sprehaja kandidat, ustvarili z uporabo funkcije \texttt{range}. 
 
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-st1 = int(input("Vnesi prvo stevilo: "))
-st2 = int(input("Vnesi drugo stevilo: "))
+st1 = int(input("Vnesi prvo število: "))
+st2 = int(input("Vnesi drugo število: "))
 
-# sprehod od 2 do manjsega od obeh stevil
-# desni del intervala naj bo vkljucen, zato pristejemo 1
+# sprehod od 2 do manjšega od obeh števil
+# desni del intervala naj bo vključen, zato prištejemo 1
 for delitelj in range(2,min(st1, st2)+1):
-    # ali delitelj deli obe stevili?
+    # ali delitelj deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
-        print("Stevili nista tuji")
+        print("Števili nista tuji")
         break # lahko prenehamo z iskanjem
 else: # ali se je zanka odvrtela do konca
     # zanke nismo prekinili s stavkom break
-    print("Stevili sta tuji")
+    print("Števili sta tuji")
 \end{lstlisting}
 \end{resitev}
 
@@ -260,7 +260,7 @@ Napiši program, ki od uporabnika prebere celo število in izpiše poštevanko �
 \begin{resitev}
 Števila od 1 do podanega števila \texttt{n} bomo najprej množili z 1, potem z 2, potem s 3 in tako naprej, dokler ne pridemo do števila \texttt{n}. To lahko enostavno rešimo z uporaba ugnezdene zanke.
 \begin{lstlisting}[language=Python, showstringspaces=false]
-n = int(input("Vnesi stevilo: "))
+n = int(input("Vnesi število: "))
 
 for i in range(1, n+1): # zunanja zanka
     for j in range(1, n+1): # notranja zanka
@@ -313,18 +313,18 @@ Napiši program, ki od uporabnika prebere celo število in izpiše vsa števila,
 \begin{resitev}
 Kandidati, ki jih moramo torej obravnavati, se gibljejo v razponu od števila 1 (ki je vsem številom tuje število) do števila \texttt{n-1}, pri čemer je \texttt{n} število, ki ga je vnesel uporabnik. Kako za posameznega kandidata preverimo, če je tuj številu \texttt{n}? Podobno kot prej -- tako da se sprehodimo od števila 2, do manjšega od obeh števil. Če smo našli kakšnega delitelja, si števili očitno nista tuji.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-n = int(input("Vnesi stevilo: "))
+n = int(input("Vnesi število: "))
 
 for kandidat in range(1, n): # razpon cez kandidate
     # kandidat ne sme imeti nobenega skupnega delitelja
-    # ugnezdimo kodo iz prejsnjih zgledov
+    # ugnezdimo kodo iz prejšnjih zgledov
     st1 = n
     st2 = kandidat
     
-    # sprehod od 2 do manjsega od obeh stevil
-    # desni del intervala naj bo vkljucen, zato pristejemo 1
+    # sprehod od 2 do manjšega od obeh števil
+    # desni del intervala naj bo vključen, zato prištejemo 1
     for delitelj in range(2,min(st1, st2)+1):
-        # ali delitelj deli obe stevili?
+        # ali delitelj deli obe števili?
         if st1 % delitelj == 0 and st2 % delitelj == 0:
             break # lahko prekinemo ugnezdeno zanko
     else: # ali se je ugnezdena zanka odvrtela do konca
@@ -364,7 +364,7 @@ Zaenkrat nas bosta zanimala predvsem argumenta \texttt{sep} in \texttt{end}. Fun
 1 2 3
 >>> print(1,2,3, sep='') # brez presledka
 123
->>>print(1,2,3, sep='+++') # poljuben niz kot locilo
+>>>print(1,2,3, sep='+++') # poljuben niz kot ločilo
 1+++2+++3
 \end{lstlisting}
 Izbirni argument \texttt{end} podaja niz, ki naj se vstavi na koncu izpisa. Privzeto je argument \texttt{end} nastavljen na znak \texttt{'$\backslash$n'} (\texttt{end='$\backslash$n'}), ki predstavlja znak za novo vrstico \angl{line feed}. Tudi tega lahko postavimo na kakšno drugo vrednost. 
@@ -378,7 +378,7 @@ Napiši program, ki od uporabnika prebere celo število in izpiše poštevanko �
 Rešitev bo podobna kot prej, le da se tokrat ne bomo pomikali v novo vrstico po vsakem izpisu. To lahko naredimo tako, da opcijski argument  \texttt{end} nastavimo na znak \texttt{' '}.
 
 \begin{lstlisting}[language=Python, showstringspaces=false]
-n = int(input("Vnesi stevilo: "))
+n = int(input("Vnesi število: "))
 
 for i in range(1, n+1): # zunanja zanka
     for j in range(1, n+1): # notranja zanka

@@ -171,16 +171,16 @@ delitelj = 2 # začetna vrednost kandidata
 nasli = False 
 
 while delitelj <= min(st1, st2): # kandidat gre do manjsega
-    # ali kandidat deli obe stevili?
+    # ali kandidat deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
-        print("Stevili nista tuji")
+        print("Števili nista tuji")
         nasli = True # popravimo predpostavko
         break # lahko prenehamo z iskanjem
     delitelj += 1 
 
-# ce do tu skupnega delitelja nismo nasli, potem ga ni        
+# če do tu skupnega delitelja nismo našli, potem ga ni        
 if nasli == False: 
-    print("Stevili sta tuji")
+    print("Števili sta tuji")
 \end{lstlisting}
 \end{resitev}
 
@@ -191,7 +191,7 @@ while pogoj:
     # telo zanke
     ...
 else:
-    # ko pogoj ni vec izpolnjen
+    # ko pogoj ni več izpolnjen
     ...
 # nadaljevanje programa
 ...
@@ -206,7 +206,7 @@ while pogoj:
     if dodaten_pogoj:
         break # prekini izvajanje zanke
 else: # samo v primeru, ko zanka ni bila prekinjena z break
-    # ko pogoj ni vec izpolnjen
+    # ko pogoj ni več izpolnjen
     ...
 # nadaljevanje programa
 ...
@@ -226,19 +226,19 @@ Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta 
 \begin{resitev}
 Del programa, kjer izpisujemo, da si števili nista tuji, bo ostal bolj ali manj nespremenjen. Skrajšamo pa lahko tiste dela programa, ki jih potrebujemo za izpis, da sta si števili tuji. Števili sta si tuji, ko nismo našli nobenega skupnega delitelja. To se zgodi takrat, ko se je zanka \texttt{while} \emph{odvrtela} do konca in nismo našli nobenega skupnega delitelja, torej je posledično nismo prekinili s stavkom \texttt{break}. Če zanko \texttt{while} dopolnimo z vejo \texttt{else}, se bo ta izvedla natanko takrat, ko zanka ni bila prekinjena s stavkom \texttt{break}, torej takrat, ko nismo našli nobenega skupnega delitelja. Znotraj veje \texttt{else} lahko torej zapišemo, da sta si števili tuji. Na tak način se lahko znebimo spremenljivke \texttt{nasli} in naredimo program krajši in bistveno bolj pregleden.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-st1 = int(input("Vnesi prvo stevilo: "))
-st2 = int(input("Vnesi drugo stevilo: "))
+st1 = int(input("Vnesi prvo število: "))
+st2 = int(input("Vnesi drugo število: "))
 
-delitelj = 2 # zacetna vrednost kandidata
+delitelj = 2 # začetna vrednost kandidata
 
-while delitelj <= min(st1, st2): # kandidat gre do manjsega
-    # ali kandidat deli obe stevili?
+while delitelj <= min(st1, st2): # kandidat gre do manjšega
+    # ali kandidat deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
-        print("Stevili nista tuji")
+        print("Števili nista tuji")
         break # lahko prenehamo z iskanjem
     delitelj += 1 
 else: # ali se je zanka odvrtela do konca
     # zanke nismo prekinili s stavkom break
-    print("Stevili sta tuji")
+    print("Števili sta tuji")
 \end{lstlisting}
 \end{resitev}

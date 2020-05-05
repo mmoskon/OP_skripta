@@ -25,8 +25,8 @@ Spodnji primer predstavlja definicijo enostavne funkcije, ki sešteje vrednosti 
 def sestej(a, b):
     c = a + b
     print(c)
-    # tale komentar je se del funkcije
-# tale komentar ni vec del funkcije
+    # tale komentar je še del funkcije
+# tale komentar ni več del funkcije
 \end{lstlisting}
 
 Kaj pa se zgodi, ko program s tole definicijo poženemo. Navidez se ne zgodi nič, če pa v ukazno vrstico napišemo ime pravkar definirane funkcije, bi moral Python izpisati nekaj podobnega temu:
@@ -117,11 +117,11 @@ Iz globalnega imenskega prostora do lokalnih imenskih prostorov uporabljenih fun
 
 Napišimo malo razširjen program, ki bo seštel vrednosti dveh seznamov. Pri tem si bomo pomagali z definicijo dveh funkcij.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-def sestej(a, b): # sestej in izpisi
+def sestej(a, b): # seštej in izpiši
     c = a + b
     print(c)
 
-def sestej_seznama(a,b): # sestej istolezne elemente
+def sestej_seznama(a,b): # seštej istoležne elemente
     for i in range(len(a)):
         sestej(a[i], b[i])
 
@@ -165,20 +165,20 @@ Kaj pa če bi želeli, da naša funkcija vrne nekaj uporabnega? V tem primeru mo
 
 Spremenimo funkcijo \texttt{sestej}, tako da bo vsoto dveh števil vračala in ne izpisovala.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-def sestej(a, b): # sestej in izpisi
+def sestej(a, b): # seštej in izpiši
     c = a + b
     return c
 \end{lstlisting}
 Z uporabo stavka \texttt{return} smo torej povedali, da želimo, da naša funkcija vrne vrednost spremenljivke \texttt{c}. Ali nismo tega naredili že prej? Ne. V prejšnji različici je funkcija vrednost spremenjivke \texttt{c} zgolj izpisovala. Ko se je funkcija končala, je njen lokalni imenski prostor izginil in z njim tudi vrednost spremenljivke \texttt{c}. Pogosto pa želimo rezultate funkcij uporabiti tudi v drugih delih naših programov (npr. ko uporabljamo funkcijo \texttt{input} želimo z uporabnikovim vnosom ponavadi nekaj uporabnega narediti in ga ne zgolj izpisati na zaslon). To lahko dosežemo s stavkom return. Kaj se zgodi, če funkcijo v našem programu zdaj še pokličemo. Razširimo program na sledeč način.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-def sestej(a, b): # sestej in vrni
+def sestej(a, b): # seštej in vrni
     c = a + b
     return c
 sestej(4,5)
 \end{lstlisting}
 Program tokrat ne izpiše ničesar. Zakaj ne? Ker tega od njega nismo nikjer zahtevali. Kaj torej naredi klic funkcije \texttt{sestej}. V konkretnem primeru nič uporabnega, saj izračuna vsoto števil 4 in 5, rezultat shrani v spremenljivko \texttt{c} in ko se funkcija zaključi, le-ta izgine, saj nanj ne kaže nobeno ime več. Kako pa bi lahko dobljeno vrednost uporabili še kje druge v našem programu? Podobno kot pri uporabi funkcije \texttt{input} -- tako, da bi rezultat funkcije priredili spremenljivki.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-def sestej(a, b): # sestej in vrni
+def sestej(a, b): # seštej in vrni
     c = a + b
     return c
 rezultat = sestej(4,5)
@@ -201,10 +201,10 @@ Napiši funkcijo, ki kot argument prejme celo število in izpiše, če je podano
 def prastevilo(stevilo):
     for i in range(2,stevilo): # razpon preiskovanja
         if stevilo % i == 0:
-            print(stevilo, "ni prastevilo")
+            print(stevilo, "ni praštevilo")
             break # dovolj je, da najdemo enega delitelja
-    else: # ce se je zanka odvrtela do konca
-        print(stevilo, "je prastevilo")   
+    else: # če se je zanka odvrtela do konca
+        print(stevilo, "je praštevilo")   
 \end{lstlisting}
 \end{resitev}
 Podoben program smo napisali že, ko smo se srečali z zanko \texttt{for}, tako da ga posebej ne bomo komentirali. Poskusimo zdaj program spremeniti, tako da ne bo ničesar izpisoval, ampak bo uporabniku podal povratno informacijo o tem, če je število praštevilo ali ne.
@@ -230,7 +230,7 @@ Napiši funkcijo, ki kot argument prejme celo število in izpiše vsa praštevil
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prastevila(stevilo):
     for kandidat in range(2,stevilo+1): # kandidati
-        if prastevilo(kandidat): # ali je prastevilo
+        if prastevilo(kandidat): # ali je praštevilo
             print(kandidat)
 \end{lstlisting}
 \end{resitev}

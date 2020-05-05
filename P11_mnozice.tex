@@ -85,7 +85,7 @@ Najprej bomo niz pretvorili v množico s funkcijo \texttt{set}. Ker množica pos
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def razlicni(niz):
     mnozica = set(niz) # odstranitev duplikatov
-    return len(mnozica) # moc mnozice
+    return len(mnozica) # moč množice
 \end{lstlisting}
 \end{resitev}
 
@@ -229,7 +229,7 @@ Napiši funkcijo \texttt{prijatelji\_od}, ki kot argument sprejme omrežje prija
 Kot smo videli že prej, je zaradi izbrane predstavitve omrežja, iskanje prijateljev podane osebe enostavno. Preveriti moramo samo, če oseba v omrežju obstaja.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prijatelji_od(prijatelji, oseba):
-    if oseba not in prijatelji: # ali je oseba v omrezju?
+    if oseba not in prijatelji: # ali je oseba v omrežju?
         print("Ta oseba ne obstaja!")
     else:
         return prijatelji[oseba]
@@ -243,8 +243,8 @@ Napiši funkcijo \texttt{dodaj\_osebo}, ki kot argument sprejme omrežje prijate
 V omrežje bomo torej dodali novo osebo (nov ključ), na katerega bomo vezali prazno množico. Smiselno je tudi, da preverimo, če oseba v omrežju že obstaja. Ali mora funkcija vračati spremenjen slovar? Odgovor je seveda ne, saj je slovar spremenljiv podatkovni tip in se bo spreminjanje tega znotraj funkcije odražalo tudi izven funkcije.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def dodaj_osebo(prijatelji, oseba):
-    if oseba not in prijatelji: # dodaj samo, ce je se ni
-        prijatelji[oseba] = set() # prazna mnozica
+    if oseba not in prijatelji: # dodaj samo, če je še ni
+        prijatelji[oseba] = set() # prazna množica
 \end{lstlisting}
 \end{resitev}
 
@@ -260,14 +260,14 @@ def spoprijatelji(prijatelji, oseba1, oseba2):
     if oseba2 not in prijatelji:
         dodaj_osebo(prijatelji, oseba2) 
     
-    # spoprijatelji samo, ce se nista prijatelja
+    # spoprijatelji samo, če še nista prijatelja
     if oseba2 not in prijatelji[oseba1]:
         # dodaj oseba2 med prijatelje oseba1
         prijatelji[oseba1].add(oseba2)
         # dodaj oseba1 med prijatelje oseba2
         prijatelji[oseba2].add(oseba1)
     else:
-        print("Osebi sta ze v prijateljstvu")
+        print("Osebi sta že v prijateljstvu")
 \end{lstlisting}
 Primer klica:
 \begin{lstlisting}[language=Python, showstringspaces=false]
@@ -279,7 +279,7 @@ Primer klica:
  'Peter': {'Janez', 'Ana', 'Polona'}, 
  'Polona': {'Janez', 'Peter', 'Ana', 'Nejc'}}
 >>> spoprijatelji(prijatelji, 'Ana', 'Nejc')
-Osebi sta ze v prijateljstvu
+Osebi sta že v prijateljstvu
 \end{lstlisting}
 
 \end{resitev}
@@ -292,12 +292,12 @@ Pri skreganju bomo prvo osebo odstranili iz množice prijateljev druge osebe in 
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def skregaj(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
-        print("Ene izmed oseb ni v omrezju!")
-        return # koncaj in ne vrni nic
+        print("Ene izmed oseb ni v omrežju!")
+        return # končaj in ne vrni nič
     # ce oseba1 ni prijatelj oseba2, velja tudi obratno
     if oseba1 not in prijatelji[oseba2]:    
         print("Osebi nista prijatelja!")
-        return # koncaj in ne vrni nic
+        return # končaj in ne vrni nič
     
     # odstrani prijateljstvo
     prijatelji[oseba1].remove(oseba2)
@@ -328,8 +328,8 @@ def najbolj_popularni(prijatelji):
     naj_oseba = ""
     naj_prijateljev = 0
     
-    for oseba in prijatelji: # sprehod cez kljuce
-        prijateljev = len(prijatelji[oseba]) # stevilo prijateljev
+    for oseba in prijatelji: # sprehod čez ključe
+        prijateljev = len(prijatelji[oseba]) # število prijateljev
         if prijateljev > naj_prijateljev:
             naj_oseba = oseba
             naj_prijateljev = prijateljev
@@ -347,8 +347,8 @@ def najbolj_popularni(prijatelji):
     naj_osebe = []
     naj_prijateljev = 0
     
-    for oseba in prijatelji: # sprehod cez kljuce
-        prijateljev = len(prijatelji[oseba]) # stevilo prijateljev
+    for oseba in prijatelji: # sprehod čez ključe
+        prijateljev = len(prijatelji[oseba]) # število prijateljev
         if prijateljev > naj_prijateljev:
             naj_osebe = [oseba]
             naj_prijateljev = prijateljev
@@ -362,8 +362,6 @@ Primer klica:
 >>> najbolj_popularni(prijatelji)
 ['Janez', 'Polona']
 \end{lstlisting}
-
-
 \end{resitev}
 
 \begin{zgled}
@@ -374,21 +372,21 @@ V tej rešitvi bomo povadili uporabo preseka (skupni prijatelji), unije (vsaj od
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def skupni(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
-        print("Vsaj ene osebe ni v omrezju!")
+        print("Vsaj ene osebe ni v omrežju!")
     else:
         # presek
         return prijatelji[oseba1] & prijatelji[oseba2]
 
 def vsaj_od_enega(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
-        print("Vsaj ene osebe ni v omrezju!")
+        print("Vsaj ene osebe ni v omrežju!")
     else:
         # unija
         return prijatelji[oseba1] | prijatelji[oseba2]
 
 def brez_njegovih(prijatelji, oseba1, oseba2):
     if oseba1 not in prijatelji or oseba2 not in prijatelji:
-        print("Vsaj ene osebe ni v omrezju!")
+        print("Vsaj ene osebe ni v omrežju!")
     else:
         # razlika
         return prijatelji[oseba1] - prijatelji[oseba2]
@@ -398,7 +396,7 @@ Primer klica:
 >>> skupni(prijatelji, 'Ana', 'Janez')
 {'Peter', 'Polona'}
 >>> skupni(prijatelji, 'Ana', 'Jan')
-Vsaj ene osebe ni v omrezju!
+Vsaj ene osebe ni v omrežju!
 >>> vsaj_od_enega(prijatelji, 'Ana', 'Janez')
 {'Janez', 'Peter', 'Ana', 'Nejc', 'Polona'}
 >>> brez_njegovih(prijatelji, 'Ana', 'Janez')
@@ -408,15 +406,15 @@ Vsaj ene osebe ni v omrezju!
 
 
 \begin{zgled}
-Napiši funkcijo \texttt{prijatelji\_prijateljev}, ki kot argumenta sprejme omrezje prijateljev in ime osebe ter vrne prijatelje prijateljev podane osebe, pri čemer naj izpusti prijatelje podane osebe ter podano osebo samo.
+Napiši funkcijo \texttt{prijatelji\_prijateljev}, ki kot argumenta sprejme omrežje prijateljev in ime osebe ter vrne prijatelje prijateljev podane osebe, pri čemer naj izpusti prijatelje podane osebe ter podano osebo samo.
 \end{zgled}
 \begin{resitev}
 Tokrat se bomo sprehodili čez prijatelje podane osebe z uporabo zanke \texttt{for} ter s prijatelji prijateljev dopolnili na začetku prazno množico. Potem bomo iz te množice izločili prijatelje podane osebe in osebo samo.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def prijatelji_prijateljev(prijatelji, oseba):
-    vsi_pp = set() #prijatelji prijateljev je na zacetku prazna
+    vsi_pp = set() #prijatelji prijateljev je na začetku prazna
     
-    # sprehod cez prijatelje osebe
+    # sprehod čez prijatelje osebe
     for prijatelj in prijatelji[oseba]:
         pp = prijatelji[prijatelj]
         vsi_pp |= pp # z unijo dodam prijatelje prijatelja

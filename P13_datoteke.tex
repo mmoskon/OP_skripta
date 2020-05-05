@@ -328,9 +328,9 @@ from random import randint
 def nakljucna(ime_datoteke, n):
     f = open(ime_datoteke, mode='w') # odpri za prepisovanje
     for i in range(1,n+1): # zanko ponovimo n-krat
-        st = randint(1,100) # nakljucno stevilo od 1 do 100
-        f.write(str(st)) # stevilo moramo pretvoriti v niz
-        if i % 10 == 0: # ali je cas za novo vrstico
+        st = randint(1,100) # naključno število od 1 do 100
+        f.write(str(st)) # število moramo pretvoriti v niz
+        if i % 10 == 0: # ali je čas za novo vrstico
             f.write('\n')
         else:
             f.write(' ')
@@ -351,8 +351,8 @@ from random import randint
 def nakljucna(ime_datoteke, n):
     f = open(ime_datoteke, mode='w') # odpri za prepisovanje
     for i in range(1,n+1): # zanko ponovimo n-krat
-        st = randint(1,100) # nakljucno stevilo od 1 do 100
-        if i % 10 == 0: # ali je cas za novo vrstico
+        st = randint(1,100) # naključno stevilo od 1 do 100
+        if i % 10 == 0: # ali je čas za novo vrstico
             print(st, file=f) # nova vrstica
         else:
             print(st, end=' ', file=f) # presledek 
@@ -411,7 +411,7 @@ Preslikavo lahko naredimo tudi v drugo smer (iz kode v znak), in sicer z uporabo
 'A'
 \end{lstlisting}
 
-Koda posameznega znaka je torej odvisna od uporabljenega kodiranja. Izkaže se, da so osnovni znaki ne glede na uporabljeno kodiranje zakodirani na enak način. Pri kodiranju teh se namreč uporablja 7-bitni standard ASCII \angl{ American Standard Code for Information Interchange}. Za kodiranje posameznega znaka lahko torej uporabimo 7 bitov, kar pomeni, da lahko zakodiramo $2^7=128$ različnih znakov. Pri tem je 32 kod rezerviranih za posebne znake (med te sodi npr. tudi znak za novo vrstico), torej nam ostane 96 kod, s katerimi moramo predstaviti male črke, velike črke, številke in različna ločila ter simbole. Izkaže se, da teh kod zelo hitro zmanjka in zato služijo zgolj predstavitvi osnovnih znakov in črk angleške abecede. Kaj pa naši šumnik, nemški preglasi in kitajske pismenke? Za predstavitev teh moramo uporabiti razširitrve kodiranja ASCII. Omenimo dve razširitvi, ki sta v pogosti uporabi v današnjem času. 
+Koda posameznega znaka je torej odvisna od uporabljenega kodiranja. Izkaže se, da so osnovni znaki ne glede na uporabljeno kodiranje zakodirani na enak način. Pri kodiranju teh se namreč uporablja 7-bitni standard ASCII \angl{ American Standard Code for Information Interchange}. Za kodiranje posameznega znaka lahko torej uporabimo 7 bitov, kar pomeni, da lahko zakodiramo $2^7=128$ različnih znakov. Pri tem je 32 kod rezerviranih za posebne znake (med te sodi npr. tudi znak za novo vrstico), torej nam ostane 96 kod, s katerimi moramo predstaviti male črke, velike črke, številke in različna ločila ter simbole. Izkaže se, da teh kod zelo hitro zmanjka in zato služijo zgolj predstavitvi osnovnih znakov in črk angleške abecede. Kaj pa naši šumnik, nemški preglasi in kitajske pismenke? Za predstavitev teh moramo uporabiti razširitve kodiranja ASCII. Omenimo dve razširitvi, ki sta v pogosti uporabi v današnjem času. 
 
 Kodne tabele \angl{code page} kodiranje ASCII razširjajo z dodatnim bitom, kar pomeni, da lahko z njihovo uporabo predstavimo dodatnih 128 znakov. To je sicer dovolj za znake č, ž in š, kaj pa za kitajske pismenke? Dodatnih kod seveda ni dovolj, da bi predstavili še te, poleg njih pa mogoče še črke iz cirilice, korejski hangul in še kaj drugega. Iz tega razloga se v različnih delih sveta uporabljajo različne kodne tabele. Pri nas je npr. v uporabi centralno-evropska kodna tabela \texttt{cp1250}, s katero lahko predstavimo tudi znake č, ž in š. Znak \texttt{č} je v tej kodni tabeli določen s kodo \texttt{232}. V Nemčiji uporabljajo zahodno-evropsko kodno tabelo \texttt{cp1252}, s katero sicer ne moremo predstaviti šumnikov, lahko pa predstavimo preglase.  V tej kodni tabeli koda \texttt{232} predstavlja znak \texttt{è}, kar ste mogoče že kdaj opazili, npr. pri predvajanju podnapisov.
 

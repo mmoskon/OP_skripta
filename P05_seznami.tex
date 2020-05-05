@@ -2,7 +2,7 @@
 
 \section{Sekvenčni podatkovni tipi}
 
-Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (en) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnati ločeno, kar nas bo pripeljalo do ogrome količine nepregledne \emph{copy--paste} kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bomo imeli (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Dodatna prednost sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
+Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (en) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnavati ločeno, kar nas bo pripeljalo do ogromne količine nepregledne \emph{copy--paste} kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bomo imeli (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnavati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Dodatna prednost sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
 
 \section{Kaj so seznami?}
 
@@ -16,7 +16,7 @@ Seznam, ki vsebuje približno naključne dolžine skokov smučarjev skakalcev pa
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> dolzine = [121.4, 143.1, 105.2, 99.3]
 \end{lstlisting}
-V isti seznam bi lahko zapisali tudi različne podatkovne tipe, npr. 3 cela števila, 1 decimalko, 5 nizov itd., čeprav v praksi tega ne srečamo pogosto. Ponavadi v sezname shranjujejmo podatke, ki pripadajo istemu podatkovnemu tipu, saj se ti podatke nanašajo na ponavljajoče izvajanje npr. določene meritve. Na koncu lahko zato z uporabo seznamov izvedemo določene statistike, npr. kdo je skočil najdlje, kakšna je povprečna dolžina skoka, koliko ljudi je skočilo itd.
+V isti seznam bi lahko zapisali tudi različne podatkovne tipe, npr. 3 cela števila, 1 decimalko, 5 nizov itd., čeprav v praksi tega ne srečamo pogosto. Ponavadi v sezname shranjujemo podatke, ki pripadajo istemu podatkovnemu tipu, saj se ti podatke nanašajo na ponavljajoče izvajanje npr. določene meritve. Na koncu lahko zato z uporabo seznamov izvedemo določene statistike, npr. kdo je skočil najdlje, kakšna je povprečna dolžina skoka, koliko ljudi je skočilo itd.
 
 \section{Indeksiranje seznamov}
 Seznami so urejeni. To pomeni, da je vrstni red, v katerem naštejemo elemente seznama, pomemben. Vsak element v seznamu ima namreč svoj \emph{indeks}. Pri tem se indeksiranje začne z najmanjšim pozitivnim številom, ki v računalništvu ni 1, ampak 0. Indeksi bodo torej šli od števila 0 do dolžine seznama -- 1. V primeru zgoraj definiranega seznama \texttt{dolzine} gredo torej indeksi od 0 do 3, saj seznam vsebuje 4 elemente:
@@ -50,9 +50,6 @@ Funkcijo lahko torej uporabimo pri indeksiranju, kadar ne vemo točno, koliko el
 Zakaj moramo od dolžine seznama odšteti 1? Ker smo začeli šteti s številom 0, bo zadnji indeks enak dolžini seznama -- 1. Kaj pa če vseeno poskusimo indeksirati po indeksu, ki ga v seznamu ni? V tem primeru seveda dobimo napako:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> dolzine[len(dolzine)]
-Traceback (most recent call last):
-  File "<pyshell#16>", line 1, in <module>
-    dolzine[len(dolzine)]
 IndexError: list index out of range
 \end{lstlisting}
 Kot smo do zdaj že večkrat videli ima Python veliko lepih lastnosti. Ena izmed njih je tudi ta, da lahko uporabljamo negativno indeksiranje, pri čemer indeks -1 predstavlja zadnji element, indeks -2 predzadnji in tako naprej. Dolžine skokov imajo torej tudi negativne indekse:
@@ -90,9 +87,6 @@ Nad seznami lahko uporabimo različne operatorje, ki smo jih do zdaj uporabljali
 Ne moremo pa seznamom prišteti nečesa, kar ni seznam, npr. števila:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> [1,2,3]+4
-Traceback (most recent call last):
-  File "<pyshell#20>", line 1, in <module>
-    [1,2,3]+4
 TypeError: can only concatenate list (not "int") to list
 \end{lstlisting}
 Lahko pa sezname množimo s celimi števili:
@@ -103,9 +97,6 @@ Lahko pa sezname množimo s celimi števili:
 S čim drugim jih ni smiselno množiti, zato Python tega ne podpira:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> [1,2,3]*[4,5,6]
-Traceback (most recent call last):
-  File "<pyshell#22>", line 1, in <module>
-    [1,2,3]*[4,5,6]
 TypeError: can't multiply sequence by non-int of type 'list'
 \end{lstlisting}
 
@@ -223,13 +214,13 @@ Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj 
 \begin{resitev}
 Sodnikova števila lahko beremo preko funkcije \texttt{input}, katere rezultat moramo pretvoriti v podatkovni tip \texttt{float}, saj so dolžine decimalna števila. Beremo dokler sodnik ne vnese števila 0, medtem pa dolžine dodajamo v seznam. Na koncu izračunamo povprečno dolžino skoka, poleg tega pa izpišemo tudi najdaljši skok. Program je sledeč:
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-dolzine = [] # na zacetku ni nobene dolzine
-d = float(input("Vpisi dolzino: ")) # prvo branje
-while d > 0: # dokler je dolzina veljavna
-    dolzine.append(d) # dodaj dolzino
-    d = float(input("Vpisi dolzino: ")) # ponovno branje
-print("Najdaljsi skok:", max(dolzine))
-print("Povprecna dolzina:", sum(dolzine)/len(dolzine))
+dolzine = [] # na začetku ni nobene dolžine
+d = float(input("Vpiši dolžino: ")) # prvo branje
+while d > 0: # dokler je dolžina veljavna
+    dolzine.append(d) # dodaj dolžino
+    d = float(input("Vpiši dolžino: ")) # ponovno branje
+print("Najdaljši skok:", max(dolzine))
+print("Povprečna dolžina:", sum(dolzine)/len(dolzine))
 \end{lstlisting}
 \end{resitev}
 Prednost zgornjega programa je v tem, da deluje ne glede na to koliko skokov je v seznamu. Vse dokler sodnik ne vnese kakšne neumnosti.
@@ -259,9 +250,9 @@ Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj
 \begin{resitev}
 Rešitev bo podobna kot prej, le da tokrat ne potrebujemo zanke.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-dolzine = eval(input("Vnesi dolzine: "))
-print("Najdaljsi skok:", max(dolzine))
-print("Povprecna dolzina:", sum(dolzine)/len(dolzine))
+dolzine = eval(input("Vnesi dolžine: "))
+print("Najdaljši skok:", max(dolzine))
+print("Povprečna dolžina:", sum(dolzine)/len(dolzine))
 \end{lstlisting}
 Slabost programa je ta, da mora sodnik zdaj vse dolžine vnesti naenkrat. 
 \end{resitev}
@@ -301,7 +292,7 @@ Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj
 \begin{resitev}
 Zdaj bo branju seznama sledilo sortiranje in izpis zmagovalnih dolžin.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-dolzine = eval(input("Vnesi dolzine: "))
+dolzine = eval(input("Vnesi dolžine: "))
 dolzine.sort(reverse=True)
 print("1. mesto", dolzine[0])
 print("2. mesto", dolzine[1])
@@ -320,7 +311,7 @@ Prej smo videli, da metoda \texttt{sort} sprejema tudi izbirni argument \texttt{
 Sezname (in še kaj drugega) pa bi lahko sortirali tudi preko vgrajene funkcije \texttt{sorted}. Ta funkcija deluje na enak način kot metoda \texttt{sort}, le da podanega seznama ne sortira, ampak vrne sortiran seznam. Poglejmo si na zgledu:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> seznam = [-100, 10, -1, -5, 50]
->>> # funkciji kot argument podamo tisto kar zelimo posortirati
+>>> # funkciji kot argument podamo tisto kar želimo posortirati
 >>> sorted(seznam) 
 [-1, -5, 10, 50, -100]
 >>> seznam # podan seznam je ostal nespremenjen
@@ -366,7 +357,7 @@ Seznam, ki vsebuje podatke o ničtem skakalcu. Kako pa bi prišlo do njegovega i
 >>> skoki[0][1]
 "Andrej"
 \end{lstlisting}
-Kaj se bo zgodilo, če tak seznam sortiramo? Nad vgnezdenimi seznami bo za sortiranje uporabljena relacija \texttt{<}, ki smo jo v tem poglavju v povezavi s primerjanjem seznamov že srečali. Rekli smo, da relacija manjše sezname med seboj primerja leksikografsko. Najprej primerja ničti element prvega seznam z ničtim drugega. Če sta enaka, primerja prvi element prvega seznama s prvim elementom drugega seznama in tako naprej. Če bomo torej v vgnezdene sezname na ničto mesto dali dolžine na prvo mesto pa imena, bo sortiranje izvedeno po dolžinah. Po imenih bo sortiranje potekalo samo v primeru, če bosta dolžini pri dveh podseznamih enaki. Poskusimo:
+Kaj se bo zgodilo, če tak seznam sortiramo? Nad ugnezdenimi seznami bo za sortiranje uporabljena relacija \texttt{<}, ki smo jo v tem poglavju v povezavi s primerjanjem seznamov že srečali. Rekli smo, da relacija manjše sezname med seboj primerja leksikografsko. Najprej primerja ničti element prvega seznam z ničtim drugega. Če sta enaka, primerja prvi element prvega seznama s prvim elementom drugega seznama in tako naprej. Če bomo torej v ugnezdene sezname na ničto mesto dali dolžine na prvo mesto pa imena, bo sortiranje izvedeno po dolžinah. Po imenih bo sortiranje potekalo samo v primeru, če bosta dolžini pri dveh podseznamih enaki. Poskusimo:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> skoki.sort(reverse=True)
 >>> skoki
@@ -389,16 +380,16 @@ Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Program naj 
 \begin{resitev}
 Ponovno bomo brali dolžino po dolžino, le da bomo tokrat v primeru, da bo vnesena dolžina večja kot 0, prebrali še ime tekmovalca. Potem bomo oboje dodali v seznam skokov. Pomembno je, da na ničto mesto v podseznam shranimo dolžino skoka, saj želimo podsezname sortirati po dolžini skokov. Na koncu skoke sortiramo in izpišemo zmagovalce in dolžine zmagovalnih skokov.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-skoki = [] # na zacetku ni nobenega skoka
-d = float(input("Vpisi dolzino: ")) # prvo branje
-while d > 0: # dokler je dolzina veljavna
-    ime = input("Vpisi ime tekmovalca: ") # branje imena
+skoki = [] # na začetku ni nobenega skoka
+d = float(input("Vpiši dolžino: ")) # prvo branje
+while d > 0: # dokler je dolžina veljavna
+    ime = input("Vpiši ime tekmovalca: ") # branje imena
     skoki.append([d,ime]) # dodajanje podseznama
-    d = float(input("Vpisi dolzino: ")) # ponovno branje
+    d = float(input("Vpisi dolžino: ")) # ponovno branje
 skoki.sort(reverse=True)
-print("1. mesto:", skoki[0][1], ", dolzina skoka:", skoki[0][0])
-print("2. mesto:", skoki[1][1], ", dolzina skoka:",  skoki[1][0])
-print("3. mesto:", skoki[2][1], ", dolzina skoka:", skoki[2][0])
+print("1. mesto:", skoki[0][1], ", dolžina skoka:", skoki[0][0])
+print("2. mesto:", skoki[1][1], ", dolžina skoka:",  skoki[1][0])
+print("3. mesto:", skoki[2][1], ", dolžina skoka:", skoki[2][0])
 \end{lstlisting}
 \end{resitev}
 
@@ -426,7 +417,7 @@ Tale izpis je malo čuden. Poklicali smo funkcijo \texttt{range} in dobili \text
 >>> type(razpon)
 <class 'range'>
 \end{lstlisting}
-Rezultat funkcije \texttt{range} torej pripada \texttt{razredu} \texttt{range}, ki nam vrednosti iz razpona vrača sproti, ko jih pač potrebujemo. Zakaj tako? Funkcija \texttt{range} je varčna in ponavadi ni nobene potrebe po tem, da bi morali celoten razpon ustvariti naenkrat, ampak naenkrat potrebujemo samo en element iz razpona. S tem, ko funkcija \texttt{range} ustvari objekt, ki nam po potrebi vrne željeni element, varčuje tako s procesorjevim časom (hitrost), saj je generiranje dolgih seznamov zamudno, kot tudi s pomnlniškim prostorom, saj dolgi seznami zasedejo veliko prostora. Še vedno pa lahko nad rezultatom funkcije \texttt{range} delamo podobne stvari, kot nad seznami. Lahko jih npr. indeksiramo:
+Rezultat funkcije \texttt{range} torej pripada \texttt{razredu} \texttt{range}, ki nam vrednosti iz razpona vrača sproti, ko jih pač potrebujemo. Zakaj tako? Funkcija \texttt{range} je varčna in ponavadi ni nobene potrebe po tem, da bi morali celoten razpon ustvariti naenkrat, ampak naenkrat potrebujemo samo en element iz razpona. S tem, ko funkcija \texttt{range} ustvari objekt, ki nam po potrebi vrne želeni element, varčuje tako s procesorjevim časom (hitrost), saj je generiranje dolgih seznamov zamudno, kot tudi s pomnilniškim prostorom, saj dolgi seznami zasedejo veliko prostora. Še vedno pa lahko nad rezultatom funkcije \texttt{range} delamo podobne stvari, kot nad seznami. Lahko jih npr. indeksiramo:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> razpon[2]
 2
@@ -434,9 +425,6 @@ Rezultat funkcije \texttt{range} torej pripada \texttt{razredu} \texttt{range}, 
 Ne moremo pa nad njimi klicati metod, ki so definirane nad običajnimi seznami:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> razpon.sort()
-Traceback (most recent call last):
-  File "<pyshell#98>", line 1, in <module>
-    razpon.sort()
 AttributeError: 'range' object has no attribute 'sort'
 \end{lstlisting}
 Poleg tega funkcija \texttt{print}, kot smo videli že zgoraj, ne izpiše vrednosti elementov v razponu. Če bi želeli preko funkcije \texttt{range} dobiti običajen seznam, lahko uporabimo pretvorbo v seznam preko funkcije \texttt{list}:
@@ -458,7 +446,7 @@ Tudi če imate počasen računalnik, bo generiranje razpona narejeno v trenutku.
 \end{lstlisting}
 Če vam Python ni javil napake \texttt{MemoryError}, je tole verjetno nekaj časa trajalo. Če ni in vas nisem prepričal, poskusite stvar ponoviti z večjim številom, npr. $10^{10}$. 
 
-Vrnimo se k osnovni uporabi funkcije \texttt{range}. Mogoče se sprašujetete zakaj razpon ne vključuje vrednosti \texttt{stop}. Razlogov za to je več. Zaenkrat podajmo najbolj očitnega. Ker funkcija \texttt{range} začne šteti z vrednostjo 0 (in ne z 1), bo razpon, ki ga bo vračala, vseboval točno \texttt{stop} elementov. Če bi funkciji \texttt{range} za argument \texttt{stop} podali dolžino nekega seznama, bi razpon vseboval vse indekse tega seznama (ena izmed možnih uporab funkcije \texttt{range} se že počasi odkriva). 
+Vrnimo se k osnovni uporabi funkcije \texttt{range}. Mogoče se sprašujete zakaj razpon ne vključuje vrednosti \texttt{stop}. Razlogov za to je več. Zaenkrat podajmo najbolj očitnega. Ker funkcija \texttt{range} začne šteti z vrednostjo 0 (in ne z 1), bo razpon, ki ga bo vračala, vseboval točno \texttt{stop} elementov. Če bi funkciji \texttt{range} za argument \texttt{stop} podali dolžino nekega seznama, bi razpon vseboval vse indekse tega seznama (ena izmed možnih uporab funkcije \texttt{range} se že počasi odkriva). 
 
 S funkcijo \texttt{range} lahko generiramo razpon elementov, ki se ne začne s številom 0. V tem primeru bomo funkciji poleg argumenta \texttt{stop} podali še argument \texttt{start}. Najprej seveda navedemo \texttt{start}, potem pa \texttt{stop}:
 \begin{lstlisting}[language=Python, showstringspaces=false]
@@ -484,7 +472,7 @@ Do zdaj je bil korak med sosednjima elementoma v razponu vedno enak. To lahko sp
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> range(start, stop, step)
 \end{lstlisting}
-Argument \texttt{step} je opcijski, njegova privzeta vrednost pa je 1. Lahko ga nastavimo na kaj drugega, npr. na 2. Če bi hoteli zgenerirati seznam lihih števil v razponu od 0 do 100, bi to lahko narediili takole:
+Argument \texttt{step} je opcijski, njegova privzeta vrednost pa je 1. Lahko ga nastavimo na kaj drugega, npr. na 2. Če bi hoteli zgenerirati seznam lihih števil v razponu od 0 do 100, bi to lahko naredili takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>>  razpon = range(1, 101, 2)
 >>> list(razpon)
@@ -583,7 +571,7 @@ Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj
 \begin{resitev}
 Podobno kot prej bomo seznam prebrali in uredili. Zmagovalce lahko zdaj izpišemo v eni vrstici. Tokrat bo program za razliko od prej deloval tudi v primeru, če bo sodnik vnesel manj kot 3 skoke. Rezine pač režejo dokler gre in primeru da je razpon preseže indekse seznama, napake ne javljajo.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-dolzine = eval(input("Vnesi dolzine: "))
+dolzine = eval(input("Vnesi dolžine: "))
 dolzine.sort(reverse=True)
 print(dolzine[:3])
 \end{lstlisting}
@@ -599,13 +587,13 @@ Napiši program, ki bo od uporabnika prebral dve zaporedji baz (zapisani kot niz
 \begin{resitev}
 Program bo torej od uporabnika prejel dva niza. Najprej bomo določili indeksa, kjer bomo križanje naredili. To bo na polovici posameznega zaporedja. Dolžino posameznega zaporedja bomo delili z 2, pri čemer bomo uporabili celoštevilsko deljenje (\texttt{//}), saj morajo biti indeksi cela števila. Potem bomo odrezali rezine in jih med seboj sestavili (z operatorjem lepljenja \texttt{+}) ter izpisali.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-gen1 = input("Vpisi prvo zaporedje baz: ")
-gen2 = input("Vpisi drugo zaporedje baz: ")
+gen1 = input("Vpiši prvo zaporedje: ")
+gen2 = input("Vpiši drugo zaporedje: ")
 
-# kje prerezemo gen 1
-i1 = len(gen1)//2 # celostevilsko deljenje z 2
-# kje prerezemo gen 2
-i2 = len(gen2)//2 # celostevilsko deljenje z 2
+# kje prerežemo gen 1?
+i1 = len(gen1)//2 # celoštevilsko deljenje z 2
+# kje prerežemo gen 2?
+i2 = len(gen2)//2 # celoštevilsko deljenje z 2
 
 gen11 = gen1[:i1] # prva polovica gena 1
 gen12 = gen1[i1:] # druga polovica gena 1
@@ -628,21 +616,21 @@ Palindrom je niz, ki se na enak način bere naprej kot nazaj. Napiši program, k
 \begin{resitev}
 Prva rešitev bo temeljila na zanki \texttt{while}, s katero se bomo sprehajali od začetka proti koncu niza. Zanko \texttt{while} lahko torej ponavljamo, dokler z nekim števcem (npr. \texttt{i}) ne preštejemo do konca niza. Začeli bomo pa seveda na začetku, torej pri vrednosti 0 (\texttt{i=0}). V zanki \texttt{while} bomo primerjali enakost znaka na indeksu \texttt{i} z znakom na indeksu \texttt{-i-1}. Če se bodo ti pari ujemali \textbf{povsod}, bomo lahko sklepali, da je niz palindrom. Takoj, ko bomo našli \textbf{en} primer, kjer se par ne ujema (protiprimer), pa bomo lahko sklepali, da niz ni palindrom.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-niz = input("Vpisi niz: ")
-i = 0 # zaceli bomo na zacetku niza
+niz = input("Vpiši niz: ")
+i = 0 # začeli bomo na začetku niza
 while i < len(niz): # do konca niza
     if niz[i] != niz[-i-1]: # protiprimer
         print("Niz ni palindrom")
         break
     i += 1 # gremo na naslednji par
-else: # ce smo prisli do konca brez break-a
+else: # če smo prisli do konca brez break-a
     print("Niz je palindrom")
 \end{lstlisting}
 Program bi sicer lahko nekoliko pohitrili, saj se nam ni treba premikati do konca niza, ampak je dovolj, da končamo, ko števec \texttt{i} pride do polovice niza. Pogoj v zanki \texttt{while} bi torej lahko spremenili v \texttt{i < len(niz)//2}.
 
 Do bistveno lepše rešitve pa pridemo, če uporabimo rezine. Niz je palindrom, če se bere naprej enako kot nazaj. Torej mora biti naprej prebran niz (\texttt{niz}) enak nazaj prebranemu niz (\texttt{niz[::-1]}). Program je torej sledeč:
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-niz = input("Vpisi niz: ")
+niz = input("Vpiši niz: ")
 if niz == niz[::-1]:
     print("Niz je palindrom")
 else:

@@ -147,7 +147,7 @@ Python je ob naštevanju elementov z vejicami ugotovil, da želimo imeti terko i
 >>> type(terka)
 <class 'int'>
 \end{lstlisting}
-Že prej smo omenili to, da je bistvena lasntnost terk naštevanje elementov, ki jih ločimo z vejicami. Kako v primeru enega elementa povemo, da gre za naštevanje? Tako, da za njim napišemo vejico:
+Že prej smo omenili to, da je bistvena lastnost terk naštevanje elementov, ki jih ločimo z vejicami. Kako v primeru enega elementa povemo, da gre za naštevanje? Tako, da za njim napišemo vejico:
 \texttt{tuple}:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> terka=(1,)
@@ -170,30 +170,27 @@ Kaj lahko s terkami počnemo? Podobno kot sezname lahko elemente terke indeksira
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> terka = ("Janez", 1.8, 75)
 >>> terka[0] = "Marko"
-Traceback (most recent call last):
-  File "<pyshell#6>", line 1, in <module>
-    terka[0] = "Marko"
 TypeError: 'tuple' object does not support item assignment
 \end{lstlisting}
 Očitno res ne gre. Seveda ne, saj so nespremenljive. Zakaj bi terke potem sploh uporabljali? Nekaj primerov, pri katerih je uporaba terk smiselna, je podanih v nadaljevanju poglavja.
 
 \section{Seznami terk in razpakiranje elementov terk}
 
-Nenapisano pravilo (ki ga seveda lahko kršimo) je, da v sezname shranjujemo homogene podatke, torej podatke, ki se nanašajo npr. na isto spremenljivko. To pomeni, da vsak element seznama obravnavamo na enak način, saj se nanaša na isto količino. Terke se pogosto uporabljajo za shranjevanje heterogenih podatkov, tj. podatkov različnih tipov, ki pa pripadajo isti entiteti, kot je npr. oseba ali meritev. Če si torej želimo pri določeni entiteti zabeležiti več podatkov, lahko uporabimo seznam terk. Na primer, če imamo vzorec oseb, pri čemer za vsako osebo beležimo ime, višino in težo, potem lahko uporabimo seznam terk, pri čemer vsaka izmed terk vsebuje ime, višino in težo dotične osebe. Primer takega seznama bi bil
+Nenapisano pravilo (ki ga seveda lahko kršimo) je, da v sezname shranjujemo homogene podatke, torej podatke, ki se nanašajo npr. na isto spremenljivko. To pomeni, da vsak element seznama obravnavamo na enak način, saj se nanaša na isto količino. Terke se pogosto uporabljajo za shranjevanje heterogenih podatkov, tj. podatkov različnih tipov, ki pa pripadajo isti entiteti, kot je npr. oseba ali meritev. Če si torej želimo pri določeni entiteti zabeležiti več podatkov, lahko uporabimo seznam terk. Na primer, če imamo vzorec oseb, pri čemer za vsako osebo beležimo ime, višino in telesno maso, potem lahko uporabimo seznam terk, pri čemer vsaka izmed terk vsebuje ime, višino in telesno maso dotične osebe. Primer takega seznama bi bil
 \begin{lstlisting}[language=Python, showstringspaces=false]
 meritve = [("Janez", 1.8, 75),
            ("Ana", 1.65, 60), 
            ("Nika", 1.66, 55)]
 \end{lstlisting}
-Elementi seznama so torej homogeni, kar pomeni, da bomo vsakega obravavali enako. Elementi seznama so namreč terke, ki imajo vsakič enako obliko. Na 0-tem indeksu je shranjeno ime osebe, na indeksu 1 višina v metrih in na indeksu 2 teža osebe v kilogramih. Elementi posamezne terke pa očitno pripadajo različnim spremenljivkam.
+Elementi seznama so torej homogeni, kar pomeni, da bomo vsakega obravnavali enako. Elementi seznama so namreč terke, ki imajo vsakič enako obliko. Na 0-tem indeksu je shranjeno ime osebe, na indeksu 1 višina v metrih in na indeksu 2 telesna masa osebe v kilogramih. Elementi posamezne terke pa očitno pripadajo različnim spremenljivkam.
 
 Tak način predstavitve podatkov bomo srečali velikokrat. Kako pa lahko tako shranjene podatke uporabimo pri nadaljnji analizi. Na primer pri izračunu in izpisu indeksa telesnih mas posamezne osebe v seznamu. Tako, da se čez seznam sprehodimo z zanko \texttt{for} in v vsaki iteraciji zanke tekočo terko \emph{razpakiramo} in tako pridemo do konkretnih vrednosti. To lahko naredimo na sledeč način: 
 \begin{lstlisting}[language=Python, showstringspaces=false]
 for meritev in meritve:
     ime = meritev[0]
     visina = meritev[1]
-    teza = meritev[2]
-    itm = teza/visina**2
+    masa = meritev[2]
+    itm = masa/visina**2
     print("ITM osebe", ime, "je", itm)
 \end{lstlisting}
 Do posameznih elementov terke smo torej prišli z njihovim indeksiranjem. Terke pa lahko razpakiramo veliko hitreje, in sicer tako, da terko priredimo drugi terki, ki vsebuje imena spremenljivk, v katere želimo vrednosti shraniti oziroma razpakirati. Takole:
@@ -204,54 +201,54 @@ Paziti moramo le na to, da terka na levi strani vsebuje enako število elementov
 \begin{lstlisting}[language=Python, showstringspaces=false]
 spremenljivka1, spremenljivka2,... = terka
 \end{lstlisting}
-Mimogrede, tako razpakiranje elementov bi delovalo tudi, če bi imeli na desni strani prireditvnega stavka seznam.
+Mimogrede, tako razpakiranje elementov bi delovalo tudi, če bi imeli na desni strani prireditvenega stavka seznam.
 
 Tak način razpakiranja elementov lahko uporabimo v našem zgledu z računanjem indeksa telesnih mas, s čimer se koda občutna skrajša:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 for meritev in meritve:
-    ime, visina, teza = meritev
-    itm = teza/visina**2
+    ime, visina, masa = meritev
+    itm = masa/visina**2
     print("ITM osebe", ime, "je", itm)
 \end{lstlisting}
 Kodo lahko še dodatno skrajšamo, če razpakiranje naredimo kar v glavi zanke \texttt{for}:
 \begin{lstlisting}[language=Python, showstringspaces=false]
-for ime, visina, teza in meritve:
-    itm = teza/visina**2
+for ime, visina, masa in meritve:
+    itm = masa/visina**2
     print("ITM osebe", ime, "je", itm)
 \end{lstlisting}
 
 \section{Pakiranje seznamov v sezname terk}
-Seznami terk, kot smo jih srečali zgoraj, torej predstavljajo lep način zapisovanja podatkov, ko želimo pri posamezni entiteti imeti več podatkov. Dejstvo pa je, da velikokrat podatkov ne dobimo v taki obliki, ampak dobimo za vsako količino svoj seznam. Pri tem so seznami med seboj poravnani, kar pomeni, da istoležni elementi v vseh seznamih pripadajo isti entiteti. Elementi na indeksu 0 torej pripadajo entiteti 0, elementi na indeksu 1 entiteti 1 itd. V primeru imen, višin in tež, bi torej imeli tri sezname v obliki 
+Seznami terk, kot smo jih srečali zgoraj, torej predstavljajo lep način zapisovanja podatkov, ko želimo pri posamezni entiteti imeti več podatkov. Dejstvo pa je, da velikokrat podatkov ne dobimo v taki obliki, ampak dobimo za vsako količino svoj seznam. Pri tem so seznami med seboj poravnani, kar pomeni, da istoležni elementi v vseh seznamih pripadajo isti entiteti. Elementi na indeksu 0 torej pripadajo entiteti 0, elementi na indeksu 1 entiteti 1 itd. V primeru imen, višin in mas, bi torej imeli tri sezname v obliki 
 \begin{lstlisting}[language=Python, showstringspaces=false]
 imena = ["Janez", "Ana", "Nika"]
 visine = [1.8, 1.65, 1.66]
-teze = [75, 60, 55]
+mase = [75, 60, 55]
 \end{lstlisting}
 Elementi vseh treh seznamov torej na indeksu 0 pripadajo Janezu, na indeksu 1 Ani in na indeksu 2 Niki. Kaj imajo ti seznami skupnega? Indekse! Čez take podatke bi se torej lahko sprehodili tako, da se sprehajamo po indeksih in ne direktno po elementih. Naredimo torej sprehod z znako \texttt{for} od indeksa 0 do dolžine seznama - 1. Dolžine katerega seznama? Ni važno, saj so vsi enko dolgi (oziroma vsaj smiselno bi bilo, da so). To bi lahko naredili takole:  
 \begin{lstlisting}[language=Python, showstringspaces=false]
 for i in range(len(imena)):
     ime = imena[i]
     visina = visine[i]
-    teza = teze[i]
-    itm = teza/visina**2
+    masa = mase[i]
+    itm = masa/visina**2
     print("ITM osebe", ime, "je", itm)
 \end{lstlisting}
 Kako pa bi lahko iz treh seznamov naredili seznam terk, s katerim smo delali zgoraj. Izkaže se, da se s takim problemom srečamo relativno pogosto, zato nam Python za \emph{zapakiranje} več seznamov v seznam terk ponuja vgrajeno funkcijo \texttt{zip}. Funkcija \texttt{zip} iz zgornjih treh seznamov naredi točno to, kar bi si želeli: 
 \begin{lstlisting}[language=Python, showstringspaces=false]
->>> meritve = zip(imena, visine, teze)
+>>> meritve = zip(imena, visine, mase)
 >>> meritve
 <zip object at 0x0000019A2A865D48>
 \end{lstlisting}
 Tale izpis je malo čuden, ampak ni z njim nič narobe. Funkcija \texttt{zip} je t.i. \emph{iterator}, ki dejanski seznam elementov vrne, šele ko ga potrebujemo oziroma posamezne elemente seznama vrača sproti. Če bi želeli imeti lepši izpis, bi lahko do njega prišli tako, da rezultat funkcije \texttt{zip} eksplicitno pretvorimo v seznam s funkcijo \texttt{list}:
 \begin{lstlisting}[language=Python, showstringspaces=false]
->>> meritve = list(zip(imena, visine, teze))
+>>> meritve = list(zip(imena, visine, mase))
 >>> meritve
 [('Janez', 1.8, 75), ('Ana', 1.65, 60), ('Nika', 1.66, 55)]
 \end{lstlisting}
 Sprehod čez sezname lahko torej naredimo na podoben način kot v prejšnjem poglavju, le da prej sezname zapakiramo v seznam terk:
 \begin{lstlisting}[language=Python, showstringspaces=false]
-for ime, visina, teza in zip(imena, visine, teze):
-    itm = teza/visina**2
+for ime, visina, masa in zip(imena, visine, mase):
+    itm = masa/visina**2
     print("ITM osebe", ime, "je", itm)
 \end{lstlisting}
 
@@ -341,8 +338,4 @@ Prepričajmo se, če je vrednost spremenljivke \texttt{zaporedje1} res spremenje
 >>> zaporedje1
 ['A', 'T', 'C', 'G', 'A', 'A', 'T', 'A', 'A', 'T']
 \end{lstlisting}
-
-
-
-
 \end{resitev}

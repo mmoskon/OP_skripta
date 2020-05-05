@@ -70,10 +70,10 @@ def odstrani(niz, podniz):
     for i in range(len(niz)):
         rezina = niz[i:i+len(podniz)]
         if rezina == podniz:
-            zacetek = i # zacetek rezanja
+            zacetek = i # začetek rezanja
             konec = i + len(podniz) # konec rezanja
             return niz[:zacetek] + niz[konec:]
-    return niz # nismo nasli - vrni nespremenjen niz
+    return niz # nismo našli - vrni nespremenjen niz
 \end{lstlisting}
 Vprašanje je še ali mora funkcija res vračati spremenjen niz ali je dovolj, če niz, ki ga funkcija sprejme kot argument, spreminjamo znotraj funkcije (kot smo to delali pri seznamih, slovarjih in množicah). Odgovor je seveda ne, saj je niz nespremenljiv. Spremembe, ki jih vršimo nad imenom, za katerim se skriva niz, se izven funkcije ne bodo ohranile, zato je potrebno nov (spremenjen) niz vrniti s stavkom \texttt{return}. 
 \end{resitev}
@@ -86,17 +86,17 @@ V prejšnjem zgledu se lahko uporabi rezin deloma izognemo z uporabo metode \tex
 def odstrani(niz, podniz):
     for i in range(len(niz)):
         if niz[i:].startswith(podniz):
-            zacetek = i # zacetek rezanja
+            zacetek = i # začetek rezanja
             konec = i + len(podniz) # konec rezanja
             return niz[:zacetek] + niz[konec:]
-    return niz # nismo nasli - vrni nespremenjen niz
+    return niz # nismo našli - vrni nespremenjen niz
 \end{lstlisting}
 Poleg metode \texttt{startswith} lahko pri iskanju uporabimo še metodo \texttt{endswith}, ki preverja, če se niz konča s podanim podnizom, metodo \texttt{count}, ki prešteje število pojavitev podniza in metodo \texttt{find}, ki vrne lokacijo podniza oziroma --1, če podniza v nizu ni. Povadimo še uporabo metode \texttt{find}:
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def odstrani(niz, podniz):
     i = niz.find(podniz)
     if i >= 0: # ali je podniz v nizu
-        zacetek = i # zacetek rezanja
+        zacetek = i # začetek rezanja
         konec = i + len(podniz) # konec rezanja
         return niz[:zacetek] + niz[konec:]
     return niz
@@ -162,9 +162,9 @@ def palindrom(niz):
 \section{Razdruževanje in združevanje nizov}
 Funkcija \texttt{input} uporabnikov vnos vedno vrne zapisan kot niz. Prav tako bomo vsebino datotek (v naslednjem poglavju) vedno dobili najprej zapisano kot niz. V primeru, da uporabnik vnese eno število, lahko število zapisano kot niz enostavno pretvorimo preko funkcij \texttt{int} oziroma \texttt{float}. V primeru, da uporabnik naenkrat vnese več števil ali pa je vnos sestavljen iz števil in drugih znakov, ki jih mogoče želimo pretvoriti v kaj drugega pa ta pristop ni več mogoč. Deloma nas sicer lahko reši funkcija \texttt{eval}, katere uporaba zaradi varnosti v splošnem ni priporočljiva, poleg tega pa tudi ta slej ko prej odpove. V tem primeru moramo niz razčleniti \angl{parse} sami. Za ta namen lahko uporabimo metodo \texttt{split}, ki ji kot argument podamo ločilo \angl{separator}, preko katerega naj niz loči v seznam nizov. Poglejmo si primer:
 \begin{lstlisting}[language=Python, showstringspaces=false]
->>> niz = "jabolka,hruske,slive"
+>>> niz = "jabolka,hruške,slive"
 >>> niz.split(",")
-['jabolka', 'hruske', 'slive']
+['jabolka', 'hruške', 'slive']
 \end{lstlisting}
 Povadimo še na zgledu:
 
@@ -174,16 +174,16 @@ Napiši program, ki na podlagi uporabnikovega vnosa izračuna in izpiše vsoto p
 \begin{resitev}
 Program bo uporabnikov vnos ločil po podpičjih. Sledil bo sprehod čez dobljeni seznam, pretvorba nizov v števila in seštevanje.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-vnos = input("Vnesi stevila locena s podpicji: ")
+vnos = input("Vnesi števila ločena s podpičji: ")
 seznam = vnos.split(";")
-s = 0 # zacetna vsota
+s = 0 # začetna vsota
 for st in seznam:
-    s += float(st) # pretvorba niza in pristevanje
+    s += float(st) # pretvorba niza in prištevanje
 print(s)
 \end{lstlisting}
 Zgled izvedbe programa:
 \begin{lstlisting}[language=Python, showstringspaces=false]
-Vnesi stevila locena s podpicji: 20;40.5;60
+Vnesi števila ločena s podpičji: 20;40.5;60
 120.5
 \end{lstlisting}
 \end{resitev}
@@ -214,7 +214,7 @@ Napiši funkcijo \texttt{palindrom}, ki kot argument sprejme niz in vrne \texttt
 \end{zgled}
 
 \begin{resitev}
-Želimo torej, da bi rešitev delovala tudi nad nečim takim kot je niz \texttt{"perica reze raci rep"}. Niz se prebere enako naprej kot nazaj, ampak samo v primeru, ko presledkov ne upoštevamo. Prva rešitev bo temeljila na tem, da vse bele prostore zamenjamo za prazne nize.
+Želimo torej, da bi rešitev delovala tudi nad nečim takim kot je niz \texttt{"perica reže raci rep"}. Niz se prebere enako naprej kot nazaj, ampak samo v primeru, ko presledkov ne upoštevamo. Prva rešitev bo temeljila na tem, da vse bele prostore zamenjamo za prazne nize.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def palindrom(niz):
     niz = niz.upper()
@@ -225,13 +225,13 @@ def palindrom(niz):
 \end{lstlisting}
 Alternativa je, da najprej nad nizom uporabimo metodo \texttt{split} brez podanega argumenta, ki bo niz ločila v seznam nizov, pri čemer bo odstranila ves prazen prostor. Zatem uporabimo metodo \texttt{join}, pri čemer kot ločilo uporabimo prazen niz. Takole:
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
->>> niz = "perica \n reze \t raci rep"
+>>> niz = "perica \n reže \t raci rep"
 >>> sez = niz.split()
 >>> sez
-['perica', 'reze', 'raci', 'rep']
+['perica', 'reže', 'raci', 'rep']
 >>> niz = "".join(sez)
 >>> niz
-'pericarezeracirep'
+'pericarežeracirep'
 \end{lstlisting}
 Druga rešitev je torej sledeča:
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]

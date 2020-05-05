@@ -33,9 +33,6 @@ Telefonsko številko osebe lahko torej najdemo tako, da podamo njeno ime, kar je
 Indeksiranje se torej v primeru slovarjev namesto po indeksih izvaja po ključih. Kaj pa če bi želeli poiskati telefonsko številko od Dejana. Potem bi slovar indeksirali po ključu \texttt{"Dejan"}, kar pa nam v konkretnem primeru vrne napako:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> imenik["Dejan"]
-Traceback (most recent call last):
-  File "<pyshell#1>", line 1, in <module>
-    imenik["Dejan"]
 KeyError: 'Dejan'
 \end{lstlisting}
 Problem je v tem, da ključa \texttt{"Dejan"} v našem slovarju (še) ni, zato preko njega slovarja ne moremo indeksirati (tako kot nismo mogli indeksirati seznam z indeksom, ki ga v seznamu ni bilo). Obstoj ključa v slovarju lahko preverimo z operatorjem \texttt{in}:
@@ -94,7 +91,7 @@ def dodaj(imenik, ime, stevilka):
     if ime not in imenik:
         imenik[ime] = stevilka
     else:
-        print("Ta oseba ze obstaja")
+        print("Ta oseba že obstaja")
 \end{lstlisting}
 \end{resitev}
 
@@ -211,7 +208,7 @@ def naj_baza(zaporedje):
     baze = prestej_baze(zaporedje)
     
     naj_B = "" # naj baza
-    M = 0 # stevilo pojavitev
+    M = 0 # število pojavitev
     for baza in baze:
         pojavitev = baze[baza]
         if pojavitev > M:
