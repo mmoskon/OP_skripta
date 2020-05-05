@@ -337,3 +337,61 @@ def nakljucna(ime_datoteke, n):
     f.close()
 \end{lstlisting}
 \end{resitev}
+
+Metoda \texttt{write} torej v datoteko zapiše točno tisto, kar ji podamo, vedno pa ji moramo podati točno en podatek tipa \texttt{str}. Če bi želeli naenkrat zapisati več podatkov, jih moramo torej pred tem sami združiti. V določenih primerih bi bilo veliko bolj priročno, če bi lahko v datoteko pisali na enak način, kot smo stvari izpisovali na zaslon, tj. s funkcijo \texttt{print}. Ta sprejema vrednosti poljubnega tipa, poleg tega pa ji lahko podamo več vrednosti, ki jih bo med sabo združila (privzeto z ločilom \texttt{' '}). Izkaže se, da lahko za pisanje v datoteke uporabimo tudi funkcijo \texttt{print}. Pri tej moramo opcijskemu argumentu z imenom \texttt{file} prirediti spremenljivko, v katero smo datoteko odprli\footnote{Opcijski argument \texttt{file} funkcije \texttt{print} je privzeto postavljen na vrednost \texttt{sys.stdout}, kar pomeni, da pišemo na standardni izhod -- v našem primeru je to konzola okolja IDLE.} Poskusimo na prejšnjem zgledu.
+\begin{zgled}
+Napiši funkcijo \texttt{nakljucna}, ki kot argument prejme niz z imenom datoteke in celo število, ki podaja število naključnih števil, ki naj jih funkcija zapiše v datoteko s podanim imenim. Funkcija naj v vsako vrstico v datoteki zapiše največ 10 naključnih celih števil iz intervala od 1 do 100. Za pisanje v datoteko uporabi funkcijo \texttt{print}.
+\end{zgled}
+\begin{resitev}
+Rešitev je zelo podobna kot prej, le da nam tokrat števil ni potrebno pretvarjati v nize, funkcija \texttt{print} pa tudi sama poskrbi za pisanje presledkov in novih vrstic (le pravilno jo moramo poklicati).
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+# uvazanje vedno delamo izven funkcij
+from random import randint
+
+def nakljucna(ime_datoteke, n):
+    f = open(ime_datoteke, mode='w') # odpri za prepisovanje
+    for i in range(1,n+1): # zanko ponovimo n-krat
+        st = randint(1,100) # nakljucno stevilo od 1 do 100
+        if i % 10 == 0: # ali je cas za novo vrstico
+            print(st, file=f) # nova vrstica
+        else:
+            print(st, end=' ', file=f) # presledek 
+    f.close()
+\end{lstlisting}
+\end{resitev}
+
+Za konec dopolnimo še zgled s telefonskim imenikom.
+\begin{zgled}
+Napiši funkcijo \texttt{shrani\_imenik}, ki kot argument prejme niz z imenom datoteke, ki naj vsebuje varnostno kopijo telefonskega imenika in slovar, v katerem so ključi imena oseb, vrednosti pa njihove telefonske številke. Funkcija imenik zapiše v datoteko s podanim imenom, in sicer tako, da vsaka vrstica vsebuje podatke o eni osebi, pri čemer je ime od telefonske številke ločeno z vejico, tako da bo izhod funkcije kompatibilen s funkcijo \texttt{preberi\_imenik}.
+\end{zgled}
+\begin{resitev}
+V funkciji se bomo sprehodili čez cel imenik in v vsako vrstico zapisali ime in telefonsko številko. Takole:
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+def shrani_imenik(ime_datoteke, imenik):
+    f = open(ime_datoteke, mode='w') # prepisovanje
+    for ime, stevilka in imenik.items():
+        f.write(ime) 
+        f.write(',')
+        f.write(stevilka)
+        f.write('\n')
+    f.close()
+\end{lstlisting}
+Štiri nize (\texttt{ime}, \texttt{','}, \texttt{stevilka} in \texttt{'$\backslash$n'} bi lahko združili skupaj in metodo \texttt{write} uporabili samo enkrat.
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+def shrani_imenik(ime_datoteke, imenik):
+    f = open(ime_datoteke, mode='w') # prepisovanje
+    for ime, stevilka in imenik.items():
+        f.write(ime+','+stevilka+'\n')
+    f.close()
+\end{lstlisting}
+Za pisanje pa bi lahko uporabili tudi funkcijo \texttt{print}. Tej moramo spremeniti privzeto ločilo (presledek) v zahtevano ločilo (vejica). Takole:
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+def shrani_imenik(ime_datoteke, imenik):
+    f = open(ime_datoteke, mode='w') # prepisovanje
+    for ime, stevilka in imenik.items():
+        print(ime, stevilka, sep=',', file=f)
+    f.close()
+\end{lstlisting}
+\end{resitev}
+
+\section{Kodiranje znakov}
