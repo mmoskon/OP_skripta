@@ -50,13 +50,13 @@ encoding='cp65001'>
 Tokrat smo datoteko le našli. Mimogrede, zakaj je bilo pri podajanju poti potrebno podati dve poševnici (\texttt{$\backslash$}). Kot smo videli v prejšnjem poglavju, poševnico Python obravnava kot začetek posebnega znaka. Z njo lahko npr. zapišemo tabulator (\texttt{$\backslash$t}) ali pa znak za novo vrstico (\texttt{$\backslash$n}). Če bi radi zapisali poševnico pa v niz enostavno vpišemo dve poševnici (\texttt{$\backslash\backslash$}).
 
 Drugi način, ki je nekoliko enostavnejši in bolj pogost, je, da pač spremenimo svojo delovno mapo in potem do datoteke podamo relativno pot. To ponavadi v praksi pomeni, da podamo samo ime datoteke (kot v primeru, ko je Python javil napako). Kako pa spremenimo trenutno delovno mapo? Načeloma nam za to ni potrebno posebej skrbeti, saj bo IDLE ob zagonu programa Pythonovo delovno mapo avtomatsko zamenjal za tisto, v kateri se program nahaja. Če bomo datoteko odprli iz programa, ki se bo nahajal v isti mapi kot datoteka, lahko torej podamo zgolj njeno ime. Če torej naredimo program \texttt{branje.py} in ga shranimo v mapo, v katero smo prej shranili \texttt{stevila.txt}, lahko iz njega datoteko odpremo takole:
-\begin{lstlisting}[language=Python, showstringspaces=false, numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 open('stevila.txt')
 \end{lstlisting}
 
 \section{Branje datoteke}
 Datoteko smo torej uspešno odprli, zdaj pa jo bomo poskusili prebrati. Dostopanje do datoteke lahko izvedemo preko objekta, ki ga vrne funkcija \texttt{read}. Če hočemo datoteko prebrati, moramo ta objekt torej shraniti v neko spremenljivko, preko katere ga bomo lahko kasneje še poklicali. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false, numbers=left]
+\begin{lstlisting}[language=Python, showstringspaces=false]
 f = open('stevila.txt')
 \end{lstlisting}
 Do metod za delo z datoteko lahko zdaj dostopamo preko spremenljivke \texttt{f}. Prvi način za branje datoteke je uporaba metode \texttt{read}, ki prebere datoteko od začetka do konca in vrne niz z njeno vsebino. V našem primeru bo rezultat sledeč:
@@ -395,3 +395,73 @@ def shrani_imenik(ime_datoteke, imenik):
 \end{resitev}
 
 \section{Kodiranje znakov}
+
+Že na začetku poglavja smo omenili, da vsebino datoteke predstavlja zaporedje števil, ki jih lahko v primeru tekstovnih datotek pretvorimo v neoblikovan tekst oziroma neko zaporedje znakov. Vsak znak je torej shranjen kot neko število. \emph{Kodiranje} določa preslikavo, ki posamezno število oziroma \emph{kodo} preslika v določen znak. Do kode znaka lahko pridemo z uporabo vgrajene funkcije \texttt{ord}, ki ji kot argument podamo en znak:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> ord('a')
+97
+>>> ord('A')
+65
+\end{lstlisting}
+Preslikavo lahko naredimo tudi v drugo smer (iz kode v znak), in sicer z uporabo funkcije \texttt{chr}, ki ji kot argument podamo kodo znaka:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> chr(97)
+'a'
+>>> chr(65)
+'A'
+\end{lstlisting}
+
+Koda posameznega znaka je torej odvisna od uporabljenega kodiranja. Izkaže se, da so osnovni znaki ne glede na uporabljeno kodiranje zakodirani na enak način. Pri kodiranju teh se namreč uporablja 7-bitni standard ASCII \angl{ American Standard Code for Information Interchange}. Za kodiranje posameznega znaka lahko torej uporabimo 7 bitov, kar pomeni, da lahko zakodiramo $2^7=128$ različnih znakov. Pri tem je 32 kod rezerviranih za posebne znake (med te sodi npr. tudi znak za novo vrstico), torej nam ostane 96 kod, s katerimi moramo predstaviti male črke, velike črke, številke in različna ločila ter simbole. Izkaže se, da teh kod zelo hitro zmanjka in zato služijo zgolj predstavitvi osnovnih znakov in črk angleške abecede. Kaj pa naši šumnik, nemški preglasi in kitajske pismenke? Za predstavitev teh moramo uporabiti razširitrve kodiranja ASCII. Omenimo dve razširitvi, ki sta v pogosti uporabi v današnjem času. 
+
+Kodne tabele \angl{code page} kodiranje ASCII razširjajo z dodatnim bitom, kar pomeni, da lahko z njihovo uporabo predstavimo dodatnih 128 znakov. To je sicer dovolj za znake č, ž in š, kaj pa za kitajske pismenke? Dodatnih kod seveda ni dovolj, da bi predstavili še te, poleg njih pa mogoče še črke iz cirilice, korejski hangul in še kaj drugega. Iz tega razloga se v različnih delih sveta uporabljajo različne kodne tabele. Pri nas je npr. v uporabi centralno-evropska kodna tabela \texttt{cp1250}, s katero lahko predstavimo tudi znake č, ž in š. Znak \texttt{č} je v tej kodni tabeli določen s kodo \texttt{232}. V Nemčiji uporabljajo zahodno-evropsko kodno tabelo \texttt{cp1252}, s katero sicer ne moremo predstaviti šumnikov, lahko pa predstavimo preglase.  V tej kodni tabeli koda \texttt{232} predstavlja znak \texttt{è}, kar ste mogoče že kdaj opazili, npr. pri predvajanju podnapisov.
+
+Kljub temu, da se kodne tabele še vedno uporabljajo, je v današnjem času v večinski rabi standard \emph{unicode}, katerega pomemben predstavnik je kodiranje UTF-8. Pri tem je posamezen znak zapisan z minimalno 8 biti. V primeru, da se v našem besedilu pojavijo znaki, ki ne nastopajo v osnovnem ASCII kodiranju (npr. č), se zapis posameznega znaka razširi (V konkretnem primeru na 16-bitni zapis).
+
+Zakaj se moramo s kodiranjem znakov ukvarjati v okviru osnov programiranja? Pri branju in pisanju datotek je zaželeno, da izrecno podamo kodiranje, ki ga želimo uporabiti. S tem se namreč izognemo težavam z napačno interpretacijo znakov. Če je nekdo zapisal datoteko z uporabo kodiranje UTF-8, mi pa jo poskusimo odpreti s kodiranjem cp1250, bo prišlo do napake ali pa bodo znaki dekodirani narobe. Če kodiranja ne podamo (kot ga nismo podali v primerih zgoraj), bo uporabljeno privzeto kodiranje našega operacijskega sistema. Operacijski sistem Windows pogosto uporablja kodiranje cp1250, Linux pa UTF-8. To lahko povzroči nemalo težave, zato se dogovorimo, da bomo od zdaj naprej pri delu z datotekami vedno podali način kodiranja, ki naj bo kar UTF-8. 
+
+Kodiranje, ki ga želimo uporabiti pri pisanju ali branju datoteke, navedemo pri odpiranju datoteke s funkcijo \texttt{open} preko izbirnega argumenta \texttt{encoding}. Zapišimo datoteko z uporabo kodiranja UTF-8:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open("posebni_znaki.txt", mode='w', encoding="utf8")
+>>> f.write("čžš")
+3
+>>> f.close()
+\end{lstlisting}
+Zdaj datoteko preberimo z uporabo kodiranja cp1250:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open("posebni_znaki.txt", encoding="cp1250")
+>>> f.read()
+'ÄŤĹľĹ'
+\end{lstlisting}
+
+Rezultat je seveda napačen. Poskusimo še s pravilnim kodiranjem:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> f = open("posebni_znaki.txt", encoding="utf8")
+>>> f.read()
+'čžš'
+\end{lstlisting}
+
+Izbira ustreznega kodiranja pri delu z datotekami je torej pomembna. Dopolnimo naši funkciji za branje telefonskega imenika iz datoteke in njegovo zapisovanje v datoteko, saj je velika verjetnost, da bodo v imenih naših prijateljev nastopali tudi šumniki.
+
+\begin{zgled}
+Napiši funkciji za branje in shranjevanje telefonskega imenika v in iz datoteke, pri čemer je imenik podan kot slovar, v katerem ključi predstavljajo imena oseb, vrednosti pa njihove telefonske številke. Datoteka naj bo zakodirana z uporabo kodiranja UTF-8.
+\end{zgled}
+\begin{resitev}
+Rešitev bo praktično enaka kot v prej, le da bomo pri odpiranju datoteke izbirni argument \texttt{encoding} postavili na vrednost \texttt{'utf8'}.
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+def shrani_imenik(ime_datoteke, imenik):
+    f = open(ime_datoteke, mode='w', encoding='utf8')
+    for ime, stevilka in imenik.items():
+        print(ime, stevilka, sep=',', file=f)
+    f.close()
+
+def preberi_imenik(ime_datoteke):
+    f = open(ime_datoteke, encoding='utf8') # dodano kodiranje
+    imenik = {} # prazen slovar
+    for vrstica in f:
+        vrstica = vrstica.strip() # odstrani '\n'
+        if vrstica: # vrstica ni prazna?
+            ime, stevilka = vrstica.split(',') # razpakiraj
+            imenik[ime] = stevilka # dodajanje vnosa
+    return imenik
+\end{lstlisting}
+\end{resitev}
