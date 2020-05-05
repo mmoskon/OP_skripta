@@ -455,14 +455,14 @@ Napiši funkciji za branje in shranjevanje telefonskega imenika v in iz datoteke
 Rešitev bo praktično enaka kot v prej, le da bomo pri odpiranju datoteke izbirni argument \texttt{encoding} postavili na vrednost \texttt{'utf8'}.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def shrani_imenik(ime_datoteke, imenik):
-    # pri odpiranju podamo kodiranje datoteke
+    # pri odpiranju datoteke podamo še kodiranje
     f = open(ime_datoteke, mode='w', encoding='utf8')
     for ime, stevilka in imenik.items():
         print(ime, stevilka, sep=',', file=f)
     f.close()
 
 def preberi_imenik(ime_datoteke):
-    # pri odpiranju podamo kodiranje datoteke
+    # pri odpiranju datoteke podamo še kodiranje
     f = open(ime_datoteke, encoding='utf8') 
     imenik = {} # prazen slovar
     for vrstica in f:

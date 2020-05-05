@@ -38,17 +38,17 @@ Napiši program, ki od uporabnika prebere dve celi števili in poišče največj
 \begin{resitev}
 Program bo manjše število odšteval od večjega, dokler sta števili različni. Uporabili bomo torej zanko \texttt{while} (dokler sta števili različni).  Znotraj zanke bomo uporabili še stavek \texttt{if}, s pomočjo katerega bomo ugotovili, katero število je manjše. 
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-st1 = int(input("Vnesi prvo stevilo: "))
-st2 = int(input("Vnesi drugo stevilo: "))
+st1 = int(input("Vnesi prvo število: "))
+st2 = int(input("Vnesi drugo število: "))
 
-while st1 != st2: # dokler sta stevili razlicni
-    if st1 < st2: # drugo stevilo je vecje
+while st1 != st2: # dokler sta števili različni
+    if st1 < st2: # drugo število je večje
         st2 = st2 - st1
-    else: # prvo stevilo je veje
+    else: # prvo število je večje
         st1 = st1 - st2
 
 # konec vsebine zanke 
-print(st1) # stevili sta tu enaki, zato je vseeno katero izpisem
+print(st1) # števili sta tu enaki, zato je vseeno katero izpišem
 \end{lstlisting}
 Opomba: vsebina stavka \texttt{if} je zamaknjena dvakrat, saj je zapisana tako znotraj stavka \texttt{if} kot tudi znotraj zanke \texttt{while}!
 \end{resitev}
@@ -62,33 +62,33 @@ Napiši program, ki šteje od 0 do števila, ki ga je vnesel uporabnik. Vsa šte
 \begin{resitev}
 Število, do katerega smo prešteli, si bomo morali nekam zabeležiti, npr. v spremenljivko z imenom \texttt{i}. Šteti bomo glede na navodila začeli s številom 0. Torej bomo spremenljivko \texttt{i} na začetku postavili na 0. Končali bomo s številom, ki ga je vnesel uporabnik, recimo \texttt{n}. Pogoj za štetje naprej bo torej \texttt{i <= n}. Znotraj zanke \texttt{while} bomo trenutno število (\texttt{i}) izpisali, poleg tega moramo trenutno število tudi povečati, saj bo sicer pogoj za vedno izpolnjen. 
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-n = int(input("Vpisi stevilo do katerega zelis steti: "))
-i = 0 # stevec s katerim bomo steli
-while i <= n: # smo ze presteli?
+n = int(input("Vpiši število do katerega želiš šteti: "))
+i = 0 # števec s katerim bomo šteli
+while i <= n: # smo ze prešteli do konca?
     print(i)
-    i = i + 1 # povecanje stevca za 1
+    i = i + 1 # povečanje števca za 1
 \end{lstlisting}
 \end{resitev}
 
 \section{Stavek \texttt{+=}}
 Znotraj zanke smo števec povečali za 1 z izvedbo prireditvenega stavka
 \begin{lstlisting}[language=Python, showstringspaces=false]
-i = i + 1 # povecanje stevca za 1
+i = i + 1 # povečanje števca za 1
 \end{lstlisting}
 Ker je tak način povečevanja vrednosti zelo pogost, v jeziku Python obstaja bližnjica
 \begin{lstlisting}[language=Python, showstringspaces=false]
-i += 1 # povecanje stevca za 1
+i += 1 # povečanje števca za 1
 \end{lstlisting}
 Bistvo zgornjega stavka je, da izvedemo aritmetično operacijo seštevanja in rezultat priredimo spremenljivki, nad katero smo operacijo izvedli. Na podoben način lahko operator prirejanja \texttt{=} kombiniramo z drugimi aritmetičnimi operatorji in števili:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> x = 10
->>> x += 1 # povecaj za 1
+>>> x += 1 # povečaj za 1
 >>> x
 11
->>> x -= 2 # zmanjsaj za 2
+>>> x -= 2 # zmanjšaj za 2
 >>> x
 9
->>> x *= 5 # pomnozi s 5
+>>> x *= 5 # pomnoži s 5
 >>> x
 45
 >>> x /= 9 # deli z 9
@@ -130,45 +130,44 @@ Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta 
 \begin{resitev}
 Nalogo bi lahko rešili tako, da bi poiskali največji skupni delitelj podanih števil (naj bosta to števili \texttt{st1} in \texttt{st2}) in pogledali, če je ta večji od 1. Tokrat se bomo rešitve lotili na malo drugačen način. Preverili bomo, če med kandidati za skupne delitelje obstaja kakšno število, ki deli obe števili, pri čemer bodo kandidati v razponu od števila 2 do manjšega števila, torej do vrednosti \texttt{min(st1, st2)}. V primeru, da med kandidati najdemo eno število, ki deli obe podani števili (ostanek po deljenju posameznega števila s kandidatom je enak 0 (\texttt{st \% delitelj == 0}), lahko takoj izpišemo, da števili nista tuji.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-st1 = int(input("Vnesi prvo stevilo: "))
-st2 = int(input("Vnesi drugo stevilo: "))
+st1 = int(input("Vnesi prvo število: "))
+st2 = int(input("Vnesi drugo število: "))
 
-delitelj = 2 # zacetna vrednost kandidata
+delitelj = 2 # začetna vrednost kandidata
 
-while delitelj <= min(st1, st2): # kandidat gre do manjsega
-    # ali kandidat deli obe stevili?
+while delitelj <= min(st1, st2): # kandidat gre do manjšega
+    # ali kandidat deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
-        print("Stevili nista tuji")
+        print("Števili nista tuji")
     delitelj += 1
 \end{lstlisting}
 Rešitev je še nepopolna, saj izpis poda samo v primeru, ko števili nista tuji. Kako bi lahko program dopolnili, tako da bi izpis podal tudi v primeru, ko sta števili tuji. Tak izpis lahko podamo samo v primeru, ko smo pregledali vse kandidate in nismo našli nobenega, ki deli obe števili. Pomagamo si lahko s pomožno spremenljivko tipa \texttt{bool}, v katero bomo shranili informacijo o tem, ali smo že našli kašnega delitelja. Pri tem bomo na začetku predpostavljali, da delitelja ni. Če ga bomo našli, bomo predpostavko popravili. Na koncu bomo preverili, če smo kakšnega delitelja našli. Če bo odgovor ne (\texttt{nasli == False}), bomo izpisali, da sta si števili tuji.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-st1 = int(input("Vnesi prvo stevilo: "))
-st2 = int(input("Vnesi drugo stevilo: "))
+st1 = int(input("Vnesi prvo število: "))
+st2 = int(input("Vnesi drugo število: "))
 
-delitelj = 2 # zacetna vrednost kandidata
-# predspostavljamo, da skupnega delitelja se nismo nasli:
+delitelj = 2 # začetna vrednost kandidata
+# predspostavljamo, da skupnega delitelja še nismo našli:
 nasli = False 
 
-while delitelj <= min(st1, st2): # kandidat gre do manjsega
-    # ali kandidat deli obe stevili?
+while delitelj <= min(st1, st2): # kandidat gre do manjšega
+    # ali kandidat deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
-        print("Stevili nista tuji")
+        print("Števili nista tuji")
         nasli = True # popravimo predpostavko
     delitelj += 1
 
-# ce do tu skupnega delitelja nismo nasli, potem ga ni        
+# če do tu skupnega delitelja nismo našli, potem ga ni        
 if nasli == False: 
-    print("Stevili sta tuji")
+    print("Števili sta tuji")
 \end{lstlisting}
-Program sicer deluje pravilno, je pa njegov izpis moteč, v primeru, da najdemo več skupnih deliteljev dveh števil. Vsakič, ko najdemo skupnega delitelja, namreč izpišemo, da smo ga našli
-Poleg tega bi lahko izvajanje zanke \texttt{while} prekinili takoj, ko smo našli enega skupnega delitelja, saj je to zadosten pogoj, da si števili nista tuji. Uporabimo lahko torej stavek \texttt{break}. Končna rešitev bo sledeča.
+Program sicer deluje pravilno, je pa njegov izpis moteč, v primeru, da najdemo več skupnih deliteljev dveh števil. Vsakič, ko najdemo skupnega delitelja, namreč izpišemo, da smo ga našli. Poleg tega bi lahko izvajanje zanke \texttt{while} prekinili takoj, ko smo našli enega skupnega delitelja, saj je to zadosten pogoj, da si števili nista tuji. Uporabimo lahko torej stavek \texttt{break}. Končna rešitev bo sledeča.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-st1 = int(input("Vnesi prvo stevilo: "))
-st2 = int(input("Vnesi drugo stevilo: "))
+st1 = int(input("Vnesi prvo število: "))
+st2 = int(input("Vnesi drugo število: "))
 
-delitelj = 2 # zacetna vrednost kandidata
-# predpostavljamo, da skupnega delitelja se nismo nasli:
+delitelj = 2 # začetna vrednost kandidata
+# predpostavljamo, da skupnega delitelja še nismo našli:
 nasli = False 
 
 while delitelj <= min(st1, st2): # kandidat gre do manjsega

@@ -6,29 +6,29 @@ Vsi programi, ki smo jih do zdaj napisali (je bil mogoče samo eden?), so se izv
 
 Poglejmo si spodnji primer:
 \begin{zgled}
-Napiši program, ki od uporabnika prebere telesno težo in višino in izpiše uporabnikov indeks telesne mase.
+Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase.
 \end{zgled}
 \begin{resitev}
-Preko funkcije \texttt{input} bomo torej prebrali težo in višino. Ker funkcija vrača niz, bomo obe vrednosti pretvorili v decimalno število (\texttt{float}). Potem bomo uporabili enačbo za izračun indeksa telesne mase: $itm = \frac{teza}{visina^2}$. Pri tem mora biti teža podana v kilogramih, višina pa v metrih.
+Preko funkcije \texttt{input} bomo torej prebrali telesno mso in višino. Ker funkcija vrača niz, bomo obe vrednosti pretvorili v decimalno število (\texttt{float}). Potem bomo uporabili enačbo za izračun indeksa telesne mase: $itm = \frac{masa}{visina^2}$. Pri tem mora biti telesna masa podana v kilogramih, višina pa v metrih.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-teza = float(input("Vpisi svojo tezo [kg]: "))
-visina = float(input("Vpisi svojo visino [m]: "))
-itm = teza/visina**2
+masa = float(input("Vpiši svojo telesno maso [kg]: "))
+visina = float(input("Vpiši svojo višino [m]: "))
+itm = masa/visina**2
 print("Tvoj ITM je", itm)
 \end{lstlisting}
 \end{resitev}
 
-Zgornji program je popolnoma pravilen, bi ga pa radi še malo dopolnili. Veliko uporabnikov verjetno ne ve kaj posamezna vrednost indeksa telesne mase (ITM) pomeni. Ali mora shujšati, je njegova teža ustrezna, ali bi se moral malo zrediti? Če malo poenostavimo, lahko ljudi razdelimo v tri skupine, in sicer tiste s premajhno težo, tiste z ustrezno težo in tiste s preveliko težo:
+Zgornji program je popolnoma pravilen, bi ga pa radi še malo dopolnili. Veliko uporabnikov verjetno ne ve kaj posamezna vrednost indeksa telesne mase (ITM) pomeni. Ali mora shujšati, je njegova telesena masa ustrezna, ali bi se moral malo zrediti? Če malo poenostavimo, lahko ljudi razdelimo v tri skupine, in sicer na tiste s premajhno telesno maso, tiste z ustrezno telesno maso in tiste s preveliko telesno maso:
 
 \begin{tabular}{c|c}
      pogoj & skupina \\
      \hline
      ITM $<$ 18.5 & podhranjenost\\
-     18.5 $\leq$ ITM $\leq$ 25 & normalna teža\\
+     18.5 $\leq$ ITM $\leq$ 25 & normalna telesna masa\\
      25 $<$ ITM & debelost
 \end{tabular}
 
-Naš program bi torej radi dopolnili tako, da bo uporabniku izpisal tudi informacijo o tem, v katero skupino spada. Z drugimi besedami, če bo izpolnjen prvi pogoj (ITM $<$ 18.5), bi radi izpisali, da je uporabnik podhranjen, če bo izpolnjen drugi pogoj (18.5 $\leq$ ITM $\leq$ 25), da je njegova teža ustrezna in če bo izpolnjen tretji pogoj (25 $<$ ITM), da je pretežak. Radi bi torej, da se določeni deli našega programam (v konkretnem primeru različni izpisi) izvedejo v odvisnosti od vrednosti ITM. 
+Naš program bi torej radi dopolnili tako, da bo uporabniku izpisal tudi informacijo o tem, v katero skupino spada. Z drugimi besedami, če bo izpolnjen prvi pogoj (ITM $<$ 18.5), bi radi izpisali, da je uporabnik podhranjen, če bo izpolnjen drugi pogoj (18.5 $\leq$ ITM $\leq$ 25), da je njegova telesna masa ustrezna in če bo izpolnjen tretji pogoj (25 $<$ ITM), da je pretežak. Radi bi torej, da se določeni deli našega programa (v konkretnem primeru različni izpisi) izvedejo v odvisnosti od vrednosti ITM. 
 
 \section{Osnovna oblika stavka \texttt{if}}
 
@@ -37,13 +37,13 @@ Za pisanje pogojnih stavkov bomo uporabili Pythonov stavek \texttt{if}. Njegova 
 if pogoj:
     # pogojni_stavki so zamaknjeni
     # pogojni stavki
-    # ce je pogoj izpolnjen
+    # če je pogoj izpolnjen
     ...
 # skupni stavki
-# ni vec zamaknjeno
+# ni več zamaknjeno
 ...
 \end{lstlisting}
-Začnemo torej z rezervirano besedico \textbf{\texttt{if}}, ki ji sledi pogoj. Temu sledi dvopičje (\texttt{:}), s katerim povemo, da je konec pogoja. Potem sledi pogojni del, ki se bo izvedel samo v primeru, da je podan pogoj izpolnjen (glej sliko \ref{img:if1}). Pogojnemu delu sledijo stavki, ki se bodo izvedli v vsakem primeru, ne glede na izpolnjenost pogoja. Kako pa Pythonu povemo kje je konec pogojnega dela? Z zamikom \angl{indent}. Zgoraj smo tiste stavke, ki se izvedejo samo v primeru izpolnjenosti pogoja zamaknili, tako da smo pred njih vstavili tabulator (tipka \emph{Tab}) ali par presledkov (če smo pikolovski, se držimo konvencije štirih presledkov). Pogojni del smo zaključili tako, da smo enostano nehali zamikati. Izvedbo zgornje kode prikazuje diagram poteka na sliki \ref{img:if1}.
+Začnemo torej z rezervirano besedico \textbf{\texttt{if}}, ki ji sledi pogoj. Temu sledi dvopičje (\texttt{:}), s katerim povemo, da je konec pogoja. Potem sledi pogojni del, ki se bo izvedel samo v primeru, da je podan pogoj izpolnjen (glej sliko \ref{img:if1}). Pogojnemu delu sledijo stavki, ki se bodo izvedli v vsakem primeru, ne glede na izpolnjenost pogoja. Kako pa Pythonu povemo kje je konec pogojnega dela? Z zamikom \angl{indent}. Zgoraj smo tiste stavke, ki se izvedejo samo v primeru izpolnjenosti pogoja zamaknili, tako da smo pred njih vstavili tabulator (tipka \emph{Tab}) ali par presledkov (če smo pikolovski, se držimo konvencije štirih presledkov). Pogojni del smo zaključili tako, da smo enostavno nehali zamikati. Izvedbo zgornje kode prikazuje diagram poteka na sliki \ref{img:if1}.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/if1.pdf}
@@ -85,19 +85,19 @@ Za oblikovanje pogojev imamo torej na voljo poseben podatkovni tip, tj. \texttt{
 
 Poskusimo uporaba primerjalnih operatorjev uporabiti na zgledu iz začetka poglavja.
 \begin{zgled}
-Napiši program, ki od uporabnika prebere telesno težo in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
+Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
 \end{zgled}
 \begin{resitev}
-Program od prej bomo dopolnili s pogojnim stavkom. Če je ITM manjši od 17.5, lahko program izpiše, da je uporabnikova teža premajhna. Če je ITM večji od 25, lahko program izpiše, da je uporabnikova teža prevelika. Kaj pa vmes? Tega pa zaenkrat še ne znamo. 
+Program od prej bomo dopolnili s pogojnim stavkom. Če je ITM manjši od 17.5, lahko program izpiše, da je uporabnikova telesna masa premajhna. Če je ITM večji od 25, lahko program izpiše, da je uporabnikova telesna masa prevelika. Kaj pa vmes? Tega pa zaenkrat še ne znamo. 
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-teza = float(input("Vpisi svojo tezo [kg]: "))
-visina = float(input("Vpisi svojo visino [m]: "))
-itm = teza/visina**2
+masa = float(input("Vpiši svojo telesno maso [kg]: "))
+visina = float(input("Vpiši svojo višino [m]: "))
+itm = masa/visina**2
 print("Tvoj ITM je", itm)
 if ITM < 17.5:
-    print("Tvoja teza je premajhna")
+    print("Tvoja telesna masa je premajhna")
 if ITM > 25:
-    print("Tvoja teza je prevelika")
+    print("Tvoja telesna masa je prevelika")
 \end{lstlisting}
 \end{resitev}
 
@@ -114,12 +114,12 @@ False
 >>> "abc" < "abd"
 True
 \end{lstlisting}
-Iz zgornjih zgledov vidimo npr., da Python loči med velikimi in malimi črkami in da so določeni nizi manjši od drugih. Kako pa primerjanje dveh nizov poteka? Na enak način, kot primerjamo nize, ko poskušamo besede sortirati po abecedi (npr. v slovarju ali telefonskem imeniku). Dve besedi primerjamo znak po znaku od začetka do konca, dokler ne pridemo do dveh znakov, ki se razlikujeta ali do konca ene izmed besed. Če se besedi ujemata po vseh znakih in je ena beseda krajša, je krajša beseda zagotovo manjša. Npr., beseda "Beda" je manjša od besede "Bedarija" (v slovarju bo verjetno Beda nastopala pred Bedarijo):
+Iz zgornjih zgledov vidimo tudi to, da Python loči med velikimi in malimi črkami in da so določeni nizi manjši od drugih. Kako pa primerjanje dveh nizov poteka? Na enak način, kot primerjamo nize, ko poskušamo besede sortirati po abecedi (npr. v slovarju ali telefonskem imeniku). Dve besedi primerjamo znak po znaku od začetka do konca, dokler ne pridemo do dveh znakov, ki se razlikujeta ali do konca ene izmed besed. Če se besedi ujemata po vseh znakih in je ena beseda krajša, je krajša beseda zagotovo manjša. Npr., beseda "Beda" je manjša od besede "Bedarija" (v slovarju bo verjetno Beda nastopala pred Bedarijo):
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> "Beda" < "Bedarija"
 True
 \end{lstlisting}
-Beseda "Bedno" pa ni manjša od besede "Bedarija", čeprav je od nje krajša. Zakaj ne? Zato, ker se besedi razlikujeta v čertem primerjanju na znakih "n" in "a" in ker "n" pač ni manjši od znaka "a".
+Beseda "Bedno" pa ni manjša od besede "Bedarija", čeprav je od nje krajša. Zakaj ne? Zato, ker se besedi razlikujeta v četrtem primerjanju na znakih "n" in "a" in ker "n" pač ni manjši od znaka "a".
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> "Bedno" < "Bedarija"
 False
@@ -147,7 +147,7 @@ Spet vidimo, da je znak \texttt{"b"} nekaj drugega kot znak \texttt{"B"} in da P
 
 \subsection{Združevanje rezultatov primerjanja}
 
-Pri reševanju naloge z izpisovanjem podatkov o ITM imamo še vedno težave s primerom, kjer morata biti izpolnjena dva pogoja hkrati (\texttt{ITM >= 18.5} in \texttt{ITM <= 25}). Končen pogoj za izvedbo izpisa \texttt{Tvoja teza je ustrezna}, moramo torej sestaviti iz dveh pogojev. Za ta namen lahko uporabimo t.i. \emph{logične operatorje}, ki omogočajo medsebojno združevanje več spremenljivk tipa \texttt{bool}. Osnovna logična operatorja, ki ju bomo uporabljali v takem primeru sta operator \texttt{and} in operator \texttt{or}. Njuno delovanje lahko ponazorimo s spodnjo tabelo:
+Pri reševanju naloge z izpisovanjem podatkov o ITM imamo še vedno težave s primerom, kjer morata biti izpolnjena dva pogoja hkrati (\texttt{ITM >= 18.5} in \texttt{ITM <= 25}). Končen pogoj za izvedbo izpisa \texttt{Tvoja telesna masa je ustrezna}, moramo torej sestaviti iz dveh pogojev. Za ta namen lahko uporabimo t.i. \emph{logične operatorje}, ki omogočajo medsebojno združevanje več spremenljivk tipa \texttt{bool}. Osnovna logična operatorja, ki ju bomo uporabljali v takem primeru sta operator \texttt{and} in operator \texttt{or}. Njuno delovanje lahko ponazorimo s spodnjo tabelo:
 
 \begin{tabular}{cc|cc}
      \texttt{pogoj1} & \texttt{pogoj2}  & \texttt{pogoj1 and pogoj2} & \texttt{pogoj1 or pogoj2}\\
@@ -168,25 +168,25 @@ True
 
 Zdaj lahko dokončamo zgled z izpisovanjem podatkov o ITM.
 \begin{zgled}
-Napiši program, ki od uporabnika prebere telesno težo in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
+Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
 \end{zgled}
 \begin{resitev}
-Zdaj lahko dodamo še pogojni stavek, pri katerem bo pogoj sestavljen iz dveh delov. V tem primeru mora biti vrednost spremenljivke \texttt{ITM} večja ali enaka od 17.5 in manjpa ali enaka od 25, kar lahko zapišemo s pogojem \texttt{17.5 <= ITM and ITM <= 25}.
+Zdaj lahko dodamo še pogojni stavek, pri katerem bo pogoj sestavljen iz dveh delov. V tem primeru mora biti vrednost spremenljivke \texttt{ITM} večja ali enaka od 17.5 in manjša ali enaka od 25, kar lahko zapišemo s pogojem \texttt{17.5 <= ITM and ITM <= 25}.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-teza = float(input("Vpisi svojo tezo [kg]: "))
-visina = float(input("Vpisi svojo visino [m]: "))
-itm = teza/visina**2
+masa = float(input("Vpiši svojo telesno maso [kg]: "))
+visina = float(input("Vpiši svojo višino [m]: "))
+itm = masa/visina**2
 print("Tvoj ITM je", itm)
 if ITM < 17.5:
-    print("Tvoja teza je premajhna")
+    print("Tvoja telesna masa je premajhna")
 if ITM > 25:
-    print("Tvoja teza je prevelika")
+    print("Tvoja telesna masa je prevelika")
 if 17.5 <= ITM and ITM <= 25:
-    print("Tvoja teza je ustrezna")
+    print("Tvoja telesna masa je ustrezna")
 \end{lstlisting}
 \end{resitev}
 
-Programiranja se učimo v jeziku Python med drugim tudi zato, ker omogoča kar nekaj uporabnih funkcionalnosti, ki jih drugi jeziki ne podpirajo. Sestavljen pogoj \texttt{17.5 <= ITM and ITM <= 25} lahko v tem jeziku zapišemo tudi malo krajše, in sicer takole: \texttt{17.5 <= ITM <= 25}.
+Programiranja se učimo v jeziku Python med drugim tudi zato, ker omogoča kar nekaj uporabnih sladkorčkov (funkcionalnosti), ki jih drugi jeziki ne podpirajo. Sestavljen pogoj \texttt{17.5 <= ITM and ITM <= 25} lahko v tem jeziku zapišemo tudi malo krajše, in sicer takole: \texttt{17.5 <= ITM <= 25}.
 
 \section{Veja \texttt{else}}
 
@@ -203,11 +203,11 @@ Do sedaj smo v primeru neizpolnjenosti pogoja vedno skočili na del \texttt{skup
 \begin{lstlisting}[language=Python, showstringspaces=false]
 if pogoj:
     # pogojni stavki
-    # ce je pogoj izpolnjen
+    # če je pogoj izpolnjen
     ...
 else:
     # pogojni stavki
-    # ce pogoj ni izpolnjen
+    # če pogoj ni izpolnjen
     ...
 # skupni stavki
 ...
@@ -223,25 +223,25 @@ Potek izvajanja zgornje kode prikazuje slika \ref{img:if2}.
 
 Uporabimo zgornji stavek za poenostavljeno rešitev naloge z izpisovanjem podatkov o ITM.
 \begin{zgled}
-Napiši program, ki od uporabnika prebere telesno težo in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, če je njegova teža ustrezna ali ne. 
+Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, če je njegova telesna masa ustrezna ali ne. 
 \end{zgled}
 \begin{resitev}
 Tokrat bomo preverjali le pogoj o ustreznosti uporabnikove teže. 
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-teza = float(input("Vpisi svojo tezo [kg]: "))
-visina = float(input("Vpisi svojo visino [m]: "))
-itm = teza/visina**2
+masa = float(input("Vpiši svojo telesno maso [kg]: "))
+visina = float(input("Vpiši svojo višino [m]: "))
+itm = masa/visina**2
 print("Tvoj ITM je", itm)
 if 17.5 <= ITM and ITM <= 25:
-    print("Tvoja teza je ustrezna")
+    print("Tvoja telesna masa je ustrezna")
 else:
-    print("Tvoja teza ni ustrezna")
+    print("Tvoja telesna masa ni ustrezna")
 \end{lstlisting}
 \end{resitev}
 
 \section{Veja \texttt{elif} in gnezdenje stavkov \texttt{if}}
 
-Uporabnik zdaj ve, če je njegova teža ustrezna. Če njegova teža ni ustrezna, informacije o tem ali je pretežak ali prelahek nima (verjetno se mu to sicer dozdeva). Zgornji primer bi torej radi dopolnili tako, da znotraj veje \texttt{else} izvedemo dodatno primerjanje, na podlagi katerega bomo lahko ugotovili ali je ITM prevelik ali premajhen.
+Uporabnik zdaj ve, če je njegova telesna masa ustrezna. Če njegova telesna masa ni ustrezna, informacije o tem ali je pretežak ali prelahek nima (verjetno se mu to sicer dozdeva). Zgornji primer bi torej radi dopolnili tako, da znotraj veje \texttt{else} izvedemo dodatno primerjanje, na podlagi katerega bomo lahko ugotovili ali je ITM prevelik ali premajhen.
 
 To lahko naredimo na dva načina. Elegantnejši način je uporaba stavka \texttt{elif}, ki omogoča preverjanje dodatnega pogoja znotraj veje \texttt{else}. Celoten stavek \texttt{if} z vejo \texttt{elif} zapišemo takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
@@ -271,21 +271,21 @@ V tem primeru se izpolnjenost pogoja \texttt{pogoj2} preverja samo, če pogoj \t
 
 Zdaj lahko končno podamo lepšo rešitev zgleda z izpisovanjem podatkov o ITM.
 \begin{zgled}
-Napiši program, ki od uporabnika prebere telesno težo in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
+Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
 \end{zgled}
 \begin{resitev}
-Najprej bomo preverili enega izmed pogojev, npr. če je ITM manjši od 17.5. V primeru, da je izpolnjen, izpišemo, da je teža premajhna. V veji \texttt{elif} lahko preverimo naslednji pogoj, npr. če je ITM večji od 25. V primeru, da je izpolnjen, izpišemo, da je teža prevelika. Če ni izpolnjen nobeden izmed obeh pogojev, lahko izpišemo, da je teža ustrezna.
+Najprej bomo preverili enega izmed pogojev, npr. če je ITM manjši od 17.5. V primeru, da je izpolnjen, izpišemo, da je telesna masa premajhna. V veji \texttt{elif} lahko preverimo naslednji pogoj, npr. če je ITM večji od 25. V primeru, da je izpolnjen, izpišemo, da je telesna masa prevelika. Če ni izpolnjen nobeden izmed obeh pogojev, lahko izpišemo, da je telesna masa ustrezna.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-teza = float(input("Vpisi svojo tezo [kg]: "))
-visina = float(input("Vpisi svojo visino [m]: "))
-itm = teza/visina**2
+masa = float(input("Vpiši svojo telesna masa [kg]: "))
+visina = float(input("Vpiši svojo višino [m]: "))
+itm = masa/visina**2
 print("Tvoj ITM je", itm)
 if ITM < 17.5:
-    print("Tvoja teza je premajhna")
+    print("Tvoja telesna masa je premajhna")
 elif ITM > 25:
-    print("Tvoja teza je prevelika")
+    print("Tvoja telesna masa je prevelika")
 else:
-    print("Tvoja teza je ustrezna")
+    print("Tvoja telesna masa je ustrezna")
 \end{lstlisting}
 \end{resitev}
 
@@ -308,25 +308,25 @@ else
 # skupni stavki
 ...
 \end{lstlisting}
-Začetek vgenzdenega stavka \texttt{if} je zamaknjen enkrat, s čimer povemo, da naj se izvede samo v primeru, ko pogoj \texttt{pogoj1} ni izpolnjen. Vsebino ugnezdenega stavka moramo zamakniti dvakrat. Izvedba zgornje kode bo enaka kot v primeru z uporabo veje \texttt{elif} in jo prikazuje slika \ref{img:if3}. 
+Začetek ugnezdenega stavka \texttt{if} je zamaknjen enkrat, s čimer povemo, da naj se izvede samo v primeru, ko pogoj \texttt{pogoj1} ni izpolnjen. Vsebino ugnezdenega stavka moramo zamakniti dvakrat. Izvedba zgornje kode bo enaka kot v primeru z uporabo veje \texttt{elif} in jo prikazuje slika \ref{img:if3}. 
 
 Uporabimo ugnezden stavek \texttt{if} še pri reševanju naše naloge.
 \begin{zgled}
-Napiši program, ki od uporabnika prebere telesno težo in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. Uporabi ugnezden stavek \texttt{if}
+Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. Uporabi ugnezden stavek \texttt{if}
 \end{zgled}
 \begin{resitev}
 Potek programa bo podoben kot prej za razliko od gnezdenje stavka \texttt{if}.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-teza = float(input("Vpisi svojo tezo [kg]: "))
-visina = float(input("Vpisi svojo visino [m]: "))
-itm = teza/visina**2
+masa = float(input("Vpiši svojo telesno maso [kg]: "))
+visina = float(input("Vpiši svojo višino [m]: "))
+itm = masa/visina**2
 print("Tvoj ITM je", itm)
 if ITM < 17.5:
-    print("Tvoja teza je premajhna")
+    print("Tvoja telesna masa je premajhna")
 else
     if ITM > 25:
-        print("Tvoja teza je prevelika")
+        print("Tvoja telesna masa je prevelika")
     else:
-        print("Tvoja teza je ustrezna")
+        print("Tvoja telesna masa je ustrezna")
 \end{lstlisting}
 \end{resitev}

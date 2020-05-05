@@ -341,7 +341,7 @@ print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.")
 \end{lstlisting}
 Zgornji dve vrstici bi lahko združili tudi v eno samo:
 \begin{lstlisting}[language=Python, showstringspaces=false, showstringspaces=false, showstringspaces=false, showstringspaces=false,numbers=left]
-T_C = float(input("Vnesi temperaturo v stopinaj Celzija: "))
+T_C = float(input("Vnesi temperaturo v stopinjah Celzija: "))
 T_F = T_C * 1.8 +32
 print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.")
 \end{lstlisting}
@@ -355,8 +355,8 @@ Komentarji služijo opombam, ki jih sebi ali drugim pišemo znotraj naših progr
 
 Znak \texttt{\#} označuje vrstični komentar, in sicer bo Python preskočil vso kodo od začetka znaka \texttt{\#} do konca vrstice, v kateri se ta znak nahaja. Primer uporabe je sledeč:
 \begin{lstlisting}[language=Python, showstringspaces=false, showstringspaces=false, showstringspaces=false, showstringspaces=false]
->>> # napisemo lahko karkoli
->>> x = 1 # prireditev bo pognal, komentarja pa ne
+>>> # napišemo lahko karkoli
+>>> x = 1 # prireditev bo Python izvedel, komentarja pa ne
 >>> x
 1
 \end{lstlisting}
@@ -370,10 +370,10 @@ Program, ki pretvori prebrano temperaturo
 iz stopinj Celzija v stopinje Fahrenheit
 """
 
-# branje in pretvorba v decimalno stevilo
+# branje in pretvorba v decimalno število
 T_C = float(input("Vnesi temperaturo v stopinaj Celzija: ")) 
 
-T_F = T_C * 1.8 +32 # enacba pretvorbe
+T_F = T_C * 1.8 +32 # enačba pretvorbe
 
 # izpis na zaslon
 print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.") 
