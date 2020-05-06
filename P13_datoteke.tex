@@ -485,16 +485,126 @@ Datoteke CSV se v današnjem času uporabljajo zelo pogosto, saj zagotavljajo ko
 
 Datoteke CSV lahko enostavno uvozimo v različna orodja za obdelavo podatkov, kot je npr. Excel, lahko pa obdelavo podatkov naredimo kar v jeziku Python. Za shranjevanje in branje datotek CSV obstaja kar nekaj knjižnic (v zadnjem času se za namen obdelave podatkov, ki zajema tudi branje in pisanje datotek CSV uporablja predvsem knjižnica \texttt{pandas}, ki jo bomo še srečali), mi pa bomo branje malo kompleksnejše datoteke CSV izvedli kar z osnovnimi konstrukti jezika Python, podobno kot smo to naredili že s telefonskim imenikom. Poglejmo si naslednji primer. 
 
-Najprej bomo pridobili testne podatke, v obliki CSV.
+Najprej bomo pridobili testne podatke, v obliki datoteke CSV.
 \begin{zgled}
 Na spletni strani Statističnega urada Republike Slovenije (\url{https://www.stat.si/}) poišči bazo podatkov SiStat, v njej pa podatke o povprečnih mesečnih bruto in neto plačah pri pravnih osebah javnega in zasebnega sektorja. Te izvozi v obliki CSV, pri čemer želimo imeti ločene podatke za javni in zasebni sektor ter za bruto in neto plače, zanimajo pa nas plače za posamezen mesec.
 \end{zgled}
 
 \begin{resitev}
-Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https://pxweb.stat.si/SiStat}). Sledimo povezavam: \emph{Demografsko in socialno področje} $\rightarrow$ \emph{Trg dela} $\rightarrow$ \emph{Plače in stroški dela} $\rightarrow$ \emph{Povprečne mesečne plače} $\rightarrow$ \emph{Povprečne mesečne bruto in neto plače pri pravnih osebah javnega in zasebnega sektorja, Slovenija, mesečno}. Tu si izberemo mesce, ki jih želimo izvoziti, sektorja in bruto ter neto plače. Pod \emph{Meritve} si izberemo še \emph{Plače za mesec}. Spodaj si izberemo eno izmed oblik CSV za izvoz in podatke izvozimo. Datoteko preimenujemo v \texttt{place.csv}. Tako izvožena datoteka je na voljo na \href{https://raw.githubusercontent.com/mmoskon/OP_skripta/master/place.csv}{povezavi}, vendar verjetno ne predstavlja zadnjega stanja. 
+Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https://pxweb.stat.si/SiStat}). Sledimo povezavam: \emph{Demografsko in socialno področje} $\rightarrow$ \emph{Trg dela} $\rightarrow$ \emph{Plače in stroški dela} $\rightarrow$ \emph{Povprečne mesečne plače} $\rightarrow$ \emph{Povprečne mesečne bruto in neto plače pri pravnih osebah javnega in zasebnega sektorja, Slovenija, mesečno}. Tu si izberemo mesce, ki jih želimo izvoziti, sektorja in bruto ter neto plače. Pod \emph{Meritve} si izberemo še \emph{Plače za mesec}. Spodaj si izberemo eno izmed oblik CSV za izvoz in podatke izvozimo. Datoteko preimenujemo v \texttt{place.csv}. Primer tako izvožene datoteke je na voljo na \href{https://raw.githubusercontent.com/mmoskon/OP_skripta/master/resitve/place.csv}{povezavi}. 
 \end{resitev}
 
-Zdaj bomo poskusili podatke uvoziti v Python.
+Zdaj bomo poskusili podatke uvoziti v Python in izračunali povprečje razpoložljivih mesečnih plač v javnem in v zasebnem sektorju.
 \begin{zgled}
-Podatke o mesečnih plačah uvozi v svoj program, v obliki štirih seznamov: seznam mesecev plač v javnem sektorju, zneski plač v javnem sektorju
+Podatke o mesečnih plačah uvozi v svoj program, v obliki štirih seznamov: seznam mesecev plač v javnem sektorju (\texttt{mesci\_javni}), zneski plač v javnem sektorju (\texttt{zneski\_javni}), seznam mesecev plač v zasebnem sektorju (\texttt{mesci\_zasebni}) in seznam zneskov plač v zasebnem sektorju (\texttt{zneski\_zasebni}). Podatki o mesecih naj bodo ustrezno poravnani s podatki o zneskih.
 \end{zgled}
+\begin{resitev}
+Najprej moramo podrobneje pogledati kako je datoteka strukturirana. V ta namen jo odpremo z beležnico ali podobnim orodjem (ne z orodjem Excel). Če je odpremo z orodjem \emph{Notepad++}, lahko enostavno preverimo kako je datoteka zakodirana. Če določeni znaki niso berljivi, postanejo berljivi, ko kodiranje nastavimo na \emph{cp1250} (\emph{Encoding} $\rightarrow$ \emph{Character Sets} $\rightarrow$ \emph{Central European} $\rightarrow$ \emph{Windows-1250}). To kodiranje bomo torej uporabili pri odpiranju datoteke:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+f = open("place", encoding="cp1250")
+\end{lstlisting}
+
+Zdaj se lotimo vsebine datoteke. Takoj vidimo, da prve tri vrstice ne vsebujejo podatkov. Te bomo torej preskočili. Lahko kar tako, da jih preberemo:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+f.readline()
+f.readline()
+f.readline()
+\end{lstlisting}
+
+Ostale vrstice bomo shranjevali v sezname, ki jih bomo lahko kasneje uporabili za analizo mesečnih plač. Najprej si pripravimo prazne sezname:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+mesci_javni = []
+zneski_javni = []
+mesci_zasebni = []
+zneski_zasebni = []
+\end{lstlisting}
+
+Zdaj se bomo z zanko \texttt{for} sprehodili čez preostanek datoteke. Posamezno vrstico bomo najprej oklestili znaka za novo vrstico, potem pa razbili glede na uporabljeno ločilo. V beležnici ali orodju Notepad++ vidimo, da je to tabulator (\texttt{$\backslash$t}).
+\begin{lstlisting}[language=Python, showstringspaces=false]
+seznam = vrstica.strip().split("\t")
+\end{lstlisting}
+Tako pridobljen seznam bo sestavljen iz štirih podatkov: podatka o mesecu, sektorju, bruto plači in neto plači. Razpakirajmo ga:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+mesec = seznam[0]
+sektor = seznam[1]
+bruto = seznam[2]
+neto = seznam[3]
+\end{lstlisting}
+Šlo bi tudi hitreje:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+mesec, sektor, bruto, neto = seznam
+\end{lstlisting}
+Podatku o mesecu in sektorju lahko pred nadaljnjo obdelavo odstranimo dvojne navednice:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+mesec = mesec.replace('"','')
+sektor = sektor.replace('"','')
+\end{lstlisting}
+Zneske bomo pretvorili v števila tipa \texttt{float}:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+bruto = float(bruto)
+neto = float(neto)
+\end{lstlisting}
+
+Potem bomo preverili podatek o sektorju. Na podlagi sektorja bomo podatka o mesecu in bruto plači dodali v ustrezna seznama. Podatek o neto plači bomo zavrgli.
+\begin{lstlisting}[language=Python, showstringspaces=false]
+if sektor.startswith("Javni"):
+    mesci_javni.append(mesec)
+    zneski_javni.append(bruto)
+else:
+    mesci_zasebni.append(mesec)
+    zneski_zasebni.append(bruto)
+\end{lstlisting}
+
+Celotno rešitev predstavlja spodnja koda:
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+# datoteka je zakodirana s cp1250
+f = open('place.csv', encoding='cp1250')
+
+# prve tri vrstice vržemo proč
+f.readline()
+f.readline()
+f.readline()
+
+# prazni seznami
+mesci_javni = []
+zneski_javni = []
+mesci_zasebni = []
+zneski_zasebni = []
+
+for vrstica in f:
+    # razbijmo vrstico na seznam s podatki
+    seznam = vrstica.strip().split("\t")
+    # razpakirajmo seznam
+    mesec, sektor, bruto, neto = seznam
+
+    # odstranimo dvojne navednice
+    mesec = mesec.replace('"','')
+    sektor = sektor.replace('"','')
+
+    # zneske pretvorimo v števila
+    bruto = float(bruto)
+    neto = float(neto)
+
+    # na podlagi sektorja podatke dodamo v seznama
+    if sektor.startswith("Javni"):
+        mesci_javni.append(mesec)
+        zneski_javni.append(bruto)
+    else:
+        mesci_zasebni.append(mesec)
+        zneski_zasebni.append(bruto)
+
+# podatki so zdaj pripravljeni
+\end{lstlisting}
+\end{resitev}
+
+Podatki so zdaj pripravljeni za nadaljnjo obdelavo. Lahko npr. izračunamo povprečje mesečnih bruto plač v javnem in v zasebnem sektorju:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+>>> avg_javni = sum(zneski_javni)/len(zneski_javni)
+>>> avg_zasebni = sum(zneski_zasebni)/len(zneski_zasebni)
+>>> avg_javni
+1886.8506756756758
+>>> avg_zasebni
+1502.0971621621622
+\end{lstlisting}
+
+Vidimo torej, da so plače v javnem sektorju precej višje. Z analizami bi lahko nadaljevali. Lahko bi npr. poiskali mesec, ko je bila plača najvišja, pogledali kakšni so trendi itd. Pred podrobnejšo obdelavo pa vselej pomaga, če si podatke prej narišemo. In ravno to bomo naredili v naslednjem poglavju.
