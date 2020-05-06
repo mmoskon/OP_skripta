@@ -483,15 +483,18 @@ Prednost uporabe datotek CSV je v tem, da jih lahko zelo enostavno razčlenimo \
 
 Datoteke CSV se v današnjem času uporabljajo zelo pogosto, saj zagotavljajo kompatibilnost zapisanih podatkov med različnimi orodji. Vse kar moramo za branje teh podatkov in izvedbo nadaljnjih analiz poznati je ločilo, ki loči podatke znotraj zapisa (tega lahko določimo tako, da datoteko odpremo z beležnico) in kodiranje, ki je bilo uporabljeno pri zapisovanju podatkov. V določenih primerih datoteka CSV vsebuje tudi \emph{glavo}, ki podaja pomen posameznega stolpca v datoteki, v določenih primerih pa moramo vnaprej vedeti kaj posamezen stolpcev predstavlja. 
 
-Datoteke CSV lahko enostavno uvozimo v različna orodja za obdelavo podatkov, kot je npr. Excel, lahko pa obdelavo podatkov naredimo kar v jeziku Python. Za shranjevanje in branje datotek CSV obstaja kar nekaj knjižnic (v zadnjem času se za namen obdelave podatkov, ki zajema tudi branje in pisanje datotek CSV uporablja predvsem knjižnica \texttt{pandas}, ki jo bomo še srečali), mi pa bomo branje malo kompleksnejše datoteke CSV izvedli kar z osnovnimi konstrukti jezika Python, podobno kot smo to naredili že s telefonskim imenikom. Poglejmo si naslednji primer.
+Datoteke CSV lahko enostavno uvozimo v različna orodja za obdelavo podatkov, kot je npr. Excel, lahko pa obdelavo podatkov naredimo kar v jeziku Python. Za shranjevanje in branje datotek CSV obstaja kar nekaj knjižnic (v zadnjem času se za namen obdelave podatkov, ki zajema tudi branje in pisanje datotek CSV uporablja predvsem knjižnica \texttt{pandas}, ki jo bomo še srečali), mi pa bomo branje malo kompleksnejše datoteke CSV izvedli kar z osnovnimi konstrukti jezika Python, podobno kot smo to naredili že s telefonskim imenikom. Poglejmo si naslednji primer. 
 
+Najprej bomo pridobili testne podatke, v obliki CSV.
 \begin{zgled}
-Na spletni strani Statističnega urada Republike Slovenije (\url{https://www.stat.si/}) poišči bazo podatkov SiStat, v njej pa podatke o povprečnih mesečnih bruto in neto plačah pri pravnih osebah javnega in zasebnega sektorja. Te izvozi v obliki CSV, pri čemer želim imeti ločene podatke za javni in zasebni sektor ter za bruto in neto plače, zanimajo pa nas plače za posamezen mesec.
-
+Na spletni strani Statističnega urada Republike Slovenije (\url{https://www.stat.si/}) poišči bazo podatkov SiStat, v njej pa podatke o povprečnih mesečnih bruto in neto plačah pri pravnih osebah javnega in zasebnega sektorja. Te izvozi v obliki CSV, pri čemer želimo imeti ločene podatke za javni in zasebni sektor ter za bruto in neto plače, zanimajo pa nas plače za posamezen mesec.
 \end{zgled}
 
 \begin{resitev}
-Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https://pxweb.stat.si/SiStat}). 
-
-Sledimo povezavam: \emph{Demografsko in socialno področje} $\rightarrow$ \emph{Trg dela} $\rightarrow$ \emph{Plače in stroški dela} $\rightarrow$ \emph{Povprečne mesečne plače} $\rightarrow$ \emph{Povprečne mesečne bruto in neto plače pri pravnih osebah javnega in zasebnega sektorja, Slovenija, mesečno}. Tu si izberemo mesce, ki jih želimo izvoziti, sektorja in bruto ter neto plače. Pod \emph{Meritve} si izberemo še \emph{Plače za mesec}. Spodaj si izberemo eno izmed oblik CSV za izvoz in podatke izvozimo. Datoteko preimenujemo v \texttt{place.csv}. Tako izvožena datoteka je na voljo na povezavi, vendar verjetno ne predstavlja zadnjega stanja. 
+Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https://pxweb.stat.si/SiStat}). Sledimo povezavam: \emph{Demografsko in socialno področje} $\rightarrow$ \emph{Trg dela} $\rightarrow$ \emph{Plače in stroški dela} $\rightarrow$ \emph{Povprečne mesečne plače} $\rightarrow$ \emph{Povprečne mesečne bruto in neto plače pri pravnih osebah javnega in zasebnega sektorja, Slovenija, mesečno}. Tu si izberemo mesce, ki jih želimo izvoziti, sektorja in bruto ter neto plače. Pod \emph{Meritve} si izberemo še \emph{Plače za mesec}. Spodaj si izberemo eno izmed oblik CSV za izvoz in podatke izvozimo. Datoteko preimenujemo v \texttt{place.csv}. Tako izvožena datoteka je na voljo na \href{https://raw.githubusercontent.com/mmoskon/OP_skripta/master/place.csv}{povezavi}, vendar verjetno ne predstavlja zadnjega stanja. 
 \end{resitev}
+
+Zdaj bomo poskusili podatke uvoziti v Python.
+\begin{zgled}
+Podatke o mesečnih plačah uvozi v svoj program, v obliki štirih seznamov: seznam mesecev plač v javnem sektorju, zneski plač v javnem sektorju
+\end{zgled}
