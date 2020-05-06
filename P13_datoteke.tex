@@ -2,13 +2,13 @@
 
 \section{Zakaj pisati v datoteke in brati iz njih?}
 
-Programi, ki smo jih napisali do zdaj, so podatke hranili le za čas njihovega izvajanja v t.i. \emph{delovnem pomnilniku}. Ko se je nek program končal, so ti podatki izginili in ko smo program ponovno zagnali, smo morali te podatke ponovno zgenerirati, npr. tako, da smo jih prebrali od uporabnika (če smo bolj natančni, so podatki izginili, ko smo resetirali okolje IDLE npr. z zagonom drugega ali istega programa). Ko smo torej dopolnjevali telefonski imenik z novimi vnosi, se je imenik ob končanju programa izbrisal in dodani vnosi so izginili. To običajno predstavlja problem zaradi več razlogov:
+Programi, ki smo jih napisali do zdaj, so podatke hranili le za čas svojega izvajanja v t.i. \emph{delovnem pomnilniku}. Ko se je nek program končal, so ti podatki izginili in ko smo program ponovno zagnali, smo morali te podatke ponovno zgenerirati, npr. tako, da smo jih prebrali od uporabnika (če smo bolj natančni, so podatki izginili, ko smo resetirali okolje IDLE npr. z zagonom drugega ali istega programa). Ko smo torej dopolnjevali telefonski imenik z novimi vnosi, se je imenik ob končanju programa izbrisal in dodani vnosi so izginili. To običajno predstavlja problem zaradi več razlogov:
 \begin{itemize}
     \item Ko se program neha izvajati, podatki izginejo. V primeru imenika se ta torej ob vsakem ponovnem zagonu programa resetira na začetno, npr. prazno, vsebino.
     \item Nimamo varnostnih kopij podatkov. Če se npr. telefon, ki uporablja naš imenik, ugasne, moramo celotno vsebino imenika ustvariti od začetka.
     \item Podatkov, ki smo jih ustvarili v enem programu, ne moremo oziroma težko uporabljamo v drugih programih. 
 \end{itemize}
-Na srečo lahko podatke v svojih programih iz delovnega pomnilnika oziroma iz vsebine spremenljivk, kadarkoli shranimo v t.i. \emph{trajni pomnilnik} oziroma po domače na \emph{disk}. S tem omogočimo njihovo trajno hrambo, kar pomeni, da lahko do teh podatkov pridemo tudi po zaključku izvajanja programa, na disku podatki ostanejo tudi po izklopu računalnika, do njih pa lahko pridemo tudi iz drugih programov. 
+Na srečo lahko podatke v svojih programih iz delovnega pomnilnika oziroma iz vsebine spremenljivk kadarkoli shranimo v t.i. \emph{trajni pomnilnik} oziroma po domače na \emph{disk}. S tem omogočimo njihovo trajno hrambo, kar pomeni, da lahko do teh podatkov pridemo tudi po zaključku izvajanja programa, na disku podatki ostanejo tudi po izklopu računalnika, do njih pa lahko pridemo tudi iz drugih programov. 
 
 Kako pa podatke shranimo na disk? Podobno, kot smo do zdaj na disk shranjevali naše programe v obliki datotek s končnico \texttt{py}, lahko v (druge) datoteke shranjujemo tudi podatke, s katerimi delamo. 
 
@@ -16,7 +16,7 @@ Tako shranjene datoteke lahko kasneje v svojih programih preberemo in s tem \emp
 
 \section{Kaj je datoteka?}
 
-Datoteke predstavljajo osnovni način zapisovanja podatkov na disku (ali na kakšnem drugem mediju). Datoteke predstavljajo trajno hrambo podatkov, omogočajo prenašanje podatkov med različnimi uporabniki in lahko vsebujejo različne tipe podatkov od teksta, besedil, slik in filmov, do datotek, ki jih operacijskih sistem uporablja za svoje delovanje. Ponavadi tip datoteke označuje njena končnica. Programi v Pythonu na primer uporabljajo končnico \texttt{py}, slike pa končnice kot \texttt{jpg}, \texttt{png} ali \texttt{gif}. 
+Datoteke predstavljajo osnovni način zapisovanja podatkov na disku (ali na kakšnem drugem mediju). Datoteke predstavljajo trajno hrambo podatkov, omogočajo prenašanje podatkov med različnimi uporabniki in lahko vsebujejo različne tipe podatkov od teksta, besedil, slik in filmov, do datotek, ki jih operacijskih sistem uporablja za svoje delovanje. Ponavadi tip datoteke označuje njena končnica. Programi v Pythonu na primer uporabljajo končnico \texttt{py}, slike pa končnice kot so \texttt{jpg}, \texttt{png} ali \texttt{gif}. 
 
 V grobem lahko datoteke ločimo v dve skupini, in sicer na \emph{tekstovne datoteke} in \emph{binarne datoteke}. V obeh primerih vsebino datoteke predstavlja zaporedje števil, ki si jih lahko v primeru tekstovnih datotek interpretiramo kot zaporedje znakov oziroma nek (neoblikovan) tekst. Primer tekstovne datoteke je recimo datoteka s končnico \texttt{py} ali datoteka s končnico \texttt{txt}. Za tekstovne datoteke velja, da jih lahko odpremo z beležnico ali beležnici podobnimi orodji (npr. \emph{Notepad++}) in je njihova vsebina bolj ali manj berljiva. Kaj pa binarne datoteke? V skupino binarnih datotek uvrščamo vse ostalo, npr. slike, filme in oblikovana besedila. Če poskusite z beležnico odpreti datoteko s končnico \texttt{docx} (besedilo oblikovano z orodjem Microsoft Word), boste hitro videli, da to ni tekstovna datoteka. Tako kot pri tekstovnih datotekah je zapis s števili uporabljen tudi pri binarnih datotekah. Različna je le interpretacija teh števil. Medtem, ko lahko vsebino tekstovnih datotek orodja, kot je beležnica, enostavno dekodirajo kot zaporedje znakov, potrebujemo za binarne datoteke druga orodja oziroma programe, ki znajo njihovo vsebino dekodirati, glede na tip zapisa. Ena orodja pretvarjajo številke v slike, druga v filme, tretja v oblikovano besedilo. Katero orodje bo posamezno datoteko ob dvojnem kliku nanju odprlo, določa njena končnica. Če se končnica datoteke ne ujema z njeno vsebino, bo orodje vrnilo napako ali pa v najboljšem primeru prikazalo nekaj nenavadnega, podobno kot če datoteko s končnico \texttt{docx} odpremo z beležnico. 
 
@@ -25,7 +25,7 @@ Tekstovne datoteke torej vsebujejo neoblikovan tekst, ki lahko predstavlja na pr
 
 \section{Odpiranje datoteke}
 
-Če želimo neko datoteko v našem programu prebrati ali vanjo pisati, jo moramo najprej seveda odpreti. To lahko naredimo z vgrajeno funkcijo \texttt{open}, ki ji bomo za začetek podali zgolj ime datoteke, do katere želimo dostopati. Naredimo tekstovno datoteko \texttt{stevila.txt} s sledečo vsebino\footnote{Datoteko naredimo tako, da odpremo beležnico, vpišemo vsebino datoteke in datoteko shranimo.}:
+Če želimo neko datoteko v našem programu prebrati ali vanjo pisati, jo moramo najprej odpreti. To lahko naredimo z vgrajeno funkcijo \texttt{open}, ki ji bomo za začetek podali zgolj ime datoteke, do katere želimo dostopati. Naredimo tekstovno datoteko \texttt{stevila.txt} s sledečo vsebino\footnote{Datoteko naredimo tako, da odpremo beležnico, vpišemo vsebino datoteke in datoteko shranimo.}:
 \begin{lstlisting}[showstringspaces=false,numbers=left]
 4
 5.6
@@ -49,17 +49,17 @@ encoding='cp65001'>
 \end{lstlisting}
 Tokrat smo datoteko le našli. Mimogrede, zakaj je bilo pri podajanju poti potrebno podati dve poševnici (\texttt{$\backslash$}). Kot smo videli v prejšnjem poglavju, poševnico Python obravnava kot začetek posebnega znaka. Z njo lahko npr. zapišemo tabulator (\texttt{$\backslash$t}) ali pa znak za novo vrstico (\texttt{$\backslash$n}). Če bi radi zapisali poševnico pa v niz enostavno vpišemo dve poševnici (\texttt{$\backslash\backslash$}).
 
-Drugi način, ki je nekoliko enostavnejši in bolj pogost, je, da pač spremenimo svojo delovno mapo in potem do datoteke podamo relativno pot. To ponavadi v praksi pomeni, da podamo samo ime datoteke (kot v primeru, ko je Python javil napako). Kako pa spremenimo trenutno delovno mapo? Načeloma nam za to ni potrebno posebej skrbeti, saj bo IDLE ob zagonu programa Pythonovo delovno mapo avtomatsko zamenjal za tisto, v kateri se program nahaja. Če bomo datoteko odprli iz programa, ki se bo nahajal v isti mapi kot datoteka, lahko torej podamo zgolj njeno ime. Če torej naredimo program \texttt{branje.py} in ga shranimo v mapo, v katero smo prej shranili \texttt{stevila.txt}, lahko iz njega datoteko odpremo takole:
+Drugi način, ki je nekoliko enostavnejši in bolj pogost, je, da pač spremenimo svojo delovno mapo in potem do datoteke podamo relativno pot. To ponavadi pomeni, da podamo samo ime datoteke (kot v primeru, ko je Python javil napako). Kako pa spremenimo trenutno delovno mapo? Načeloma nam za to ni potrebno posebej skrbeti, saj bo IDLE ob zagonu programa Pythonovo delovno mapo avtomatsko zamenjal za tisto, v kateri se program nahaja. Če bomo datoteko odprli iz programa, ki se bo nahajal v isti mapi kot datoteka, lahko torej podamo zgolj njeno ime. Če torej naredimo program \texttt{branje.py} in ga shranimo v mapo, v katero smo prej shranili \texttt{stevila.txt}, lahko iz njega datoteko odpremo takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 open('stevila.txt')
 \end{lstlisting}
 
 \section{Branje datoteke}
-Datoteko smo torej uspešno odprli, zdaj pa jo bomo poskusili prebrati. Dostopanje do datoteke lahko izvedemo preko objekta, ki ga vrne funkcija \texttt{read}. Če hočemo datoteko prebrati, moramo ta objekt torej shraniti v neko spremenljivko, preko katere ga bomo lahko kasneje še poklicali. Takole:
+Datoteko smo torej uspešno odprli, zdaj pa jo bomo poskusili prebrati. Dostopanje do datoteke lahko izvedemo preko objekta, ki ga vrne funkcija \texttt{read}. Če hočemo datoteko prebrati, moramo temu objektu prirediti neko ime, preko katerega ga bomo lahko kasneje še poklicali. Takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 f = open('stevila.txt')
 \end{lstlisting}
-Do metod za delo z datoteko lahko zdaj dostopamo preko spremenljivke \texttt{f}. Prvi način za branje datoteke je uporaba metode \texttt{read}, ki prebere datoteko od začetka do konca in vrne niz z njeno vsebino. V našem primeru bo rezultat sledeč:
+Do metod za delo z datoteko lahko zdaj dostopamo preko imena \texttt{f}. Prvi način za branje datoteke je uporaba metode \texttt{read}, ki prebere datoteko od začetka do konca in vrne niz z njeno vsebino. V našem primeru bo rezultat sledeč:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f.read()
 '4\n5.6\n2\n100\n15'
@@ -69,7 +69,7 @@ To je torej zapisano v datoteki. Niz vsebuje števila, ki so med seboj ločena z
 >>> print(f.read())
 
 \end{lstlisting}
-Zakaj se tokrat ni nič izpisalo? Poleg tega, da lahko preko spremenljivke \texttt{f} dostopamo do datoteke, le-ta beleži, do kje je bila datoteka že prebrana. Datoteko lahko namreč beremo tudi po kosih (npr. vrstico po vrstico), pri čemer nočemo, da bi vedno brali npr. samo prvo vrstico, ampak bi radi slej ko prej prišli do konca datoteke. Ker smo našo datoteko že prebrali, jo moramo za ponovno branje ponovno odpreti. Ker je trenutna delovna mapa zdaj že enaka mapi, kjer se nahaja naša datoteka, lahko odpiranje tokrat naredimo kar iz ukazne vrstice:
+Zakaj se tokrat ni nič izpisalo? Objekt za dostopanje do datoteke za imenom \texttt{f} beleži, do kje je bila datoteka že prebrana. Datoteko lahko namreč beremo tudi po kosih (npr. vrstico po vrstico), pri čemer nočemo, da bi vedno brali npr. samo prvo vrstico, ampak bi radi slej ko prej prišli do konca datoteke. Ker smo našo datoteko že prebrali, jo moramo za ponovno branje ponovno odpreti. Ker je trenutna delovna mapa zdaj že enaka mapi, kjer se nahaja naša datoteka, lahko odpiranje tokrat naredimo kar iz ukazne vrstice:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f = open('stevila.txt')
 >>> print(f.read())
@@ -146,7 +146,7 @@ def povprecje(ime_datoteke):
 \end{lstlisting}
 \end{resitev}
 
-Kaj pa če bi imeli v eni vrstici več števil? V tem primeru je potrebno vrstico več števil prej še razbiti na posamezna števila. To lahko naredimo z uporabo metode \texttt{split}, ki jo pokličemo nad posamezno vrstico in ji kot argument podamo ustrezno ločilo.
+Kaj pa če bi imeli v eni vrstici več števil? V tem primeru je potrebno vrstico prej še razbiti na posamezna števila. To lahko naredimo z uporabo metode \texttt{split}, ki jo pokličemo nad posamezno vrstico in ji kot argument podamo ustrezno ločilo.
 
 \begin{zgled}
 Napiši funkcijo \texttt{povprecje}, ki kot argument prejme niz z imenom datoteke in izračuna povprečje števil, ki so shranjena v datoteki. Predpostavljaš lahko, da je v posamezni vrstici lahko zapisano več števil, ki so med seboj ločena z vejicami.
@@ -173,7 +173,7 @@ def povprecje(ime_datoteke):
 
 Poskusimo rešiti še težave, ki smo jih imeli s telefonskim imenikom (pa tega nismo vedeli).
 \begin{zgled}
-Napiši funkcijo \texttt{preberi\_imenik}, ki kot argument prejme niz z imenom datoteke, ki vsebuje varnostno kopijo telefonskega imenika. Funkcija naj datoteko prebere in vrne slovar, v katerem so ključi imena oseb, vrednosti pa njihove telefonske številke zapisane kot nizi. Predpostavljaš lahko, da so podatki v datoteki zapisani v obliki \texttt{CSV}\footnote{CSV zapis \angl{comma separated values} predstavlja način zapisovanja podatkov v tekstovne datoteke, pri čemer vsaka vrstica vsebuje svoj zapis (npr. osebo), podatki znotraj posamezne vrstice (npr. ime osebe in telefonska številka) pa so med seboj ločeni z vejicami ali kakšnim drugim ločilom, kot je npr. podpičje ali tabulator. Pomembno je, da je za ločilo uporabljen znak, ki se sicer med podatki nikoli ne pojavi. Če bi npr. datoteka vsebovala decimalna števila ločena s piko, bi bila pika zelo slaba izbira za ločilo med podatki znotraj vrstice.}, pri čemer posamezna vrstica vsebuje ime osebe, ki je od telefonske številke osebe ločeno z vejico.
+Napiši funkcijo \texttt{preberi\_imenik}, ki kot argument prejme niz z imenom datoteke, ki vsebuje varnostno kopijo telefonskega imenika. Funkcija naj datoteko prebere in vrne slovar, v katerem so ključi imena oseb, vrednosti pa njihove telefonske številke zapisane kot nizi. Predpostavljaš lahko, da so podatki v datoteki zapisani v obliki \texttt{CSV}\footnote{CSV zapis \angl{comma separated values} predstavlja način zapisovanja podatkov v tekstovne datoteke, pri čemer vsaka vrstica vsebuje svoj zapis (npr. osebo), podatki znotraj posamezne vrstice (npr. ime osebe in telefonska številka) pa so med seboj ločeni z vejicami ali kakšnim drugim ločilom, kot je npr. podpičje ali tabulator. Pomembno je, da je za ločilo uporabljen znak, ki se sicer med podatki nikoli ne pojavi. Če bi npr. datoteka vsebovala decimalna števila zapisana z decimalno piko, bi bila pika zelo slaba izbira za ločilo med podatki znotraj vrstice.}, pri čemer posamezna vrstica vsebuje ime osebe, ki je od telefonske številke osebe ločeno z vejico.
 \end{zgled}
 \begin{resitev}
 Podobno kot v prejšnjem zgledu bomo s posamezno vrstico naredili sledeče:
@@ -229,7 +229,7 @@ Pisanje v datoteko lahko izvedemo z metodo \texttt{write}, ki ji kot argument po
 >>> f.write(6)
 TypeError: write() argument must be str, not int
 \end{lstlisting}
-Ravnokar smo rekli, da moramo metodi \texttt{write} podati \textbf{niz}, ki ga želimo zapisati. Če hočemo torej v datoteko zapisati število, ga moramo prej pretvoriti v niz s funkcijo \texttt{str}. Poskusimo še enkrat: 
+Ravnokar smo rekli, da moramo metodi \texttt{write} podati \textbf{niz}, ki ga želimo zapisati. Če hočemo torej v datoteko zapisati število, ga moramo prej pretvoriti v niz s funkcijo \texttt{str}. Poskusimo še enkrat z nizom: 
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f = open('stevila.txt')
 >>> f.write('6')
@@ -240,7 +240,7 @@ Tokrat smo dobili drugo napako. Vidimo, da pisanje ni mogoče, ker smo datoteko 
 >>> f
 <_io.TextIOWrapper name='stevila.txt' mode='r' encoding='cp65001'>
 \end{lstlisting}
-Iz izpisa vidimo, da smo odprli datoteko z imenom \texttt{'stevila.txt'} (kar že vemo) in da je \texttt{mode} oziroma način odpiranja datoteke enak vrednosti \texttt{'r'}, ki se nanaša na branje oziroma \emph{read}. Način odpiranja datoteke lahko funkciji \texttt{open} nastavimo z izbirnim argumentom \texttt{mode}, ki je privzeto enak vrednosti \texttt{'r'}. Če argumenta ne nastavimo, bomo torej datoteko odprli za branje. Pogosto uporabljena načina odpiranja datoteke sta še \texttt{'w'} oziroma pisanje \angl{write} in \texttt{'a'} dodajanje \angl{append}. Pisanju bi lahko, če bi bili nekoliko bolj natančni, rekli tudi prepisovanje, saj bomo s takim načinom pisanja obstoječo datoteko prepisali. Dodajanju bi v podobnem kontekstu lahko rekli dopisovanje, saj bomo obstoječi datoteki vsebino dodajali (na koncu obstoječe vsebine). Pri obeh načinih pa zdaj napake, če datoteka s podanim imenom ne bo obstajala, ne bomo dobili, ampak bo Python to datoteko pač ustvaril. Poskusimo zdaj v datoteko \texttt{'stevila.txt'} zapisati par stevil. Najprej jo odpremo za pisanje:
+Iz izpisa vidimo, da smo odprli datoteko z imenom \texttt{'stevila.txt'} (kar že vemo) in da je \texttt{mode} oziroma način odpiranja datoteke enak vrednosti \texttt{'r'}, ki se nanaša na branje oziroma \emph{read}. Način odpiranja datoteke lahko funkciji \texttt{open} nastavimo z izbirnim argumentom \texttt{mode}, ki je privzeto enak vrednosti \texttt{'r'}. Če argumenta ne nastavimo, bomo torej datoteko odprli za branje. Pogosto uporabljena načina odpiranja datoteke sta še \texttt{'w'} oziroma pisanje \angl{write} in \texttt{'a'} oziroma dodajanje \angl{append}. Pisanju bi lahko, če bi bili nekoliko bolj natančni, rekli tudi prepisovanje, saj bomo s takim načinom odpiranja obstoječo datoteko prepisali. Dodajanju bi v podobnem kontekstu lahko rekli dopisovanje, saj bomo obstoječi datoteki vsebino dodajali (na koncu obstoječe vsebine). Pri obeh načinih pa zdaj napake, če datoteka s podanim imenom ne bo obstajala, ne bomo dobili, ampak bo Python to datoteko pač ustvaril. Poskusimo zdaj v datoteko \texttt{'stevila.txt'} zapisati par števil. Najprej jo odpremo za pisanje:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f = open('stevila.txt', mode = 'w')
 \end{lstlisting}
@@ -255,7 +255,7 @@ Zdaj pa pišimo:
 >>> f.write('45')
 2
 \end{lstlisting}
-Vsakič, ko pokličemo metodo \texttt{'write'} ta vrne število znakov, ki smo jih zapisovali. Ko zdaj datoteko \texttt{stevila.txt} odpremo z beležnico (ali beležnici podobnim orodjem), vidimo, da je ta prazna. Zakaj? Pravilo lepega dela z datotekami je, da jih po vsakem odpiranju tudi zapremo za kar lahko uporabimo metodo \texttt{close}. Pri branju to ni nujno potrebno, saj se bo datoteka zaprla avtomatsko, ko bo iz našega imenskega prostora izginila spremenljivka, preko katere smo datoteko brali (najkasneje, ko bomo resetirali okolje IDLE). Pri pisanju pa se lahko zgodi, da bo vsebina datoteke brez eksplicitnega zapiranja datoteke ostala prazna. Ker je pisanje v datoteko počasna operacija, Python, kot smo že navajeni, to v določeni meri optimizira oziroma pohitri. Ko od njega zahtevamo pisanje v datoteko, namreč raje piše v medpomnilnik \angl{buffer}, katerega vsebino bo v dejansko datoteko Python zapisal bodisi takrat, ko se bo nabralo malo več podatkov, da se mu bo splačalo to zapisati v datoteko, ali pa takrat, ko bomo datoteko zaprli, saj s tem povemo, da vanjo ne bomo več pisali. Če želimo, da se naša števila v datoteko zagotvo zapišejo, jo moramo torej zapreti:
+Vsakič, ko pokličemo metodo \texttt{'write'} ta vrne število znakov, ki smo jih zapisovali. Ko zdaj datoteko \texttt{stevila.txt} odpremo z beležnico (ali beležnici podobnim orodjem), vidimo, da je ta prazna. Ko smo datoteko odprli za prepisovanje, je obstoječa vsebina izginila. Potem smo vanjo nekaj pisali. Zakaj je datoteka kljub pisanju še vedno prazna? Pravilo lepega dela z datotekami je, da jih po vsakem odpiranju tudi zapremo za kar lahko uporabimo metodo \texttt{close}. Pri branju to ni nujno potrebno, saj se bo datoteka zaprla avtomatsko, ko bo iz našega imenskega prostora izginila spremenljivka, preko katere smo datoteko najprej odprli in potem brali (najkasneje, ko bomo resetirali okolje IDLE). Pri pisanju pa se lahko zgodi, da bo vsebina datoteke brez eksplicitnega zapiranja datoteke ostala prazna. Ker je pisanje v datoteko počasna operacija, Python, kot smo že navajeni, to v določeni meri optimizira oziroma pohitri. Ko od njega zahtevamo pisanje v datoteko, namreč raje piše v medpomnilnik \angl{buffer}, katerega vsebino bo v dejansko datoteko Python zapisal bodisi takrat, ko se bo nabralo malo več podatkov, da se mu bo splačalo to zapisati v datoteko, ali pa takrat, ko bomo datoteko zaprli, saj s tem povemo, da vanjo ne bomo več pisali. Če želimo, da se naša števila v datoteko zagotovo zapišejo, jo moramo torej zapreti:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f.close()
 \end{lstlisting}
@@ -317,35 +317,36 @@ Ko datoteko ponovno odpremo z beležnico, vidimo, da smo v njej dobili tri nove 
 
 Povadimo pisanje še na zgledu.
 \begin{zgled}
-Napiši funkcijo \texttt{nakljucna}, ki kot argument prejme niz z imenom datoteke in celo število, ki podaja število naključnih števil, ki naj jih funkcija zapiše v datoteko s podanim imenim. Funkcija naj v vsako vrstico v datoteki zapiše največ 10 naključnih celih števil iz intervala od 1 do 100.
+Napiši funkcijo \texttt{nakljucna}, ki kot argument prejme niz z imenom datoteke in celo število, ki podaja število naključnih števil, ki naj jih funkcija zapiše v datoteko s podanim imenom. Funkcija naj v vsako vrstico v datoteki zapiše največ 10 naključnih celih števil iz intervala od 1 do 100.
 \end{zgled}
 \begin{resitev}
 Naključna števila bomo generirali z uporabo funkcije \texttt{randint} modula \texttt{random}. V datoteko bomo pisali po eno število naenkrat. Po vsakem pisanju lahko zapišemo tudi presledek, na vsakih 10 pisanj pa bomo zapisali znak za novo vrstico.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-# uvazanje vedno delamo izven funkcij
+# uvažanje modulov vedno delamo izven funkcij
 from random import randint
 
 def nakljucna(ime_datoteke, n):
     f = open(ime_datoteke, mode='w') # odpri za prepisovanje
     for i in range(1,n+1): # zanko ponovimo n-krat
         st = randint(1,100) # naključno število od 1 do 100
-        f.write(str(st)) # število moramo pretvoriti v niz
+        niz = str(st) # število moramo pretvoriti v niz
+        f.write(niz) # niz zapišemo v datoteko 
         if i % 10 == 0: # ali je čas za novo vrstico
             f.write('\n')
         else:
             f.write(' ')
-    f.close()
+    f.close() # datoteko na koncu zapremo
 \end{lstlisting}
 \end{resitev}
 
 Metoda \texttt{write} torej v datoteko zapiše točno tisto, kar ji podamo, vedno pa ji moramo podati točno en podatek tipa \texttt{str}. Če bi želeli naenkrat zapisati več podatkov, jih moramo torej pred tem sami združiti. V določenih primerih bi bilo veliko bolj priročno, če bi lahko v datoteko pisali na enak način, kot smo stvari izpisovali na zaslon, tj. s funkcijo \texttt{print}. Ta sprejema vrednosti poljubnega tipa, poleg tega pa ji lahko podamo več vrednosti, ki jih bo med sabo združila (privzeto z ločilom \texttt{' '}). Izkaže se, da lahko za pisanje v datoteke uporabimo tudi funkcijo \texttt{print}. Pri tej moramo opcijskemu argumentu z imenom \texttt{file} prirediti spremenljivko, v katero smo datoteko odprli\footnote{Opcijski argument \texttt{file} funkcije \texttt{print} je privzeto postavljen na vrednost \texttt{sys.stdout}, kar pomeni, da pišemo na standardni izhod -- v našem primeru je to konzola okolja IDLE.} Poskusimo na prejšnjem zgledu.
 \begin{zgled}
-Napiši funkcijo \texttt{nakljucna}, ki kot argument prejme niz z imenom datoteke in celo število, ki podaja število naključnih števil, ki naj jih funkcija zapiše v datoteko s podanim imenim. Funkcija naj v vsako vrstico v datoteki zapiše največ 10 naključnih celih števil iz intervala od 1 do 100. Za pisanje v datoteko uporabi funkcijo \texttt{print}.
+Napiši funkcijo \texttt{nakljucna}, ki kot argument prejme niz z imenom datoteke in celo število, ki podaja število naključnih števil, ki naj jih funkcija zapiše v datoteko s podanim imenom. Funkcija naj v vsako vrstico v datoteki zapiše največ 10 naključnih celih števil iz intervala od 1 do 100. Za pisanje v datoteko uporabi funkcijo \texttt{print}.
 \end{zgled}
 \begin{resitev}
 Rešitev je zelo podobna kot prej, le da nam tokrat števil ni potrebno pretvarjati v nize, funkcija \texttt{print} pa tudi sama poskrbi za pisanje presledkov in novih vrstic (le pravilno jo moramo poklicati).
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-# uvazanje vedno delamo izven funkcij
+# uvažanje vedno delamo izven funkcij
 from random import randint
 
 def nakljucna(ime_datoteke, n):
@@ -362,10 +363,10 @@ def nakljucna(ime_datoteke, n):
 
 Za konec dopolnimo še zgled s telefonskim imenikom.
 \begin{zgled}
-Napiši funkcijo \texttt{shrani\_imenik}, ki kot argument prejme niz z imenom datoteke, ki naj vsebuje varnostno kopijo telefonskega imenika in slovar, v katerem so ključi imena oseb, vrednosti pa njihove telefonske številke. Funkcija imenik zapiše v datoteko s podanim imenom, in sicer tako, da vsaka vrstica vsebuje podatke o eni osebi, pri čemer je ime od telefonske številke ločeno z vejico, tako da bo izhod funkcije kompatibilen s funkcijo \texttt{preberi\_imenik}.
+Napiši funkcijo \texttt{shrani\_imenik}, ki kot argument prejme niz z imenom datoteke, ki naj vsebuje varnostno kopijo telefonskega imenika in slovar, v katerem so ključi imena oseb, vrednosti pa njihove telefonske številke. Funkcija zapiše imenik v datoteko s podanim imenom, in sicer tako, da vsaka vrstica vsebuje podatke o eni osebi, pri čemer je ime od telefonske številke ločeno z vejico.
 \end{zgled}
 \begin{resitev}
-V funkciji se bomo sprehodili čez cel imenik in v vsako vrstico zapisali ime in telefonsko številko. Takole:
+V funkciji se bomo sprehodili čez cel imenik in v vsako vrstico zapisali ime in telefonsko številko. Ker sta ime in telefonska številka v slovarju shranjena kot niza, pretvorba v niz pred zapisovanjem ni potrebna.
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
 def shrani_imenik(ime_datoteke, imenik):
     f = open(ime_datoteke, mode='w') # prepisovanje
@@ -411,19 +412,19 @@ Preslikavo lahko naredimo tudi v drugo smer (iz kode v znak), in sicer z uporabo
 'A'
 \end{lstlisting}
 
-Koda posameznega znaka je torej odvisna od uporabljenega kodiranja. Izkaže se, da so osnovni znaki ne glede na uporabljeno kodiranje zakodirani na enak način. Pri kodiranju teh se namreč uporablja 7-bitni standard ASCII \angl{ American Standard Code for Information Interchange}. Za kodiranje posameznega znaka lahko torej uporabimo 7 bitov, kar pomeni, da lahko zakodiramo $2^7=128$ različnih znakov. Pri tem je 32 kod rezerviranih za posebne znake (med te sodi npr. tudi znak za novo vrstico), torej nam ostane 96 kod, s katerimi moramo predstaviti male črke, velike črke, številke in različna ločila ter simbole. Izkaže se, da teh kod zelo hitro zmanjka in zato služijo zgolj predstavitvi osnovnih znakov in črk angleške abecede. Kaj pa naši šumnik, nemški preglasi in kitajske pismenke? Za predstavitev teh moramo uporabiti razširitve kodiranja ASCII. Omenimo dve razširitvi, ki sta v pogosti uporabi v današnjem času. 
+Koda posameznega znaka je odvisna od uporabljenega kodiranja, pri čemer obstaja kar nekaj različnih načinov kodiranja. Izkaže se, da so osnovni znaki ne glede na uporabljeno kodiranje zakodirani na enak način (enaka koda predstavlja enak znak). Pri kodiranju teh se namreč uporablja 7-bitni standard ASCII \angl{American Standard Code for Information Interchange}. Posamezen znak je torej predstavljen s 7 biti, kar pomeni, da lahko zakodiramo $2^7=128$ različnih znakov. Pri tem je 32 kod rezerviranih za posebne znake (med te sodi npr. tudi znak za novo vrstico). Torej nam ostane 96 kod, s katerimi moramo predstaviti male črke, velike črke, številke in različna ločila ter simbole. Izkaže se, da teh kod zelo hitro zmanjka in zato služijo zgolj predstavitvi osnovnih znakov in črk angleške abecede. Kaj pa naši šumnik, nemški preglasi in kitajske pismenke? Za predstavitev teh moramo uporabiti razširitve kodiranja ASCII. Omenimo dve razširitvi, ki sta v pogosti uporabi v današnjem času. 
 
-Kodne tabele \angl{code page} kodiranje ASCII razširjajo z dodatnim bitom, kar pomeni, da lahko z njihovo uporabo predstavimo dodatnih 128 znakov. To je sicer dovolj za znake č, ž in š, kaj pa za kitajske pismenke? Dodatnih kod seveda ni dovolj, da bi predstavili še te, poleg njih pa mogoče še črke iz cirilice, korejski hangul in še kaj drugega. Iz tega razloga se v različnih delih sveta uporabljajo različne kodne tabele. Pri nas je npr. v uporabi centralno-evropska kodna tabela \texttt{cp1250}, s katero lahko predstavimo tudi znake č, ž in š. Znak \texttt{č} je v tej kodni tabeli določen s kodo \texttt{232}. V Nemčiji uporabljajo zahodno-evropsko kodno tabelo \texttt{cp1252}, s katero sicer ne moremo predstaviti šumnikov, lahko pa predstavimo preglase.  V tej kodni tabeli koda \texttt{232} predstavlja znak \texttt{è}, kar ste mogoče že kdaj opazili, npr. pri predvajanju podnapisov.
+Kodne tabele \angl{code page} kodiranje ASCII razširjajo z dodatnim bitom, kar pomeni, da lahko z njihovo uporabo predstavimo dodatnih 128 znakov. To je sicer dovolj za znake č, ž in š, kaj pa za kitajske pismenke? Dodatnih kod seveda ni dovolj, da bi predstavili še te, poleg njih pa mogoče še črke iz cirilice, korejski hangul in še kaj drugega. Iz tega razloga se v različnih delih sveta uporabljajo različne kodne tabele. Pri nas je npr. v uporabi centralno-evropska kodna tabela \texttt{cp1250}, s katero lahko predstavimo tudi znake č, ž in š. Znak \texttt{č} je v tej kodni tabeli določen s kodo \texttt{232}. V Nemčiji uporabljajo zahodno-evropsko kodno tabelo \texttt{cp1252}, s katero sicer ne moremo predstaviti šumnikov, lahko pa predstavimo preglase. V tej kodni tabeli koda \texttt{232} predstavlja znak \texttt{è}, kar ste mogoče že kdaj opazili, npr. pri predvajanju datoteke s podnapisi, ki jih program za predvajanje filmov poskuša dekodirati z napačnim kodiranjem.
 
-Kljub temu, da se kodne tabele še vedno uporabljajo, je v današnjem času v večinski rabi standard \emph{unicode}, katerega pomemben predstavnik je kodiranje UTF-8. Pri tem je posamezen znak zapisan z minimalno 8 biti. V primeru, da se v našem besedilu pojavijo znaki, ki ne nastopajo v osnovnem ASCII kodiranju (npr. č), se zapis posameznega znaka razširi (V konkretnem primeru na 16-bitni zapis).
+Kljub temu, da se kodne tabele še vedno uporabljajo, je v današnjem času v večinski rabi standard \emph{unicode}, katerega pomemben predstavnik je kodiranje UTF-8. Pri tem je posamezen znak zapisan z minimalno 8 biti. V primeru, da se v našem besedilu pojavijo znaki, ki ne nastopajo v osnovnem ASCII kodiranju (npr. č), se zapis posameznega znaka razširi (V konkretnem primeru na 16-bitni zapis). Prednost tega načina kodiranja je, da lahko datoteke iz različnih delov sveta, ki vsebujejo različne lokalne pisave, dekodiramo z enim samim kodiranjem in uporabniku ni potrebno ročno preklapljati med različnimi načini kodiranja, kot v primeru kodnih tabel.
 
-Zakaj se moramo s kodiranjem znakov ukvarjati v okviru osnov programiranja? Pri branju in pisanju datotek je zaželeno, da izrecno podamo kodiranje, ki ga želimo uporabiti. S tem se namreč izognemo težavam z napačno interpretacijo znakov. Če je nekdo zapisal datoteko z uporabo kodiranje UTF-8, mi pa jo poskusimo odpreti s kodiranjem cp1250, bo prišlo do napake ali pa bodo znaki dekodirani narobe. Če kodiranja ne podamo (kot ga nismo podali v primerih zgoraj), bo uporabljeno privzeto kodiranje našega operacijskega sistema. Poglejmo si še enkrat kaj se skriva za spremenljivko, preko katere odpremo datoteko:
+Zakaj se moramo s kodiranjem znakov ukvarjati v okviru osnov programiranja? Pri branju in pisanju datotek je zaželeno, da izrecno podamo tudi kodiranje, ki ga želimo uporabiti. S tem se namreč izognemo težavam z napačno interpretacijo znakov. Če je nekdo zapisal datoteko z uporabo kodiranja UTF-8, mi pa jo poskusimo odpreti s kodiranjem cp1250, bo prišlo do napake ali pa bodo znaki dekodirani narobe. Če kodiranja ne podamo (kot ga nismo podali v primerih zgoraj), bo uporabljeno privzeto kodiranje našega operacijskega sistema. Poglejmo si še enkrat kaj se skriva za spremenljivko, preko katere odpremo datoteko:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> f = open('stevila.txt')
 >>> f 
 <_io.TextIOWrapper name='stevila.txt' mode='r' encoding='cp65001'>
 \end{lstlisting}
-Kodiranje \angl{encoding} je v konkretnem primeru nastavljeno na \texttt{'cp650010'}, ki predstavlja nekakšen ekvivalent kodiranja UTF-8 v operacijskem sistemu Windows. Operacijski sistem Windows sicer pogosto uporablja kodiranje cp1250, Linux pa UTF-8. Zmešnjava je torej popolna. To lahko povzroči nemalo težav, zato je pri delu z datotekami pomembno, da vedno podamo način kodiranja. Dogovorimo se, da bomo od zdaj naprej pri delu z datotekami vedno podali način kodiranja, ki naj bo kar UTF-8. 
+Kodiranje \angl{encoding} je v konkretnem primeru nastavljeno na \texttt{'cp65001'}, ki predstavlja nekakšen ekvivalent kodiranja UTF-8 v operacijskem sistemu Windows. Operacijski sistem Windows sicer pogosto uporablja kodiranje cp1250, Linux pa UTF-8. Zmešnjava je torej popolna. To lahko povzroči nemalo težav, zato je pri delu z datotekami pomembno, da vedno podamo način kodiranja. Dogovorimo se, da bomo od zdaj naprej pri delu z datotekami vedno podali način kodiranja, ki naj bo kar UTF-8. 
 
 Kodiranje, ki ga želimo uporabiti pri pisanju ali branju datoteke, navedemo pri odpiranju datoteke s funkcijo \texttt{open} preko izbirnega argumenta \texttt{encoding}. Zapišimo datoteko z uporabo kodiranja UTF-8\footnote{Argument \texttt{encoding} bomo nastavili na vrednost \texttt{'utf8'}, \texttt{'utf-8'}, \texttt{'UTF8'} ali \texttt{'UTF-8'}.}:
 \begin{lstlisting}[language=Python, showstringspaces=false]
