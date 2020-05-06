@@ -173,7 +173,7 @@ def povprecje(ime_datoteke):
 
 Poskusimo rešiti še težave, ki smo jih imeli s telefonskim imenikom (pa tega nismo vedeli).
 \begin{zgled}
-Napiši funkcijo \texttt{preberi\_imenik}, ki kot argument prejme niz z imenom datoteke, ki vsebuje varnostno kopijo telefonskega imenika. Funkcija naj datoteko prebere in vrne slovar, v katerem so ključi imena oseb, vrednosti pa njihove telefonske številke zapisane kot nizi. Predpostavljaš lahko, da so podatki v datoteki zapisani v obliki \texttt{CSV}\footnote{CSV zapis \angl{comma separated values} predstavlja način zapisovanja podatkov v tekstovne datoteke, pri čemer vsaka vrstica vsebuje svoj zapis (npr. osebo), podatki znotraj posamezne vrstice (npr. ime osebe in telefonska številka) pa so med seboj ločeni z vejicami ali kakšnim drugim ločilom, kot je npr. podpičje ali tabulator. Pomembno je, da je za ločilo uporabljen znak, ki se sicer med podatki nikoli ne pojavi. Če bi npr. datoteka vsebovala decimalna števila zapisana z decimalno piko, bi bila pika zelo slaba izbira za ločilo med podatki znotraj vrstice.}, pri čemer posamezna vrstica vsebuje ime osebe, ki je od telefonske številke osebe ločeno z vejico.
+Napiši funkcijo \texttt{preberi\_imenik}, ki kot argument prejme niz z imenom datoteke, ki vsebuje varnostno kopijo telefonskega imenika. Funkcija naj datoteko prebere in vrne slovar, v katerem so ključi imena oseb, vrednosti pa njihove telefonske številke zapisane kot nizi. Predpostavljaš lahko, da so podatki v datoteki zapisani tako, da posamezna vrstica vsebuje ime osebe, ki je od telefonske številke osebe ločeno z vejico. Pri tem se v eni vrstici nahajajo zgolj podatki ene osebe.
 \end{zgled}
 \begin{resitev}
 Podobno kot v prejšnjem zgledu bomo s posamezno vrstico naredili sledeče:
@@ -473,4 +473,25 @@ def preberi_imenik(ime_datoteke):
             imenik[ime] = stevilka # dodajanje vnosa
     return imenik
 \end{lstlisting}
+\end{resitev}
+
+\section{Datoteke CSV}
+
+Zapis \texttt{CSV} \angl{comma separated values} predstavlja način zapisovanja podatkov v tekstovne datoteke, pri čemer vsaka vrstica vsebuje svoj zapis (npr. osebo), podatki znotraj posamezne vrstice (npr. ime osebe in telefonska številka) pa so med seboj ločeni z vejicami. Primer datoteke CSV smo v tem poglavju že srečali, in sicer, ko smo v datoteko zapisovali telefonski imenik. Kot ločilo je lahko uporabljeno tudi kaj drugega kot vejica, npr. podpičje ali tabulator. Pomembno je, da je za ločilo uporabljen znak, ki se sicer med podatki nikoli ne pojavi. Če bi npr. datoteka vsebovala decimalna števila zapisana z decimalno piko, bi bila pika zelo slaba izbira za ločilo med podatki znotraj vrstice. Včasih uporabljeno ločilo nakazuje že končnica datoteke. Končnica \texttt{csv} npr. nakazuje na to, da je za ločilo uporabljena vejica \angl{comma}, \texttt{tsv} pa tabulator. Včasiv so datoteke CSV shranjene s končnico \texttt{txt}. V tem primeru je najlažje, če datoteko odpremo z beležnico ali beležnici podobnim orodjem in takoj vidimo kateri znak je uporabljen za ločilo. 
+
+Prednost uporabe datotek CSV je v tem, da jih lahko zelo enostavno razčlenimo \angl{parse} oziroma z drugimi besedami, da lahko podatke iz njih zelo enostavno pridobimo in pretvorimo v obliko, ki bo najustreznejša za nadaljno obdelavo (spomnimo se npr. na omrežja prijateljstev). Kot smo videli v primeru branja telefonskega imenika, smo posamezno vrstico, ki predstavlja en zapis (npr. osebo) zgolj razbili z metodo \texttt{split}. Tako smo prišli do seznama podatkov (npr. imena in telefonske številke), ki pripadajo posameznemu zapisu (npt. osebi). Tudi zapisovanje podatkov datotek CSV je nadvse preprosto, saj moramo med podatke, ki jih zapisujemo zgolj vrniti izbrano ločilo, zapise pa med seboj ločiti z novimi vrsticami. Na zapise lahko torej gledamo tudi kot na vrstice, na podatke znotraj zapisov pa kot na stolpce v tabeli. 
+
+Datoteke CSV se v današnjem času uporabljajo zelo pogosto, saj zagotavljajo kompatibilnost zapisanih podatkov med različnimi orodji. Vse kar moramo za branje teh podatkov in izvedbo nadaljnjih analiz poznati je ločilo, ki loči podatke znotraj zapisa (tega lahko določimo tako, da datoteko odpremo z beležnico) in kodiranje, ki je bilo uporabljeno pri zapisovanju podatkov. V določenih primerih datoteka CSV vsebuje tudi \emph{glavo}, ki podaja pomen posameznega stolpca v datoteki, v določenih primerih pa moramo vnaprej vedeti kaj posamezen stolpcev predstavlja. 
+
+Datoteke CSV lahko enostavno uvozimo v različna orodja za obdelavo podatkov, kot je npr. Excel, lahko pa obdelavo podatkov naredimo kar v jeziku Python. Za shranjevanje in branje datotek CSV obstaja kar nekaj knjižnic (v zadnjem času se za namen obdelave podatkov, ki zajema tudi branje in pisanje datotek CSV uporablja predvsem knjižnica \texttt{pandas}, ki jo bomo še srečali), mi pa bomo branje malo kompleksnejše datoteke CSV izvedli kar z osnovnimi konstrukti jezika Python, podobno kot smo to naredili že s telefonskim imenikom. Poglejmo si naslednji primer.
+
+\begin{zgled}
+Na spletni strani Statističnega urada Republike Slovenije (\url{https://www.stat.si/}) poišči bazo podatkov SiStat, v njej pa podatke o povprečnih mesečnih bruto in neto plačah pri pravnih osebah javnega in zasebnega sektorja. Te izvozi v obliki CSV, pri čemer želim imeti ločene podatke za javni in zasebni sektor ter za bruto in neto plače, zanimajo pa nas plače za posamezen mesec.
+
+\end{zgled}
+
+\begin{resitev}
+Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https://pxweb.stat.si/SiStat}). 
+
+Sledimo povezavam: \emph{Demografsko in socialno področje} $\rightarrow$ \emph{Trg dela} $\rightarrow$ \emph{Plače in stroški dela} $\rightarrow$ \emph{Povprečne mesečne plače} $\rightarrow$ \emph{Povprečne mesečne bruto in neto plače pri pravnih osebah javnega in zasebnega sektorja, Slovenija, mesečno}. Tu si izberemo mesce, ki jih želimo izvoziti, sektorja in bruto ter neto plače. Pod \emph{Meritve} si izberemo še \emph{Plače za mesec}. Spodaj si izberemo eno izmed oblik CSV za izvoz in podatke izvozimo. Datoteko preimenujemo v \texttt{place.csv}. Tako izvožena datoteka je na voljo na povezavi, vendar verjetno ne predstavlja zadnjega stanja. 
 \end{resitev}
