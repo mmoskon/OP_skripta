@@ -1,1 +1,19 @@
 \chapter{Vizualizacija podatkov}
+
+\section{Knjižnica Matplotlib in njena namestitev}
+Za vizualizacijo podatkov bomo uporabljali knjižnico Matplotlib, ki predstavlja osnovo za risanje kakršnihkoli grafov. Ker v osnovni različici jezika Python še ni nameščen, ga moramo pred uporabo namestiti (če imate nameščeno distribucijo Anaconda, imate to knjižnico že nameščeno). Kot smo spoznali v poglavju \ref{ch:moduli} lahko za namestitev knjižnice uporabimo orodje \texttt{pip}, tako da zaženemo ukazno vrstico svojega operacijskega sistema (ne okolja IDLE) in vanjo vpišemo
+\begin{lstlisting}[language=bash]
+> pip install matplotlib
+\end{lstlisting}
+Podrobnejša navodila za namestitev paketov smo podali že v poglavju \ref{ch:moduli}, zato jih tu ne bomo podvajali. Če ima vaš računalnik povezavo z internetom, bo orodje \texttt{pip} samo preneslo potrebne namestitvene datoteke in knjižnico namestilo.
+
+Za vizualizacija naših podatkov bomo uporabili Matplotlibov vmesnik \angl{interface} \texttt{pyplot}, ki nam risanje nekoliko olajša. V svoje programe ga bomo uvozili takole:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+import matplotlib.pyplot as plt
+\end{lstlisting}
+Zdaj lahko do funkcij za risanje grafov dostopamo takole:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+plt.ime_funkcije(argumenti)
+\end{lstlisting}
+
+\texttt{Funkciji \texttt{plot} in \texttt{show}}
