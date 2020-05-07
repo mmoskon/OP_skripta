@@ -218,19 +218,26 @@ pdfauthor={Miha Moskon} % author
 \title{Osnove programiranja v jeziku Python za študente Fakultete za kemijo in kemijsko tehnologijo}
 
 
-\lstset{
-  basicstyle=\ttfamily,
-  columns=fullflexible}
-%\lstset{literate=%
-%{č}{{\v c}}1
-%{ž}{{\v z}}1
-%{š}{{\v s}}1
-%{Č}{{\v C}}1
-%{Ž}{{\v Z}}1
-%{Š}{{\v S}}1
-%}
-\lstset{extendedchars=\true}
-\lstset{inputencoding=utf8}
+%\lstset{
+%  basicstyle=\ttfamily,
+%  columns=fullflexible}
+%\lstset{extendedchars=\true}
+%\lstset{inputencoding=utf8}
+%\lstset{literate={č}{\v c}1 {ž}{\v z}1 {š}{\v s}1 {Č}{\v C}1 {Ž}{\v Z}1  {Š}{\v S}1}
+
+\lstset{extendedchars=true,basicstyle=\ttfamily,showspaces=false,showstringspaces=false,literate=%
+{č}{{\v c}}1%
+{ž}{{\v z}}1%
+{š}{{\v s}}1%
+{Č}{{\v C}}1%
+{Ž}{{\v Z}}1%
+{Š}{{\v S}}1%
+{Ä}{{\" A}}1%
+{Ť}{{\v T}}1%
+{Ĺ}{{\' L}}1%
+{ľ}{{\v l}}1%
+{Ĺ}{{\' L}}1%
+}
 
 
 

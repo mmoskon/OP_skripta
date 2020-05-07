@@ -434,7 +434,7 @@ Kodiranje, ki ga želimo uporabiti pri pisanju ali branju datoteke, navedemo pri
 >>> f.close()
 \end{lstlisting}
 Zdaj datoteko preberimo z uporabo kodiranja cp1250:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> f = open("posebni_znaki.txt", encoding="cp1250")
 >>> f.read()
 'ÄŤĹľĹ'
@@ -496,12 +496,12 @@ Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https:/
 
 Zdaj bomo poskusili podatke uvoziti v Python in izračunali povprečje razpoložljivih mesečnih plač v javnem in v zasebnem sektorju.
 \begin{zgled}
-Podatke o mesečnih plačah uvozi v svoj program, v obliki štirih seznamov: seznam mesecev plač v javnem sektorju (\texttt{mesci\_javni}), zneski plač v javnem sektorju (\texttt{zneski\_javni}), seznam mesecev plač v zasebnem sektorju (\texttt{mesci\_zasebni}) in seznam zneskov plač v zasebnem sektorju (\texttt{zneski\_zasebni}). Podatki o mesecih naj bodo ustrezno poravnani s podatki o zneskih.
+Napiši funkcijo \texttt{uvozi\_place}, za uvoz podatkov o mesečnih plačah. Funkcija naj kot argument sprejme ime datoteke s podatki in vrne štiri sezname: seznam mesecev plač v javnem sektorju (\texttt{mesci\_javni}), zneski plač v javnem sektorju (\texttt{zneski\_javni}), seznam mesecev plač v zasebnem sektorju (\texttt{mesci\_zasebni}) in seznam zneskov plač v zasebnem sektorju (\texttt{zneski\_zasebni}). Podatki o mesecih naj bodo ustrezno poravnani s podatki o zneskih.
 \end{zgled}
 \begin{resitev}
 Najprej moramo podrobneje pogledati kako je datoteka strukturirana. V ta namen jo odpremo z beležnico ali podobnim orodjem (ne z orodjem Excel). Če je odpremo z orodjem \emph{Notepad++}, lahko enostavno preverimo kako je datoteka zakodirana. Če določeni znaki niso berljivi, postanejo berljivi, ko kodiranje nastavimo na \emph{cp1250} (\emph{Encoding} $\rightarrow$ \emph{Character Sets} $\rightarrow$ \emph{Central European} $\rightarrow$ \emph{Windows-1250}). To kodiranje bomo torej uporabili pri odpiranju datoteke:
 \begin{lstlisting}[language=Python, showstringspaces=false]
-f = open("place", encoding="cp1250")
+f = open("place.csv", encoding="cp1250")
 \end{lstlisting}
 
 Zdaj se lotimo vsebine datoteke. Takoj vidimo, da prve tri vrstice ne vsebujejo podatkov. Te bomo torej preskočili. Lahko kar tako, da jih preberemo:
@@ -555,52 +555,55 @@ else:
     zneski_zasebni.append(bruto)
 \end{lstlisting}
 
-Celotno rešitev predstavlja spodnja koda:
+Celotno rešitev zapisano v obliki funkcije predstavlja spodnja koda:
 \begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-# datoteka je zakodirana s cp1250
-f = open('place.csv', encoding='cp1250')
-
-# prve tri vrstice vržemo proč
-f.readline()
-f.readline()
-f.readline()
-
-# prazni seznami
-mesci_javni = []
-zneski_javni = []
-mesci_zasebni = []
-zneski_zasebni = []
-
-for vrstica in f:
-    # razbijmo vrstico na seznam s podatki
-    seznam = vrstica.strip().split("\t")
-    # razpakirajmo seznam
-    mesec, sektor, bruto, neto = seznam
-
-    # odstranimo dvojne navednice
-    mesec = mesec.replace('"','')
-    sektor = sektor.replace('"','')
-
-    # zneske pretvorimo v števila
-    bruto = float(bruto)
-    neto = float(neto)
-
-    # na podlagi sektorja podatke dodamo v seznama
-    if sektor.startswith("Javni"):
-        mesci_javni.append(mesec)
-        zneski_javni.append(bruto)
-    else:
-        mesci_zasebni.append(mesec)
-        zneski_zasebni.append(bruto)
-
-# podatki so zdaj pripravljeni
+def uvozi_place(ime_datoteke):
+    
+    # datoteka je zakodirana s cp1250
+    f = open(ime_datoteke, encoding='cp1250')
+    
+    # prve tri vrstice vržemo proč
+    f.readline()
+    f.readline()
+    f.readline()
+    
+    # prazni seznami
+    mesci_javni = []
+    zneski_javni = []
+    mesci_zasebni = []
+    zneski_zasebni = []
+    
+    for vrstica in f:
+        # razbijmo vrstico na seznam s podatki
+        seznam = vrstica.strip().split("\t")
+        # razpakirajmo seznam
+        mesec, sektor, bruto, neto = seznam
+    
+        # odstranimo dvojne navednice
+        mesec = mesec.replace('"','')
+        sektor = sektor.replace('"','')
+    
+        # zneske pretvorimo v števila
+        bruto = float(bruto)
+        neto = float(neto)
+    
+        # na podlagi sektorja podatke dodamo v seznama
+        if sektor.startswith("Javni"):
+            mesci_javni.append(mesec)
+            zneski_javni.append(bruto)
+        else:
+            mesci_zasebni.append(mesec)
+            zneski_zasebni.append(bruto)
+    # podatki so zdaj pripravljeni
+    return mesci_javni,zneski_javni,mesci_zasebni,zneski_zasebni
 \end{lstlisting}
 \end{resitev}
 
-Podatki so zdaj pripravljeni za nadaljnjo obdelavo. Lahko npr. izračunamo povprečje mesečnih bruto plač v javnem in v zasebnem sektorju:
+Podatke lahko zdaj preberemo in obdelamo. Lahko npr. izračunamo povprečje mesečnih bruto plač v javnem in v zasebnem sektorju:
 \begin{lstlisting}[language=Python, showstringspaces=false]
->>> avg_javni = sum(zneski_javni)/len(zneski_javni)
->>> avg_zasebni = sum(zneski_zasebni)/len(zneski_zasebni)
+>>> MJ, ZJ, MZ, ZZ = uvozi_place('place.csv')
+>>> avg_javni = sum(ZJ)/len(ZJ)
+>>> avg_zasebni = sum(ZZ)/len(ZZ)
 >>> avg_javni
 1886.8506756756758
 >>> avg_zasebni
