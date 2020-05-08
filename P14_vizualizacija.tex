@@ -56,14 +56,21 @@ Graf, ki smo ga narisali tako, prikazuje slika \ref{img:plt2}.
     \caption{Črtni graf, pri čemer smo podali koordinate točk na obeh oseh.}
     \label{img:plt2}
 \end{figure}
-Na sliki je prikazan samo zadnji graf. Kam je izginil prejšnji? Kot smo že omenili knjižnica Matplotlib grafe riše na risalni površini v ozadju. Te prikaže, ko pokličemo funkcijo \texttt{show}, hkrati pa takrat risalno površino tudi počisti. Če hočemo na isti sliki prikazati več grafov, bomo pred klicanjem funkcije \texttt{show} pač narisali več grafov. Poskusimo to kar na zgledu s plačami. Predpostavljali bomo, da smo funkcijo \texttt{uvozi\_place} shranili v program \texttt{place\_beri.py} in da se ta program nahaja v naši trenutni delovni mapi. Najprej bomo uvozili funkcijo za uvoz podatkov o plačah zraven pa še knjižnico Matplotlib:
+Na sliki je prikazan samo zadnji graf. Kam je izginil prejšnji? Kot smo že omenili knjižnica Matplotlib grafe riše na risalni površini v ozadju. Te prikaže, ko pokličemo funkcijo \texttt{show}, hkrati pa takrat risalno površino tudi počisti. Če hočemo na isti sliki prikazati več grafov, bomo pred klicanjem funkcije \texttt{show} pač narisali več grafov. Poskusimo to kar na zgledu s plačami, in sicer bi radi narisali podatke o povprečnih bruto plačah. Predpostavljali bomo, da smo funkcijo \texttt{uvozi\_place} shranili v program \texttt{place\_beri.py} in da se ta program nahaja v naši trenutni delovni mapi. Najprej bomo uvozili funkcijo za uvoz podatkov o plačah zraven pa še knjižnico Matplotlib:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> from place_beri import uvozi_place
 >>> import matplotlib.pyplot as plt
 \end{lstlisting}
 Potem preberimo podatke o plačah:
-\begin{lstlisting}[language=Python, showstringspaces=false]
->>> MJ, ZJ, MZ, ZZ = uvozi_place('place.csv')
+\begin{lstlisting}[language=Python]
+>>> place = uvozi_place('place.csv')
+\end{lstlisting}
+in potegnimo sezname is slovarjev:
+\begin{lstlisting}[language=Python]
+>>> MJ = place['Javni sektor']['mesec']
+>>> ZJ = place['Javni sektor']['bruto']
+>>> MZ = place['Zasebni sektor']['mesec']
+>>> ZZ = place['Zasebni sektor']['bruto']
 \end{lstlisting}
 Zdaj bomo kot koordinate na osi $x$ podali podatke o mesecih, kot koordinate na osi $y$ pa podatke o zneskih in poklicali funkcijo za prikaz grafa. Takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
@@ -106,8 +113,8 @@ plt.title("Povprečne mesečne plače")
 
 Manjka seveda tudi legenda. Kaj prikazuje modra linija in kaj oranžna? Legendo lahko dodamo tako, da oznake dodamo še posameznemu grafu kar med izrisom. Funkciji \texttt{plot} lahko preko opcijskega argumenta \texttt{label} podamo niz, ki predstavlja oznako grafa, ki ga bo izrisala. V našem primeru bi to naredili takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
-plt.plot(MJ, ZJ, label='javni') # riši javni sektor
-plt.plot(MZ, ZZ, label='zasebni') # riši zasebni sektor
+plt.plot(MJ, ZJ, label='Javni sektor') # riši javni sektor
+plt.plot(MZ, ZZ, label='Zasebni sektor') # riši zasebni sektor
 \end{lstlisting}
 Če želimo legendo pokazati, moramo poklicati še funkcijo \texttt{legend}, ki prikaz legende vklopi:
 \begin{lstlisting}[language=Python, showstringspaces=false]
@@ -115,7 +122,7 @@ plt.legend()
 \end{lstlisting}
 Vsebino legende, ki jo želimo izpisati bi lahko podali tudi neposredno funkciji \texttt{legend}. Takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
-plt.legend(['javni', 'zasebni'])
+plt.legend(['Javni sektor', 'Zasebni sektor'])
 \end{lstlisting}
 Pri tem moramo paziti na to, da oznake v legendi podajamo v enakem vrstnem redu, kot smo izvajali risanje grafov.
 
@@ -125,7 +132,14 @@ Zapišimo celoten program, ga poženimo in poglejmo rezultat.
 from place_beri import uvozi_place # funkcija za uvoz
 import matplotlib.pyplot as plt
 
-MJ, ZJ, MZ, ZZ = uvozi_place('place.csv')
+# uvozi podatke v slovar
+place = uvozi_place('place.csv')
+# pridobi sezname iz slovarja
+MJ = place['Javni sektor']['mesec']
+ZJ = place['Javni sektor']['bruto']
+MZ = place['Zasebni sektor']['mesec']
+ZZ = place['Zasebni sektor']['bruto']
+
 plt.plot(MJ, ZJ) # riši javni sektor
 plt.plot(MZ, ZZ) # riši zasebni sektor
 
@@ -133,7 +147,7 @@ plt.plot(MZ, ZZ) # riši zasebni sektor
 plt.xlabel("mesec")
 plt.ylabel("znesek [EUR]")
 plt.title("Povprečne mesečne plače")
-plt.legend(['javni', 'zasebni'])
+plt.legend(['Javni sektor', 'Zasebni sektor'])
 
 plt.show() # prikaži graf
 \end{lstlisting}
@@ -173,15 +187,20 @@ Celoten program je zdaj sledeč:
 from place_beri import uvozi_place # funkcija za uvoz
 import matplotlib.pyplot as plt
 
-MJ, ZJ, MZ, ZZ = uvozi_place('place.csv')
-plt.plot(MJ, ZJ) # riši javni sektor
-plt.plot(MZ, ZZ) # riši zasebni sektor
+# uvozi podatke v slovar
+place = uvozi_place('place.csv')
+# pridobi sezname iz slovarja
+MJ = place['Javni sektor']['mesec']
+ZJ = place['Javni sektor']['bruto']
+MZ = place['Zasebni sektor']['mesec']
+ZZ = place['Zasebni sektor']['bruto']
+
 
 # dodaj oznake
 plt.xlabel("mesec")
 plt.ylabel("znesek [EUR]")
 plt.title("Povprečne mesečne plače")
-plt.legend(['javni', 'zasebni'])
+plt.legend(['Javni sektor', 'Zasebni sektor'])
 
 oznake = []
 for mj in MJ[::12]: # vzamemo vsako 12-to oznako
@@ -201,11 +220,156 @@ Rezultat izvedbe programa prikazuje slika \ref{img:plt5}.
     \label{img:plt5}
 \end{figure}
 
+Kaj pa če bi imeli v podatkih o plačah še kakšen sektor več? Ker imamo podatke shranjene v dokaj prilagodljivi strukturi (slovarju), bi lahko izris naredili neodvisno od števila sektorjev. Enostavno se sprehodimo čez ključe slovarja in rišemo. Takole:
+\begin{lstlisting}[language=Python]
+for sektor in place:
+    mesec = place[sektor]['mesec']
+    znesek = place[sektor]['neto']
+    plt.plot(mesec, znesek, label=sektor)
+\end{lstlisting}
+Tokrat smo oznake grafov dodajali že kar med izrisovanjem preko argumenta \texttt{label}. Pri risanju oznak na osi $x$ lahko uporabimo kar spremenljivko \texttt{mesec}, v kateri so ostali podatki zadnjega sektorja (po sprehodu z zanko \texttt{for}). Celotna koda je sledeča: 
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+from place_beri import uvozi_place # funkcija za uvoz
+import matplotlib.pyplot as plt
+
+# uvozi podatke v slovar
+place = uvozi_place('place.csv')
+# pridobi sezname iz slovarja
+MJ = place['Javni sektor']['mesec']
+ZJ = place['Javni sektor']['bruto']
+MZ = place['Zasebni sektor']['mesec']
+ZZ = place['Zasebni sektor']['bruto']
+
+
+plt.plot(MJ, ZJ) # riši javni sektor
+plt.plot(MZ, ZZ) # riši zasebni sektor
+
+# dodaj oznake
+plt.xlabel("mesec")
+plt.ylabel("znesek [EUR]")
+plt.title("Povprečne mesečne plače")
+plt.legend(['Javni sektor', 'Zasebni sektor'])
+
+oznake = []
+for mj in MJ[::12]: # vzamemo vsako 12-to oznako
+    oznake.append(mj[:4]) # vzamemo samo podatek o letu
+
+# vsaka 12-ta lokacija
+lokacije = range(0, len(MJ), 12) 
+
+# prikaži oznake na osi x
+plt.xticks(lokacije, oznake)
+
+plt.show() # prikaži graf
+\end{lstlisting}
+
 \section{Ostale prilagoditve izrisa}
 Če nam grafi še vedno niso všeč, se lahko igramo naprej. Preko funkcije \texttt{plot} lahko nastavljamo barvo izrisa (argument \texttt{color}), debelino črte (argument \texttt{linewidth}), tip črte (argument \texttt{linestyle}) in še marsikaj. Poleg tega lahko določamo razpon osi (funkcija \texttt{axis}), rišemo več podgrafov (funkcija \texttt{subplot}) in graf shranjujemo v datoteko (funkcija \texttt{savefig}). Možnosti je res veliko in jih tukaj ne bomo več naštevali. Primere različnih grafov, ki jih lahko izrišemo z uporabo knjižnice Matplotlib, si lahko bralec pogleda (in prosto dostopno kodo prilagodi za risanje svojih grafov) na povezavi \url{https://matplotlib.org/gallery}.
 
 \section{Ostali tipi grafov}
 
-Matplotlib poleg črtnega diagrama (funkcija \texttt{plot})
+Matplotlib poleg črtnega diagrama (funkcija \texttt{plot}) omogoča risanje tudi ostalih tipov grafov, npr. stolpičnega diagrama \angl{bar plot} s funkcijo \texttt{bar}, histograma s funkcijo \texttt{hist}, kvartilnega diagrama s funkcijo \texttt{box} itd. Poglejmo si še primer izrisa stolpičnega diagrama, pri čemer bomo prikazali podatke o povprečnih plačah za leto 2018. Najprej iz podatkov izluščimo zgolj podatke za leto 2018. Hkrati se bomo morali sprehajati čez mesece in zneske. Ker sta seznama poravnana (isti indeks se nanaša na isti mesec), lahko naredimo sprehod s pomočjo funkcije \texttt{zip}. Znotraj sprehoda pogledamo, če se mesec nanaša na leto 2018 in v tem primeru mesec in znesek dodamo v nova seznama, ki se nanašata na leto 2018. To naredimo za javni in zasebni sektor posebej:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+# uvozi podatke v slovar
+place = uvozi_place('place.csv')
+# pridobi sezname iz slovarja
+MJ = place['Javni sektor']['mesec']
+ZJ = place['Javni sektor']['bruto']
+MZ = place['Zasebni sektor']['mesec']
+ZZ = place['Zasebni sektor']['bruto']
+
+MJ_2018 = []
+ZJ_2018 = []
+MZ_2018 = []
+ZZ_2018 = []
+
+for mj, zj in zip(MJ, ZJ):
+    if "2018" in mj:
+        MJ_2018.append(mj)
+        ZJ_2018.append(zj)
+
+for mz, zz in zip(MZ, ZZ):
+    if "2018" in mz:
+        MZ_2018.append(mz)
+        ZZ_2018.append(zz)
+\end{lstlisting}
+
+Zdaj lahko podatke narišemo, pri čemer bomo za izris uporabili funkcijo \texttt{bar}. Ena izmed razlik med funkcijo \texttt{bar} in \texttt{plot} je, da moramo pri prvi lokacije stolpcev na osi $x$ vedno podati. Uporabimo lahko kar funkcijo \texttt{range}:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+plt.bar(range(len(ZJ_2018)), ZJ_2018)
+plt.bar(range(len(ZZ_2018)), ZZ_2018)
+\end{lstlisting}
+
+Z uporabo funkcije \texttt{xticks} lahko določimo še oznake na osi $x$:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+plt.xticks(range(len(MJ)), MJ)
+\end{lstlisting}
+
+Poglejmo si rezultat
+\begin{lstlisting}[language=Python, showstringspaces=false]
+plt.show()
+\end{lstlisting}
+Prikazuje ga slika \ref{img:plt6}.
+\begin{figure}
+    \includegraphics[width=\linewidth]{img/plt6.png}
+    \caption{Izris podatkov o plačah za leto 2018 s stolpičnim diagramom.}
+    \label{img:plt6}
+\end{figure}
+Oznake na osi $x$ so zopet moteči. Grafu bi lahko dodali naslov, da gre za leto 2018, na osi $x$ pa prikazali samo informacijo o mesecu. Tako bo postalo vse skupaj nekoliko bolj pregledno. Najprej iz oznak odstranimo podatek o letu. To lahko naredimo že med filtiranjem podatkov za leto 2018, kjer namesto stavkov \texttt{MJ\_2018.append(mj)} in \texttt{MZ\_2018.append(mz)} uporabimo stavka \texttt{MJ\_2018.append(mj[-3:])} in \texttt{MZ\_2018.append(mz[-3:])}. Naslov grafa dodamo s sledečo vrstico:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+plt.title('Podatki o plačah za leto 2018')
+\end{lstlisting}
+Dodajmo še legendo:
+\begin{lstlisting}[language=Python, showstringspaces=false]
+plt.legend(['Javni sektor', 'Zasebni sektor'])
+\end{lstlisting}
+
+Celoten program je zdaj sledeč:
+\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+from place_beri import uvozi_place # funkcija za uvoz
+import matplotlib.pyplot as plt
+
+# uvozi podatke v slovar
+place = uvozi_place('place.csv')
+# pridobi sezname iz slovarja
+MJ = place['Javni sektor']['mesec']
+ZJ = place['Javni sektor']['bruto']
+MZ = place['Zasebni sektor']['mesec']
+ZZ = place['Zasebni sektor']['bruto']
+
+# izluščimo podatke za leto 2018
+MJ_2018 = []
+ZJ_2018 = []
+MZ_2018 = []
+ZZ_2018 = []
+
+for mj, zj in zip(MJ, ZJ):
+    if "2018" in mj:
+        MJ_2018.append(mj[-3:]) # brez leta
+        ZJ_2018.append(zj)
+
+for mz, zz in zip(MZ, ZZ):
+    if "2018" in mz:
+        MZ_2018.append(mz[-3:]) # brez leta
+        ZZ_2018.append(zz)
+
+
+plt.bar(range(len(ZJ_2018)), ZJ_2018)
+plt.bar(range(len(ZZ_2018)), ZZ_2018)
+
+plt.xticks(range(len(MJ_2018)), MJ_2018)
+
+plt.title('Podatki o plačah za leto 2018')
+plt.legend(['Javni sektor', 'Zasebni sektor'])
+plt.show()
+\end{lstlisting}
+Rezultat izvedbe programa prikazuje slika \ref{img:plt7}.
+\begin{figure}
+    \includegraphics[width=\linewidth]{img/plt7.png}
+    \caption{Dopolnjen in popravljen izris podatkov o plačah za leto 2018 s stolpičnim diagramom.}
+    \label{img:plt7}
+\end{figure}
+
+
 
 \section{Risanje matematičnih funkcij}

@@ -8,11 +8,8 @@ def uvozi_place(ime_datoteke):
     f.readline()
     f.readline()
     
-    # prazni seznami
-    mesci_javni = []
-    zneski_javni = []
-    mesci_zasebni = []
-    zneski_zasebni = []
+    # prazen slovar
+    place = {}
     
     for vrstica in f:
         # razbijmo vrstico na seznam s podatki
@@ -27,13 +24,14 @@ def uvozi_place(ime_datoteke):
         # zneske pretvorimo v števila
         bruto = float(bruto)
         neto = float(neto)
-    
-        # na podlagi sektorja podatke dodamo v seznama
-        if sektor.startswith("Javni"):
-            mesci_javni.append(mesec)
-            zneski_javni.append(bruto)
-        else:
-            mesci_zasebni.append(mesec)
-            zneski_zasebni.append(bruto)
+
+        if sektor not in place: # če sektorja še ni
+            place[sektor] = {'mesec':[], 'neto':[], 'bruto':[]}
+
+        # dodamo podatke v ustrezen slovar
+        place[sektor]['mesec'].append(mesec)
+        place[sektor]['neto'].append(neto)
+        place[sektor]['bruto'].append(bruto)
+        
     # podatki so zdaj pripravljeni
-    return mesci_javni, zneski_javni, mesci_zasebni, zneski_zasebni
+    return place
