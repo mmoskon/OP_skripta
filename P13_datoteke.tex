@@ -491,12 +491,12 @@ Na spletni strani Statističnega urada Republike Slovenije (\url{https://www.sta
 \end{zgled}
 
 \begin{resitev}
-Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https://pxweb.stat.si/SiStat}). Sledimo povezavam: \emph{Demografsko in socialno področje} $\rightarrow$ \emph{Trg dela} $\rightarrow$ \emph{Plače in stroški dela} $\rightarrow$ \emph{Povprečne mesečne plače} $\rightarrow$ \emph{Povprečne mesečne bruto in neto plače pri pravnih osebah javnega in zasebnega sektorja, Slovenija, mesečno}. Tu si izberemo mesce, ki jih želimo izvoziti, sektorja in bruto ter neto plače. Pod \emph{Meritve} si izberemo še \emph{Plače za mesec}. Spodaj si izberemo eno izmed oblik CSV za izvoz in podatke izvozimo. Datoteko preimenujemo v \texttt{place.csv}. Primer tako izvožene datoteke je na voljo na \href{https://raw.githubusercontent.com/mmoskon/OP_skripta/master/resitve/place.csv}{povezavi}. 
+Na začetni strani poiščemo povezavo na podatkovno bazo SiStat\\ (\url{https://pxweb.stat.si/SiStat}). Sledimo povezavam: \emph{Demografsko in socialno področje} $\rightarrow$ \emph{Trg dela} $\rightarrow$ \emph{Plače in stroški dela} $\rightarrow$ \emph{Povprečne mesečne plače} $\rightarrow$ \emph{Povprečne mesečne bruto in neto plače pri pravnih osebah javnega in zasebnega sektorja, Slovenija, mesečno}. Tu si izberemo mesece, ki jih želimo izvoziti, sektorja in bruto ter neto plače. Pod \emph{Meritve} si izberemo še \emph{Plače za mesec}. Spodaj si izberemo eno izmed oblik CSV za izvoz in podatke izvozimo. Datoteko preimenujemo v \texttt{place.csv}. Primer tako izvožene datoteke je na voljo na \href{https://raw.githubusercontent.com/mmoskon/OP_skripta/master/resitve/place.csv}{povezavi}. 
 \end{resitev}
 
 Zdaj bomo poskusili podatke uvoziti v Python in izračunali povprečje razpoložljivih mesečnih plač v javnem in v zasebnem sektorju.
 \begin{zgled}
-Napiši funkcijo \texttt{uvozi\_place}, za uvoz podatkov o mesečnih plačah. Funkcija naj kot argument sprejme ime datoteke s podatki in slovar, ki kot ključ vsebuje naziv sektorja, kot vrednost pa nov slovar. V tem slovarju naj bodo ključi nizi \texttt{'mesec'}, \texttt{'bruto'} in \texttt{'neto'}, za katerimi so seznami, ki predstavljajo mesece, bruto zneske in neto zneske. Seznami naj imajo na enakem indeksu podatek za enak mesec.
+Napiši funkcijo \texttt{uvozi\_place}, za uvoz podatkov o mesečnih plačah. Funkcija naj kot argument sprejme ime datoteke s podatki in slovar, ki kot ključ vsebuje naziv sektorja, kot vrednost pa nov slovar. V tem slovarju naj bodo ključi nizi \texttt{'mesec'}, \texttt{'bruto'} in \texttt{'neto'}, za katerimi so seznami, ki predstavljajo mesece, bruto zneske in neto zneske. Seznami naj imajo na enakem indeksu podatek za isti mesec.
 \end{zgled}
 \begin{resitev}
 Najprej moramo podrobneje pogledati kako je datoteka strukturirana. V ta namen jo odpremo z beležnico ali podobnim orodjem (ne z orodjem Excel). Če je odpremo z orodjem \emph{Notepad++}, lahko enostavno preverimo kako je datoteka zakodirana. Če določeni znaki niso berljivi, postanejo berljivi, ko kodiranje nastavimo na \emph{cp1250} (\emph{Encoding} $\rightarrow$ \emph{Character Sets} $\rightarrow$ \emph{Central European} $\rightarrow$ \emph{Windows-1250}). To kodiranje bomo torej uporabili pri odpiranju datoteke:
@@ -587,9 +587,11 @@ def uvozi_place(ime_datoteke):
         neto = float(neto)
 
         if sektor not in place: # če sektorja še ni
-            place[sektor] = {'mesec':[], 'neto':[], 'bruto':[]}
+            place[sektor] = {'mesec':[],
+                             'neto':[], 
+                             'bruto':[]}
 
-        # dodamo podatke v ustrezen slovar
+        # dodamo podatke v ustrezen seznam
         place[sektor]['mesec'].append(mesec)
         place[sektor]['neto'].append(neto)
         place[sektor]['bruto'].append(bruto)

@@ -24,11 +24,11 @@ Začeli bomo s funkcijo \texttt{plot}, ki omogoča izris črtnega grafa \angl{li
 >>> plt.plot(Y)
 [<matplotlib.lines.Line2D object at 0x000001DD7FB28860>]
 \end{lstlisting}
-Nekaj se je očitno zgodilo, grafa pa še vedno ne vidimo. Funkcija \texttt{plot} namreč deluje tako, da grafe riše v ozadju in te dodaja na risalno površino, ki pa jo pokaže, šele ko pokličemo funkcijo \texttt{show}.
+Nekaj se je očitno zgodilo, grafa pa še vedno ne vidimo. Funkcija \texttt{plot} deluje tako, da grafe riše v ozadju in te dodaja na risalno površino, ki pa jo pokaže, šele ko pokličemo funkcijo \texttt{show}.
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> plt.show()
 \end{lstlisting}
-Zdaj se je pokazal graf, ki ga prikazuje slika \ref{img:plt1}.
+Zdaj se je prikazal graf, ki ga prikazuje slika \ref{img:plt1}.
 \begin{figure}
     \includegraphics[width=\linewidth]{img/plt1.png}
     \caption{Črtni graf, pri čemer smo podali koordinate točk na osi $y$.}
@@ -65,14 +65,14 @@ Potem preberimo podatke o plačah:
 \begin{lstlisting}[language=Python]
 >>> place = uvozi_place('place.csv')
 \end{lstlisting}
-in potegnimo sezname is slovarjev:
+in potegnemo sezname is slovarjev:
 \begin{lstlisting}[language=Python]
 >>> MJ = place['Javni sektor']['mesec']
 >>> ZJ = place['Javni sektor']['bruto']
 >>> MZ = place['Zasebni sektor']['mesec']
 >>> ZZ = place['Zasebni sektor']['bruto']
 \end{lstlisting}
-Zdaj bomo kot koordinate na osi $x$ podali podatke o mesecih, kot koordinate na osi $y$ pa podatke o zneskih in poklicali funkcijo za prikaz grafa. Takole:
+Zdaj bomo kot koordinate na osi $x$ podali podatke o mesecih. Tako se nam bodo na osi $x$ izpisali kar podatki o mesecih. Kot koordinate na osi $y$ podamo podatke o zneskih. Potem bomo poklicali še funkcijo za prikaz grafa.
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> plt.plot(MJ, ZJ)
 >>> plt.plot(MZ, ZZ)
@@ -85,10 +85,18 @@ Več grafov lahko na isto sliko narišemo tudi tako, da naštejemo pare seznamov
 \end{lstlisting}
 Kljub temu, da je rezultat v zgornjih dveh primerih enak, bomo raje uporabljali prvi način.
 Zapišimo zdaj vse skupaj kot program \texttt{risi\_place.py}.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 from place_beri import uvozi_place # funkcija za uvoz
 import matplotlib.pyplot as plt 
-MJ, ZJ, MZ, ZZ = uvozi_place('place.csv')
+
+# uvozi podatke v slovar
+place = uvozi_place('place.csv')
+# pridobi sezname iz slovarja
+MJ = place['Javni sektor']['mesec']
+ZJ = place['Javni sektor']['bruto']
+MZ = place['Zasebni sektor']['mesec']
+ZZ = place['Zasebni sektor']['bruto']
+
 plt.plot(MJ, ZJ) # riši javni sektor
 plt.plot(MZ, ZZ) # riši zasebni sektor
 plt.show() # prikaži graf
@@ -102,33 +110,33 @@ Rezultat izvedbe zgornjega programa prikazuje slika \ref{img:plt3}.
 
 \section{Dodajanje oznak}
 Vsak graf seveda potrebuje oznake. Označiti moramo kaj prikazuje posamezna os, za kar lahko uporabimo funkciji \texttt{xlabel} in \texttt{ylabel}, ki kot argument prejmeta niz, ki ga želimo prikazati. V našem primeru bi bilo smiselno napisati takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 plt.xlabel("mesec")
 plt.ylabel("znesek [EUR]")
 \end{lstlisting}
 Dodamo lahko tudi naslov grafa z uporabo funkcije \texttt{title}. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 plt.title("Povprečne mesečne plače")
 \end{lstlisting}
 
-Manjka seveda tudi legenda. Kaj prikazuje modra linija in kaj oranžna? Legendo lahko dodamo tako, da oznake dodamo še posameznemu grafu kar med izrisom. Funkciji \texttt{plot} lahko preko opcijskega argumenta \texttt{label} podamo niz, ki predstavlja oznako grafa, ki ga bo izrisala. V našem primeru bi to naredili takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Manjka seveda tudi legenda. Kaj prikazuje modra linija in kaj oranžna? Legendo lahko dodamo tako, da oznake dodamo posameznemu grafu kar med izrisom. Funkciji \texttt{plot} lahko preko opcijskega argumenta \texttt{label} podamo niz, ki predstavlja oznako grafa, ki ga bo izrisala. V našem primeru bi to naredili takole:
+\begin{lstlisting}[language=Python]
 plt.plot(MJ, ZJ, label='Javni sektor') # riši javni sektor
 plt.plot(MZ, ZZ, label='Zasebni sektor') # riši zasebni sektor
 \end{lstlisting}
 Če želimo legendo pokazati, moramo poklicati še funkcijo \texttt{legend}, ki prikaz legende vklopi:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 plt.legend()
 \end{lstlisting}
 Vsebino legende, ki jo želimo izpisati bi lahko podali tudi neposredno funkciji \texttt{legend}. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 plt.legend(['Javni sektor', 'Zasebni sektor'])
 \end{lstlisting}
 Pri tem moramo paziti na to, da oznake v legendi podajamo v enakem vrstnem redu, kot smo izvajali risanje grafov.
 
 
 Zapišimo celoten program, ga poženimo in poglejmo rezultat. 
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 from place_beri import uvozi_place # funkcija za uvoz
 import matplotlib.pyplot as plt
 
@@ -159,7 +167,7 @@ Rezultat izvedbe zgornjega programa prikazuje slika \ref{img:plt4}.
 \end{figure}
 
 \section{Še malo prilagajanja oznak}
-Kar nam še vedno ni všeč na sliki \ref{img:plt4} je neberljiv izpis na osi $x$. Če graf približamo, vidimo, da je na oseh izpisan podatek o mesecu. Mogoče bi bilo bolje, če bi ta podatek izpisali samo vsak januar, poleg tega pa bi informacijo o mesecu izpustili. Poskusimo odrezati rezino po mesecih od začetka do konca, pri čemer za korak nastavimo vrednost 12.
+Kar nam še vedno ni všeč na sliki \ref{img:plt4}, je neberljiv izpis na osi $x$. Če graf približamo, vidimo, da je na oseh izpisan podatek o mesecu. Mogoče bi bilo bolje, če bi ta podatek izpisali samo vsak januar, poleg tega pa bi bilo potem smiselno izpisati samo informacijo o letu (brez meseca). Poskusimo odrezati rezino po mesecih od začetka do konca, pri čemer za korak nastavimo vrednost 12.
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> MJ[::12]
 ['2014M01', '2015M01', '2016M01', '2017M01', '2018M01',
@@ -224,7 +232,7 @@ Kaj pa če bi imeli v podatkih o plačah še kakšen sektor več? Ker imamo poda
 \begin{lstlisting}[language=Python]
 for sektor in place:
     mesec = place[sektor]['mesec']
-    znesek = place[sektor]['neto']
+    znesek = place[sektor]['bruto']
     plt.plot(mesec, znesek, label=sektor)
 \end{lstlisting}
 Tokrat smo oznake grafov dodajali že kar med izrisovanjem preko argumenta \texttt{label}. Pri risanju oznak na osi $x$ lahko uporabimo kar spremenljivko \texttt{mesec}, v kateri so ostali podatki zadnjega sektorja (po sprehodu z zanko \texttt{for}). Celotna koda je sledeča: 
@@ -268,7 +276,7 @@ plt.show() # prikaži graf
 
 \section{Ostali tipi grafov}
 
-Matplotlib poleg črtnega diagrama (funkcija \texttt{plot}) omogoča risanje tudi ostalih tipov grafov, npr. stolpičnega diagrama \angl{bar plot} s funkcijo \texttt{bar}, histograma s funkcijo \texttt{hist}, kvartilnega diagrama s funkcijo \texttt{box} itd. Poglejmo si še primer izrisa stolpičnega diagrama, pri čemer bomo prikazali podatke o povprečnih plačah za leto 2018. Najprej iz podatkov izluščimo zgolj podatke za leto 2018. Hkrati se bomo morali sprehajati čez mesece in zneske. Ker sta seznama poravnana (isti indeks se nanaša na isti mesec), lahko naredimo sprehod s pomočjo funkcije \texttt{zip}. Znotraj sprehoda pogledamo, če se mesec nanaša na leto 2018 in v tem primeru mesec in znesek dodamo v nova seznama, ki se nanašata na leto 2018. To naredimo za javni in zasebni sektor posebej:
+Matplotlib poleg črtnega diagrama (funkcija \texttt{plot}) omogoča risanje tudi ostalih tipov grafov, npr. stolpčnega diagrama \angl{bar plot} s funkcijo \texttt{bar}, histograma s funkcijo \texttt{hist}, kvartilnega diagrama s funkcijo \texttt{box} itd. Poglejmo si še primer izrisa stolpčnega diagrama, pri čemer bomo prikazali podatke o povprečnih plačah za leto 2018. Najprej iz podatkov izluščimo zgolj podatke za leto 2018. Hkrati se bomo morali sprehajati čez mesece in zneske. Ker sta seznama poravnana (isti indeks se nanaša na isti mesec), lahko naredimo sprehod s pomočjo funkcije \texttt{zip}. Znotraj sprehoda pogledamo, če se mesec nanaša na leto 2018 in v tem primeru mesec in znesek dodamo v nova seznama, ki se nanašata na leto 2018. To naredimo za javni in zasebni sektor posebej:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 # uvozi podatke v slovar
 place = uvozi_place('place.csv')
@@ -294,28 +302,28 @@ for mz, zz in zip(MZ, ZZ):
         ZZ_2018.append(zz)
 \end{lstlisting}
 
-Zdaj lahko podatke narišemo, pri čemer bomo za izris uporabili funkcijo \texttt{bar}. Ena izmed razlik med funkcijo \texttt{bar} in \texttt{plot} je, da moramo pri prvi lokacije stolpcev na osi $x$ vedno podati. Uporabimo lahko kar funkcijo \texttt{range}:
+Zdaj lahko podatke narišemo, pri čemer bomo za izris uporabili funkcijo \texttt{bar}. Ena izmed razlik med funkcijo \texttt{plot} in \texttt{bar} je, da moramo pri slednji lokacije stolpcev na osi $x$ vedno podati. Uporabimo lahko kar funkcijo \texttt{range}:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 plt.bar(range(len(ZJ_2018)), ZJ_2018)
 plt.bar(range(len(ZZ_2018)), ZZ_2018)
 \end{lstlisting}
 
 Z uporabo funkcije \texttt{xticks} lahko določimo še oznake na osi $x$:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 plt.xticks(range(len(MJ)), MJ)
 \end{lstlisting}
 
 Poglejmo si rezultat
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 plt.show()
 \end{lstlisting}
 Prikazuje ga slika \ref{img:plt6}.
 \begin{figure}
     \includegraphics[width=\linewidth]{img/plt6.png}
-    \caption{Izris podatkov o plačah za leto 2018 s stolpičnim diagramom.}
+    \caption{Izris podatkov o plačah za leto 2018 s stolpčnim diagramom.}
     \label{img:plt6}
 \end{figure}
-Oznake na osi $x$ so zopet moteči. Grafu bi lahko dodali naslov, da gre za leto 2018, na osi $x$ pa prikazali samo informacijo o mesecu. Tako bo postalo vse skupaj nekoliko bolj pregledno. Najprej iz oznak odstranimo podatek o letu. To lahko naredimo že med filtiranjem podatkov za leto 2018, kjer namesto stavkov \texttt{MJ\_2018.append(mj)} in \texttt{MZ\_2018.append(mz)} uporabimo stavka \texttt{MJ\_2018.append(mj[-3:])} in \texttt{MZ\_2018.append(mz[-3:])}. Naslov grafa dodamo s sledečo vrstico:
+Oznake na osi $x$ so zopet moteče. Grafu bi lahko dodali naslov, da gre za leto 2018, na osi $x$ pa prikazali samo informacijo o mesecu. Tako bo postal graf bolj pregleden. Najprej iz oznak odstranimo podatek o letu. To lahko naredimo že med filtiranjem podatkov za leto 2018, kjer namesto stavkov \texttt{MJ\_2018.append(mj)} in \texttt{MZ\_2018.append(mz)} uporabimo stavka \texttt{MJ\_2018.append(mj[-3:])} in \texttt{MZ\_2018.append(mz[-3:])}. Naslov grafa dodamo s sledečo vrstico:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 plt.title('Podatki o plačah za leto 2018')
 \end{lstlisting}
@@ -325,7 +333,7 @@ plt.legend(['Javni sektor', 'Zasebni sektor'])
 \end{lstlisting}
 
 Celoten program je zdaj sledeč:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 from place_beri import uvozi_place # funkcija za uvoz
 import matplotlib.pyplot as plt
 
@@ -366,10 +374,133 @@ plt.show()
 Rezultat izvedbe programa prikazuje slika \ref{img:plt7}.
 \begin{figure}
     \includegraphics[width=\linewidth]{img/plt7.png}
-    \caption{Dopolnjen in popravljen izris podatkov o plačah za leto 2018 s stolpičnim diagramom.}
+    \caption{Dopolnjen in popravljen izris podatkov o plačah za leto 2018 s stolpčnim diagramom.}
     \label{img:plt7}
 \end{figure}
 
-
-
 \section{Risanje matematičnih funkcij}
+
+Kaj pa če bi želeli narisati graf matematične funkcije? Podobno kot v zgornjih primerih, bomo funkciji za risanje podali seznam koordinat na osi $x$ in seznam koordinat na osi $y$. Koordinate na osi $x$ lahko določimo glede na željen razpon vrednosti -- tega določimo sami. Za določitev vrednosti na osi $y$ pa moramo funkcijo tabelirati pri podanih vrednostih osi $x$. Poskusimo na zgledu:
+
+\begin{zgled}
+Nariši grafe logaritemskih funkcij z osnovo 2, $\textrm{e}$ in 10 na intervalu od 0 do 5. Sliko opremi z legendami, vsak graf pa naj bo narisan s svojo barvo.
+\end{zgled}
+
+\begin{resitev}
+Najprej bomo določili koordinate osi $x$. Lahko bi jih našteli, lahko pa uporabimo kakšno funkcijo za generiranje števil v podanem intervalu -- npr. funkcijo \texttt{range}.
+\begin{lstlisting}[language=Python]
+>>> X = range(6)
+\end{lstlisting}
+Če želimo v razpon vključiti tudi število 5, moramo kot argument \texttt{stop} podati število 6. Kako bomo prišli do funkcij za izračun logaritmov? Spomnimo se na modul \texttt{math}. Če pogledamo njegovo dokumentacijo, vidimo, da vsebuje funkcije \texttt{log2}, \texttt{log} in \texttt{log10}. Uvozimo jih. 
+\begin{lstlisting}[language=Python]
+>>> from math import log2, log, log10
+\end{lstlisting}
+Poskusimo zdaj izračunati koordinate točk na osi $y$:
+\begin{lstlisting}[language=Python]
+>>> Y_2 = log2(X)
+TypeError: must be real number, not range
+\end{lstlisting}
+Tole ne bo šlo. funkcije za izračun logaritmov znajo delati samo s številskimi argumenti, mi pa smo podali seznam. Logaritem bomo morali torej izračunati za vsako točko posebej. Poskusimo najprej z dvojiškim logaritmom. Najprej bomo naredili prazen seznam. Potem bomo naredili sprehod čez vse točke na osi $x$ in za vsako posebej izračunali logaritem ter ga dodali v seznam.
+\begin{lstlisting}[language=Python]
+>>> Y_2 = []
+>>> for x in X:
+    Y_2.append(log2(x))
+ValueError: math domain error
+\end{lstlisting}
+Kaj je narobe tokrat? Tokrat problem ni programerski, ampak matematični, saj logaritem števila 0 ni definiran. Razpon točk na osi $x$ bo torej potrebno zmanjšati na interval od vrednosti 1 do 5. Takole:
+\begin{lstlisting}[language=Python]
+>>> X = range(1,6)
+>>> Y_2 = []
+>>> for x in X:
+    Y_2.append(log2(x))
+\end{lstlisting}
+Podobno naredimo še za naravni in desetiški logaritem in stvar narišemo. Celotna rešitev bo sledeča:
+\begin{lstlisting}[language=Python,numbers=left]
+from math import log2, log, log10
+import matplotlib.pyplot as plt
+
+X = range(1,6) # koordinate točk na x osi
+
+Y_2 = []
+Y_e = []
+Y_10 = []
+
+for x in X:
+    Y_2.append(log2(x)) # dvojšiki
+    Y_e.append(log(x)) # naravni
+    Y_10.append(log10(x)) # desetiški
+
+plt.plot(X,Y_2, label="$log_2(x)$")
+plt.plot(X,Y_e, label="$log_e(x)$")
+plt.plot(X,Y_10, label="$log_{10}(x)$")
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+
+plt.show()
+\end{lstlisting}
+Graf, ki ga na ta način dobimo, prikazuje slika \ref{img:plt8}. 
+\begin{figure}
+    \includegraphics[width=\linewidth]{img/plt8.png}
+    \caption{Osnovni izris logaritemskih funkcij.}
+    \label{img:plt8}
+\end{figure}
+Problem je, da ta graf zgolj približno spominja na izris logaritemskih funkcij. Izrisali smo namreč samo 5 točk in te med seboj povezali. Prav tako nam manjka izris točk, ki imajo koordinato $x$ na intervalu (0, 1). Kako bi lahko \emph{resolucijo} izrisovanja povečali? Tako, da bi zmanjšali korak, s katerim generiramo koordinate na osi $x$. Idealno bi bilo, če bi izrisovanje začeli pri neki zelo majhni vrednosti $x$-a (npr. 0.001), potem pa to vrednost povečevali do števila 5, z nekim zelo majhnim korakom (npr. 0.001). Funkciji \texttt{range} bi to podali na sledeč način:
+\begin{lstlisting}[language=Python]
+>>> X = range(0.001, 5.001, 0.001)
+TypeError: 'float' object cannot be interpreted as 
+an integer
+\end{lstlisting}
+Problem tega pristopa je ta, da lahko funkciji \texttt{range} podamo samo celoštevilske argumente. Znajti se bomo morali torej drugače. Alternativen pristop bi bil, da s funkcijo \texttt{range} zgeneriramo točke od 1 do 5000, in potem vsako izmed njih delimo s 1000. Tako bomo dobili definicijsko območje z željeno resolucijo. 
+\begin{lstlisting}[language=Python]
+>>> X_cel = range(1,5001,1)
+>>> X = []
+>>> for x in X_cel:
+	x /= 1000
+	X.append(x)
+\end{lstlisting}
+Zdaj lahko pri računanju upoštevamo te vrednosti. Dopolnimo zgornjo kodo in poglejmo rezultat, ki ga prikazuje slika \ref{img:plt9}.
+\begin{figure}
+    \includegraphics[width=\linewidth]{img/plt9.png}
+    \caption{Izris logaritemskih funkcij z ustreznejšo resolucijo.}
+    \label{img:plt9}
+\end{figure}
+Celotno rešitev prikazuje spodnja koda:
+\begin{lstlisting}[language=Python]
+>>> X = range(1,6)
+>>> Y_2 = []
+>>> for x in X:
+    Y_2.append(log2(x))
+\end{lstlisting}
+Podobno naredimo še za naravni in desetiški logaritem in stvar narišemo. Celotna rešitev bo sledeča:
+\begin{lstlisting}[language=Python,numbers=left]
+from math import log2, log, log10
+import matplotlib.pyplot as plt
+
+X_cel = range(1,5001,1) # predpriprava za koordinate x
+
+X = []
+Y_2 = []
+Y_e = []
+Y_10 = []
+
+for x in X_cel:
+    x /= 1000 # koordinata x
+    X.append(x)
+    
+    Y_2.append(log2(x)) # dvojšiki
+    Y_e.append(log(x)) # naravni
+    Y_10.append(log10(x)) # desetiški
+
+plt.plot(X,Y_2, label="$log_2(x)$")
+plt.plot(X,Y_e, label="$log_e(x)$")
+plt.plot(X,Y_10, label="$log_{10}(x)$")
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+
+plt.show()
+\end{lstlisting}
+
+\end{resitev}
+Tole je bilo precej nerodno predvsem iz dveh razlogov. Prvič, za izračun logaritmov vseh vrednosti v seznamu \texttt{X} smo se morali sprehoditi čez cel seznam in vsako vrednost izračunati posebej. Veliko lažje bi bilo, če bi lahko funkcijo poklicali kar nad celotnim seznamom (brez uporabe zanke for). Drugič, funkiji \texttt{range} lahko podamo samo celoštevilske argumente. Ker smo želeli biti pri izrisovanju logaritmov nekoliko bolj natančni, smo morali generiranje definicijskega območja nekoliko zakomplicirati. Idealno pa bi bilo, če bi lahko funkciji \texttt{range} oziroma njej podobni funkciji podali decimalne korake. Izkaže se, da lahko zgornja problema rešimo z uporabo knjižnice za numerično računanje \texttt{numpy}, ki pa nam poleg tega olajša še marsikaj drugega.
