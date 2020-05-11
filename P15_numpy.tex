@@ -375,15 +375,22 @@ V tem primeru lahko funkciji \texttt{np.genfromtxt} naročimo, naj ločeno uvozi
 Zdaj so imena stolpcev zapisana ločeno znotraj atributa \texttt{dtype}.
 \begin{lstlisting}[language=Python]
 >>> A3
-array([(nan, 180.3, 87.3), (nan, 161.5, 77.3), (nan, 170. , 56.5),
-       (nan, 156. , 55.3)],
-      dtype=[('ime', '<f8'), ('višina', '<f8'), ('teža', '<f8')])
+array([(nan, 180.3, 87.3), 
+      (nan, 161.5, 77.3), 
+      (nan, 170. , 56.5),
+      (nan, 156. , 55.3)],
+      dtype=[('ime', '<f8'), 
+             ('višina', '<f8'), 
+             ('teža', '<f8')])
 >>> A3.dtype.names
 ('ime', 'višina', 'teža')
 \end{lstlisting}
 Do imen stolpcev torej lahko pridemo, je pa malo nerodno. Pri uporabi funkcije \texttt{np.loadtxt} bi lahko postopali podobno kot prej in celotno datoteko uvozili kot \texttt{ndarray} nizov:
 \begin{lstlisting}[language=Python]
->>> B3 = np.loadtxt("stevila3.csv", encoding="utf-8", delimiter=",", dtype='U')
+>>> B3 = np.loadtxt("stevila3.csv", 
+                    encoding="utf-8", 
+                    delimiter=",", 
+                    dtype='U')
 >>> B3
 array([['ime', 'višina', 'teža'],
        ['Janez', '180.3', '87.3'],
@@ -391,11 +398,11 @@ array([['ime', 'višina', 'teža'],
        ['Ana', '170', '56.5'],
        ['Katja', '156', '55.3']], dtype='<U6')
 \end{lstlisting}
-S tem se seveda spet odpovemo zmožnostim računanja, saj se z nizi pač računati ne da. 
+S tem se seveda spet odpovemo zmožnostim računanja, saj se z nizi kaj veliko pač računati ne da. 
 
 \section{Primernost knjižnice NumPy}
 
-Knjižnica NumPy je torej idealna za delo z numeričnimi podatki. Do problema pa pride, kadar naši podatki poleg numeričnih vrednosti vsebujejo tudi nize, ki jih ne moremo obravnavati kot števila. To so lahko zgolj imena stolpcev ali pa tudi drugi podatki. Pri plačah smo se npr. srečali s podatki o mesecu, v zgornjih primerih pa s podatki o imeni osebe. Ko pridemo do takih podatkov moramo skleniti kompromis. Lahko se jim odpovemo z njihovo pretvorbo v \texttt{np.nan}, kar ponavadi ne pride v upoštev. Lahko vse podatke zapišemo v obliki nizov, s čimer se odpovemo zmožnostim računanja. Možna alternativa je tudi, da numerične podatke shranimo v drugo strukturo kot nenumerične. To nam načeloma povzroči dodatno delo, je pa seveda izvedljivo. V vsakem primeru so komplikacije neizogibne. Lahko pa v takem primeru uporabimo knjižnico Pandas, ki je namenjena delu z večjimi količinami podatkov.
+Knjižnica NumPy je torej idealna za delo z numeričnimi podatki. Do problema pa pride, kadar naši podatki poleg numeričnih vrednosti vsebujejo tudi nize, ki jih ne moremo obravnavati kot števila. To so lahko zgolj imena stolpcev ali pa tudi drugi podatki. Pri plačah smo se npr. srečali s podatki o mesecu, v zgornjih primerih pa s podatki o imenu osebe. Ko pridemo do takih podatkov moramo skleniti kompromis. Lahko se jim odpovemo z njihovo pretvorbo v \texttt{np.nan}, kar ponavadi ne pride v upoštev. Lahko vse podatke zapišemo v obliki nizov, s čimer se odpovemo zmožnostim računanja. Možna alternativa je tudi, da numerične podatke shranimo v drugo strukturo kot nenumerične. To nam načeloma povzroči dodatno delo, je pa seveda izvedljivo. V vsakem primeru so komplikacije neizogibne. Lahko pa v takem primeru uporabimo knjižnico Pandas, ki je namenjena delu z večjimi količinami podatkov, omogoča učinkovito predstavitev različnih podatkovnih tipov in ne izkjučuje uporabe knjižnice NumPy pri hitrem računanju, temveč to dopolnjuje. Poglejmo si še to.
 
 
 
