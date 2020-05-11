@@ -37,7 +37,8 @@ Dobili smo torej nov \texttt{ndarray}, ki je sestavljen iz vsote istoležnih ele
 \begin{lstlisting}[language=Python]
 >>> Z = np.array([7,8])
 >>> X+Z
-ValueError: operands could not be broadcast together with shapes (3,) (2,) 
+ValueError: operands could not be broadcast together
+with shapes (3,) (2,) 
 \end{lstlisting}
 Lahko pa vektorju prištejemo skalar:
 \begin{lstlisting}[language=Python]
@@ -57,11 +58,11 @@ array([  1,  32, 243], dtype=int32)
 >>> X/10
 array([0.1, 0.2, 0.3])
 \end{lstlisting}
-Aritmetične operatorje lahko torej na tak način izvedemo nad vsakim elementom vektorja posebej. 
+Aritmetične operatorje lahko torej na tak način izvedemo nad vsakim elementom vektorja posebej. Poleg tega, da za to ne potrebujemo zank, so te operacije računsko zelo učinkovite in delujejo hitro tudi v primeru, ko delamo z velikimi količinami podatkov. 
 
 \section{Primerjalni operatorji, indeksiranje s seznami in filtiranje}
 
-Podobno kot aritmetični delujejo nad strukturo  \texttt{ndarray} tudi primerjalni operatorji, in sicer tako, da primerjanje izvedejo nad vsakim elementom strukture posebej. Primerjamo lahko npr. dva vektorja:
+Podobno kot aritmetični operatorji delujejo nad strukturo  \texttt{ndarray} tudi primerjalni operatorji, in sicer tako, da primerjanje izvedejo nad vsakim elementom strukture posebej. Primerjamo lahko npr. dva vektorja:
 \begin{lstlisting}[language=Python]
 >>> X = np.array([1,2,3])
 >>> Z = np.array([0.1, 10, -2])
@@ -76,8 +77,8 @@ array([False, True, True])
 
 Dodatna prednost uporabe strukture \texttt{ndarray} je, da lahko to indeksiramo z vektorjem vrednosti \texttt{True} in \texttt{False}, pri čemer bomo kot rezultat dobili \texttt{ndarray} elementov, ki smo jih naslovili z vrednostjo \texttt{True}. Rezultat primerjanja strukture \texttt{ndarray} lahko torej uporabimo za indeksiranja. Če bi npr. želeli dobiti tiste elemente vektorja \texttt{X}, ki so večji ali enaki 2, bi lahko to naredili takole:
 \begin{lstlisting}[language=Python]
->>> rez = X >= 2
->>> X[rez]
+>>> sito = X >= 2
+>>> X[sito]
 array([2, 3])
 \end{lstlisting}
 oziroma krajše:
