@@ -19,7 +19,7 @@ plt.ime_funkcije(argumenti)
 \section{Funkciji \texttt{plot} in \texttt{show}}
 
 Začeli bomo s funkcijo \texttt{plot}, ki omogoča izris črtnega grafa \angl{line plot}. V osnovi ji lahko podamo zgolj en seznam. Poskusimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> Y = [1, 3, 9, 12]
 >>> plt.plot(Y)
 [<matplotlib.lines.Line2D object at 0x000001DD7FB28860>]
@@ -503,4 +503,4 @@ plt.show()
 \end{lstlisting}
 
 \end{resitev}
-Tole je bilo precej nerodno predvsem iz dveh razlogov. Prvič, za izračun logaritmov vseh vrednosti v seznamu \texttt{X} smo se morali sprehoditi čez cel seznam in vsako vrednost izračunati posebej. Veliko lažje bi bilo, če bi lahko funkcijo poklicali kar nad celotnim seznamom (brez uporabe zanke for). Drugič, funkiji \texttt{range} lahko podamo samo celoštevilske argumente. Ker smo želeli biti pri izrisovanju logaritmov nekoliko bolj natančni, smo morali generiranje definicijskega območja nekoliko zakomplicirati. Idealno pa bi bilo, če bi lahko funkciji \texttt{range} oziroma njej podobni funkciji podali decimalne korake. Izkaže se, da lahko zgornja problema rešimo z uporabo knjižnice za numerično računanje \texttt{numpy}, ki pa nam poleg tega olajša še marsikaj drugega.
+Tole je bilo precej nerodno predvsem iz dveh razlogov. Prvič, za izračun logaritmov vseh vrednosti v seznamu \texttt{X} smo se morali sprehoditi čez cel seznam in vsako vrednost izračunati posebej. Veliko lažje bi bilo, če bi lahko funkcijo poklicali kar nad celotnim seznamom (brez uporabe zanke for). Drugič, funkiji \texttt{range} lahko podamo samo celoštevilske argumente. Ker smo želeli biti pri izrisovanju logaritmov nekoliko bolj natančni, smo morali generiranje definicijskega območja nekoliko zakomplicirati. Idealno pa bi bilo, če bi lahko funkciji \texttt{range} oziroma njej podobni funkciji podali decimalne korake. Izkaže se, da lahko zgornja problema rešimo z uporabo knjižnice \texttt{NumPy}, ki pa nam poleg tega olajša še marsikaj drugega.

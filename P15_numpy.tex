@@ -1,0 +1,403 @@
+\chapter{Knjižnica NumPy in hitro računanje}
+
+\section{NumPy in struktura \texttt{ndarray}}
+
+Knjižnica NumPy nadgrajuje Pythonove sezname, poleg tega pa nudi številne funkcije, ki nam olajšajo predvsem matematične operacije nad t.i. nadgrajenimi seznami oziroma strukturo \texttt{ndarray} \angl{N-dimensional array}. Vse se bo torej vrtelo okrog strukture \texttt{ndarray}. Kljub temu, da osnovna namestitev okolja Python knjižnice NumPy ne vsebuje, se je knjižnica namestila skupaj z namestitvijo knjižnice Matplotlib, saj jo slednji potrebuje za svoje delovanje. Uvozimo jo v svoje delovno okolje.
+\begin{lstlisting}[language=Python]
+>>> import numpy as np
+\end{lstlisting}
+Zdaj lahko poljuben seznam (ali seznamu podobno strukturo) pretvorimo v \texttt{ndarray} z uporabo funkcije \texttt{array}:
+\begin{lstlisting}[language=Python]
+>>> X = np.array([1,2,3])
+>>> Y = np.array([4,5,6])
+\end{lstlisting}
+Kaj lahko z \emph{novimi} seznami počnemo? Podobno kot pri pri običajnih seznamih, lahko tudi te indeksiramo, nad njimi uporabljamo vgrajene funkcije, preverjamo, če vsebujejo določen element in se čez njih sprehajamo z zanko \texttt{for}:
+\begin{lstlisting}[language=Python]
+>>> X[0]
+1
+>>> len(X)
+3
+>>> 1 in X
+True
+>>> for x in X:
+	print(x)
+1
+2
+3
+\end{lstlisting}
+
+\section{Aritmetični operatorji in strutkura \texttt{ndarray}}
+
+Sezname smo lahko med seboj tudi seštevali. Tudi \texttt{ndarray}-e lahko, vendar je rezultat nekoliko drugačen:
+\begin{lstlisting}[language=Python]
+>>> X+Y
+array([5, 7, 9])
+\end{lstlisting}
+Dobili smo torej nov \texttt{ndarray}, ki je sestavljen iz vsote istoležnih elementov izhodiščnih \texttt{ndarray}-ev. Na tak \texttt{ndarray} lahko torej gledamo kot na vektor, na vsoto dveh \texttt{ndarray}-ev pa kot na vsoto dveh vektorjev. Zdaj je pogoj za seštevanje to, da sta oba vektorja oziroma \texttt{ndarray}-a enako dolga. Tole, npr. ne bo šlo:
+\begin{lstlisting}[language=Python]
+>>> Z = np.array([7,8])
+>>> X+Z
+ValueError: operands could not be broadcast together with shapes (3,) (2,) 
+\end{lstlisting}
+Lahko pa vektorju prištejemo skalar:
+\begin{lstlisting}[language=Python]
+>>> X+10
+array([11, 12, 13]) 
+\end{lstlisting}
+Nad strukturami tipa \texttt{ndarray} lahko za razliko od seznamov uporabimo tudi druge aritmetične operatorje. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> X*Y
+array([ 4, 10, 18])
+>>> X/Y
+array([0.25, 0.4 , 0.5 ])
+>>> X-Y
+array([-3, -3, -3])
+>>> X**5
+array([  1,  32, 243], dtype=int32)
+>>> X/10
+array([0.1, 0.2, 0.3])
+\end{lstlisting}
+Aritmetične operatorje lahko torej na tak način izvedemo nad vsakim elementom vektorja posebej. 
+
+\section{Primerjalni operatorji, indeksiranje s seznami in filtiranje}
+
+Podobno kot aritmetični delujejo nad strukturo  \texttt{ndarray} tudi primerjalni operatorji, in sicer tako, da primerjanje izvedejo nad vsakim elementom strukture posebej. Primerjamo lahko npr. dva vektorja:
+\begin{lstlisting}[language=Python]
+>>> X = np.array([1,2,3])
+>>> Z = np.array([0.1, 10, -2])
+>>> X < Z
+array([False,  True, False])
+\end{lstlisting}
+Dobili smo torej vektor, ki vsebuje rezultate preverjanja na posameznih mestih. Primerjanje bi lahko izvajali tudi s skalarjem
+\begin{lstlisting}[language=Python]
+>>> X >= 2
+array([False, True, True])
+\end{lstlisting}
+
+Dodatna prednost uporabe strukture \texttt{ndarray} je, da lahko to indeksiramo z vektorjem vrednosti \texttt{True} in \texttt{False}, pri čemer bomo kot rezultat dobili \texttt{ndarray} elementov, ki smo jih naslovili z vrednostjo \texttt{True}. Rezultat primerjanja strukture \texttt{ndarray} lahko torej uporabimo za indeksiranja. Če bi npr. želeli dobiti tiste elemente vektorja \texttt{X}, ki so večji ali enaki 2, bi lahko to naredili takole:
+\begin{lstlisting}[language=Python]
+>>> rez = X >= 2
+>>> X[rez]
+array([2, 3])
+\end{lstlisting}
+oziroma krajše:
+\begin{lstlisting}[language=Python]
+>>> X[X >= 2]
+array([2, 3])
+\end{lstlisting}
+Tej operaciji lahko rečemo tudi \emph{filtriranje} vrednosti.
+
+\section{Generiranje strukture \texttt{ndarray}}
+
+Kot smo videli zgoraj lahko strukturo \texttt{ndarray} dobimo tako, da s funkcijo \texttt{array} vanjo pretvorimo običajen seznam. Modul NumPy pa ponuja tudi številne funkcije, ki jih lahko uporabimo pri generiranju  struktur \texttt{ndarray} z vnaprej poznanimi lastnostmi. Strukturo \texttt{ndarray}, ki npr. vsebuje same ničle, lahko zgeneriramo s funkcijo \texttt{zero}, same enice s funkcijo \texttt{ones}, matriko naključnih števil pa preko modula \texttt{numpy.random}. Podrobneje si bomo pogledali funkcijo \texttt{arange} in \texttt{linspace}, ki sta namenjeni generiranju struktur \texttt{ndarray} na vnaprej določenem intervalu.
+
+Funkcija \texttt{arange} deluje zelo podobno kot funkcija \texttt{range}, le da vrača strukturo tipa \texttt{ndarray} poleg tega pa za razliko od funkcije \texttt{range} ni omejena na celoštevilske argumente. Če bi npr. želeli zgenerirati vektor vrednosti od 0.001 do 5 s korakom 0.001, bi to naredili s sledečim klicem:
+\begin{lstlisting}[language=Python]
+>>> X = np.arange(0.001, 5.001, 0.001)
+\end{lstlisting}
+Funkcija \texttt{linspace} deluje podobno, le da tej kot argumente podamo začetno in končno točko intervala (tokrat bo slednja v intervalu vsebovana) in število točk, ki jih želimo v intervalu imeti. Enak rezultat, kot ga dobimo z gornjim klicem funkcije \texttt{arange}, lahko dobimo tudi s funkcijo \texttt{linspace} takole:
+\begin{lstlisting}[language=Python]
+>>> X = np.linspace(0.001, 5, 5000)
+\end{lstlisting}
+Rekli smo torej, da želimo imeti 5000 točk na intervalu, ki se začne s točko 0.001 in konča s točko 5 (ta točka je v intervalu še vsebovana). Pri tem je uporabljena linearna interpolacija med točkami, kar z drugimi besedami pomeni, da od točke 0.001 do točke 5 potegnemo premico. 
+
+\section{Funkcije nad strukturo \texttt{ndarray}}
+Če želimo narisati graf logaritemske funkcije, lahko torej koordinate na osi $x$ enostavneje zgeneriramo s funkcijo \texttt{arange}. Zdaj moramo le še izračunati njihove logaritme. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> from math import log2, log, log10
+>>> log2(X)
+TypeError: only size-1 arrays can be converted to
+Python scalars
+\end{lstlisting}
+Funkcije modula \texttt{math} torej nad vektorji ne moremo vektorsko izvajati, ampak se moramo spet zateči k zanki \texttt{for}. Izkaže pa se, da knjižnica NumPy poleg drugih vsebuje tudi matematične funkcije, ki zamenjuje tiste iz modula \texttt{math}, poleg tega pa podpirajo vektorski način izvajanja. Nad celotnim vektorjem jih torej lahko izvedemo z enim samim klicem. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> np.log2(X)
+array([-9.96578428, -8.96578428, -8.38082178, ...,
+2.3213509 , 2.32163953,  2.32192809])
+\end{lstlisting}
+
+Zdaj lahko dokončamo zgled z risanjem logaritemskih funkcij.
+
+\begin{zgled}
+Nariši grafe logaritemskih funkcij z osnovo 2, $\textrm{e}$ in 10 na intervalu od 0 do 5. Sliko opremi z legendami, vsak graf pa naj bo narisan s svojo barvo.
+\end{zgled}
+
+\begin{resitev}
+Rešitev bo zdaj bistveno krajša, saj bomo vrednosti na osi $x$ generirali s funkcijo \texttt{np.arange} (ena vrstica), logaritme pa računali s funkcijami \texttt{np.log2}, \texttt{np.log} in \texttt{np.log10} (tri vrstice). Ostala koda bo ostala enaka, prav tako pa bo enak rezultat, ki je prikazan na sliki \ref{img:plt9}.
+\begin{lstlisting}[language=Python,numbers=left]
+import numpy as np
+import matplotlib.pyplot as plt
+
+# hitro generiranje vrednosti na osi x
+X = np.arange(0.001, 5.001, 0.001) 
+
+# računanje logaritmov brez zanke for 
+Y_2 = np.log2(X)
+Y_e = np.log(X)
+Y_10 = np.log10(X)
+
+# nespremenjena koda od prej
+plt.plot(X,Y_2, label="$log_2(x)$")
+plt.plot(X,Y_e, label="$log_e(x)$")
+plt.plot(X,Y_10, label="$log_{10}(x)$")
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+
+plt.show()
+\end{lstlisting}
+\end{resitev}
+
+\section{Več dimenzij}
+
+Tekom spoznavanja seznamov smo se srečali tudi s seznami seznamov oziroma z ugnezdenimi seznami. Primer takega seznama je sledeč:
+\begin{lstlisting}[language=Python]
+>>> sez = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+\end{lstlisting}
+Kaj se zgodi, če tak seznam pretvorimo v strukturo \texttt{ndarray}:
+\begin{lstlisting}[language=Python]
+>>> A = np.array(sez)
+>>> A
+array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]])
+\end{lstlisting}
+Na prvi pogled nič kaj presenetljivega, ampak če smo lahko na strukturo \texttt{ndarray}, ki smo jo dobili iz navadnega seznama gledali na vektor, lahko na strukturo \texttt{ndarray}, ki jo dobimo iz ugnezdenih seznamov gledamo na matriko oziroma na dvodimenzionalno strukturo, ki ima podatke zapisane v vrsticah (dimenzija 0) in stolpcih (dimenzija 1). Indeksiramo jo lahko tako kot običajne ugnezdene sezname. Do ugnezdenega podseznama na npr. indeksu 1, lahko pridemo takole:
+\begin{lstlisting}[language=Python]
+>>> A[1]
+array([4, 5, 6])
+\end{lstlisting}
+V matrični interpretaciji to predstavlja vrstico 1 matrike z imenom \texttt{1}. Do elementa na indeksu 2 vrstice 1 lahko torej pridemo takole:
+\begin{lstlisting}[language=Python]
+>>> A[1][2]
+6
+\end{lstlisting}
+Delovanje je bilo do tukaj zelo podobno kot pri običajnih ugnezdenih seznamih, le interpretacija je malo drugačna. Enako bi lahko naredili tudi pri običajnem seznamu
+\begin{lstlisting}[language=Python]
+>>> sez[1][2]
+6
+\end{lstlisting}
+Pri delu s strukturo \texttt{ndarray} lahko do elementov matrike pridemo tudi tako, da znotraj oglatih oklepajev podamo indeks vrstice in indeks stolpca. To pri običajnih seznamih ne gre:
+\begin{lstlisting}[language=Python]
+>>> A[1,2]
+6
+>>> sez[1,2]
+TypeError: list indices must be integers or slices, 
+not tuple
+\end{lstlisting}
+Pri indeksiranju smo torej najprej podali indeks po ničti dimenziji oziroma indeks vrstice, potem pa indeks po prvi dimenziji oziroma indeks stolpca (nič nas ne omejuje pri tem, da ne bi število dimenzij še povečali -- tako bi dobili tenzor). Tako dobljene matrike lahko podobno kot vektorje med seboj tudi npr. seštevamo in jim prištevamo skalarje:
+\begin{lstlisting}[language=Python]
+>>> B = np.array([[10, 11, 12], 
+                  [-1, -2, -3], 
+                  [0.1, 0.2, 0.3]])
+>>> A+B
+array([[11. , 13. , 15. ],
+       [ 3. ,  3. ,  3. ],
+       [ 7.1,  8.2,  9.3]])
+\end{lstlisting}
+Nad njimi lahko delamo tudi rezine, in sicer preko vsake dimenzije posebej. Če bi želeli npr. iz matrike \texttt{A} dobiti vrstice od 0 do 2, in stolpce od 1 do konca, bi to napisali takole:
+\begin{lstlisting}[language=Python]
+>>> A[:2,1:]
+array([[2, 3],
+       [5, 6]])
+\end{lstlisting}
+Lahko bi dobili tudi specifično vrstico. Vrstico 2, bi npr. dobili takole:
+\begin{lstlisting}[language=Python]
+>>> A[2,:]
+array([7, 8, 9])
+\end{lstlisting}
+Kaj smo s tem povedali? Rekli smo, da želimo ničto dimenzijo fiksirati na indeks 2 (vrstica številka 2), dimenzijo 1 pa želimo imeti v celoti (vsi stolpci). To bi lahko sicer napisali tudi takole
+\begin{lstlisting}[language=Python]
+>>> A[2]
+array([7, 8, 9])
+\end{lstlisting}
+in bi seveda delovalo tudi nad navadnimi seznami. Kako bi lahko prišli do specifičnega stolpca? Podobno kot prej, le da zdaj fiksiramo indeks stolpca in se sprehajamo čez vse vrstice. Do stolpca številka 2 bi torej prišli takole:
+\begin{lstlisting}[language=Python]
+>>> A[:,2]
+array([3, 6, 9])
+\end{lstlisting}
+Tega nad običajnimi seznami ne moremo (tako enostavno) narediti.
+
+
+\section{Ostale uporabne funkcije}
+Knjižnica NumPy ponuja še vrsto drugih uporabnih funkcij, ki pa jih boste spoznali, če boste knjižnico bolj intenzivno uporabljali. Nekaj jih bomo vseeno omenili.
+
+Za izračun vsote elementov, določitev minimalnega in maksimalnega lahko uporabimo vgrajene funkcije \texttt{min}, \texttt{max} in \texttt{sum}. Te funkcije pa odpovejo, ko ima naša struktura več dimenzij ali pa vsebuje posebne vrednosti (glej razdelek \ref{sec:np_nan}). V tem primeru lahko uporabljamo funkcije modula NumPy, tj. \texttt{np.min}, \texttt{np.max} in \texttt{np.sum}. V osnovi te funkcije delujejo nad celotno strukturo, kar pomeni. Takole:
+\begin{lstlisting}[language=Python]
+>>> A = np.array([[1,2,3],[4,5,6],[7,8,9]])
+>>> np.min(A)
+1
+>>> np.max(A)
+9
+>>> np.sum(A)
+45
+\end{lstlisting}
+Včasih želimo določeno operacijo izvesti le nad npr. vrsticami ali stolpci matrike. V tem primeru lahko pri uporabi zgornjih funkcij podamo še vrednost izbirnega argumenta \texttt{axis}. Če ta argument nastavimo na vrednost 0, se bomo tekom operacije znebili dimenzije 0 (vrstic), kar pomeni, da bomo dobili rezultat izvedbe operacije po stolpcih.
+\begin{lstlisting}[language=Python]
+>>> A = np.array([[1,2,3],[4,5,6],[7,8,9]])
+>>> np.min(A, axis=0)
+array([1, 2, 3])
+>>> np.max(A, axis=0)
+array([7, 8, 9])
+>>> np.sum(A, axis=0)
+array([12, 15, 18])
+\end{lstlisting}
+Če argument \texttt{axis} nastavimo na vrednost 1, se bomo s tem znebili dimenzije 1 (stolpcev), kar pomeni, da bomo operacijo izvedli po vrsticah:
+\begin{lstlisting}[language=Python]
+>>> A = np.array([[1,2,3],[4,5,6],[7,8,9]])
+>>> np.min(A, axis=1)
+array([1, 4, 7])
+>>> np.max(A, axis=1)
+array([3, 6, 9])
+>>> np.sum(A, axis=1)
+array([ 6, 15, 24])
+\end{lstlisting}
+
+\section{Posebne vrednosti}
+\label{sec:np_nan}
+
+Knjižnica NumPy omogoča, da kot števila predstavimo tudi posebne vrednosti. Prava tako vrednost je uporabna predvsem v primerih, ko nam določen podatek manjka. Če npr. beležimo višino, telesno maso in starost oseb, se lahko hitro zgodi, da med podatki kakšen manjka. Narobe bi bilo, če bi tak podatek postavili na neko običajno numerično vrednost (npr. 0), saj bi nam to pokvarilo določene statistike, kot je npr. povprečje. Prav tako velikokrat podatka ne moremo kar izpustiti. Če želimo podatke npr. beležiti v matriki tipa \texttt{ndarray}, morajo imeti vse vrstice enako število stolpcev. V tem primeru lahko uporabimo posebno vrednost \texttt{np.nan} \angl{not a number}, ki predstavlja t.i. \emph{placeholder} in drži prazno mesto, hkrati pa ga lahko pri analizi vrednosti obravnavamo drugače kot ostale vrednosti (npr. ga izpustimo). V primeru, da naši podatki lahko vsebujejo vrednost \texttt{np.nan} in želimo to pri analizah ignorirati, lahko namesto funkcijo kot so \texttt{np.min}, \texttt{np.max} in \texttt{np.sum} uporabimo funkcije \texttt{np.nanmin}, \texttt{np.nanmax} in \texttt{np.nansum}.
+
+Poleg vrednosti \texttt{np.nan} knjižnica NumPy vsebuje tudi posebno vrednost \texttt{np.inf}, s katero lahko npr. zapišemo rezultat deljenja z nič ali pa logaritem števila 0. Pri tem sicer dobimo opozorilo (ne pa napake):
+\begin{lstlisting}[language=Python]
+>>> np.log(0)
+RuntimeWarning: divide by zero encountered in log
+-inf
+\end{lstlisting}
+
+\section{Uvažanje vrednosti in omejitve strukture \texttt{ndarray}}
+
+V prejšnjih poglavjih smo že omenili datoteke CSV. Ker se taka oblika zapisovanja pogosto uporablja tudi za numerične podatke, knjižnica NumPy podpira uvoz tovrstnih datotek preko funkcij \texttt{np.genfromtxt} in \texttt{np.loadtxt}. Kadar datoteka vsebuje zgolj numerične podatke (števila) funkciji ustvarita enak rezultat, in sicer vrneta strukturo \texttt{ndarray} z vsebino datoteke. Pri tem funkcijama kot argument \texttt{encoding} podamo kodiranje datoteke kot argument \texttt{delimiter} pa ločilo, ki je uporabljeno znotraj datoteke.
+
+Naj ima datoteka z imenom \texttt{stevila1.csv} sledečo vsebino:
+\begin{lstlisting}[numbers=left]
+180.3,87.3
+161.5,77.3
+170,56.5
+156,55.3
+\end{lstlisting}
+Preberemo jo lahko takole:
+\begin{lstlisting}[language=Python]
+>>> A1 = np.genfromtxt("stevila1.csv",
+                       encoding="utf-8", delimiter=",")
+>>> B1 = np.loadtxt("stevila1.csv", 
+                    encoding="utf-8", 
+                    delimiter=",")
+\end{lstlisting}
+
+Pri tem v obeh primerih dobimo enak rezultat:
+\begin{lstlisting}[language=Python]
+>>> A1
+array([[180.3,  87.3],
+       [161.5,  77.3],
+       [170. ,  56.5],
+       [156. ,  55.3]])
+>>> B1
+array([[180.3,  87.3],
+       [161.5,  77.3],
+       [170. ,  56.5],
+       [156. ,  55.3]])
+\end{lstlisting}
+Do težav pride, kadar datoteka vsebuje tudi podatke, ki niso številskega tipa. Ena izmed glavnih omejitev strukture \texttt{ndarray} je namreč ta, da zahteva, da vsi njeni podatki pripadajo enakemu podatkovnemu tipu. Podatkovni tip strukture lahko preverimo preko atributa (atribut je spremenljivka, ki pripada določenemu objektu -- podobno kot je metoda funkcija, ki pripada določenemu objektu) \texttt{dtype}.  
+\begin{lstlisting}[numbers=left]
+>>> A1.dtype # do atributov dostopamo brez oklepajev
+dtype('float64')
+\end{lstlisting}
+Vsi podatki v strukturi \texttt{A1} so torej decimalna števila. 
+
+Kaj se torej zgodi, če datoteka vsebuje podatke, ki niso števila. Dopolnimo našo datoteko s stolpcem, ki bo vsebovala imena ljudi, ki seveda niso števila. To shranimo v datoteko {stevila2.csv}:
+\begin{lstlisting}[numbers=left]
+Janez,180.3,87.3
+Andrej,161.5,77.3
+Ana,170,56.5
+Katja,156,55.3
+\end{lstlisting}
+
+Funkcija \texttt{np.genfromtxt} bo imena enostavno pretvorila v vrednosti \texttt{np.nan}, saj to lahko zapiše kot število. S tem bo dobljena struktura še vedno lahko vsebovala števila, s katerimi bomo lahko računali. Poskusimo:
+\begin{lstlisting}[language=Python]
+>>> A2 = np.genfromtxt("stevila2.csv",
+                       encoding="utf-8",
+                       delimiter=",")
+>>> A2
+array([[  nan, 180.3,  87.3],
+       [  nan, 161.5,  77.3],
+       [  nan, 170. ,  56.5],
+       [  nan, 156. ,  55.3]])
+\end{lstlisting}
+S tem smo informacijo o imenih sicer izgubili, smo pa ohranili podatkovni tip strukture, tako da ta še vedno vsebuje števila
+\begin{lstlisting}[language=Python]
+>>> A2.dtype
+dtype('float64')
+\end{lstlisting}
+Kaj pa funkcija  \texttt{np.loadtxt}? Ta poskuša na vsak način podatke pretvoriti v števila, zato ob odpiranju take datoteke vrne napako:
+\begin{lstlisting}[language=Python]
+>>> B2 = np.loadtxt("stevila2.csv", 
+                    encoding="utf-8", 
+                    delimiter=",")
+ValueError: could not convert string to float: 'Janez'
+\end{lstlisting}
+Lahko jo nekoliko prelisičimo, da ji naročimo, naj datoteko uvozi kot nize. To naredimo preko opcijskega argumenta \texttt{dtype}, ki ga nastavimo na vrednost \texttt{str} ali pa vrednost \texttt{'U'} \angl{Unicode string}. 
+\begin{lstlisting}[language=Python]
+>>> B2 = np.loadtxt("stevila2.csv", 
+                    encoding="utf-8", 
+                    delimiter=",", 
+                    dtype=str)
+array([['Janez', '180.3', '87.3'],
+       ['Andrej', '161.5', '77.3'],
+       ['Ana', '170', '56.5'],
+       ['Katja', '156', '55.3']], dtype='<U6')
+\end{lstlisting}
+Zdaj smo podatke uspešno uvozili, ampak za ceno tega, da z njimi ne moremo več računati. Če bi želeli do numeričnih vrednosti vseeno priti, lahko odvržemo stolpec 0, ostale vrednosti pa pretvorimo v števila. Takole:
+\begin{lstlisting}[language=Python]
+>>> B2[:,1:].astype(float)
+array([[180.3,  87.3],
+       [161.5,  77.3],
+       [170. ,  56.5],
+       [156. ,  55.3]]))
+\end{lstlisting}
+Opomba: funkcija \texttt{astype} izhodiščne strukture ne spreminja, ampak vrne spremenjeno strukturo.
+
+Datoteka bi lahko vsebovala tudi imena stolpcev. V našem primeru bi to izgledalo nekako takole (datoteka {stevila3.csv}:
+\begin{lstlisting}[numbers=left]
+ime,višina,teža
+Janez,180.3,87.3
+Andrej,161.5,77.3
+Ana,170,56.5
+Katja,156,55.3
+\end{lstlisting} 
+V tem primeru lahko funkciji \texttt{np.genfromtxt} naročimo, naj ločeno uvozi imena stolpcev preko izbirnega argumenta \texttt{names}, ki ga nastavimo na vrednost \texttt{True}:
+\begin{lstlisting}[language=Python]
+>>> A3 = np.genfromtxt("stevila3.csv",
+                       encoding="utf-8",
+                       delimiter=",", 
+                       names=True)
+\end{lstlisting}
+Zdaj so imena stolpcev zapisana ločeno znotraj atributa \texttt{dtype}.
+\begin{lstlisting}[language=Python]
+>>> A3
+array([(nan, 180.3, 87.3), (nan, 161.5, 77.3), (nan, 170. , 56.5),
+       (nan, 156. , 55.3)],
+      dtype=[('ime', '<f8'), ('višina', '<f8'), ('teža', '<f8')])
+>>> A3.dtype.names
+('ime', 'višina', 'teža')
+\end{lstlisting}
+Do imen stolpcev torej lahko pridemo, je pa malo nerodno. Pri uporabi funkcije \texttt{np.loadtxt} bi lahko postopali podobno kot prej in celotno datoteko uvozili kot \texttt{ndarray} nizov:
+\begin{lstlisting}[language=Python]
+>>> B3 = np.loadtxt("stevila3.csv", encoding="utf-8", delimiter=",", dtype='U')
+>>> B3
+array([['ime', 'višina', 'teža'],
+       ['Janez', '180.3', '87.3'],
+       ['Andrej', '161.5', '77.3'],
+       ['Ana', '170', '56.5'],
+       ['Katja', '156', '55.3']], dtype='<U6')
+\end{lstlisting}
+S tem se seveda spet odpovemo zmožnostim računanja, saj se z nizi pač računati ne da. 
+
+\section{Primernost knjižnice NumPy}
+
+Knjižnica NumPy je torej idealna za delo z numeričnimi podatki. Do problema pa pride, kadar naši podatki poleg numeričnih vrednosti vsebujejo tudi nize, ki jih ne moremo obravnavati kot števila. To so lahko zgolj imena stolpcev ali pa tudi drugi podatki. Pri plačah smo se npr. srečali s podatki o mesecu, v zgornjih primerih pa s podatki o imeni osebe. Ko pridemo do takih podatkov moramo skleniti kompromis. Lahko se jim odpovemo z njihovo pretvorbo v \texttt{np.nan}, kar ponavadi ne pride v upoštev. Lahko vse podatke zapišemo v obliki nizov, s čimer se odpovemo zmožnostim računanja. Možna alternativa je tudi, da numerične podatke shranimo v drugo strukturo kot nenumerične. To nam načeloma povzroči dodatno delo, je pa seveda izvedljivo. V vsakem primeru so komplikacije neizogibne. Lahko pa v takem primeru uporabimo knjižnico Pandas, ki je namenjena delu z večjimi količinami podatkov.
+
+
+
+
+
