@@ -1,0 +1,19 @@
+\chapter{Knjižnica pandas}
+
+\section{Delo s podatki}
+
+Podatkovne vede \angl{data sciences}, ki se ukvarjajo z manipulacijo in analizo podatkov, so v današnjem času postale nepogrešljive na različnih področjih ne samo znanosti, temveč tudi različnih vej gospodarstva (npr. ciljno oglaševanje, organizacija dela, planiranje procesov) in negospodarstva (npr. zdravstvo in medicina). Podatkovne vede namreč na podlagi zajema in analize (večjih količin) podatkov nudijo podporo procesom odločanja, s čimer lahko razpoložljive vire izkoristimo bolj učinkovito. Kdor zna delati s podatki ima danes službo zagotovljeno, še posebej, če zna ta znanja uporabiti na svojem primarnem strokovnem področju, kot je npr. kemija. 
+
+Če za bolj resno analizo in manipulacijo podatkov uporabljamo programski jezik Python, bomo slej ko prej pristali na uporabi knjižnice pandas \angl{Python Data Analysis Library}, ki predstavlja moderno in hitro orodje za delo z večjimi količinami podatkov. Delo s knjižnico pandas je namreč v današnjem času postalo sinonim za delo z večjimi količinami podatkov v jeziku Python. 
+
+\section{Knjižnica pandas in \texttt{dataframe}}
+
+Za uporabo moramo knjižnico pandas najprej namestiti z orodjem \texttt{pip}, kar že znamo. V ukazni vrstici svojega operacijskega sistema napišemo:
+\begin{lstlisting}[language=bash]
+> pip install pandas
+\end{lstlisting}
+Zdaj lahko knjižnico uvozimo v svoj program oziroma v svoje delovno okolje, ponavadi pod psevdonimom \texttt{pd}:
+\begin{lstlisting}[language=python]
+>>> import pandas as pd
+\end{lstlisting}
+Večje količine podatkov bomo ponavadi brali iz datotek zapisanih v obliki CSV. Pandas tako branje omogoča preko funkcije \texttt{read\_csv}. 
