@@ -112,7 +112,7 @@ Lahko bi dostopali tudi do več stolpcev naenkrat, tako da pri indeksiranju poda
 [148 rows x 2 columns]
 \end{lstlisting}
 
-Kaj pa, če želimo priti do določenih vrstic? V tem primeru uporabimo metodo \texttt{loc}, ki ji znotraj oglatih oklepajev podamo \texttt{index} vrstice. Ko smo prej izpisali tabelo, se je pred stolpcem \texttt{mesec} izpisal dodaten stolpcev \texttt{index}. Ko tabelo preberemo, ima ta stolpcev vrednosti od 0 do števila vrstic $-$ 1, lahko pa \texttt{index} nastavimo tudi na kaj drugega. Do 0-te vrstice bi torej prišli takole:
+Kaj pa, če želimo priti do določenih vrstic? V tem primeru uporabimo metodo \texttt{loc}, ki ji znotraj oglatih oklepajev podamo oznako oziroma \texttt{index} vrstice. Ko smo prej izpisali tabelo, se je pred stolpcem \texttt{mesec} izpisal dodaten stolpec oznak. Ko tabelo preberemo, ima ta stolpcev vrednosti od 0 do števila vrstic $-$ 1, lahko pa \texttt{index} nastavimo tudi na kaj drugega. Do 0-te vrstice bi torej prišli takole:
 \begin{lstlisting}[language=python]
 >>> df.loc[0]
 mesec          2014M01
@@ -126,7 +126,7 @@ Metodi \texttt{loc} lahko podamo tudi stolpec ali seznam stolpcev:
 >>> df.loc[0,'bruto']
 1758.5
 \end{lstlisting}
-Stolpcev \texttt{index} lahko spremenimo tudi na kakšnega izmed obstoječih stolpcev. Naredimo novo tabelo, ki bo imela za \texttt{index} kar stolpec \texttt{mesec}:
+Stolpec oznak vrstic lahko spremenimo tudi na kakšnega izmed obstoječih stolpcev. Naredimo novo tabelo, ki bo imela za \texttt{index} kar stolpec \texttt{mesec}:
 \begin{lstlisting}[language=python]
 >>> df2 = df.set_index('mesec')
 >>> df2.head()
@@ -147,7 +147,7 @@ mesec
 2018M01  Zasebni sektor  1526.94  997.06
 \end{lstlisting}
 
-Zadnji način indeksiranja je z uporabo metode \texttt{iloc}, kateri podamo številko vrstice lahko pa tudi stolpca. Takole:
+Zadnji način indeksiranja, ki je neodvisen od oznak vrstic in stolpcev, uporablja metodo \texttt{iloc}. Tej podamo številko vrstice lahko pa tudi stolpca. Takole:
 \begin{lstlisting}[language=python]
 >>> df.iloc[1]
 mesec            2014M01
@@ -170,8 +170,8 @@ Seveda lahko s to metodo delamo tudi rezine. Če nas zanimajo npr vse vrstice, s
 Name: bruto, Length: 148, dtype: float64
 \end{lstlisting}
 
-\section{Filtriranje podatkov}
-Podatke lahko filtriramo na podoben način kot pri uporabi strukture \texttt{ndarray}. Lahko bi npr. pogledali samo tiste vrstice, ki pripadajo javnemu sektorju:
+\section{Filtriranje vrednosti}
+Vrednosti lahko filtriramo na podoben način kot pri uporabi strukture \texttt{ndarray}. Lahko bi npr. pogledali samo tiste vrstice, ki pripadajo javnemu sektorju:
 \begin{lstlisting}[language=python]
 >>> df['sektor'] == 'Javni sektor'
 0       True
@@ -222,7 +222,8 @@ max    1790.520000  1177.510000
 Tudi risanje grafov postane zelo enostavno. Pokličemo lahko kar metodo \texttt{plot}, ki pripada tabeli \texttt{dataframe}:
 \begin{lstlisting}[language=python]
 >>> df.plot()
-<matplotlib.axes._subplots.AxesSubplot object at 0x0000029D25BFF7B8>
+<matplotlib.axes._subplots.AxesSubplot object at
+0x0000029D25BFF7B8>
 \end{lstlisting}
 Da lahko tak graf prikažemo, moramo uvoziti še knjižnico Matplotlib in poklicati funkcijo \texttt{show}:
 \begin{lstlisting}[language=python]
