@@ -272,6 +272,18 @@ Tako dobljen graf prikazuje slika \ref{img:plt_pandas2}.
 \end{figure}
 Graf bi lahko na enostaven način spremenili v kakšen drug tip, tako da bi nastavili izbirni argument \texttt{kind} na kakšno drugo vrednost, npr. \texttt{'bar'} za stolpčni diagram ali pa \texttt{'box'} za izris s kvartili.
 
+Graf bi lahko narisali tudi tako, da bi podatke iz strukture \texttt{dataframe} pretvorili npr. v strukturo \texttt{ndarray} z uporabo metode \texttt{values} (metoda \texttt{values} zavrže imena stolpcev in kot matriko tipa \texttt{ndarray} vrne vsebino tabele). Do matrike bruto in neto plač javnega in zasebnega sektorja, bi lahko npr. prišli takole:
+\begin{lstlisting}[language=python]
+>>> J = df_javni[['bruto','neto']].values
+>>> Z = df_zasebni[['bruto','neto']].values
+\end{lstlisting}
+Naenkrat lahko narišemo več grafov tudi tako, da funkciji \texttt{plot} (ne metodi) podamo kar matriko. Funkcija bo za vsak stolpec matrike izrisala svoj graf.
+\begin{lstlisting}[language=python]
+>>> plt.plot(J)
+>>> plt.plot(Z)
+>>> plt.show()
+\end{lstlisting}
+
 \section{Izvoz podatkov}
 
 Podatke lahko iz tabel \texttt{dataframe} tudi enostavno izvozimo. Če bi npr. želeli podatke za javni sektor izvoziti v datoteko CSV, bi to lahko naredili z uporabo metode \texttt{to\_csv}.
@@ -280,7 +292,7 @@ df_javni.to_csv('place_javni.csv', index=False)
 \end{lstlisting}
 Opcijski argument \texttt{index} smo nastavili na vrednost \texttt{False}, saj ponavadi stolpca z indeksi ne želimo izvažati (včasih pa). 
 
-Podatke bi lahko izvozili tudi v Excelovo datoteko, in sicer z metodo \texttt{to\_excel}, ki deluje zelo podobno kot metoda za izvoz z datoteke CSV:
+Podatke bi lahko izvozili tudi v Excelovo datoteko, in sicer z metodo \texttt{to\_excel}, ki deluje zelo podobno kot metoda za izvoz v datoteke CSV:
 \begin{lstlisting}[language=python]
 df_javni.to_excel('place_javni.xlsx', index=False)
 \end{lstlisting}

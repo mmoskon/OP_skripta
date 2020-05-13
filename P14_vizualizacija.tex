@@ -324,12 +324,26 @@ Prikazuje ga slika \ref{img:plt6}.
     \label{img:plt6}
 \end{figure}
 Oznake na osi $x$ so zopet moteče. Grafu bi lahko dodali naslov, da gre za leto 2018, na osi $x$ pa prikazali samo informacijo o mesecu. Tako bo postal graf bolj pregleden. Najprej iz oznak odstranimo podatek o letu. To lahko naredimo že med filtiranjem podatkov za leto 2018, kjer namesto stavkov \texttt{MJ\_2018.append(mj)} in \texttt{MZ\_2018.append(mz)} uporabimo stavka \texttt{MJ\_2018.append(mj[-3:])} in \texttt{MZ\_2018.append(mz[-3:])}. Naslov grafa dodamo s sledečo vrstico:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 plt.title('Podatki o plačah za leto 2018')
 \end{lstlisting}
 Dodajmo še legendo:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 plt.legend(['Javni sektor', 'Zasebni sektor'])
+\end{lstlisting}
+
+Kar nas še moti je to, da sta grafa \emph{naložena} drug na drugega. Če bi npr. najprej izrisali zasebni sektor, bi ga javni sektor prekril. Bolj pravilno bi bilo, če bi grafa narisala drug ob drugim. Kako lahko to naredimo? Tako, da en graf zamaknemo v levo, drugega pa v desno. Popravili bomo tudi širino stolpcev, da bodo malo ožji. Najprej določimo lokacije stolpcev:
+\begin{lstlisting}[language=Python]
+loc1 = list(range(len(ZJ_2018)))
+loc2 = list(range(len(ZZ_2018)))
+for i in range(len(loc1)):
+    loc1[i] -= 0.2
+    loc2[i] += 0.2
+\end{lstlisting}
+Zdaj te lokacije upoštevajmo pri izrisu, poleg tega pa preko izbirnega argumenta \texttt{width} nastavimo še širino stolpcev:
+\begin{lstlisting}[language=Python]
+plt.bar(loc1, ZJ_2018, width = 0.4)
+plt.bar(loc2, ZZ_2018, width = 0.4)
 \end{lstlisting}
 
 Celoten program je zdaj sledeč:
@@ -361,14 +375,20 @@ for mz, zz in zip(MZ, ZZ):
         MZ_2018.append(mz[-3:]) # brez leta
         ZZ_2018.append(zz)
 
+loc1 = list(range(len(ZJ_2018)))
+loc2 = list(range(len(ZZ_2018)))
+for i in range(len(loc1)):
+    loc1[i] -= 0.2
+    loc2[i] += 0.2
 
-plt.bar(range(len(ZJ_2018)), ZJ_2018)
-plt.bar(range(len(ZZ_2018)), ZZ_2018)
-
+plt.bar(loc1, ZJ_2018, width = 0.4)
+plt.bar(loc2, ZZ_2018, width = 0.4)
 plt.xticks(range(len(MJ_2018)), MJ_2018)
 
 plt.title('Podatki o plačah za leto 2018')
 plt.legend(['Javni sektor', 'Zasebni sektor'])
+plt.xlabel("Mesec")
+plt.ylabel("Znesek [EUR]")
 plt.show()
 \end{lstlisting}
 Rezultat izvedbe programa prikazuje slika \ref{img:plt7}.
