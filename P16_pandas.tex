@@ -278,7 +278,7 @@ Graf bi lahko narisali tudi tako, da bi podatke iz strukture \texttt{dataframe} 
 >>> J = df_javni[['bruto','neto']].values
 >>> Z = df_zasebni[['bruto','neto']].values
 \end{lstlisting}
-Naenkrat lahko narišemo več grafov tudi tako, da funkciji \texttt{plot} (ne metodi) podamo kar matriko. Funkcija bo za vsak stolpec matrike izrisala svoj graf.
+Naenkrat lahko narišemo več grafov tudi tako, da funkciji \texttt{plot} preko vmesnika \texttt{matplotlib.pyplot} podamo kar matriko. Funkcija bo za vsak stolpec matrike izrisala svoj graf.
 \begin{lstlisting}[language=python]
 >>> plt.plot(J)
 >>> plt.plot(Z)
