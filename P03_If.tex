@@ -9,8 +9,8 @@ Poglejmo si spodnji primer:
 Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase.
 \end{zgled}
 \begin{resitev}
-Preko funkcije \texttt{input} bomo torej prebrali telesno mso in višino. Ker funkcija vrača niz, bomo obe vrednosti pretvorili v decimalno število (\texttt{float}). Potem bomo uporabili enačbo za izračun indeksa telesne mase: $itm = \frac{masa}{visina^2}$. Pri tem mora biti telesna masa podana v kilogramih, višina pa v metrih.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+Preko funkcije \texttt{input} bomo torej prebrali telesno maso in višino. Ker funkcija vrača niz, bomo obe vrednosti pretvorili v decimalno število (\texttt{float}). Potem bomo uporabili enačbo za izračun indeksa telesne mase: $itm = \frac{masa}{visina^2}$. Pri tem mora biti telesna masa podana v kilogramih, višina pa v metrih.
+\begin{lstlisting}[language=Python,numbers=left]
 masa = float(input("Vpiši svojo telesno maso [kg]: "))
 visina = float(input("Vpiši svojo višino [m]: "))
 itm = masa/visina**2
@@ -33,7 +33,7 @@ Naš program bi torej radi dopolnili tako, da bo uporabniku izpisal tudi informa
 \section{Osnovna oblika stavka \texttt{if}}
 
 Za pisanje pogojnih stavkov bomo uporabili Pythonov stavek \texttt{if}. Njegova osnovna oblika je sledeča:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 if pogoj:
     # pogojni_stavki so zamaknjeni
     # pogojni stavki
@@ -43,7 +43,7 @@ if pogoj:
 # ni več zamaknjeno
 ...
 \end{lstlisting}
-Začnemo torej z rezervirano besedico \textbf{\texttt{if}}, ki ji sledi pogoj. Temu sledi dvopičje (\texttt{:}), s katerim povemo, da je konec pogoja. Potem sledi pogojni del, ki se bo izvedel samo v primeru, da je podan pogoj izpolnjen (glej sliko \ref{img:if1}). Pogojnemu delu sledijo stavki, ki se bodo izvedli v vsakem primeru, ne glede na izpolnjenost pogoja. Kako pa Pythonu povemo kje je konec pogojnega dela? Z zamikom \angl{indent}. Zgoraj smo tiste stavke, ki se izvedejo samo v primeru izpolnjenosti pogoja zamaknili, tako da smo pred njih vstavili tabulator (tipka \emph{Tab}) ali par presledkov (če smo pikolovski, se držimo konvencije štirih presledkov). Pogojni del smo zaključili tako, da smo enostavno nehali zamikati. Izvedbo zgornje kode prikazuje diagram poteka na sliki \ref{img:if1}.
+Začnemo torej z rezervirano besedico \textbf{\texttt{if}}, ki ji sledi pogoj. Temu sledi dvopičje (\texttt{:}), s katerim povemo, da je konec pogoja. Potem sledi pogojni del, ki se bo izvedel samo v primeru, da je podan pogoj. Pogojnemu delu sledijo stavki, ki se bodo izvedli v vsakem primeru, ne glede na izpolnjenost pogoja. Kako Pythonu povemo kje je konec pogojnega dela? Z zamikom \angl{indent}. Zgoraj smo tiste stavke, ki se izvedejo samo v primeru izpolnjenosti pogoja zamaknili, tako da smo pred njih vstavili tabulator (tipka \emph{Tab}) ali par presledkov (če smo natančni, se držimo dogovora štirih presledkov). Pogojni del smo zaključili tako, da smo enostavno nehali zamikati. Izvedbo zgornje kode prikazuje diagram poteka na sliki \ref{img:if1}.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/if1.pdf}
@@ -58,7 +58,7 @@ Kaj pravzaprav predstavlja pogoj za izvedbo pogojnega dela stavka? Kot je razvid
 \subsection{Primerjalni operatorji in podatkovni tip \texttt{bool}}
 
 Prva skupina operatorjev, ki jih bomo uporabljali pri pisanju pogojev so t.i. \emph{primerjalni operatorji}, ki jih poznamo že iz matematike. To so npr. operator enakosti \texttt{==} (ker je enojni enačaj uporabljen za prirejanje, moramo za primerjanje uporabiti dvojni enačaj), operator neenakosti \texttt{!=}, večji \texttt{>}, večji ali enak \texttt{>=} itd. Poskusimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> 1 == 1
 True
 >>> 1 == 2
@@ -74,8 +74,8 @@ False
 >>> 1 == 1.0
 True
 \end{lstlisting}
-S primerjalnimi operatorji torej lahko primerjamo med seboj dva podatka, rezultat primerjanja pa je bodisi vrednost \texttt{True} ali \texttt{False}. Rezultat primerjanja je podatek, ki lahko zavzame samo te dve vrednosti. Kakšen je podatkovni tip tega podatka?
-\begin{lstlisting}[language=Python, showstringspaces=false]
+S primerjalnimi operatorji torej med seboj primerjamo dva podatka, rezultat primerjanja pa je bodisi vrednost \texttt{True} ali \texttt{False}. Rezultat primerjanja je podatek, ki lahko zavzame samo te dve vrednosti. Kakšen je podatkovni tip tega podatka?
+\begin{lstlisting}[language=Python]
 >>> type(True)
 <class 'bool'>
 >>> type(False)
@@ -83,13 +83,13 @@ S primerjalnimi operatorji torej lahko primerjamo med seboj dva podatka, rezulta
 \end{lstlisting}
 Za oblikovanje pogojev imamo torej na voljo poseben podatkovni tip, tj. \texttt{bool}, oziroma po angleško \emph{boolean}, ki lahko zavzame samo dve vrednosti, tj. \texttt{True} ali \texttt{False}. 
 
-Poskusimo uporaba primerjalnih operatorjev uporabiti na zgledu iz začetka poglavja.
+Poskusimo uporabo primerjalnih operatorjev v kombinaciji s pogojnim stavkom \texttt{if} uporabiti na zgledu iz začetka poglavja.
 \begin{zgled}
 Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
 \end{zgled}
 \begin{resitev}
 Program od prej bomo dopolnili s pogojnim stavkom. Če je ITM manjši od 17.5, lahko program izpiše, da je uporabnikova telesna masa premajhna. Če je ITM večji od 25, lahko program izpiše, da je uporabnikova telesna masa prevelika. Kaj pa vmes? Tega pa zaenkrat še ne znamo. 
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 masa = float(input("Vpiši svojo telesno maso [kg]: "))
 visina = float(input("Vpiši svojo višino [m]: "))
 itm = masa/visina**2
@@ -102,7 +102,7 @@ if ITM > 25:
 \end{resitev}
 
 Primerjalne operatorje lahko uporabimo tudi nad podatki, ki niso števila
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> "abc" == "abc"
 True
 >>> "abc" == "ABC"
@@ -114,29 +114,29 @@ False
 >>> "abc" < "abd"
 True
 \end{lstlisting}
-Iz zgornjih zgledov vidimo tudi to, da Python loči med velikimi in malimi črkami in da so določeni nizi manjši od drugih. Kako pa primerjanje dveh nizov poteka? Na enak način, kot primerjamo nize, ko poskušamo besede sortirati po abecedi (npr. v slovarju ali telefonskem imeniku). Dve besedi primerjamo znak po znaku od začetka do konca, dokler ne pridemo do dveh znakov, ki se razlikujeta ali do konca ene izmed besed. Če se besedi ujemata po vseh znakih in je ena beseda krajša, je krajša beseda zagotovo manjša. Npr., beseda "Beda" je manjša od besede "Bedarija" (v slovarju bo verjetno Beda nastopala pred Bedarijo):
-\begin{lstlisting}[language=Python, showstringspaces=false]
->>> "Beda" < "Bedarija"
+Iz zgornjih zgledov vidimo tudi to, da Python loči med velikimi in malimi črkami in da so določeni nizi manjši od drugih. Kako pa primerjanje dveh nizov poteka? Na enak način, kot primerjamo nize, ko poskušamo besede sortirati po abecedi (npr. v slovarju ali telefonskem imeniku). Dve besedi primerjamo znak po znaku od začetka do konca, dokler ne pridemo do dveh znakov, ki se razlikujeta ali do konca ene izmed besed. Če se besedi ujemata po vseh znakih in je ena beseda krajša, je krajša beseda zagotovo manjša. Npr., beseda "beda" je manjša od besede "bedarija" (v slovarju bo verjetno beda nastopala pred bedarijo):
+\begin{lstlisting}[language=Python]
+>>> "beda" < "bedarija"
 True
 \end{lstlisting}
-Beseda "Bedno" pa ni manjša od besede "Bedarija", čeprav je od nje krajša. Zakaj ne? Zato, ker se besedi razlikujeta v četrtem primerjanju na znakih "n" in "a" in ker "n" pač ni manjši od znaka "a".
-\begin{lstlisting}[language=Python, showstringspaces=false]
->>> "Bedno" < "Bedarija"
+Beseda "bedno" pa ni manjša od besede "bedarija", čeprav je od nje krajša. Zakaj ne? Zato, ker se besedi razlikujeta v četrtem primerjanju na znakih "n" in "a" in ker "n" pač ni manjši od znaka "a".
+\begin{lstlisting}[language=Python]
+>>> "bedno" < "bedarija"
 False
 \end{lstlisting}
 Takemu primerjanju pravimo \emph{leksikografsko} primerjanje. 
 
 \subsection{Operatorja vsebovanosti}
 
-Ko smo ravno pri nizih, lahko nad njimi definiramo še \emph{operatorja vsebovanosti}, ki preverjata ali nekaj je (\texttt{in}) oziroma ni (\texttt{not in}) v posameznem nizu vsebovano. Operatorja bomo uporabljali tudi na drugih podatkovnih tipih, ki podobno kot nizi, vsebujejo druge podatke -- nizi so sestavljeni iz več znakov oziroma podnizov. Če je nek niz \texttt{podniz} vsebovan v nekem nizu \texttt{niz}, lahko preverim takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Ko smo ravno pri nizih, lahko omenimo še \emph{operatorja vsebovanosti}, ki preverjata ali nekaj je (\texttt{in}) oziroma ni (\texttt{not in}) v posameznem nizu vsebovano. Operatorja bomo uporabljali tudi na drugih podatkovnih tipih, ki podobno kot nizi, vsebujejo druge podatke -- nizi so sestavljeni iz več znakov oziroma podnizov. Če je nek niz \texttt{podniz} vsebovan v nekem nizu \texttt{niz}, lahko preverim takole:
+\begin{lstlisting}[language=Python]
 >>> podniz in niz
 \end{lstlisting}
 Povadimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
->>> "Beda" in "Bedarija"
+\begin{lstlisting}[language=Python]
+>>> "beda" in "bedarija"
 True
->>> "beda" in "Bedarija"
+>>> "Beda" in "bedarija"
 False
 >>> "ana" in "anakonda"
 True
@@ -159,7 +159,7 @@ Pri reševanju naloge z izpisovanjem podatkov o ITM imamo še vedno težave s pr
 \end{tabular}
 
 V primeru, da morata biti izpolnjena oba vhodna pogoja, torej uporabimo operator \texttt{and}. Če je dovolj, da je izpolnjen samo eden izmed vhodnih pogojev, uporabimo operator \texttt{or}. Pogosto uporabljen logični operator je še operator \texttt{not}, ki \texttt{True} spremeni v \texttt{False} in obratno:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> not True
 False
 >>> not False
@@ -172,7 +172,7 @@ Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše upo
 \end{zgled}
 \begin{resitev}
 Zdaj lahko dodamo še pogojni stavek, pri katerem bo pogoj sestavljen iz dveh delov. V tem primeru mora biti vrednost spremenljivke \texttt{ITM} večja ali enaka od 17.5 in manjša ali enaka od 25, kar lahko zapišemo s pogojem \texttt{17.5 <= ITM and ITM <= 25}.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 masa = float(input("Vpiši svojo telesno maso [kg]: "))
 visina = float(input("Vpiši svojo višino [m]: "))
 itm = masa/visina**2
@@ -186,7 +186,7 @@ if 17.5 <= ITM and ITM <= 25:
 \end{lstlisting}
 \end{resitev}
 
-Programiranja se učimo v jeziku Python med drugim tudi zato, ker omogoča kar nekaj uporabnih sladkorčkov (funkcionalnosti), ki jih drugi jeziki ne podpirajo. Sestavljen pogoj \texttt{17.5 <= ITM and ITM <= 25} lahko v tem jeziku zapišemo tudi malo krajše, in sicer takole: \texttt{17.5 <= ITM <= 25}.
+Programiranja se učimo v jeziku Python med drugim tudi zato, ker ima kar nekaj uporabnih sladkorčkov (funkcionalnosti), ki jih drugi jeziki nimajo. Sestavljen pogoj \texttt{17.5 <= ITM and ITM <= 25} lahko v tem jeziku zapišemo tudi malo krajše, in sicer takole: \texttt{17.5 <= ITM <= 25}.
 
 \section{Veja \texttt{else}}
 
@@ -200,7 +200,7 @@ Zgornji program je sicer pravilen, ni pa najlepši. V primeru, da je npr. izpoln
 \end{figure}
 
 Do sedaj smo v primeru neizpolnjenosti pogoja vedno skočili na del \texttt{skupni stavki}, torej na del, ki se izvede neodvisno od izpolnjenost pogoja. V splošnem pa stavek \texttt{if} omogoča, da del kode izvedemo samo takrat, ko pogoj \textbf{ni} izpolnjen. To kodo podamo v veji \texttt{else} stavka \texttt{if}:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 if pogoj:
     # pogojni stavki
     # če je pogoj izpolnjen
@@ -226,13 +226,13 @@ Uporabimo zgornji stavek za poenostavljeno rešitev naloge z izpisovanjem podatk
 Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, če je njegova telesna masa ustrezna ali ne. 
 \end{zgled}
 \begin{resitev}
-Tokrat bomo preverjali le pogoj o ustreznosti uporabnikove teže. 
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+Tokrat bomo preverjali le pogoj o ustreznosti uporabnikove telesne mase. 
+\begin{lstlisting}[language=Python,numbers=left]
 masa = float(input("Vpiši svojo telesno maso [kg]: "))
 visina = float(input("Vpiši svojo višino [m]: "))
 itm = masa/visina**2
 print("Tvoj ITM je", itm)
-if 17.5 <= ITM and ITM <= 25:
+if 17.5 <= ITM <= 25:
     print("Tvoja telesna masa je ustrezna")
 else:
     print("Tvoja telesna masa ni ustrezna")
@@ -244,7 +244,7 @@ else:
 Uporabnik zdaj ve, če je njegova telesna masa ustrezna. Če njegova telesna masa ni ustrezna, informacije o tem ali je pretežak ali prelahek nima (verjetno se mu to sicer dozdeva). Zgornji primer bi torej radi dopolnili tako, da znotraj veje \texttt{else} izvedemo dodatno primerjanje, na podlagi katerega bomo lahko ugotovili ali je ITM prevelik ali premajhen.
 
 To lahko naredimo na dva načina. Elegantnejši način je uporaba stavka \texttt{elif}, ki omogoča preverjanje dodatnega pogoja znotraj veje \texttt{else}. Celoten stavek \texttt{if} z vejo \texttt{elif} zapišemo takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 if pogoj1:
     # pogojni stavki
     # pogoj1 izpolnjen
@@ -274,8 +274,8 @@ Zdaj lahko končno podamo lepšo rešitev zgleda z izpisovanjem podatkov o ITM.
 Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. 
 \end{zgled}
 \begin{resitev}
-Najprej bomo preverili enega izmed pogojev, npr. če je ITM manjši od 17.5. V primeru, da je izpolnjen, izpišemo, da je telesna masa premajhna. V veji \texttt{elif} lahko preverimo naslednji pogoj, npr. če je ITM večji od 25. V primeru, da je izpolnjen, izpišemo, da je telesna masa prevelika. Če ni izpolnjen nobeden izmed obeh pogojev, lahko izpišemo, da je telesna masa ustrezna.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+Najprej bomo preverili enega izmed pogojev, npr. če je ITM manjši od 17.5. V primeru, da je pogoj izpolnjen, izpišemo, da je telesna masa premajhna. V veji \texttt{elif} lahko preverimo naslednji pogoj, npr. če je ITM večji od 25. V primeru, da je izpolnjen ta pogoj, izpišemo, da je telesna masa prevelika. Če ni izpolnjen nobeden izmed obeh pogojev, lahko izpišemo, da je telesna masa ustrezna.
+\begin{lstlisting}[language=Python,numbers=left]
 masa = float(input("Vpiši svojo telesna masa [kg]: "))
 visina = float(input("Vpiši svojo višino [m]: "))
 itm = masa/visina**2
@@ -289,7 +289,7 @@ else:
 \end{lstlisting}
 \end{resitev}
 
-Drug pristop k reševanju enakega problema je uporaba dodatnega stavka \texttt{if} znotraj veje \texttt{else}. Temu rečemo tudi \emph{gnezdenje} ali \emph{ugnezdeni stavek} \texttt{if}. Kodo bi napisali takole: \begin{lstlisting}[language=Python, showstringspaces=false]
+Drug pristop k reševanju enakega problema je uporaba dodatnega stavka \texttt{if} znotraj veje \texttt{else}. Temu rečemo tudi \emph{gnezdenje} ali \emph{ugnezdeni stavek} \texttt{if}. Kodo bi napisali takole: \begin{lstlisting}[language=Python]
 if pogoj1:
     # pogojni stavki
     # pogoj1 izpolnjen
@@ -315,8 +315,8 @@ Uporabimo ugnezden stavek \texttt{if} še pri reševanju naše naloge.
 Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. Uporabi ugnezden stavek \texttt{if}
 \end{zgled}
 \begin{resitev}
-Potek programa bo podoben kot prej za razliko od gnezdenje stavka \texttt{if}.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+Potek programa bo podoben kot prej za razliko od gnezdenja stavka \texttt{if}.
+\begin{lstlisting}[language=Python,numbers=left]
 masa = float(input("Vpiši svojo telesno maso [kg]: "))
 visina = float(input("Vpiši svojo višino [m]: "))
 itm = masa/visina**2

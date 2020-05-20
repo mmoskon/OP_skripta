@@ -1,7 +1,7 @@
 \chapter{Spoznavanje z okoljem}
 
 \section{Izbira in namestitev okolja}
-Razlaga in zgledi v knjigi temeljijo na okolju \emph{Python 3}. Osnovno okolje, ki bo za spoznavanje osnov programiranja čisto dovolj, lahko dobite na Pythonovi domači strani (\url{https://www.python.org/}), kjer si izberete še svoj operacijski sistem in verzijo, ki jo želite namestiti (izberite si distribucijo Python 3...). Če uporabljate operacijski sistem Linux ali OS X, imate Python po vsej verjetnosti že nameščen. Pazite le na to, da uporabljate Python 3, saj večina zgledov v okolju Python 2 ne bo delovala ali pa bo celo delovala nekoliko drugače. Ob nameščanju okolja Python je koristno, če na začetku obkljukate izbiro \texttt{Add Python 3... to PATH}, saj si boste s tem mogoče v prihodnosti prihranili kakšno težavo. Če ste ambiciozni in pričakujete, da boste Python v prihodnosti bolj resno uporabljali, si mogoče že zdaj namestite distribucijo \emph{Anaconda} (še ena kača), ki vključuje malo več knjižnic za bolj napredno računanje, analizo podatkov in risanje grafov. Dobite jo na strani \url{https://www.anaconda.com/}.
+Razlaga in zgledi v knjigi temeljijo na okolju \emph{Python 3}. Osnovno okolje, ki bo za spoznavanje osnov programiranja čisto dovolj, lahko dobite na Pythonovi domači strani (\url{https://www.python.org/}), kjer si izberete še svoj operacijski sistem in verzijo, ki jo želite namestiti (izberite si različico Python 3...). Če uporabljate operacijski sistem Linux ali OS X, imate Python po vsej verjetnosti že nameščen. Pazite le na to, da uporabljate Python 3, saj večina zgledov v okolju Python 2 ne bo delovala ali pa bo celo delovala nekoliko drugače. Ob nameščanju okolja Python je koristno, če na začetku obkljukate izbiro \texttt{Add Python 3... to PATH}, saj si boste s tem mogoče prihranili kakšno težavo proti koncu knjige. Če ste ambiciozni in pričakujete, da boste Python v prihodnosti bolj resno uporabljali, si mogoče že zdaj namestite distribucijo \emph{Anaconda}, ki vključuje malo več knjižnic za bolj napredno računanje, analizo podatkov in risanje grafov. Dobite jo na strani \url{https://www.anaconda.com/}.
 
 \section{Okolje IDLE}
 
@@ -11,7 +11,7 @@ Tekom razvoja enostavnejših ali kompleksnih programov ponavadi uporabljamo razl
 Pred nami se je pojavila \emph{ukazna} oziroma \emph{pozivna vrstica}, s pomočjo katere lahko začnemo naš pogovor s tolmačem jezika Python \angl{Python interpreter}. Mi mu bomo v obliki stavkov podajali ukaze, on pa jih bo izvršil in nam ponavadi tudi vrnil ali pa izpisal nek rezultat. Ukaz napišemo in tolmaču pošljemo tako, da pritisnemo tipko \texttt{Enter}. 
 
 Poskusimo nekaj osnovnih stvari.
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> 1 + 2
 3
 >>> 1 - 2
@@ -22,19 +22,19 @@ Poskusimo nekaj osnovnih stvari.
 -11
 \end{lstlisting}
 Tolmaču torej lahko podam nek izraz sestavljen iz operandov (v tem primeru števil) in operatorjev (npr. \texttt{+}, \texttt{*} in \texttt{-}) in on mi bo vrnil rezultat. Iz zadnjega izraza vidimo tudi, da ima množenje prednost pred odštevanjem. Uporabim lahko tudi oklepaje, s katerimi določim vrstni red računanja:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> (1 - 3) * 4
 -8
 \end{lstlisting}
 Kaj pa deljenje? 
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> 5 / 4
 1.25
 >>> 10 / 5
 2.0
 \end{lstlisting}
 Uporabim lahko tudi celoštevilsko deljenje (\texttt{//}) in ostanek pri deljemju oziroma operacijo modulo (\texttt{\%}): 
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> 5 // 4
 1
 >>> 10 // 5
@@ -45,8 +45,8 @@ Uporabim lahko tudi celoštevilsko deljenje (\texttt{//}) in ostanek pri deljemj
 
 \section{Podatkovni tipi}
 
-Celoštevilsko deljenje očitno vedno vrne celo število, običajno deljenje pa vrne decimalno število, tudi če je rezultat celo število. Operaciji sta pač definirani tako, da vsakič vrneta določen \texttt{podatkovni tip}, ki je poleg tega odvisen tudi od podatkovnega tipa vhodov. Podatkovni tip? Vse vrednosti, ki smo jih tolmaču podali, so imele določen podatkovni tip, in sicer smo v vseh primerih zgoraj podajali cela števila \angl{integer}, ki jim Python pravi \texttt{int}. Rezultati izvedbe gornjih stavkov so v določenih primerih prav tako predstavljali cela števila, pri deljenju pa smo dobili decimalna števila oziroma \emph{števila v plavajoči vejici} \angl{floating point number}, ki jim Python pravi \texttt{float}. Decimalna števila lahko tolmaču podamo tudi kot vhodne podatke:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Celoštevilsko deljenje očitno vedno vrne celo število, običajno deljenje pa vrne decimalno število, tudi če je decimalni del tega števila enak 0. Operaciji sta pač definirani tako, da vsakič vrneta določen \texttt{podatkovni tip}, ki je poleg tega odvisen tudi od podatkovnega tipa vhodov. Podatkovni tip? Vse vrednosti, ki smo jih tolmaču podali, so imele določen podatkovni tip, in sicer smo v vseh primerih zgoraj podajali cela števila \angl{integer}, ki jim Python pravi \texttt{int}. Rezultati izvedbe gornjih stavkov so v določenih primerih prav tako predstavljali cela števila, pri deljenju pa smo dobili decimalna števila oziroma \emph{števila v plavajoči vejici} \angl{floating point number}, ki jim Python pravi \texttt{float}. Decimalna števila lahko tolmaču podamo tudi kot vhodne podatke:
+\begin{lstlisting}[language=Python]
 >>> 5.4 + 4.6
 10.0
 >>> 6.3 / 2
@@ -57,21 +57,21 @@ Celoštevilsko deljenje očitno vedno vrne celo število, običajno deljenje pa 
 Mimogrede, operator \texttt{**} določa potenciranje, potenciranje z vrednostjo 0.5 pa je enako kvadratnemu korenu. 
 
 Python zna poleg s števili delati tudi z drugimi podatkovnimi tipi, npr. nizi \angl{string}, oziroma po njegovo s podatkovnim tipom \texttt{str}. Nizi vsebujejo sekvenco poljubnih znakov (črke, števila, ločila, posebni simboli ipd.), zapisujemo pa jih znotraj dvojnih (\texttt{"}) ali enojnih navednic (\texttt{'}). Poskusimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> "niz1"
 'niz1'
 >>> 'niz2'
 'niz2'
 \end{lstlisting}
 Python očitno ne loči med dvojnimi in enojnimi navednicami. Mi jih lahko uporabljamo čisto po navdihu. Kako pa znotraj niza zapisati enojne navednice? Tako da jih ovijemo v dvojne navednice. In obratno. Poskusimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> 'Rekel je: "Daj mi mir!"'
 'Rekel je: "Daj mi mir!"'
 >>> "'Znamo' programirati."
 "'Znamo' programirati."
 \end{lstlisting}
 Ali lahko tudi nad nizi izvajamo operacije od prej. Poskusimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> 'niz1' + 'niz2'
 'niz1niz2'
 >>> 'niz1' + ' ' + 'niz2'
@@ -81,9 +81,9 @@ Ali lahko tudi nad nizi izvajamo operacije od prej. Poskusimo:
 >>> 'niz1' * 'niz2'
 TypeError: can't multiply sequence by non-int of type 'str'
 \end{lstlisting}
-Python nam je v zadnjem primeru vrnil napako, kar pomeni, da operacija, ki smo jo hoteli izvesti ni podprta. Ko dobimo napako, se je ne ustrašimo, ampak jo preberimo, saj nam sporoča kaj je narobe. Python torej množenja dveh nizov med seboj ne podpira.
+Python nam je v zadnjem primeru vrnil napako, kar pomeni, da operacija, ki smo jo hoteli izvesti ni podprta. Ko dobimo napako, se je ne ustrašimo, ampak jo preberimo, saj nam sporoča kaj je narobe\footnote{Poročila o napakah so v knjigi nekoliko skrajšana in vsebujejo le tip in pojasnilo napake. Python sicer poroča tudi lokaciji napake.}. Python torej množenja dveh nizov med seboj ne podpira.
 Tudi seštevanje in množenje je nad nizi definirano nekoliko drugače kot nad števili. Kaj pa če niz vsebuje samo števila?
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> '3' + '5'
 '35'
 >>> '3' * '5'
@@ -92,12 +92,12 @@ TypeError: can't multiply sequence by non-int of type 'str'
 Rezultat je podoben kot prej. Podatkovni tip operanda oziroma podatka torej določa kaj in kako lahko s posameznim podatkom počnemo. Števila lahko npr. seštevamo, če pa poskusimo sešteti dva niza, izvajamo operacijo lepljenja nizov oziroma njihovo \emph{konkatenacijo}. 
 
 \section{Funkcije}
-Poleg osnovnih operatorjev so v osnovnem Python okolju vgrajene tudi določene \emph{funkcije}. Podobno kot v matematiki tudi pri programiranju funkcije sprejemajo določene vhode oziroma \emph{argumente}. Funkcijo pokličemo tako, da podamo njeno ime in argumente oziroma vhode funkciji zapišemo znotraj oklepajev. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Poleg osnovnih operatorjev so v osnovnem okolju jezika Python vgrajene tudi določene \emph{funkcije}. Podobno kot v matematiki tudi pri programiranju funkcije sprejemajo določene vhode oziroma \emph{argumente}. Funkcijo pokličemo tako, da podamo njeno ime in argumente oziroma vhode funkciji zapišemo znotraj oklepajev. Takole:
+\begin{lstlisting}[language=Python]
 ime_funkcije(argument_1, argument_2, ..., argument_n)
 \end{lstlisting}
-Po klicu se bo funkcija izvedla in nekaj koristnega naredila in / ali vrnila nek uporaben rezultat. Če bi želeli izvedeti, kateremu podatkovnem tipu pripada nek podatek, bi lahko npr. poklicali funkcijo \texttt{type}:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Po klicu se bo funkcija izvedla in nekaj koristnega naredila in/ali vrnila nek uporaben rezultat. Če bi želeli izvedeti, kateremu podatkovnemu tipu pripada nek podatek, bi lahko npr. poklicali funkcijo \texttt{type}:
+\begin{lstlisting}[language=Python]
 >>> type(1)
 <class 'int'>
 >>> type(1.0)
@@ -106,7 +106,7 @@ Po klicu se bo funkcija izvedla in nekaj koristnega naredila in / ali vrnila nek
 <class 'str'>
 \end{lstlisting}
 Poglejmo si še funkcijo \texttt{abs}, ki izračuna absolutno vrednost podanega argumenta:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> abs(-1)
 1
 >>> abs(-1.4)
@@ -116,81 +116,81 @@ Poglejmo si še funkcijo \texttt{abs}, ki izračuna absolutno vrednost podanega 
 >>> abs('niz')
 TypeError: bad operand type for abs(): 'str'
 \end{lstlisting}
-Tudi argumenti funkcij so torej omejeni na določene podatkovne tipe, kar je smiselno. Funkcija \texttt{abs} je na primer omejena zgolj na števila (\texttt{int} ali \texttt{float}), saj absolutne vrednosti niza pač ne moremo izračunati.
+Tudi argumenti funkcij so torej omejeni na določene podatkovne tipe, kar je smiselno. Funkcija \texttt{abs} je na primer omejena zgolj na števila, kot so števila tipa \texttt{int} ali \texttt{float}, saj absolutne vrednosti niza pač ne moremo izračunati.
 
 Python ima vgrajenih še kar nekaj funkcij, ki pa jih bomo večinoma spoznavali sproti. 
 
 \section{Spremenljivke}
-Do zdaj smo v ukazno vrstico pisali izraze sestavljene in operatorjev in operandov (podatkov). Python je po vsakem pritisku tipke \texttt{Enter} podan izraz pognal in vrnil rezultat, ki pa ga je takoj zatem pozabil. Do dobljenega rezultata tako ne moremo več priti drugače, kot da še enkrat podamo enak izraz, ki ga bo Python ponovno ovrednotil in vrnil enak rezultat. Pogosto pa si želimo rezultate izvedenih stavkov zapomniti oziroma želimo, da jih Python spravi za kasneje. Na ta način lahko sestavljamo kompleksnejše izraze (brez da bi pisali dolge kače čez več vrstic), izračunan podatek uporabimo večkrat in z njim delamo različne stvari (npr. uporaba v drugih izrazih, izpis na zaslon, shranjevanje na trdi disk itd.). Python omogoča, da posameznemu podatku dodelimo ime, preko katerega bomo lahko do tega podatka dostopali še kasneje. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Do zdaj smo v ukazno vrstico pisali izraze sestavljene in operatorjev in operandov (podatkov). Python je po vsakem pritisku tipke \texttt{Enter} podani izraz pognal in vrnil rezultat, ki pa ga je takoj zatem pozabil. Do dobljenega rezultata tako ne moremo več priti drugače, kot da še enkrat podamo enak izraz, ki ga bo Python ponovno ovrednotil in vrnil enak rezultat. Pogosto pa si želimo rezultate izvedenih stavkov zapomniti oziroma želimo, da jih Python shrani za kasneje. Na ta način lahko sestavljamo kompleksnejše izraze (brez da bi pisali dolge kače čez več vrstic), izračunan podatek uporabimo večkrat in z njim delamo različne stvari (npr. uporaba v drugih izrazih, izpis na zaslon, shranjevanje na trdi disk itd.). Python omogoča, da posameznemu podatku dodelimo ime, preko katerega bomo lahko do tega podatka dostopali še kasneje. Takole:
+\begin{lstlisting}[language=Python]
 >>> x = 1
 >>> y = 2 - 3.5
 >>> niz = 'abc'
 \end{lstlisting}
 Zdaj Python ni ničesar izpisal, je pa vrednost na desni strani \emph{prireditvenega stavka} priredil imenu na levi strani prireditvenega stavka. Izvedli smo torej prireditev vrednosti na desni imenu na levi, ki mu pravimo tudi \texttt{spremenljivka}. Pri tem smo uporabili prireditveni operator \texttt{=}. Pozor: to ni operator enakosti, saj vedno deluje samo v eno smer, in sicer tistemu, kar napišemo na levi strani, priredi tisto, kar napišemo na desni strani. Če npr. napišemo
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> x = x + 2
 \end{lstlisting}
 to ni nerešljiva enačba (kot bi bila v primeru, ko enačaj obravnavamo kot operator enakosti), ampak zgolj pomeni, da vzamemo vrednost, ki stoji za imenom \texttt{x}, to vrednost povečamo za 2 in priredimo imenu \texttt{x}. Zgornji stavek torej vrednost v spremenljivki \texttt{x} poveča za 2. Kako pa dostopamo do vrednosti posamezne spremenljivke oziroma do vrednosti, ki stoji za določenim imenom? To smo naredili že zgoraj -- tako da podamo ime spremenljivke. Ko smo zgoraj napisal ime \texttt{x} na desni strani prireditvenega stavka, je Python pogledal kaj za tem imenom stoji in ime zamenjal z vrednostjo za njim. Drugače je, če ime uporabimo na levi strani prireditvenega stavka. S tem namreč imenu priredimo novo vrednost, če pa imena pred tem še nismo definirali, s tem ustvarimo tudi novo ime. Temu rečemo \texttt{definicija spremenljivke}.
 
 Do vrednosti spremenljivke \texttt{x} ali \texttt{y} bi zdaj lahko dostopali tako, da podamo njeno ime:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> x
 3
 >>> y
 -1.5
 \end{lstlisting}
 Ime spremenljivke lahko uporabimo tudi kot argument funkcije, npr. takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> abs(x)
 3
 >>> abs(y)
 1.5
 \end{lstlisting}
 Prav tako lahko izhod funkcije priredimo novi (ali obstoječi) spremenljivki:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> z = abs(y)
 \end{lstlisting}
 Zdaj Python ni izpisal ničesar, je pa ustvaril novo spremenljivko, do katere lahko dostopamo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> z
 1.5
 \end{lstlisting}
 Kaj pa bi se zgodilo, če pokličemo ime spremenljivke, ki je še nimamo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> novo_ime
 NameError: name 'novo_ime' is not defined
 \end{lstlisting}
 Ker tega imena Python ne pozna, saj ga še nismo definirali, javi napako. Dostopamo lahko torej le do imen, ki smo jih bodisi definirali mi ali pa so že definirana (kot npr. \texttt{abs}). 
 
 Kaj pa bi se zgodilo, če bi imenu vgrajene funkcije priredili neko vrednost? Če bi npr. izvedli prireditev
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> abs = 5
 \end{lstlisting}
 bo Python to brez pritoževanja tudi izvedel. Poskusimo zdaj še enkrat izračunati absolutno vrednost tistega, kar se skriva za spremenljivko \texttt{y}:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> abs(y)
 TypeError: 'int' object is not callable
 \end{lstlisting}
 Seveda bo prišlo do napake, saj smo si funkcijo za izračun absolutne vrednosti \emph{povozili} z vrednostjo, ki pripada podatkovnemu tipu \texttt{int}. Za imenom \texttt{abs} po novem Python nima več shranjene funkcije za izračun absolutne vrednosti, ampak število 5. Nerodno. Stvar lahko rešimo tako, da okolje IDLE resetiramo (\texttt{Shell} $\rightarrow$ \texttt{Restart Shell} oziroma kombinacija tipk \texttt{Ctrl + F6}).
 
 V splošnem velja, da se moramo pri poimenovanju spremenljivk držati določenih pravil. Kot smo videli prej, uporaba imen, ki so že rezervirana oziroma uporabljena, ni priporočena. Prireditev vrednosti rezerviranim imenom ni zgolj slaba, ampak celo vrne napako:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> if = 5
 SyntaxError: invalid syntax
 \end{lstlisting}
 Zgoraj vidimo, da je besedica \texttt{if} t.i. \texttt{rezervirano ime}, saj jo IDLE obarva drugače kot ostale besede oziroma jo odebeli. Njeno uporabo bomo spoznali prav kmalu. Pri imenih spremenljivk nam Python poleg tega ne bo pustil uporabe presledkov:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> moje ime = 'Miha'
 SyntaxError: invalid syntax
 \end{lstlisting}
 Stvar lahko rešimo tako, da presledke zamenjamo s podčrtaji (\texttt{\_}):
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> moje_ime = 'Miha'
 >>> moje_ime
 'Miha'
 \end{lstlisting}
-Poleg tega se je pri poimenovanju spremenljivk dobro držati še določenih priporočil. Navedimo jih nekaj:
+Pri poimenovanju spremenljivk se je dobro držati določenih priporočil. Navedimo jih nekaj:
 \begin{itemize}
     \item spremenljivke naj imajo smiselna imena, ki programerju sporočajo pomen spremenljivke;
     \item pri poimenovanju spremenljivk se izogibajmo črkam, ki ne nastopajo v osnovni angleški abecedi (izogibamo se npr. črkam \texttt{č}, \texttt{ž} in \texttt{š});
@@ -201,22 +201,22 @@ Poleg tega se je pri poimenovanju spremenljivk dobro držati še določenih prip
 
 S tolmačem smo se do zdaj pogovarjali preko ukazne vrstice, čemur bi pa težko rekli programiranje. V ukazno vrstico bi lahko sicer napisali zaporedje stavkov, s katerim bi nekaj izračunali, oziroma s katerim bi rešili nek problem. Če pa bi hoteli to zaporedje stavkov pognati še enkrat (mogoče na drugih podatkih), bi morali v ukazno vrstico stavke v enakem vrstnem redu napisati ponovno. Očitno je, da to ni najbolj priročen način programiranja.
 
-V splošnem zaporedja stavkov zapisujemo v tekstovne datoteke -- v programe, ki jih potem v poganjanje predamo našemu tolmaču. Tolmač bo ukaze v datoteki izvedel po vrsti na podoben način, kot če bi te zapisali v ukazno vrstico. Kako lahko za pisanje takih programov uporabimo orodje IDLE? Najprej bomo ustvarili novo datoteko -- program, in sicer z izbiro menija \texttt{File} $\rightarrow$ \texttt{New File} oziroma s kombinacijo tipk \texttt{Ctrl + N}. V primeru, da datoteka z nekim programom že obstaja, lahko to odpremo preko menija \texttt{File} $\rightarrow$ \texttt{Open} oziroma s kombinacijo tipk \texttt{Ctrl + O}. V obeh primerih s tem odpremo tudi IDLE-ov urejevalnik teksta, s pomočjo katerega lahko napišemo program, tega shranimo in na koncu poženemo oziroma v poganjanje damo tolmaču. Kot ste verjetno že vajeni, končnica datotek podaja tudi njihovo vsebino. Datoteke, v katerih je shranjen program v jeziku Python, prepoznamo preko končnice \texttt{.py}. Programe, ki jih bomo pisali, bomo torej tudi mi opremili s tako končnico.
+V splošnem zaporedja stavkov zapisujemo v tekstovne datoteke -- v programe, ki jih potem v poganjanje predamo našemu tolmaču. Tolmač bo ukaze v datoteki izvedel po vrsti na podoben način, kot če bi te zapisali v ukazno vrstico. Kako lahko za pisanje takih programov uporabimo orodje IDLE? Najprej bomo ustvarili novo datoteko -- program, in sicer z izbiro menija \texttt{File} $\rightarrow$ \texttt{New File} oziroma s kombinacijo tipk \texttt{Ctrl + N}. V primeru, da datoteka z nekim programom že obstaja, lahko to odpremo preko menija \texttt{File} $\rightarrow$ \texttt{Open} oziroma s kombinacijo tipk \texttt{Ctrl + O}. V obeh primerih s tem odpremo tudi IDLE-ov urejevalnik teksta, s pomočjo katerega lahko napišemo program, tega shranimo in na koncu poženemo oziroma v poganjanje damo tolmaču. Kot ste verjetno že vajeni, končnica datotek nakazuje kaj približno datoteka vsebuje. Datoteke, v katerih je shranjen program v jeziku Python, prepoznamo preko končnice \texttt{.py}. Programe, ki jih bomo pisali, bomo torej tudi mi opremili s tako končnico.
 
 Napišimo krajši program, ki temperaturo v stopinjah Celzija pretvori v temperaturo v stopinjah Fahrenheit z upoštevanjem enačbe $T_F = T_C * 1.8 +32$, pri čemer $T_C$ predstavlja temperaturo v stopinjah Celzija, $T_F$ pa temperaturo v stopinjah Fahrenheit. Pri tem zaenkrat predpostavljajmo, da je $T_C$, ki ga želimo pretvoriti, enak 20. Program bo sledeč\footnote{Kadar bomo v zgledih kode vrstice označili z njihovimi številkami, bo to pomenilo, da gre za program.}:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 T_C = 20
 T_F = T_C * 1.8 +32
 \end{lstlisting}
 Program lahko zdaj shranimo, npr. v datoteko z imenom \texttt{temperatura.py} in poženemo z izbiro menija \texttt{Run} $\rightarrow$ \texttt{Run Module} oziroma s pritiskom na tipko \texttt{F5}. Izvršil se je preklop na ukazno vrstico, nikjer pa ni vidnega rezultata izvršitve našega programa. Ali se je program res izvedel? Preverimo lahko tako, da v ukazno vrstico napišemo imeni spremenljivk, ki smo jih v programu definirali. Če se program ni pognal, bo Python vrnil napako.
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> T_C
 20
 >>> T_F
 68.0
 \end{lstlisting}
 Program se je očitno izvedel, saj sta spremenljivki definirani. Program pa pred tem ni ničesar izpisal. Program ne izpiše ničesar, tudi če ga dopolnimo z zgornjima vrsticama:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 T_C = 20
 T_F = T_C * 1.8 +32
 T_C
@@ -226,59 +226,61 @@ Zakaj ne? Ko svojo kodo zapakiramo v programe, ti izpisujejo vrednosti samo takr
 
 \section{Funkcija \texttt{print}}
 Funkcija \texttt{print} nam omogoča izpisovanje vrednosti znotraj programov. Pokličemo jo tako, da ji kot argumente naštejemo vrednosti, ki jih želimo izpisati in funkcija \texttt{print} bo vednosti pač izpisala, vmes bo dala presledke, na koncu izpisa pa bo skočila v novo vrstico. Dopolnimo zgornji program, tako da izpiše obe temperaturi:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 T_C = 20
 T_F = T_C * 1.8 +32
 print(T_C)
 print(T_F)
 \end{lstlisting}
 Funkciji smo podali ime spremenljivke, izpisala pa je vrednost, ki stoji za imenom:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 20
 68.0
 \end{lstlisting}
 Funkcija \texttt{print} je na koncu vsakega izpisa avtomatsko skočila v novo vrstico.
 
 Obe temperaturi bi lahko izpisali tudi v isti vrstici, in sicer takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 print(T_C, T_F)
 \end{lstlisting}
 V tem primeru je izpis sledeč:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 20 68.0
 \end{lstlisting}
 Funkcija \texttt{print} je torej podani vrednosti avtomatsko ločila s presledkom. 
 
-Poskusimo zdaj izpis še malo olepšati. Poleg imen spremenljivk lahko kot argumenti nastopajo tudi fiksne vrednosti. Lahko bi v izpis dodali še niz, ki bi naredil vse skupaj malo bolj informativno. Takole
-\begin{lstlisting}[language=Python, showstringspaces=false]
-print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.")
+Poskusimo zdaj izpis še malo olepšati. Poleg imen spremenljivk lahko kot argumenti nastopajo tudi konstantne vrednosti. Lahko bi v izpis dodali še niz, ki bi naredil vse skupaj malo bolj informativno. Takole
+\begin{lstlisting}[language=Python]
+print(T_C, "°C je enako", T_F, "°F.")
 \end{lstlisting}
 V tem primeru je izpis sledeč:
->>> input("Vnesi svoje ime: ")
+\begin{lstlisting}[language=Python]
+20 °C je enako 68.0 °F.
+\end{lstlisting}
 Imena spremenljivk je Python torej zamenjal z njihovimi vrednostmi, nize pa je izpisal kakor so bili pač podani.
 
 \section{Funkcija \texttt{input}}
 Še malo pa bomo napisal naš prvi pravi program. Pretvarjanje iz stopinje Celzija v stopinje Fahrenheit sicer deluje, malo pa je moteče to, da lahko pretvarjamo samo eno vrednost, ki je že vnaprej določena. Program bi bil bistveno bolj uporaben, če bi lahko vrednost, ki jo želimo pretvoriti, podal kar uporabnik ob zagonu programa. To nam omogoča funkcija \texttt{input}.
 
 Funkcija \texttt{input} prav tako kot \texttt{print} na zaslon izpiše podan argument. Za razliko od funkcije \texttt{print}, funkcija \texttt{input} sprejema samo en argument tipa \texttt{str}. Preko tega argumenta bomo funkciji \texttt{input} podali navodilo za uporabnika. Na primer takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> input("Vnesi svoje ime: ")
 \end{lstlisting}
 Funkcija \texttt{input} čaka na uporabnikov vnos in pritisk tipke \texttt{Enter}. Če smo to funkcijo pognali iz ukazne vrstice, bo uporabnikov vnos ponovila. Lahko pa uporabnikov vnos shranimo v spremenljivko in ga kasneje uporabimo. Takole
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> ime = input("Vnesi svoje ime: ")
 \end{lstlisting}
 Rezultat funkcije \texttt{\input} smo torej priredili spremenljivki \texttt{ime}. Zdaj lahko do tistega, kar je uporabnik vnesel, dostopamo preko imena spremenljivke. Uporabimo to na našem programu za pretvarjanje med temperaturami. Temperaturo v stopinjah bomo zdaj prebrali od uporabnika preko funkcije \texttt{input}.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-T_C = input("Vnesi temperaturo v stopinaj Celzija: ")
+\begin{lstlisting}[language=Python,numbers=left]
+T_C = input("Vnesi temperaturo v °C: ")
 T_F = T_C * 1.8 +32
-print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.")
+print(T_C, "°C je enako", T_F, "°F.")
 \end{lstlisting}
 Program pa v tej obliki žal še ne bo deloval. Funkcija \texttt{input} namreč vedno vrne niz, saj je to podatkovni tip, v katerega lahko zapiše karkoli bo pač uporabnik vnesel. Tudi če bo uporabnik vnesel število, bo to predstavljeno kot niz oziroma podatkovni tip \texttt{str}. Kakor se spomnimo od prej pa nizov ne moremo množiti z decimalnimi števili pa tudi seštevanje je denifinirano tokrat za nas nekoliko neugodno. Prebrano število, ki je zapisano kot niz, moramo torej pred nadaljnjo obdelavo pretvoriti v nekaj, s čimer lahko računamo, npr. \texttt{float}. 
 
 \section{Pretvarjanje med podatkovnimi tipi}
 Pretvorbo podatka v posamezen podatkovni tip lahko izvedemo z vgrajenimi funkcijami, ki nosijo enako ime, kot podatkovni tip, v katerega želimo pretvarjati. Če bi želeli nekaj pretvoriti v niz, bi torej uporabili funkcijo \texttt{str}, v celo število funkcijo \texttt{int}, v decimalno pa funkcijo \texttt{float}. Poskusimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = str(20)
 >>> niz
 '20'
@@ -293,12 +295,12 @@ Pretvorbo podatka v posamezen podatkovni tip lahko izvedemo z vgrajenimi funkcij
 5
 \end{lstlisting}
 Rezultat izvedbe posamezne funkcije je torej zapis podatka v željenem podatkovnem tipu. Pri tem so seveda upoštevane omejitve posameznega podatkovnega tipa. Ko npr. pretvarjamo v podatkovni tip \texttt{int}, funkcija \texttt{int} poreže decimalke za decimalno piko (brez zaokroževanja). 
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> int(6.9)
 6
 \end{lstlisting}
-Drug primer take omejitve je, da nize lahko pretvarjamo v števila le v primeru, ko vsebujejo zgolj in samo števila (lahko tudi decimalno piko):
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Drug primer take omejitve je, da nize lahko pretvarjamo v števila le v primeru, ko vsebujejo zgolj in samo števila (in decimalno piko):
+\begin{lstlisting}[language=Python]
 >>> float("6.9")
 6.9
 >>> int("6a")
@@ -313,17 +315,17 @@ Napiši program, ki od uporabnika prebere temperaturo v stopinjah Fahrenheit in 
 \end{zgled}
 \begin{resitev}
 Rešitev naloge praktično že imamo. Malenkost jo moramo le še dopolniti.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-niz = input("Vnesi temperaturo v stopinaj Celzija: ")
+\begin{lstlisting}[language=Python,numbers=left]
+niz = input("Vnesi temperaturo v °C: ")
 T_C = float(niz)
 T_F = T_C * 1.8 +32
-print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.")
+print(T_C, "°C je enako", T_F, "°F.")
 \end{lstlisting}
-Zgornji dve vrstici bi lahko združili tudi v eno samo:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
-T_C = float(input("Vnesi temperaturo v stopinjah Celzija: "))
+Vrstici številka 1 in 2 bi lahko združili tudi v eno samo:
+\begin{lstlisting}[language=Python,numbers=left]
+T_C = float(input("Vnesi temperaturo v °C: "))
 T_F = T_C * 1.8 +32
-print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.")
+print(T_C, "°C je enako", T_F, "°F.")
 \end{lstlisting}
 \end{resitev}
 Program zdaj deluje kakor bi želeli. Do problema pride samo takrat, ko uporabnik vnese kakšno neumnost.
@@ -334,9 +336,9 @@ Ponavadi je dobro, da programe pišemo na tak način, da jih bodo razumeli tudi 
 Komentarji služijo opombam, ki jih sebi ali drugim pišemo znotraj naših programom, niso pa namenjeni izvajanju. Pythonu moramo torej nekako povedati, da naj komentarjev ne poganja. To mu lahko sporočimo z uporabo določenih znakov. 
 
 Znak \texttt{\#} označuje vrstični komentar, in sicer bo Python preskočil vso kodo od začetka znaka \texttt{\#} do konca vrstice, v kateri se ta znak nahaja. Primer uporabe je sledeč:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> # napišemo lahko karkoli
->>> x = 1 # prireditev bo Python izvedel, komentarja pa ne
+>>> x = 1 # prireditev bo pognana, komentar pa ne
 >>> x
 1
 \end{lstlisting}
@@ -344,19 +346,19 @@ Znak \texttt{\#} označuje vrstični komentar, in sicer bo Python preskočil vso
 Včasih si želimo napisati daljši (večvrstični komentar). Tega začnemo s tremi enojnimi ali tremi dvojnimi narekovaji in ga končamo s tremi enojnimi ali tremi dvojnimi narekovaji (s tistimi pač, s katerimi smo komentar začeli).
 
 Povadimo zdaj oboje na našem prvem programu.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 """
 Program, ki pretvori prebrano temperaturo 
 iz stopinj Celzija v stopinje Fahrenheit
 """
 
 # branje in pretvorba v decimalno število
-T_C = float(input("Vnesi temperaturo v stopinaj Celzija: ")) 
+T_C = float(input("Vnesi temperaturo v °C: ")) 
 
 T_F = T_C * 1.8 +32 # enačba pretvorbe
 
 # izpis na zaslon
-print(T_C, "stopinj Celzija je enako", T_F, "stopinj Fahrenheit.") 
+print(T_C, "°C je enako", T_F, "°F.") 
 \end{lstlisting}
 
 
