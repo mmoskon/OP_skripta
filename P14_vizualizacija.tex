@@ -7,7 +7,7 @@ Za vizualizacijo podatkov bomo uporabljali knjižnico Matplotlib, ki predstavlja
 \end{lstlisting}
 Podrobnejša navodila za namestitev paketov smo podali že v poglavju \ref{ch:moduli}, zato jih tu ne bomo podvajali. Če ima vaš računalnik povezavo z internetom, bo orodje \texttt{pip} samo preneslo potrebne namestitvene datoteke in knjižnico namestilo.
 
-Za vizualizacija naših podatkov bomo uporabili Matplotlibov vmesnik \angl{interface} \texttt{pyplot}, ki nam risanje precej olajša. V svoje programe ga bomo uvozili takole:
+Za vizualizacijo naših podatkov bomo uporabili Matplotlibov vmesnik \angl{interface} \texttt{pyplot}, ki nam risanje precej olajša. V svoje programe ga bomo uvozili takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 import matplotlib.pyplot as plt
 \end{lstlisting}
@@ -34,7 +34,7 @@ Zdaj se je prikazal graf, ki ga prikazuje slika \ref{img:plt1}.
     \caption{Črtni graf, pri čemer smo podali koordinate točk na osi $y$.}
     \label{img:plt1}
 \end{figure}
-Točke, ki smo jih podali funkciji \texttt{plot}, očitno predstavljajo koordinate $y$ narisanega grafa. Točke na osi $x$ je Matplotlib določil kar glede na indekse točke v seznamu \texttt{Y}. To lahko spremenimo, tako da funkcijo \texttt{plot} pokličemo z dvema seznamoma, pri čemer prvi določa koordinate točk na osi $x$ drugi pa koordinate točk na osi $y$. Seznama morata biti seveda enakih dolžin. Do enakega grafa kot zgoraj, bi lahko prišli takole: 
+Točke, ki smo jih podali funkciji \texttt{plot}, očitno predstavljajo koordinate $y$ narisanega grafa. Točke na osi $x$ je Matplotlib določil kar glede na indekse točke v seznamu \texttt{Y}. To lahko spremenimo, tako da funkcijo \texttt{plot} pokličemo z dvema seznamoma, pri čemer prvi določa koordinate točk na osi $x$ drugi pa koordinate točk na osi $y$\footnote{To se zgodi v primeru, ko imamo v prvem seznamu številske vrednosti. Če bi imeli v prvem seznamu nize, bi bili ti uporabljeni kot oznake na osi $x$, pri čemer bi bile lokacije točk na osi $x$ zopet določene kar z indeksi točk na osi $y$.}. Seznama morata biti seveda enakih dolžin. Do enakega grafa kot zgoraj, bi lahko prišli takole: 
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> Y = [1, 3, 9, 12]
 >>> X = range(len(Y))
@@ -173,7 +173,7 @@ Kar nam še vedno ni všeč na sliki \ref{img:plt4}, je neberljiv izpis na osi $
 ['2014M01', '2015M01', '2016M01', '2017M01', '2018M01',
 '2019M01', '2020M01']
 \end{lstlisting}
-Pripravimo si seznam \texttt{oznake}, ki bo vseboval samo podatke o letih. Vzeli bomo vsak 12-ti podatek iz obstoječega seznama mesecev (izhajamo lahko bodisi is seznama \texttt{MJ} ali \texttt{MZ}), pri čemer bomo upoštevali samo prve štiri znake (podatek o letu). 
+Pripravimo si seznam \texttt{oznake}, ki bo vseboval samo podatke o letih. Vzeli bomo vsak 12-ti podatek iz obstoječega seznama mesecev (izhajamo lahko bodisi iz seznama \texttt{MJ} ali \texttt{MZ}), pri čemer bomo upoštevali samo prve štiri znake (podatek o letu). 
 \begin{lstlisting}[language=Python, showstringspaces=false]
 oznake = []
 for mj in MJ[::12]: # vzamemo vsako 12-to oznako
@@ -332,7 +332,7 @@ Dodajmo še legendo:
 plt.legend(['Javni sektor', 'Zasebni sektor'])
 \end{lstlisting}
 
-Kar nas še moti je to, da sta grafa \emph{naložena} drug na drugega. Če bi npr. najprej izrisali zasebni sektor, bi ga javni sektor prekril. Bolj pravilno bi bilo, če bi grafa narisala drug ob drugim. Kako lahko to naredimo? Tako, da en graf zamaknemo v levo, drugega pa v desno. Popravili bomo tudi širino stolpcev, da bodo malo ožji. Najprej določimo lokacije stolpcev:
+Kar nas še moti je to, da sta grafa \emph{naložena} drug na drugega. Če bi npr. najprej izrisali zasebni sektor, bi ga javni sektor prekril. Bolj pravilno bi bilo, če bi grafa narisala drug ob drugemu. Kako lahko to naredimo? Tako, da en graf zamaknemo v levo, drugega pa v desno. Popravili bomo tudi širino stolpcev, da bodo malo ožji. Najprej določimo lokacije stolpcev:
 \begin{lstlisting}[language=Python]
 loc1 = list(range(len(ZJ_2018)))
 loc2 = list(range(len(ZZ_2018)))
@@ -523,4 +523,4 @@ plt.show()
 \end{lstlisting}
 
 \end{resitev}
-Tole je bilo precej nerodno predvsem iz dveh razlogov. Prvič, za izračun logaritmov vseh vrednosti v seznamu \texttt{X} smo se morali sprehoditi čez cel seznam in vsako vrednost izračunati posebej. Veliko lažje bi bilo, če bi lahko funkcijo poklicali kar nad celotnim seznamom (brez uporabe zanke for). Drugič, funkiji \texttt{range} lahko podamo samo celoštevilske argumente. Ker smo želeli biti pri izrisovanju logaritmov nekoliko bolj natančni, smo morali generiranje definicijskega območja nekoliko zakomplicirati. Idealno pa bi bilo, če bi lahko funkciji \texttt{range} oziroma njej podobni funkciji podali decimalne korake. Izkaže se, da lahko zgornja problema rešimo z uporabo knjižnice \texttt{NumPy}, ki pa nam poleg tega olajša še marsikaj drugega.
+Tole je bilo precej nerodno predvsem iz dveh razlogov. Prvič, za izračun logaritmov vseh vrednosti v seznamu \texttt{X} smo se morali sprehoditi čez cel seznam in vsako vrednost izračunati posebej. Veliko lažje bi bilo, če bi lahko funkcijo poklicali kar nad celotnim seznamom (brez uporabe zanke for). Drugič, funkciji \texttt{range} lahko podamo samo celoštevilske argumente. Ker smo želeli biti pri izrisovanju logaritmov nekoliko bolj natančni, smo morali generiranje definicijskega območja nekoliko zakomplicirati. Idealno pa bi bilo, če bi lahko funkciji \texttt{range} oziroma njej podobni funkciji podali decimalne korake. Izkaže se, da lahko zgornja problema rešimo z uporabo knjižnice \texttt{NumPy}, ki pa nam poleg tega olajša še marsikaj drugega.

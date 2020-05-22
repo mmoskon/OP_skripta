@@ -58,13 +58,13 @@ Opomba: vsebina stavka \texttt{if} je zamaknjena dvakrat, saj je zapisana tako z
 
 Zanko \texttt{while} bi lahko uporabili tudi za štetje. Za ta namen je sicer boljša zanka \texttt{for}, ki jo bomo spoznali malo kasneje. Poglejmo si zgled.
 \begin{zgled}
-Napiši program, ki šteje od 1 do števila, ki ga je vnesel uporabnik. Vsa števila naj program tudi izpiše
+Napiši program, ki šteje od 0 do števila, ki ga je vnesel uporabnik. Vsa števila naj program tudi izpiše
 \end{zgled}
 \begin{resitev}
-Število, do katerega smo že prešteli, si bomo morali nekam zabeležiti, npr. v spremenljivko z imenom \texttt{i}. Šteti bomo glede na navodila začeli s številom 1. Torej bomo spremenljivko \texttt{i} na začetku postavili na vrednost 1. Končali bomo s številom, ki ga je vnesel uporabnik, recimo \texttt{n}. Pogoj za štetje naprej bo torej \texttt{i <= n}. Znotraj zanke \texttt{while} bomo trenutno število (\texttt{i}) izpisali, poleg tega moramo trenutno število tudi povečati, saj bo sicer pogoj za vedno izpolnjen. 
+Število, do katerega smo že prešteli, si bomo morali nekam zabeležiti, npr. v spremenljivko z imenom \texttt{i}. Šteti bomo glede na navodila začeli s številom 0. Torej bomo spremenljivko \texttt{i} na začetku postavili na vrednost 0. Končali bomo s številom, ki ga je vnesel uporabnik, recimo \texttt{n}. Pogoj za štetje naprej bo torej \texttt{i <= n}. Znotraj zanke \texttt{while} bomo trenutno število (\texttt{i}) izpisali, poleg tega moramo trenutno število tudi povečati, saj bo sicer pogoj za vedno izpolnjen. 
 \begin{lstlisting}[language=Python,numbers=left]
 n = int(input("Vpiši število do katerega želiš šteti: "))
-i = 1 # števec s katerim bomo šteli
+i = 0 # števec s katerim bomo šteli
 while i <= n: # smo ze prešteli do konca?
     print(i)
     i = i + 1 # povečanje števca za 1
@@ -102,7 +102,7 @@ Bistvo zgornjega stavka je, da izvedemo aritmetično operacijo seštevanja in re
 
 \section{Mrtva zanka}
 
-Kaj pa bi se zgodilo, če bi števec v prejšnjem zgledu znotraj zanke pozabili povečati? Spremenljivka \texttt{i} (oziroma števec) bi ostala na vrednosti 1 ne glede na to koliko iteracij zanke bi se izvedlo. To pomeni, da bi bil pogoj za vedno izpolnjen (\texttt{True}). Kdaj bi se taka zanka končala? Ker je pogoj vedno resničen, se taka zanka nikoli ne konča in tak program je potrebno končati na silo (v okolju Python je temu namenjena kombinacija tipk \texttt{ctrl + c}). Na take stvari moramo torej pri programiranju z zanko \texttt{while} paziti. Zanki, ki se nikoli ne konča, pravimo \emph{mrtva zanka} \angl{deadlock}.
+Kaj pa bi se zgodilo, če bi števec v prejšnjem zgledu znotraj zanke pozabili povečati? Spremenljivka \texttt{i} (oziroma števec) bi ostala na vrednosti 0 ne glede na to koliko iteracij zanke bi se izvedlo. To pomeni, da bi bil pogoj za vedno izpolnjen (\texttt{True}). Kdaj bi se taka zanka končala? Ker je pogoj vedno resničen, se taka zanka nikoli ne konča in tak program je potrebno končati na silo (v okolju Python je temu namenjena kombinacija tipk \texttt{ctrl + c}). Na take stvari moramo torej pri programiranju z zanko \texttt{while} paziti. Zanki, ki se nikoli ne konča, pravimo \emph{mrtva zanka} \angl{deadlock}.
 
 \section{Stavek \texttt{break}}
 Zanko pa lahko prekinemo tudi drugače kot z neizpolnjenostjo pogoja v glavi zanke. Uporabimo lahko namreč stavek \texttt{break}, ki prekine izvajanje zanke brez preverjanja pogoja v glavi zanke. Primer uporabe stavka \texttt{break} ponazarja spodnja koda
@@ -136,8 +136,9 @@ st2 = int(input("Vnesi drugo število: "))
 
 delitelj = 2 # začetna vrednost kandidata
 
-while delitelj <= min(st1, st2): # kandidat gre do manjšega
-    # ali kandidat deli obe števili?
+# kandidat/delitelj gre do manjšega
+while delitelj <= min(st1, st2): 
+    # ali delitelj deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Števili nista tuji")
     delitelj += 1
@@ -148,11 +149,12 @@ st1 = int(input("Vnesi prvo število: "))
 st2 = int(input("Vnesi drugo število: "))
 
 delitelj = 2 # začetna vrednost kandidata
-# predspostavljamo, da skupnega delitelja še nismo našli:
+# predpostavljamo, da skupnega delitelja še nismo našli:
 nasli = False 
 
-while delitelj <= min(st1, st2): # kandidat gre do manjšega
-    # ali kandidat deli obe števili?
+# kandidat/delitelj gre do manjšega
+while delitelj <= min(st1, st2):
+    # ali delitelj deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Števili nista tuji")
         nasli = True # popravimo predpostavko
@@ -173,7 +175,7 @@ nasli = False
 
 # kandidat za skupni delitelj gre do manjsega
 while delitelj <= min(st1, st2): 
-    # ali kandidat deli obe števili?
+    # ali delitelj deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Števili nista tuji")
         nasli = True # popravimo predpostavko
@@ -234,9 +236,9 @@ st2 = int(input("Vnesi drugo število: "))
 
 delitelj = 2 # začetna vrednost kandidata
 
-# kandidat za skupni delitelj gre do manjsega
+# kandidat/delitelj gre do manjšega
 while delitelj <= min(st1, st2): 
-    # ali kandidat deli obe števili?
+    # ali delitelj deli obe števili?
     if st1 % delitelj == 0 and st2 % delitelj == 0:
         print("Števili nista tuji")
         break # lahko prenehamo z iskanjem

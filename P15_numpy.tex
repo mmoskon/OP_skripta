@@ -11,7 +11,7 @@ Zdaj lahko poljuben seznam (ali seznamu podobno strukturo) pretvorimo v \texttt{
 >>> X = np.array([1,2,3])
 >>> Y = np.array([4,5,6])
 \end{lstlisting}
-Kaj lahko z \emph{novimi} seznami počnemo? Podobno kot pri pri običajnih seznamih, lahko tudi te indeksiramo, nad njimi uporabljamo vgrajene funkcije, preverjamo, če vsebujejo določen element in se čez njih sprehajamo z zanko \texttt{for}:
+Kaj lahko z \emph{novimi} seznami počnemo? Podobno kot običajne sezname, lahko tudi te indeksiramo, nad njimi uporabljamo vgrajene funkcije, preverjamo, če vsebujejo določen element in se čez njih sprehajamo z zanko \texttt{for}:
 \begin{lstlisting}[language=Python]
 >>> X[0]
 1
@@ -75,7 +75,7 @@ Dobili smo torej vektor, ki vsebuje rezultate preverjanja na posameznih mestih. 
 array([False, True, True])
 \end{lstlisting}
 
-Dodatna prednost uporabe strukture \texttt{ndarray} je, da lahko to indeksiramo z vektorjem vrednosti \texttt{True} in \texttt{False}, pri čemer bomo kot rezultat dobili \texttt{ndarray} elementov, ki smo jih naslovili z vrednostjo \texttt{True}. Rezultat primerjanja strukture \texttt{ndarray} lahko torej uporabimo za indeksiranja. Če bi npr. želeli dobiti tiste elemente vektorja \texttt{X}, ki so večji ali enaki 2, bi lahko to naredili takole:
+Dodatna prednost uporabe strukture \texttt{ndarray} je, da lahko to indeksiramo z vektorjem vrednosti \texttt{True} in \texttt{False}, pri čemer bomo kot rezultat dobili \texttt{ndarray} elementov, ki smo jih naslovili z vrednostjo \texttt{True}. Rezultat primerjanja strukture \texttt{ndarray} lahko torej uporabimo za indeksiranje. Če bi npr. želeli dobiti tiste elemente vektorja \texttt{X}, ki so večji ali enaki 2, bi lahko to naredili takole:
 \begin{lstlisting}[language=Python]
 >>> sito = X >= 2
 >>> X[sito]
@@ -100,7 +100,7 @@ Funkcija \texttt{linspace} deluje podobno, le da tej kot argumente podamo začet
 \begin{lstlisting}[language=Python]
 >>> X = np.linspace(0.001, 5, 5000)
 \end{lstlisting}
-Rekli smo torej, da želimo imeti 5000 točk na intervalu, ki se začne s točko 0.001 in konča s točko 5 (ta točka je v intervalu še vsebovana). Pri tem je uporabljena linearna interpolacija med točkami, kar z drugimi besedami pomeni, da je med sosednjima točkama v vektorja vedno enaka razlika.
+Rekli smo torej, da želimo imeti 5000 točk na intervalu, ki se začne s točko 0.001 in konča s točko 5 (ta točka je v intervalu še vsebovana). Pri tem je uporabljena linearna interpolacija med točkami, kar z drugimi besedami pomeni, da je med sosednjima točkama v vektorju razlika vselej enaka.
 
 \section{Funkcije nad strukturo \texttt{ndarray}}
 Če želimo narisati graf logaritemske funkcije, lahko torej koordinate na osi $x$ enostavneje zgeneriramo s funkcijo \texttt{arange}. Zdaj moramo le še izračunati njihove logaritme. Poskusimo:
@@ -178,7 +178,7 @@ Delovanje je bilo do tukaj zelo podobno kot pri običajnih ugnezdenih seznamih, 
 >>> sez[1][2]
 6
 \end{lstlisting}
-Pri delu s strukturo \texttt{ndarray} lahko do elementov matrike pridemo tudi tako, indeks vrstice in indeks stolpca podamo skupaj in tako indeksiranje izvedemo le enkrat. To pri običajnih seznamih ne gre:
+Pri delu s strukturo \texttt{ndarray} lahko do elementov matrike pridemo tudi tako, da indeksa vrstice in stolpca podamo skupaj in tako indeksiranje izvedemo le enkrat. To pri običajnih seznamih ne gre:
 \begin{lstlisting}[language=Python]
 >>> A[1,2]
 6
@@ -411,4 +411,4 @@ S tem se seveda spet odpovemo zmožnostim računanja, saj se z nizi kaj veliko p
 
 \section{Omejitve knjižnice NumPy}
 
-Knjižnica NumPy je torej idealna za delo z numeričnimi podatki. Do problema pa pride, kadar naši podatki poleg numeričnih vrednosti vsebujejo tudi nize, ki jih ne moremo obravnavati kot števila. To so lahko zgolj imena stolpcev ali pa tudi drugi podatki. Pri plačah smo se npr. srečali s podatki o mesecu, v zgornjih primerih pa s podatki o imenu osebe. Ko pridemo do takih podatkov moramo skleniti kompromis. Lahko se jim odpovemo z njihovo pretvorbo v \texttt{np.nan}, kar ponavadi ne pride v upoštev. Lahko vse podatke zapišemo v obliki nizov, s čimer se odpovemo zmožnostim računanja. Možna alternativa je tudi, da numerične podatke shranimo v drugo strukturo kot nenumerične. To nam načeloma povzroči dodatno delo, je pa seveda izvedljivo. V vsakem primeru so komplikacije neizogibne. Lahko pa v takem primeru uporabimo knjižnico Pandas, ki je namenjena delu z večjimi količinami podatkov, omogoča učinkovito predstavitev različnih podatkovnih tipov in ne izkjučuje uporabe knjižnice NumPy pri hitrem računanju, temveč to dopolnjuje.
+Knjižnica NumPy je torej idealna za delo z numeričnimi podatki. Do problema pa pride, kadar naši podatki poleg numeričnih vrednosti vsebujejo tudi nize, ki jih ne moremo obravnavati kot števila. To so lahko zgolj imena stolpcev ali pa tudi drugi podatki. Pri plačah smo se npr. srečali s podatki o mesecu, v zgornjih primerih pa s podatki o imenu osebe. Ko pridemo do takih podatkov moramo skleniti kompromis. Lahko se jim odpovemo z njihovo pretvorbo v \texttt{np.nan}, kar ponavadi ne pride v upoštev. Lahko vse podatke zapišemo v obliki nizov, s čimer se odpovemo zmožnostim računanja. Možna alternativa je tudi, da numerične podatke shranimo v drugo strukturo kot nenumerične. To nam načeloma povzroči dodatno delo, je pa seveda izvedljivo. V vsakem primeru so komplikacije neizogibne. Lahko pa v takem primeru uporabimo knjižnico Pandas, ki je namenjena delu z večjimi količinami podatkov, omogoča učinkovito predstavitev različnih podatkovnih tipov in ne izključuje uporabe knjižnice NumPy pri hitrem računanju, temveč to dopolnjuje.

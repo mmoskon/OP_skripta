@@ -2,10 +2,10 @@
 
 \section{Delo z nizi}
 
-Nize smo do zdaj že dodobra spoznali, preden se lotimo dela z datotekami pa si moramo pogledati še nekaj metod za delo z njimi.
+Nize smo do zdaj že dodobra spoznali. Preden se lotimo dela z datotekami pa si moramo pogledati še nekaj metod, ki jih lahko nad nizi uporabimo.
 
 Ponovimo najprej osnovne operacije, ki smo jih do zdaj že izvajali nad nizi. Nad nizi lahko izvajamo zanko \texttt{for}, pri čemer v vsaki iteraciji zanke, dostopamo do enega znaka niza. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> for znak in niz:
 	print(znak)
@@ -17,28 +17,28 @@ e
 d
 \end{lstlisting}
 Nize lahko med sabo seštevamo, čemur smo rekli lepljenje ali konkatenacija, poleg tega pa jih lahko množimo s celimi števili:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> "abc" + " " + "def"
 'abc def'
 >>> "abc" * 3
 'abcabcabc'
 \end{lstlisting}
-Njihove elemente lahko tudi indeksiramo in delamo rezine. Ne moremo pa jih spreminjati. Odstranjevanja podniza z besedico \texttt{del} torej ne bo šlo skozi:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Njihove elemente lahko tudi indeksiramo in delamo rezine. Ne moremo pa jih spreminjati. Odstranjevanje podniza z besedico \texttt{del} torej ne bo šlo skozi:
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> niz[2:5]
 'ece'
 >>> del niz[2:5]
 TypeError: 'str' object does not support item deletion
 \end{lstlisting}
-Zakaj ne? Ker so nizi nespremenljivi. Alternativa je seveda ta, da naredimo nov niz, ki odraža željeno spremembo. V zgornjem primeru bi torej lahko naredili nov niz z lepljenjem dveh rezin. Eno pred podnizom, ki ga želimo odstraniti, in drugo za podnizem, ki ga želimo odstraniti. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Zakaj ne? Ker so nizi nespremenljivi. Alternativa je seveda ta, da naredimo nov niz, ki odraža željeno spremembo. V zgornjem primeru bi torej lahko naredili nov niz z lepljenjem dveh rezin. Eno pred podnizom, ki ga želimo odstraniti, in drugo za podnizom, ki ga želimo odstraniti. Takole:
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> niz[:2] + niz[5:]
 'abda'
 \end{lstlisting}
 Iz niza smo tako odstranili podniz \texttt{"ece"}. Če želimo, da se sprememba odraža tudi preko spremenljivke z imenom \texttt{niz}, bomo nov (spremenjen) niz priredili temu imenu:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> niz = niz[:2] + niz[5:]
 >>> niz
@@ -51,7 +51,7 @@ Napiši funkcijo \texttt{odstrani}, ki sprejme dva niza in iz prvega niza odstra
 
 \begin{resitev}
 V funkciji moramo najprej preveriti, če in kje se v nizu nahaja podniz. To lahko naredimo tako, da se sprehajamo od začetka do konca niza in režemo rezine dolžine podniza. Da lahko delamo rezine, se moramo seveda sprehajati po indeksih niza. To bi izgledalo nekako takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> pondiz = "ece"
 >>> for i in range(len(niz)):
@@ -65,7 +65,7 @@ V funkciji moramo najprej preveriti, če in kje se v nizu nahaja podniz. To lahk
 'a'
 \end{lstlisting}
 Znotraj zanke bomo preverjali, če je odrezana rezina enaka podnizu (zgoraj je to bilo v 3. iteraciji zanke). V tem primeru ga bomo odstranili (podobno kot prej) in vrnili rezultat. Napišimo celotno funkcijo.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 def odstrani(niz, podniz):
     for i in range(len(niz)):
         rezina = niz[i:i+len(podniz)]
@@ -75,14 +75,14 @@ def odstrani(niz, podniz):
             return niz[:zacetek] + niz[konec:]
     return niz # nismo našli - vrni nespremenjen niz
 \end{lstlisting}
-Vprašanje je še ali mora funkcija res vračati spremenjen niz ali je dovolj, če niz, ki ga funkcija sprejme kot argument, spreminjamo znotraj funkcije (kot smo to delali pri seznamih, slovarjih in množicah). Odgovor je seveda ne, saj je niz nespremenljiv. Spremembe, ki jih vršimo nad imenom, za katerim se skriva niz, se izven funkcije ne bodo ohranile, zato je potrebno nov (spremenjen) niz vrniti s stavkom \texttt{return}. 
+Vprašanje je še ali mora funkcija res vračati spremenjen niz ali je dovolj, če niz, ki ga funkcija sprejme kot argument, spreminjamo znotraj funkcije (kot smo to delali pri seznamih, slovarjih in množicah). Spremenjen niz moramo seveda eksplicitno vrniti, saj je niz nespremenljiv. Spremembe, ki jih vršimo nad imenom, za katerim se skriva niz, se izven funkcije ne bodo ohranile, zato je potrebno nov (spremenjen) niz vrniti s stavkom \texttt{return}. 
 \end{resitev}
 
 Tole je bilo še kar zakomplicirano. Izkaže pa se, da nam te in podobnih funkcij ni treba pisati, saj večinoma že obstajajo. Najdemo jih med metodami nizov. Izbrane (tj. tiste, ki jih bomo uporabljali pogosteje) si bomo podrobneje pogledali v nadaljevanju poglavja.
 
 \section{Iskanje podnizov}
 V prejšnjem zgledu se lahko uporabi rezin deloma izognemo z uporabo metode \texttt{startswith}, ki vrne vrednost \texttt{True}, če se niz, preko katerega smo metodo poklicali začne s podanim podnizom. Rešitev bi torej lahko nekoliko poenostavili:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 def odstrani(niz, podniz):
     for i in range(len(niz)):
         if niz[i:].startswith(podniz):
@@ -92,7 +92,7 @@ def odstrani(niz, podniz):
     return niz # nismo našli - vrni nespremenjen niz
 \end{lstlisting}
 Poleg metode \texttt{startswith} lahko pri iskanju uporabimo še metodo \texttt{endswith}, ki preverja, če se niz konča s podanim podnizom, metodo \texttt{count}, ki prešteje število pojavitev podniza in metodo \texttt{find}, ki vrne lokacijo podniza oziroma --1, če podniza v nizu ni. Povadimo še uporabo metode \texttt{find}:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 def odstrani(niz, podniz):
     i = niz.find(podniz)
     if i >= 0: # ali je podniz v nizu
@@ -104,26 +104,26 @@ def odstrani(niz, podniz):
 
 \section{Odstranjevanje in spreminjanje (pod)nizov}
 Podnize pa lahko odstranimo zgolj s klicem metode \texttt{replace}, ki vse pojavitve prvega argumenta zamenja z drugim argumentom. Poskusimo
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> niz.replace("a","e")
 'ebecede'
 \end{lstlisting}
 Metoda podanega niza ne spreminja. Seveda, saj ga ne more, ker so nizi nespremenljivi. Metoda torej niza ne more spremeniti, lahko pa vrne nov niz, ki odraža spremembo. Če želimo s klicem metode spremeniti vrednost, ki stoji za imenom spremenljivke, bomo rezultat klica priredili spremenljivki. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> niz = niz.replace("a","e")
 >>> niz
 'ebecede'
 \end{lstlisting}
-Kako lahko uporabimo metodo pri odstranjevanju podnizov? Tako, da kot drugi argument podamo prazen nizen.
-\begin{lstlisting}[language=Python, showstringspaces=false]
+Kako lahko uporabimo metodo pri odstranjevanju podnizov? Tako, da kot drugi argument podamo prazen niz.
+\begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
 >>> niz.replace("a","")
 'beced'
 \end{lstlisting}
 V navodilu prejšnje naloge je bilo zahtevno, da odstranimo samo prvo pojavitev podniza. Tudi to lahko rešimo z dodatnim argumentom, ki ga metoda \texttt{replace} sprejema. Poglejmo si izpis funkcije \texttt{help}:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> help("".replace)
 Help on built-in function replace:
 
@@ -139,7 +139,7 @@ replace(old, new, count=-1, /) method of builtins.str instance
     occurrences are replaced.
 \end{lstlisting}
 Podamo lahko tudi tretji argument \texttt{count}, ki pove koliko zamenjav naj metoda naredi (privzeto naredi vse zamenjave). Zdaj lahko našo funkcijo poenostavimo do konca:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 def odstrani(niz, podniz):
     return niz.replace(podniz, "", 1)
 \end{lstlisting}
@@ -151,8 +151,8 @@ Napiši funkcijo \texttt{palindrom}, ki kot argument sprejme niz in vrne \texttt
 \end{zgled}
 
 \begin{resitev}
-Kako preveriti, če je niz palindrom, že znamo. Tokrat bomo dodali še to, da preverjanje ne loči med malimi in velikimi črkami. To bomo naredili tako, da vse črke v nizu pred preverjanjem pretvorili v velike (ali pa v male).
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+Kako preveriti, če je niz palindrom, že znamo. Tokrat bomo dodali še to, da preverjanje ne loči med malimi in velikimi črkami. To bomo naredili tako, da bomo vse črke v nizu pred preverjanjem pretvorili v velike (ali pa v male).
+\begin{lstlisting}[language=Python,numbers=left]
 def palindrom(niz):
     niz = niz.upper()
     return niz == niz[::-1]
@@ -161,7 +161,7 @@ def palindrom(niz):
 
 \section{Razdruževanje in združevanje nizov}
 Funkcija \texttt{input} uporabnikov vnos vedno vrne zapisan kot niz. Prav tako bomo vsebino datotek (v naslednjem poglavju) vedno dobili najprej zapisano kot niz. V primeru, da uporabnik vnese eno število, lahko število zapisano kot niz enostavno pretvorimo preko funkcij \texttt{int} oziroma \texttt{float}. V primeru, da uporabnik naenkrat vnese več števil ali pa je vnos sestavljen iz števil in drugih znakov, ki jih mogoče želimo pretvoriti v kaj drugega pa ta pristop ni več mogoč. Deloma nas sicer lahko reši funkcija \texttt{eval}, katere uporaba zaradi varnosti v splošnem ni priporočljiva, poleg tega pa tudi ta slej ko prej odpove. V tem primeru moramo niz razčleniti \angl{parse} sami. Za ta namen lahko uporabimo metodo \texttt{split}, ki ji kot argument podamo ločilo \angl{separator}, preko katerega naj niz loči v seznam nizov. Poglejmo si primer:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "jabolka,hruške,slive"
 >>> niz.split(",")
 ['jabolka', 'hruške', 'slive']
@@ -172,8 +172,8 @@ Povadimo še na zgledu:
 Napiši program, ki na podlagi uporabnikovega vnosa izračuna in izpiše vsoto podanih števil. Uporabnik bo števila vnesel v eni vrstici in jih med seboj ločil s podpičji. 
 \end{zgled}
 \begin{resitev}
-Program bo uporabnikov vnos ločil po podpičjih. Sledil bo sprehod čez dobljeni seznam, pretvorba nizov v števila in seštevanje.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+Program bo uporabnikov vnos (niz) ločil po podpičjih. Sledil bo sprehod čez dobljeni seznam, pretvorba nizov v števila in seštevanje.
+\begin{lstlisting}[language=Python,numbers=left]
 vnos = input("Vnesi števila ločena s podpičji: ")
 seznam = vnos.split(";")
 s = 0 # začetna vsota
@@ -182,24 +182,24 @@ for st in seznam:
 print(s)
 \end{lstlisting}
 Zgled izvedbe programa:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 Vnesi števila ločena s podpičji: 20;40.5;60
 120.5
 \end{lstlisting}
 \end{resitev}
 
 Metodo \texttt{split} lahko pokličemo tudi brez podanega ločila, pri čemer bo privzeto za ločilo uporabljen \emph{prazen prostor} \angl{white space}. Prazen prostor predstavlja znake, ki na zaslonu predstavljajo točno to -- prazen prostor. Sem uvrstimo presledek, tabulator (\texttt{$\backslash$t}) in novo vrstico (\texttt{$\backslash$n}) (opomba: kombinacija znakov \texttt{$\backslash$t} in \texttt{$\backslash$n} pravzaprav predstavlja en sam znak). Dodatna prednost uporabe metode \texttt{split} brez argumenta je v tem, da bo več zaporednih ponovitev znakov za prazen prostor obravnaval kot eno samo. Poskusimo:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "1    2 \n 3\t4"
 >>> niz.split(" ")
 ['1', '', '', '', '2', '\n', '3\t4']
 >>> niz.split()
 ['1', '2', '3', '4']
 \end{lstlisting}
-Klic metode z argumentom \texttt{" "} očitno ni vrnil želenega prostora, klic metode brez argumentov pa je uspešno odstranil prazen prostor in iz niza pobral samo relevantne vrednosti. 
+Klic metode z argumentom \texttt{" "} praznega prostora očitno ni odstranil v celoti, klic metode brez argumentov iz niza uspešno pobral samo relevantne vrednosti. 
 
 Podobno, kot lahko podan niz glede na podano ločilo razbijemo na seznam nizov, lahko seznam nizov, glede na podano ločilo združimo v en niz. V tem primeru uporabimo metodo \texttt{join}, ki jo pokličemo nad nizom, ki predstavlja naše ločilo, kot argument pa ji podamo seznam nizov, ki ga želimo združiti. Takole: 
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> seznam = ["jabolka", "slive", "avokado"]
 >>> ", ".join(seznam)
 'jabolka, slive, avokado'
@@ -215,7 +215,7 @@ Napiši funkcijo \texttt{palindrom}, ki kot argument sprejme niz in vrne \texttt
 
 \begin{resitev}
 Želimo torej, da bi rešitev delovala tudi nad nečim takim kot je niz \texttt{"perica reže raci rep"}. Niz se prebere enako naprej kot nazaj, ampak samo v primeru, ko presledkov ne upoštevamo. Prva rešitev bo temeljila na tem, da vse bele prostore zamenjamo za prazne nize.
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 def palindrom(niz):
     niz = niz.upper()
     niz = niz.replace(" ","")
@@ -224,7 +224,7 @@ def palindrom(niz):
     return niz == niz[::-1]
 \end{lstlisting}
 Alternativa je, da najprej nad nizom uporabimo metodo \texttt{split} brez podanega argumenta, ki bo niz ločila v seznam nizov, pri čemer bo odstranila ves prazen prostor. Zatem uporabimo metodo \texttt{join}, pri čemer kot ločilo uporabimo prazen niz. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 >>> niz = "perica \n reže \t raci rep"
 >>> sez = niz.split()
 >>> sez
@@ -234,7 +234,7 @@ Alternativa je, da najprej nad nizom uporabimo metodo \texttt{split} brez podane
 'pericarežeracirep'
 \end{lstlisting}
 Druga rešitev je torej sledeča:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 def palindrom(niz):
     niz = niz.upper()
     sez = niz.split()
@@ -242,7 +242,7 @@ def palindrom(niz):
     return niz == niz[::-1]
 \end{lstlisting}
 Prve tri vrstice lahko združimo v eno:
-\begin{lstlisting}[language=Python, showstringspaces=false,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left]
 def palindrom(niz):
     niz = "".join(niz.upper().split())
     return niz == niz[::-1]
@@ -250,7 +250,7 @@ def palindrom(niz):
 \end{resitev}
 
 Beli prostor lahko torej odstranjujemo na različne načine. V določenih primerih pa želimo beli prostor odstraniti samo pred začetkom in po koncu \emph{prave} vsebine, vmes pa ne. V tem primeru lahko uporabimo metodo \texttt{strip}
-\begin{lstlisting}[language=Python, showstringspaces=false, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> niz = "\n   \t  Danes je lep dan!     \n"
 >>> niz.strip()
 'Danes je lep dan!'
@@ -263,25 +263,25 @@ Beli prostor lahko torej odstranjujemo na različne načine. V določenih primer
 Funkcija \texttt{print} podane argumente združi v niz, ki ga izpiše na zaslon. Pri tem med argumente vstavi presledke (\texttt{sep = " "}), na koncu izpisa pa gre v novo vrstico (\texttt{end = "$\backslash$n"}). Privzeto delovanje lahko spremenimo, tako da nastavimo (povozimo privzete) vrednosti izbirnima argumentom \texttt{sep} in \texttt{end}. 
 
 Včasih pa to ni dovolj in bi bili radi z izpisovanjem nekoliko bolj ustvarjalni. V tem primeru lahko uporabimo metodo \texttt{format}. Metodo \texttt{format} pokličemo nad nizom, ki vsebuje t.i. fiksne dele in dele, ki jih bo metoda zamenjala z argumenti, ki jih bomo podali ob klicu. Slednje znotraj niza označimo z zavitimi oklepaji (\texttt{\{} in \texttt{\}}). Osnovni primer uporabe je sledeč:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> m = 1
 >>> "{} meter/ov/a je {} centimeter/ov/a".format(m, m*100)
 '1 meter/ov/a je 100 centimeter/ov/a'
 \end{lstlisting}
 Prvo pojavitev zavitega oklepaja je metoda \texttt{format} torej zamenjala s prvim argumentom, drugo pa z drugim. Znotraj zavitih oklepajev lahko tudi eksplicitno navedemo, kateri argument naj se uporabi pri zamenjavi. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> m = 1
 >>> "{0} m = {1} cm, torej je {1} cm = {0} m".format(m, m*100)
 '1 m = 100 cm, torej je 100 cm = 1 m'
 \end{lstlisting}
 Do malo gršega izpisa pride, kadar imamo veliko decimalk:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> cm = 12.673
 >>> "{} cm = {} m".format(cm, cm/100)
 '12.673 cm = 0.12673 m'
 \end{lstlisting}
 Rezultate lahko sicer zaokrožujemo z vgrajeno funkcijo \text{round}, ki ji kot argument podamo število decimalk. Alternativa je, da zaokroževanje podamo samo pri izpisu, tako da znotraj zavitih oklepajev malo bolj natančno povemo kako naj se izpis formatira. Takole:
-\begin{lstlisting}[language=Python, showstringspaces=false]
+\begin{lstlisting}[language=Python]
 >>> cm = 12.673
 >>> "{:5.1f} cm = {:5.2f} m".format(cm, cm/100)
 ' 12.7 cm =  0.13 m'
@@ -290,22 +290,22 @@ Kaj smo s tem povedali? Z dvopičjem povemo, da želimo izpis malo oblikovati. �
 
 Oblikovanje celih števil in nizov je enostavneje. V tem primeru podamo število mest, ki naj jih število (minimalno) zavzame. 
 
-\begin{lstlisting}[language=Python, showstringspaces=false,literate={°}{${^\circ}$}1]
+\begin{lstlisting}[language=Python]
 >>> "{:3}: {:15}...{:5.2f}°C".format(1, "Ljubljana", 25.3)
 '  1: Ljubljana      ...25.30°C'
 \end{lstlisting}
 Povemo lahko še ali naj se posamezen izpis poravna levo (\texttt{<}), desno (\texttt{>}) ali sredinsko (\texttt{\^}):
-\begin{lstlisting}[language=Python, showstringspaces=false,literate={°}{${^\circ}$}1]
+\begin{lstlisting}[language=Python]
 >>> "{:<3}: {:<15}...{:>5.2f}°C".format(1, "Ljubljana", 25.3)
 '1  : Ljubljana      ...25.30°C'
 \end{lstlisting}
 Presledke lahko zamenjamo tudi za kaj drugega, npr. za pike.
-\begin{lstlisting}[language=Python, showstringspaces=false,literate={°}{${^\circ}$}1]
+\begin{lstlisting}[language=Python]
 >>> "{:<3}: {:.<15}...{:>5.2f}°C".format(1, "Ljubljana", 25.3)
 '1  : Ljubljana.........25.30°C'
 \end{lstlisting}
 Zdaj lahko uporabo formatiranja demonstriramo na celotnem zgledu:
-\begin{lstlisting}[language=Python, showstringspaces=false,literate={°}{${^\circ}$}1]
+\begin{lstlisting}[language=Python]
 >>> stevilke = [1,2,3]
 >>> kraji = ["Ljubljana", "Maribor", "Nova Gorica"]
 >>> temperature = [25.3, 21.32322, 26.433333]
