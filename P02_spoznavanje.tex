@@ -131,7 +131,7 @@ Zdaj Python ni ničesar izpisal, je pa vrednost na desni strani \emph{prireditve
 \begin{lstlisting}[language=Python]
 >>> x = x + 2
 \end{lstlisting}
-to ni nerešljiva enačba (kot bi bila v primeru, ko enačaj obravnavamo kot operator enakosti), ampak zgolj pomeni, da vzamemo vrednost, ki stoji za imenom \texttt{x}, to vrednost povečamo za 2 in priredimo imenu \texttt{x}. Zgornji stavek torej vrednost v spremenljivki \texttt{x} poveča za 2. Kako pa dostopamo do vrednosti posamezne spremenljivke oziroma do vrednosti, ki stoji za določenim imenom? To smo naredili že zgoraj -- tako da podamo ime spremenljivke. Ko smo zgoraj napisal ime \texttt{x} na desni strani prireditvenega stavka, je Python pogledal kaj za tem imenom stoji in ime zamenjal z vrednostjo za njim. Drugače je, če ime uporabimo na levi strani prireditvenega stavka. S tem namreč imenu priredimo novo vrednost, če pa imena pred tem še nismo definirali, s tem ustvarimo tudi novo ime. Temu rečemo \texttt{definicija spremenljivke}.
+to ni nerešljiva enačba (kot bi bila v primeru, ko enačaj obravnavamo kot operator enakosti), ampak zgolj pomeni, da vzamemo vrednost, ki stoji za imenom \texttt{x}, to vrednost povečamo za 2 in priredimo imenu \texttt{x}. Zgornji stavek torej vrednost v spremenljivki \texttt{x} poveča za 2. Kako pa dostopamo do vrednosti posamezne spremenljivke oziroma do vrednosti, ki stoji za določenim imenom? To smo naredili že zgoraj -- tako da podamo ime spremenljivke. Ko smo zgoraj napisali ime \texttt{x} na desni strani prireditvenega stavka, je Python pogledal kaj za tem imenom stoji in ime zamenjal z vrednostjo za njim. Drugače je, če ime uporabimo na levi strani prireditvenega stavka. S tem namreč imenu priredimo novo vrednost, če pa imena pred tem še nismo definirali, s tem ustvarimo tudi novo ime. Temu rečemo \texttt{definicija spremenljivke}.
 
 Do vrednosti spremenljivke \texttt{x} ali \texttt{y} bi zdaj lahko dostopali tako, da podamo njeno ime:
 \begin{lstlisting}[language=Python]
@@ -299,7 +299,7 @@ Rezultat izvedbe posamezne funkcije je torej zapis podatka v željenem podatkovn
 >>> int(6.9)
 6
 \end{lstlisting}
-Drug primer take omejitve je, da nize lahko pretvarjamo v števila le v primeru, ko vsebujejo zgolj in samo števila (in decimalno piko):
+Drugi primer take omejitve je, da nize lahko pretvarjamo v števila le, ko vsebujejo zgolj in samo števila (in decimalno piko):
 \begin{lstlisting}[language=Python]
 >>> float("6.9")
 6.9
