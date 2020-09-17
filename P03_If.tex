@@ -18,7 +18,7 @@ print("Tvoj ITM je", itm)
 \end{lstlisting}
 \end{resitev}
 
-Zgornji program je popolnoma pravilen, bi ga pa radi še malo dopolnili. Veliko uporabnikov verjetno ne ve kaj posamezna vrednost indeksa telesne mase (ITM) pomeni. Ali mora shujšati, je njegova telesena masa ustrezna, ali bi se moral malo zrediti? Če malo poenostavimo, lahko ljudi razdelimo v tri skupine, in sicer na tiste s premajhno telesno maso, tiste z ustrezno telesno maso in tiste s preveliko telesno maso:
+Zgornji program je popolnoma pravilen, bi ga pa radi še malo dopolnili. Veliko uporabnikov verjetno ne ve, kaj posamezna vrednost indeksa telesne mase (ITM) pomeni. Ali mora shujšati, je njegova telesena masa ustrezna, ali bi se moral malo zrediti? Če malo poenostavimo, lahko ljudi razdelimo v tri skupine, in sicer na tiste s premajhno telesno maso, tiste z ustrezno telesno maso in tiste s preveliko telesno maso:
 
 \begin{tabular}{c|c}
      pogoj & skupina \\
@@ -27,6 +27,8 @@ Zgornji program je popolnoma pravilen, bi ga pa radi še malo dopolnili. Veliko 
      18.5 $\leq$ ITM $\leq$ 25 & normalna telesna masa\\
      25 $<$ ITM & debelost
 \end{tabular}
+
+\bigskip
 
 Naš program bi torej radi dopolnili tako, da bo uporabniku izpisal tudi informacijo o tem, v katero skupino spada. Z drugimi besedami, če bo izpolnjen prvi pogoj (ITM $<$ 18.5), bi radi izpisali, da je uporabnik podhranjen, če bo izpolnjen drugi pogoj (18.5 $\leq$ ITM $\leq$ 25), da je njegova telesna masa ustrezna in če bo izpolnjen tretji pogoj (25 $<$ ITM), da je pretežak. Radi bi torej, da se določeni deli našega programa (v konkretnem primeru različni izpisi) izvedejo v odvisnosti od vrednosti ITM. 
 
@@ -43,7 +45,7 @@ if pogoj:
 # ni več zamaknjeno
 ...
 \end{lstlisting}
-Začnemo torej z rezervirano besedico \textbf{\texttt{if}}, ki ji sledi pogoj. Temu sledi dvopičje (\texttt{:}), s katerim povemo, da je konec pogoja. Potem sledi pogojni del, ki se bo izvedel samo v primeru, da je podan pogoj. Pogojnemu delu sledijo stavki, ki se bodo izvedli v vsakem primeru, ne glede na izpolnjenost pogoja. Kako Pythonu povemo kje je konec pogojnega dela? Z zamikom \angl{indent}. Zgoraj smo tiste stavke, ki se izvedejo samo v primeru izpolnjenosti pogoja zamaknili, tako da smo pred njih vstavili tabulator (tipka \emph{Tab}) ali par presledkov (če smo natančni, se držimo dogovora štirih presledkov). Pogojni del smo zaključili tako, da smo enostavno nehali zamikati. Izvedbo zgornje kode prikazuje diagram poteka na sliki \ref{img:if1}.
+Začnemo torej z rezervirano besedico \textbf{\texttt{if}}, ki ji sledi pogoj. Temu sledi dvopičje (\texttt{:}), s katerim povemo, da je konec pogoja. Potem sledi pogojni del, ki se bo izvedel samo v primeru, da je podan pogoj izpolnjen. Pogojnemu delu sledijo stavki, ki se bodo izvedli v vsakem primeru, ne glede na izpolnjenost pogoja. Kako Pythonu povemo kje je konec pogojnega dela? Z zamikom \angl{indent}. Zgoraj smo tiste stavke, ki se izvedejo samo v primeru izpolnjenosti pogoja zamaknili, tako da smo pred njih vstavili tabulator (tipka \emph{Tab}) ali par presledkov (če smo natančni, se držimo dogovora štirih presledkov). Pogojni del smo zaključili tako, da smo enostavno nehali zamikati. Izvedbo zgornje kode prikazuje diagram poteka na sliki \ref{img:if1}.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{img/if1.pdf}
@@ -53,7 +55,7 @@ Začnemo torej z rezervirano besedico \textbf{\texttt{if}}, ki ji sledi pogoj. T
 
 \section{Kaj je pogoj?}
 
-Kaj pravzaprav predstavlja pogoj za izvedbo pogojnega dela stavka? Kot je razvido iz slike \ref{img:if1} je pogoj nekaj, kar je lahko resnično \angl{true} ali neresnično \angl{false}. Pogoj moramo torej zastaviti kot vprašanje, na katerega lahko odgovorimo bodisi z odgovorom \emph{da} ali z odgovorom \emph{ne}. Pri formiranju vprašanja oziroma pogoja bomo torej večinoma uporabljali operatorje, ki vračajo take odgovore. Tem operatorjem pravimo \emph{pogojni operatorji} pa si poglejmo nekaj njihovih primerov.
+Kaj pravzaprav predstavlja pogoj za izvedbo pogojnega dela stavka? Kot je razvidno iz slike \ref{img:if1} je pogoj nekaj, kar je lahko resnično \angl{true} ali neresnično \angl{false}. Pogoj moramo torej zastaviti kot vprašanje, na katerega lahko odgovorimo bodisi z odgovorom \emph{da} ali z odgovorom \emph{ne}. Pri formiranju vprašanja oziroma pogoja bomo torej večinoma uporabljali operatorje, ki vračajo take odgovore. Tem operatorjem pravimo \emph{pogojni operatorji}. Pa si poglejmo nekaj njihovih primerov.
 
 \subsection{Primerjalni operatorji in podatkovni tip \texttt{bool}}
 
@@ -101,7 +103,7 @@ if ITM > 25:
 \end{lstlisting}
 \end{resitev}
 
-Primerjalne operatorje lahko uporabimo tudi nad podatki, ki niso števila
+Primerjalne operatorje lahko uporabimo tudi nad podatki, ki niso števila.
 \begin{lstlisting}[language=Python]
 >>> "abc" == "abc"
 True
@@ -114,7 +116,7 @@ False
 >>> "abc" < "abd"
 True
 \end{lstlisting}
-Iz zgornjih zgledov vidimo tudi to, da Python loči med velikimi in malimi črkami in da so določeni nizi manjši od drugih. Kako pa primerjanje dveh nizov poteka? Na enak način, kot primerjamo nize, ko poskušamo besede sortirati po abecedi (npr. v slovarju ali telefonskem imeniku). Dve besedi primerjamo znak po znaku od začetka do konca, dokler ne pridemo do dveh znakov, ki se razlikujeta ali do konca ene izmed besed. Če se besedi ujemata po vseh znakih in je ena beseda krajša, je krajša beseda zagotovo manjša. Npr., beseda "beda" je manjša od besede "bedarija" (v slovarju bo verjetno beda nastopala pred bedarijo):
+Iz zgornjih zgledov vidimo tudi to, da Python loči med velikimi in malimi črkami in da so določeni nizi manjši od drugih. Kako pa primerjanje dveh nizov poteka? Na enak način, kot primerjamo nize, ko poskušamo besede sortirati po abecedi (npr. v slovarju ali telefonskem imeniku). Dve besedi primerjamo znak po znaku od začetka do konca, dokler ne pridemo do dveh znakov, ki se razlikujeta ali do konca ene izmed besed. Če se besedi ujemata po vseh znakih in je ena beseda krajša, je krajša beseda zagotovo manjša. Npr., beseda "beda" je manjša od besede "bedarija" (v slovarju bo beda nastopala pred bedarijo):
 \begin{lstlisting}[language=Python]
 >>> "beda" < "bedarija"
 True
@@ -140,6 +142,8 @@ True
 False
 >>> "ana" in "anakonda"
 True
+>>> "ana" in "sanatorij"
+True
 >>> "a" in "abeceda"
 True
 \end{lstlisting}
@@ -158,11 +162,27 @@ Pri reševanju naloge z izpisovanjem podatkov o ITM imamo še vedno težave s pr
      \texttt{True} & \texttt{True} & \texttt{True} & \texttt{True} \\
 \end{tabular}
 
+\bigskip
+
+Poglejmo si še en malo bolj konkreten primer:
+
+\begin{tabular}{cc|cc}
+     \texttt{17 >= 18.5} & \texttt{17 <= 25}  & \texttt{17 >= 18.5 and 17 <= 25} & \texttt{17 >= 18.5 or 17 <= 25}\\
+     \hline
+     \texttt{False} & \texttt{True} & \texttt{False} & \texttt{True} \\
+\end{tabular}
+
+\bigskip
+
 V primeru, da morata biti izpolnjena oba vhodna pogoja, torej uporabimo operator \texttt{and}. Če je dovolj, da je izpolnjen samo eden izmed vhodnih pogojev, uporabimo operator \texttt{or}. Pogosto uporabljen logični operator je še operator \texttt{not}, ki \texttt{True} spremeni v \texttt{False} in obratno:
 \begin{lstlisting}[language=Python]
 >>> not True
 False
 >>> not False
+True
+>>> 17 >= 18.5
+False
+>>> not 17 >= 18.5
 True
 \end{lstlisting}
 
@@ -243,7 +263,7 @@ else:
 
 Uporabnik zdaj ve, če je njegova telesna masa ustrezna. Če njegova telesna masa ni ustrezna, informacije o tem ali je pretežak ali prelahek nima (verjetno se mu to sicer dozdeva). Zgornji primer bi torej radi dopolnili tako, da znotraj veje \texttt{else} izvedemo dodatno primerjanje, na podlagi katerega bomo lahko ugotovili ali je ITM prevelik ali premajhen.
 
-To lahko naredimo na dva načina. Elegantnejši način je uporaba stavka \texttt{elif}, ki omogoča preverjanje dodatnega pogoja znotraj veje \texttt{else}. Celoten stavek \texttt{if} z vejo \texttt{elif} zapišemo takole:
+To lahko naredimo na dva načina. Elegantnejši način je uporaba stavka \texttt{elif}\footnote{Po slovensko bi lahko stavku \texttt{elif} rekli \emph{sicer pa, če velja}.}, ki omogoča preverjanje dodatnega pogoja znotraj veje \texttt{else}. Celoten stavek \texttt{if} z vejo \texttt{elif} zapišemo takole:
 \begin{lstlisting}[language=Python]
 if pogoj1:
     # pogojni stavki
@@ -294,7 +314,7 @@ if pogoj1:
     # pogojni stavki
     # pogoj1 izpolnjen
     ...
-else
+else:
     if pogoj2:
         # tukaj so uporabljeni dvojni zamiki
         # pogojni stavki
@@ -312,7 +332,7 @@ Začetek ugnezdenega stavka \texttt{if} je zamaknjen enkrat, s čimer povemo, da
 
 Uporabimo ugnezden stavek \texttt{if} še pri reševanju naše naloge.
 \begin{zgled}
-Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. Uporabi ugnezden stavek \texttt{if}
+Napiši program, ki od uporabnika prebere telesno maso in višino in izpiše uporabnikov indeks telesne mase (ITM). Poleg tega program uporabniku pove, v katero skupino spada. Uporabi ugnezden stavek \texttt{if}.
 \end{zgled}
 \begin{resitev}
 Potek programa bo podoben kot prej za razliko od gnezdenja stavka \texttt{if}.
@@ -323,7 +343,7 @@ itm = masa/visina**2
 print("Tvoj ITM je", itm)
 if ITM < 17.5:
     print("Tvoja telesna masa je premajhna")
-else
+else:
     if ITM > 25:
         print("Tvoja telesna masa je prevelika")
     else:

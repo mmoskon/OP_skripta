@@ -33,7 +33,7 @@ Kaj pa deljenje?
 >>> 10 / 5
 2.0
 \end{lstlisting}
-Uporabim lahko tudi celoštevilsko deljenje (\texttt{//}) in ostanek pri deljemju oziroma operacijo modulo (\texttt{\%}): 
+Uporabim lahko tudi celoštevilsko deljenje (\texttt{//}) in ostanek pri deljenju oziroma operacijo modulo (\texttt{\%}): 
 \begin{lstlisting}[language=Python]
 >>> 5 // 4
 1
@@ -96,7 +96,7 @@ Poleg osnovnih operatorjev so v osnovnem okolju jezika Python vgrajene tudi dolo
 \begin{lstlisting}[language=Python]
 ime_funkcije(argument_1, argument_2, ..., argument_n)
 \end{lstlisting}
-Po klicu se bo funkcija izvedla in nekaj koristnega naredila in/ali vrnila nek uporaben rezultat. Če bi želeli izvedeti, kateremu podatkovnemu tipu pripada nek podatek, bi lahko npr. poklicali funkcijo \texttt{type}:
+Kot vhode oziroma argumente lahko funkciji podamo fiksne vrednosti ali pa kar imena spremenljivk, za katerimi se določene vrednosti nahajajo. Po klicu se bo funkcija izvedla in nekaj koristnega naredila in/ali vrnila nek uporaben rezultat. Če bi želeli izvedeti, kateremu podatkovnemu tipu pripada nek podatek, bi lahko npr. poklicali funkcijo \texttt{type}:
 \begin{lstlisting}[language=Python]
 >>> type(1)
 <class 'int'>
@@ -121,7 +121,7 @@ Tudi argumenti funkcij so torej omejeni na določene podatkovne tipe, kar je smi
 Python ima vgrajenih še kar nekaj funkcij, ki pa jih bomo večinoma spoznavali sproti. 
 
 \section{Spremenljivke}
-Do zdaj smo v ukazno vrstico pisali izraze sestavljene in operatorjev in operandov (podatkov). Python je po vsakem pritisku tipke \texttt{Enter} podani izraz pognal in vrnil rezultat, ki pa ga je takoj zatem pozabil. Do dobljenega rezultata tako ne moremo več priti drugače, kot da še enkrat podamo enak izraz, ki ga bo Python ponovno ovrednotil in vrnil enak rezultat. Pogosto pa si želimo rezultate izvedenih stavkov zapomniti oziroma želimo, da jih Python shrani za kasneje. Na ta način lahko sestavljamo kompleksnejše izraze (brez da bi pisali dolge kače čez več vrstic), izračunan podatek uporabimo večkrat in z njim delamo različne stvari (npr. uporaba v drugih izrazih, izpis na zaslon, shranjevanje na trdi disk itd.). Python omogoča, da posameznemu podatku dodelimo ime, preko katerega bomo lahko do tega podatka dostopali še kasneje. Takole:
+Do zdaj smo v ukazno vrstico pisali izraze sestavljene iz operatorjev in operandov (podatkov)\footnote{Tovrstnim izrazom lahko rečemo tudi ukazi ali pa kar stavki.}. Python je po vsakem pritisku tipke \texttt{Enter} podani izraz pognal in vrnil rezultat, ki pa ga je takoj zatem pozabil. Do dobljenega rezultata tako ne moremo več priti drugače, kot da še enkrat podamo enak izraz, ki ga bo Python ponovno ovrednotil in vrnil enak rezultat. Pogosto pa si želimo rezultate izvedenih stavkov. zapomniti oziroma želimo, da jih Python shrani za kasneje. Na ta način lahko sestavljamo kompleksnejše izraze (brez da bi pisali dolge kače čez več vrstic), izračunan podatek uporabimo večkrat in z njim delamo različne stvari (npr. uporaba v drugih izrazih, izpis na zaslon, shranjevanje na trdi disk itd.). Python omogoča, da posameznemu podatku dodelimo ime, preko katerega bomo lahko do tega podatka dostopali še kasneje. Takole:
 \begin{lstlisting}[language=Python]
 >>> x = 1
 >>> y = 2 - 3.5
@@ -203,10 +203,10 @@ S tolmačem smo se do zdaj pogovarjali preko ukazne vrstice, čemur bi pa težko
 
 V splošnem zaporedja stavkov zapisujemo v tekstovne datoteke -- v programe, ki jih potem v poganjanje predamo našemu tolmaču. Tolmač bo ukaze v datoteki izvedel po vrsti na podoben način, kot če bi te zapisali v ukazno vrstico. Kako lahko za pisanje takih programov uporabimo orodje IDLE? Najprej bomo ustvarili novo datoteko -- program, in sicer z izbiro menija \texttt{File} $\rightarrow$ \texttt{New File} oziroma s kombinacijo tipk \texttt{Ctrl + N}. V primeru, da datoteka z nekim programom že obstaja, lahko to odpremo preko menija \texttt{File} $\rightarrow$ \texttt{Open} oziroma s kombinacijo tipk \texttt{Ctrl + O}. V obeh primerih s tem odpremo tudi IDLE-ov urejevalnik teksta, s pomočjo katerega lahko napišemo program, tega shranimo in na koncu poženemo oziroma v poganjanje damo tolmaču. Kot ste verjetno že vajeni, končnica datotek nakazuje kaj približno datoteka vsebuje. Datoteke, v katerih je shranjen program v jeziku Python, prepoznamo preko končnice \texttt{.py}. Programe, ki jih bomo pisali, bomo torej tudi mi opremili s tako končnico.
 
-Napišimo krajši program, ki temperaturo v stopinjah Celzija pretvori v temperaturo v stopinjah Fahrenheit z upoštevanjem enačbe $T_F = T_C * 1.8 +32$, pri čemer $T_C$ predstavlja temperaturo v stopinjah Celzija, $T_F$ pa temperaturo v stopinjah Fahrenheit. Pri tem zaenkrat predpostavljajmo, da je $T_C$, ki ga želimo pretvoriti, enak 20. Program bo sledeč\footnote{Kadar bomo v zgledih kode vrstice označili z njihovimi številkami, bo to pomenilo, da gre za program.}:
+Napišimo krajši program, ki temperaturo v stopinjah Celzija pretvori v temperaturo v stopinjah Fahrenheit z upoštevanjem enačbe $T_F = T_C * 1.8 + 32$, pri čemer $T_C$ predstavlja temperaturo v stopinjah Celzija, $T_F$ pa temperaturo v stopinjah Fahrenheit. Pri tem zaenkrat predpostavljajmo, da je $T_C$, ki ga želimo pretvoriti, enak 20. Program bo sledeč\footnote{Kadar bomo v zgledih kode vrstice označili z njihovimi številkami, bo to pomenilo, da gre za program.}:
 \begin{lstlisting}[language=Python,numbers=left]
 T_C = 20
-T_F = T_C * 1.8 +32
+T_F = T_C * 1.8 + 32
 \end{lstlisting}
 Program lahko zdaj shranimo, npr. v datoteko z imenom \texttt{temperatura.py} in poženemo z izbiro menija \texttt{Run} $\rightarrow$ \texttt{Run Module} oziroma s pritiskom na tipko \texttt{F5}. Izvršil se je preklop na ukazno vrstico, nikjer pa ni vidnega rezultata izvršitve našega programa. Ali se je program res izvedel? Preverimo lahko tako, da v ukazno vrstico napišemo imeni spremenljivk, ki smo jih v programu definirali. Če se program ni pognal, bo Python vrnil napako.
 \begin{lstlisting}[language=Python]
@@ -218,7 +218,7 @@ Program lahko zdaj shranimo, npr. v datoteko z imenom \texttt{temperatura.py} in
 Program se je očitno izvedel, saj sta spremenljivki definirani. Program pa pred tem ni ničesar izpisal. Program ne izpiše ničesar, tudi če ga dopolnimo z zgornjima vrsticama:
 \begin{lstlisting}[language=Python,numbers=left]
 T_C = 20
-T_F = T_C * 1.8 +32
+T_F = T_C * 1.8 + 32
 T_C
 T_F
 \end{lstlisting}
@@ -228,7 +228,7 @@ Zakaj ne? Ko svojo kodo zapakiramo v programe, ti izpisujejo vrednosti samo takr
 Funkcija \texttt{print} nam omogoča izpisovanje vrednosti znotraj programov. Pokličemo jo tako, da ji kot argumente naštejemo vrednosti, ki jih želimo izpisati in funkcija \texttt{print} bo vednosti pač izpisala, vmes bo dala presledke, na koncu izpisa pa bo skočila v novo vrstico. Dopolnimo zgornji program, tako da izpiše obe temperaturi:
 \begin{lstlisting}[language=Python,numbers=left]
 T_C = 20
-T_F = T_C * 1.8 +32
+T_F = T_C * 1.8 + 32
 print(T_C)
 print(T_F)
 \end{lstlisting}
@@ -270,10 +270,10 @@ Funkcija \texttt{input} čaka na uporabnikov vnos in pritisk tipke \texttt{Enter
 \begin{lstlisting}[language=Python]
 >>> ime = input("Vnesi svoje ime: ")
 \end{lstlisting}
-Rezultat funkcije \texttt{\input} smo torej priredili spremenljivki \texttt{ime}. Zdaj lahko do tistega, kar je uporabnik vnesel, dostopamo preko imena spremenljivke. Uporabimo to na našem programu za pretvarjanje med temperaturami. Temperaturo v stopinjah bomo zdaj prebrali od uporabnika preko funkcije \texttt{input}.
+Rezultat funkcije \texttt{input} smo torej priredili spremenljivki \texttt{ime}. Zdaj lahko do tistega, kar je uporabnik vnesel, dostopamo preko imena spremenljivke. Uporabimo to na našem programu za pretvarjanje med temperaturami. Temperaturo v stopinjah bomo zdaj prebrali od uporabnika preko funkcije \texttt{input}.
 \begin{lstlisting}[language=Python,numbers=left]
 T_C = input("Vnesi temperaturo v °C: ")
-T_F = T_C * 1.8 +32
+T_F = T_C * 1.8 + 32
 print(T_C, "°C je enako", T_F, "°F.")
 \end{lstlisting}
 Program pa v tej obliki žal še ne bo deloval. Funkcija \texttt{input} namreč vedno vrne niz, saj je to podatkovni tip, v katerega lahko zapiše karkoli bo pač uporabnik vnesel. Tudi če bo uporabnik vnesel število, bo to predstavljeno kot niz oziroma podatkovni tip \texttt{str}. Kakor se spomnimo od prej pa nizov ne moremo množiti z decimalnimi števili pa tudi seštevanje je denifinirano tokrat za nas nekoliko neugodno. Prebrano število, ki je zapisano kot niz, moramo torej pred nadaljnjo obdelavo pretvoriti v nekaj, s čimer lahko računamo, npr. \texttt{float}. 
@@ -318,13 +318,13 @@ Rešitev naloge praktično že imamo. Malenkost jo moramo le še dopolniti.
 \begin{lstlisting}[language=Python,numbers=left]
 niz = input("Vnesi temperaturo v °C: ")
 T_C = float(niz)
-T_F = T_C * 1.8 +32
+T_F = T_C * 1.8 + 32
 print(T_C, "°C je enako", T_F, "°F.")
 \end{lstlisting}
 Vrstici številka 1 in 2 bi lahko združili tudi v eno samo:
 \begin{lstlisting}[language=Python,numbers=left]
 T_C = float(input("Vnesi temperaturo v °C: "))
-T_F = T_C * 1.8 +32
+T_F = T_C * 1.8 + 32
 print(T_C, "°C je enako", T_F, "°F.")
 \end{lstlisting}
 \end{resitev}
@@ -355,7 +355,7 @@ iz stopinj Celzija v stopinje Fahrenheit
 # branje in pretvorba v decimalno število
 T_C = float(input("Vnesi temperaturo v °C: ")) 
 
-T_F = T_C * 1.8 +32 # enačba pretvorbe
+T_F = T_C * 1.8 + 32 # enačba pretvorbe
 
 # izpis na zaslon
 print(T_C, "°C je enako", T_F, "°F.") 
