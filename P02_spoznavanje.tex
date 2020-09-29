@@ -45,7 +45,7 @@ Uporabim lahko tudi celoštevilsko deljenje (\texttt{//}) in ostanek pri deljenj
 
 \section{Podatkovni tipi}
 
-Celoštevilsko deljenje očitno vedno vrne celo število, običajno deljenje pa vrne decimalno število, tudi če je decimalni del tega števila enak 0. Operaciji sta pač definirani tako, da vsakič vrneta določen \texttt{podatkovni tip}, ki je poleg tega odvisen tudi od podatkovnega tipa vhodov. Podatkovni tip? Vse vrednosti, ki smo jih tolmaču podali, so imele določen podatkovni tip, in sicer smo v vseh primerih zgoraj podajali cela števila \angl{integer}, ki jim Python pravi \texttt{int}. Rezultati izvedbe gornjih stavkov so v določenih primerih prav tako predstavljali cela števila, pri deljenju pa smo dobili decimalna števila oziroma \emph{števila v plavajoči vejici} \angl{floating point number}, ki jim Python pravi \texttt{float}. Decimalna števila lahko tolmaču podamo tudi kot vhodne podatke:
+Celoštevilsko deljenje očitno vedno vrne celo število, običajno deljenje pa vrne decimalno število, tudi če je decimalni del tega števila enak 0. Operaciji sta definirani tako, da vsakič vrneta določen \texttt{podatkovni tip}, ki je poleg tega odvisen tudi od podatkovnega tipa vhodov. Podatkovni tip? Vse vrednosti, ki smo jih tolmaču podali, so imele določen podatkovni tip, in sicer smo v vseh primerih zgoraj podajali cela števila \angl{integer}, ki jim Python pravi \texttt{int}. Rezultati izvedbe gornjih stavkov so v določenih primerih prav tako predstavljali cela števila, pri deljenju pa smo dobili decimalna števila oziroma \emph{števila v plavajoči vejici} \angl{floating point number}, ki jim Python pravi \texttt{float}. Decimalna števila lahko tolmaču podamo tudi kot vhodne podatke:
 \begin{lstlisting}[language=Python]
 >>> 5.4 + 4.6
 10.0
@@ -96,7 +96,7 @@ Poleg osnovnih operatorjev so v osnovnem okolju jezika Python vgrajene tudi dolo
 \begin{lstlisting}[language=Python]
 ime_funkcije(argument_1, argument_2, ..., argument_n)
 \end{lstlisting}
-Kot vhode oziroma argumente lahko funkciji podamo fiksne vrednosti ali pa kar imena spremenljivk, za katerimi se določene vrednosti nahajajo. Po klicu se bo funkcija izvedla in nekaj koristnega naredila in/ali vrnila nek uporaben rezultat. Če bi želeli izvedeti, kateremu podatkovnemu tipu pripada nek podatek, bi lahko npr. poklicali funkcijo \texttt{type}:
+Kot vhode oziroma argumente lahko funkciji podamo fiksne vrednosti ali pa kar imena spremenljivk, za katerimi se določene vrednosti nahajajo (glej naslednji razdelek). Po klicu se bo funkcija izvedla in nekaj koristnega naredila in/ali vrnila nek uporaben rezultat. Če bi želeli izvedeti, kateremu podatkovnemu tipu pripada nek podatek, bi lahko npr. poklicali funkcijo \texttt{type}:
 \begin{lstlisting}[language=Python]
 >>> type(1)
 <class 'int'>
@@ -116,12 +116,12 @@ Poglejmo si še funkcijo \texttt{abs}, ki izračuna absolutno vrednost podanega 
 >>> abs('niz')
 TypeError: bad operand type for abs(): 'str'
 \end{lstlisting}
-Tudi argumenti funkcij so torej omejeni na določene podatkovne tipe, kar je smiselno. Funkcija \texttt{abs} je na primer omejena zgolj na števila, kot so števila tipa \texttt{int} ali \texttt{float}, saj absolutne vrednosti niza pač ne moremo izračunati.
+Tudi argumenti funkcij so torej omejeni na določene podatkovne tipe, kar je smiselno. Funkcija \texttt{abs} je na primer omejena zgolj na števila, kot so števila tipa \texttt{int} ali \texttt{float}, saj absolutne vrednosti niza ne moremo izračunati.
 
 Python ima vgrajenih še kar nekaj funkcij, ki pa jih bomo večinoma spoznavali sproti. 
 
 \section{Spremenljivke}
-Do zdaj smo v ukazno vrstico pisali izraze sestavljene iz operatorjev in operandov (podatkov)\footnote{Tovrstnim izrazom lahko rečemo tudi ukazi ali pa kar stavki.}. Python je po vsakem pritisku tipke \texttt{Enter} podani izraz pognal in vrnil rezultat, ki pa ga je takoj zatem pozabil. Do dobljenega rezultata tako ne moremo več priti drugače, kot da še enkrat podamo enak izraz, ki ga bo Python ponovno ovrednotil in vrnil enak rezultat. Pogosto pa si želimo rezultate izvedenih stavkov. zapomniti oziroma želimo, da jih Python shrani za kasneje. Na ta način lahko sestavljamo kompleksnejše izraze (brez da bi pisali dolge kače čez več vrstic), izračunan podatek uporabimo večkrat in z njim delamo različne stvari (npr. uporaba v drugih izrazih, izpis na zaslon, shranjevanje na trdi disk itd.). Python omogoča, da posameznemu podatku dodelimo ime, preko katerega bomo lahko do tega podatka dostopali še kasneje. Takole:
+Do zdaj smo v ukazno vrstico pisali izraze sestavljene iz operatorjev in operandov (podatkov).\footnote{Tovrstnim izrazom lahko rečemo tudi ukazi ali pa kar stavki.} Python je po vsakem pritisku tipke \texttt{Enter} podani izraz pognal in vrnil rezultat, ki pa ga je takoj zatem pozabil. Do dobljenega rezultata tako ne moremo več priti drugače, kot da še enkrat podamo enak izraz, ki ga bo Python ponovno ovrednotil in vrnil enak rezultat. Pogosto pa si želimo rezultate izvedenih stavkov. zapomniti oziroma želimo, da jih Python shrani za kasneje. Na ta način lahko sestavljamo kompleksnejše izraze (brez da bi pisali dolge kače čez več vrstic), izračunan podatek uporabimo večkrat in z njim delamo različne stvari (npr. uporaba v drugih izrazih, izpis na zaslon, shranjevanje na trdi disk itd.). Python omogoča, da posameznemu podatku dodelimo ime, preko katerega bomo lahko do tega podatka dostopali še kasneje. Takole:
 \begin{lstlisting}[language=Python]
 >>> x = 1
 >>> y = 2 - 3.5
@@ -225,7 +225,7 @@ T_F
 Zakaj ne? Ko svojo kodo zapakiramo v programe, ti izpisujejo vrednosti samo takrat, ko to od njih eksplicitno zahtevamo. Kako? S funkcijo \texttt{print}.
 
 \section{Funkcija \texttt{print}}
-Funkcija \texttt{print} nam omogoča izpisovanje vrednosti znotraj programov. Pokličemo jo tako, da ji kot argumente naštejemo vrednosti, ki jih želimo izpisati in funkcija \texttt{print} bo vednosti pač izpisala, vmes bo dala presledke, na koncu izpisa pa bo skočila v novo vrstico. Dopolnimo zgornji program, tako da izpiše obe temperaturi:
+Funkcija \texttt{print} nam omogoča izpisovanje vrednosti znotraj programov. Pokličemo jo tako, da ji kot argumente naštejemo vrednosti, ki jih želimo izpisati in funkcija \texttt{print} bo vednosti izpisala, vmes bo dala presledke, na koncu izpisa pa bo skočila v novo vrstico. Dopolnimo zgornji program, tako da izpiše obe temperaturi:
 \begin{lstlisting}[language=Python,numbers=left]
 T_C = 20
 T_F = T_C * 1.8 + 32
@@ -257,10 +257,10 @@ V tem primeru je izpis sledeč:
 \begin{lstlisting}[language=Python]
 20 °C je enako 68.0 °F.
 \end{lstlisting}
-Imena spremenljivk je Python torej zamenjal z njihovimi vrednostmi, nize pa je izpisal kakor so bili pač podani.
+Imena spremenljivk je Python torej zamenjal z njihovimi vrednostmi, nize pa je izpisal kakor so bili podani.
 
 \section{Funkcija \texttt{input}}
-Še malo pa bomo napisali naš prvi pravi program. Pretvarjanje iz stopinje Celzija v stopinje Fahrenheit sicer deluje, malo pa je moteče to, da lahko pretvarjamo samo eno vrednost, ki je že vnaprej določena. Program bi bil bistveno bolj uporaben, če bi lahko vrednost, ki jo želimo pretvoriti, podal kar uporabnik ob zagonu programa. To nam omogoča funkcija \texttt{input}.
+Še malo pa bomo napisali naš prvi pravi program. Pretvarjanje iz stopinj Celzija v stopinje Fahrenheit sicer deluje, malo pa je moteče to, da lahko pretvarjamo samo eno vrednost, ki je že vnaprej določena. Program bi bil bistveno bolj uporaben, če bi lahko vrednost, ki jo želimo pretvoriti, podal kar uporabnik ob zagonu programa. To nam omogoča funkcija \texttt{input}.
 
 Funkcija \texttt{input} prav tako kot \texttt{print} na zaslon izpiše podan argument. Za razliko od funkcije \texttt{print}, funkcija \texttt{input} sprejema samo en argument tipa \texttt{str}. Preko tega argumenta bomo funkciji \texttt{input} podali navodilo za uporabnika. Na primer takole:
 \begin{lstlisting}[language=Python]
@@ -343,7 +343,7 @@ Znak \texttt{\#} označuje vrstični komentar, in sicer bo Python preskočil vso
 1
 \end{lstlisting}
 
-Včasih si želimo napisati daljši (večvrstični komentar). Tega začnemo s tremi enojnimi ali tremi dvojnimi narekovaji in ga končamo s tremi enojnimi ali tremi dvojnimi narekovaji (s tistimi pač, s katerimi smo komentar začeli).
+Včasih si želimo napisati daljši (večvrstični komentar). Tega začnemo s tremi enojnimi ali tremi dvojnimi narekovaji in ga končamo s tremi enojnimi ali tremi dvojnimi narekovaji (s tistimi, s katerimi smo komentar začeli).
 
 Povadimo zdaj oboje na našem prvem programu.
 \begin{lstlisting}[language=Python,numbers=left]

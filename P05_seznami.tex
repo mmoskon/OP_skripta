@@ -2,11 +2,11 @@
 
 \section{Sekvenčni podatkovni tipi}
 
-Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (en) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnavati ločeno, kar nas bo pripeljalo do ogromne količine nepregledne \emph{copy--paste} kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bo potrebno definirati (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnavati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Prednost uporabe sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
+Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (en) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnavati ločeno, kar nas bo pripeljalo do ogromne količine nepregledne ponavljajoče se kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bo potrebno definirati (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnavati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Prednost uporabe sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
 
 \section{Kaj so seznami?}
 
-Drug predstavnik sekvenčnih podatkovnih tipov je seznam oziroma \texttt{list}. Za razliko od nizov lahko vanj shranimo poljubne podatke, kot so npr. števila, nizi in tudi drugi seznami. Dodatna prednost uporabe seznamov je ta, da lahko elemente v seznamu dodajamo sproti, zato dolžine seznama ni treba vnaprej definirati. Lahko torej začnemo s praznim seznamom in vsakič, ko dobimo podatek o novi meritvi, tega v seznam dodamo. 
+Pomemben predstavnik sekvenčnih podatkovnih tipov je seznam oziroma \texttt{list}. Za razliko od nizov lahko vanj shranimo poljubne podatke, kot so npr. števila, nizi in tudi drugi seznami. Dodatna prednost uporabe seznamov je ta, da lahko elemente v seznamu dodajamo sproti, zato dolžine seznama ni potrebno vnaprej definirati. Lahko torej začnemo s praznim seznamom in vsakič, ko dobimo podatek o novi meritvi, tega v seznam dodamo. 
 
 Sezname definiramo z oglatimi oklepaji \texttt{[} in \texttt{]}, znotraj katerih naštejemo elemente. Prazen seznam bi naredili takole
 \begin{lstlisting}[language=Python]
@@ -16,10 +16,10 @@ Seznam, ki vsebuje približno naključne dolžine skokov smučarjev skakalcev pa
 \begin{lstlisting}[language=Python]
 >>> dolzine = [121.4, 143.1, 105.2, 99.3]
 \end{lstlisting}
-V isti seznam bi lahko zapisali tudi različne podatkovne tipe, npr. 3 cela števila, 1 decimalko, 5 nizov itd., čeprav v praksi tega ne srečamo pogosto. Ponavadi v sezname shranjujemo podatke, ki pripadajo istemu podatkovnemu tipu, saj se ti podatke nanašajo na ponavljajoče izvajanje npr. določene meritve. Na koncu lahko zato z uporabo seznamov izvedemo določene statistike, npr. kdo je skočil najdlje, kakšna je povprečna dolžina skoka, koliko ljudi je skočilo itd.
+V isti seznam bi lahko zapisali tudi različne podatkovne tipe, npr. 3 cela števila, 1 decimalno število, 5 nizov itd., čeprav v praksi tega ne srečamo pogosto. Ponavadi v sezname shranjujemo podatke, ki pripadajo istemu podatkovnemu tipu, saj se ti podatki nanašajo na ponavljajoče izvajanje npr. določene meritve. Na koncu lahko zato z uporabo seznamov izvedemo določene statistike, npr. kdo je skočil najdlje, kakšna je povprečna dolžina skoka, koliko ljudi je skočilo itd.
 
 \section{Indeksiranje seznamov}
-Seznami so urejeni. To pomeni, da je vrstni red, v katerem naštejemo elemente seznama, pomemben. Vsak element v seznamu ima namreč svoj \emph{indeks}. Pri tem se indeksiranje začne z najmanjšim pozitivnim številom, ki v računalništvu ni 1, ampak 0. Indeksi bodo torej šli od števila 0 do dolžine seznama -- 1. V primeru zgoraj definiranega seznama \texttt{dolzine} gredo torej indeksi od 0 do 3, saj seznam vsebuje 4 elemente:
+Seznami so urejeni. To pomeni, da je vrstni red, v katerem naštejemo elemente seznama, pomemben. Vsak element v seznamu ima namreč svoj \emph{indeks}. Pri tem se indeksiranje začne s številom 0\footnote{V računalništvu ponavadi začnemo štetje s številom 0 in ne s številom 1, kot smo sicer navajeni.}, indeksi pa vedno predstavljajo cela števila in se (od leve proti desni) povečujejo za 1. Indeksi bodo torej šli od števila 0 do dolžine seznama -- 1. V primeru zgoraj definiranega seznama \texttt{dolzine} gredo torej indeksi od 0 do 3, saj seznam vsebuje 4 elemente:
 
 \begin{tabular}{cccccc}
 \textbf{indeksi} & & 0 & 1 & 2 & 3\\
@@ -33,13 +33,13 @@ Do elementa na določenem indeksu lahko pridemo z indeksiranjem, ki ga izvedemo 
 \begin{lstlisting}[language=Python]
 ime_seznama[indeks]
 \end{lstlisting}
-Do dolžine skoka 0-tega skakalca bi torej prišli takole:
+Do dolžine skoka 0-tega skakalca (tistega, ki je v seznamu na začetku) bi torej prišli takole:
 \begin{lstlisting}[language=Python]
 >>> dolzine[0]
 121.4
 \end{lstlisting}
 
-Kaj pa do zadnjega skakalca? Do dolžine seznama lahko pridemo preko vgrajene funkcije \texttt{len}:
+Kaj pa do zadnjega skakalca (tistega, ki je v seznamu na koncu)? Do dolžine seznama lahko pridemo preko vgrajene funkcije \texttt{len}:
 \begin{lstlisting}[language=Python]
 >>> len(dolzine)
 4
@@ -106,9 +106,11 @@ TypeError: can't multiply sequence by non-int of type 'list'
 
 Nad seznami lahko uporabimo tudi operatorja vsebovanosti \texttt{in} in \texttt{not in}, ki vrneta \texttt{True} ali \texttt{False} v odvisnosti od tega ali je nekaj v seznamu vsebovano ali ne:
 \begin{lstlisting}[language=Python]
->>> 1 in [1,2,3]
+>>> 2 in [1,2,3]
 True
->>> 1 not in [1,2,3]
+>>> 4 in [1,2,3]
+False
+>>> 2 not in [1,2,3]
 False
 \end{lstlisting}
 
@@ -126,7 +128,7 @@ True
 >>> [1,3,3] < [1,2,3]
 False
 \end{lstlisting}
-Primerjalni operatorji nad seznami delujejo podobno kot nad nizi, in sicer se gre za leksikografsko primerjanje. Leksikografsko primerjanje je npr. uporabljeno pri sortiranju besed v slovarju. Deluje tako, da med seboj primerjamo istoležne elemente seznama, dokler ne pridemo do neenakosti oziroma do konca enega izmed obeh seznamov. V zgornjem primeru smo prišli do konca prvega seznama. Ker je nekaj kar ne obstaja načeloma manjše kot nekaj kar obstaja, je Python vrnil, da je prvi seznam manjši od drugega. V drugem primeru se je primerjanje ustavilo pri elementih na indeksu 1, saj sta elementa na tem indeksu različna. Ker 3 ni manjše od 2, je Python ugotovil, da prvi seznam ni manjši od drugega in vrnil rezultat \texttt{False}.
+Primerjalni operatorji nad seznami delujejo podobno kot nad nizi, in sicer gre za leksikografsko primerjanje. Leksikografsko primerjanje je npr. uporabljeno pri sortiranju besed v slovarju. Deluje tako, da med seboj primerjamo istoležne elemente seznama, dokler ne pridemo do neenakosti oziroma do konca enega izmed obeh seznamov. V zgornjem primeru smo prišli do konca prvega seznama. Ker je nekaj kar ne obstaja načeloma manjše kot nekaj kar obstaja, je Python vrnil, da je prvi seznam manjši od drugega. V drugem primeru se je primerjanje ustavilo pri elementih na indeksu 1, saj sta elementa na tem indeksu različna. Ker 3 ni manjše od 2, je Python ugotovil, da prvi seznam ni manjši od drugega in vrnil rezultat \texttt{False}.
 
 \section{Spreminjanje in brisanje elementov seznama}
 
@@ -158,9 +160,9 @@ Nad seznami lahko uporabimo še druge vgrajene funkcije. Nekatere izmed njih bom
 
 \section{Metode}
 
-Nad seznami lahko torej uporabljamo vgrajene funkcije, ki so pač v Pythonu na voljo. Te funkcije lahko sicer uporabimo na poljubnem podatku, ki ni nujno seznam. Obstaja poseben nabor funkcij, ki pa jih lahko uporabljamo samo nad seznami. 
+Nad seznami lahko torej uporabljamo vgrajene funkcije, ki so v Pythonu na voljo. Te funkcije lahko sicer uporabimo na poljubnem podatku, ki ni nujno seznam. Obstaja poseben nabor funkcij, ki pa jih lahko uporabljamo samo nad seznami. 
 
-Tem funkcijam pravimo \emph{metode seznamov}. V splošnem se izraz \emph{metode} uporablja za posebno družino funkcij, ki pripadajo določenemu \emph{objektu}. Kaj je objekt ne bomo podrobneje razlagali. Lahko pa povemo, da so seznami objekti (pravzaprav je skoraj vse v Pythonu objekt). Kakorkoli že metode so tiste funkcije, ki pripadajo določenemu objektu. Do posamezne metode seznama lahko pridemo s spodnjim klicem:
+Tem funkcijam pravimo \emph{metode seznamov}. V splošnem se izraz \emph{metode} uporablja za posebno družino funkcij, ki pripadajo določenemu \emph{objektu}. Kaj je objekt ne bomo podrobneje razlagali. Lahko pa povemo, da so seznami objekti (pravzaprav je skoraj vse v Pythonu objekt). Kakorkoli že, metode so tiste funkcije, ki pripadajo določenemu objektu. Do posamezne metode seznama lahko pridemo s spodnjim klicem:
 \begin{lstlisting}[language=Python]
 ime_seznama.ime_metode(argumenti)
 \end{lstlisting}
@@ -170,9 +172,9 @@ Klic metode je torej podoben klicu običajne funkcije, le da moramo pred imenom 
 \begin{lstlisting}[language=Python]
 >>> dolzine.
 \end{lstlisting}
-se po nekaj sekundah pojavijo imena metod, ki jih lahko nad seznamom uporabimo: \texttt{append}, \texttt{copy}, \texttt{clear} itd.
+se pojavijo imena metod, ki jih lahko nad seznamom uporabimo: \texttt{append}, \texttt{copy}, \texttt{clear} itd.
 
-Metode torej razširjajo vgrajene funkcije okolja Python in so vezane na točko določen podatkovni tip, kateremu izbrani objekt pripada. Če bi npr. enako stvar kot zgoraj poskusili z nizom, bi dobili drug seznam metod, ki jih lahko poženemo nad nizom. Metodam kot argument za razliko od vgrajenih funkcij ni potrebno podati seznama (ali pa niza) nad katerim jih želimo izvesti, saj smo seznam (ali pa niz) podali že pred piko -- že s samim klicem smo povedali nad čim želimo metodo pognati. Metode vseeno velikokrat vsebujejo določene argumente, ki pač določijo kaj in kako naj metoda nad izbranim objektom naredi. 
+Metode torej razširjajo vgrajene funkcije okolja Python in so vezane na točno določen podatkovni tip, kateremu izbrani objekt pripada. Če bi npr. enako stvar kot zgoraj poskusili z nizom, bi dobili drug seznam metod, ki jih lahko poženemo nad nizom. Metodam kot argument za razliko od vgrajenih funkcij ni potrebno podati seznama (ali pa niza) nad katerim jih želimo izvesti, saj smo seznam (ali pa niz) podali že pred piko -- že s samim klicem smo povedali nad čim želimo metodo pognati. Metode vseeno velikokrat vsebujejo določene argumente, ki določijo kaj in kako naj metoda nad izbranim objektom naredi. 
 
 Prav tako kot obstaja kar veliko vgrajenih funkcij, obstaja tudi veliko metod nad seznami. Natančneje si bomo v nadaljevanju tega poglavja pogledali tiste, ki jih uporabljamo pogosteje.
 
@@ -210,7 +212,14 @@ Oziroma na prejšnjem zgledu takole:
 >>> seznam
 [1,2,3,4]
 \end{lstlisting}
-Tokrat smo morali element, ki smo ga v seznam dodajali, zapakirati v drug seznam.
+Tokrat smo morali element, ki smo ga v seznam dodajali, zapakirati v drug seznam. Z metodo \texttt{extend} bi seveda lahko dodali tudi več elementov naenkrat. Takole: 
+\begin{lstlisting}[language=Python]
+>>> seznam = [1,2,3]
+>>> seznam.extend([4,5,6])
+>>> seznam
+[1,2,3,4,5,6]
+\end{lstlisting}
+
 
 Povadimo dodajanje elementov v seznam na praktičnem zgledu.
 \begin{zgled}
@@ -231,7 +240,7 @@ print("Povprečna dolžina:", sum(dolzine)/len(dolzine))
 Prednost zgornjega programa je v tem, da deluje ne glede na to koliko skokov je v seznamu. Vse dokler sodnik ne vnese kakšne neumnosti.
 
 \section{Branje seznamov iz ukazne vrstice}
-Včasih pa bi si želeli celoten seznam prebrati z enim samim uporabnikovim vnosom. Torej bomo spet uporabili funkcijo \texttt{input}. Spomnimo se, da funkcija \texttt{input} uporabnikov vnos vedno zapiše v niz oziroma v podatkovni tip \texttt{str}, ne glede na to kaj je uporabnik vnesel. Tak niz smo v prejšnjih primerih s funkcijo \texttt{int} pretvorili v celo število ali pa s funkcijo \texttt{float} v decimalno, če smo želeli podan vnos v nadaljevanju obravnavati kot število. Kaj pa če bi želeli niz, ki ga je vnesel uporabnik, pretvoriti v seznam? Na prvo žogo bi lahko rekli, da pač uporabimo funkcijo \texttt{list}. Poskusimo:
+Včasih bi si želeli celoten seznam prebrati z enim samim uporabnikovim vnosom. Torej bomo spet uporabili funkcijo \texttt{input}. Spomnimo se, da funkcija \texttt{input} uporabnikov vnos vedno zapiše v niz oziroma v podatkovni tip \texttt{str}, ne glede na to kaj je uporabnik vnesel. Tak niz smo v prejšnjih primerih s funkcijo \texttt{int} pretvorili v celo število ali pa s funkcijo \texttt{float} v decimalno, če smo želeli podan vnos v nadaljevanju obravnavati kot število. Kaj pa če bi želeli niz, ki ga je vnesel uporabnik, pretvoriti v seznam? Na prvo žogo bi lahko rekli, da uporabimo funkcijo \texttt{list}. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> seznam = list(input("Vnesi seznam: "))
 Vnesi seznam: [1,2,3]
@@ -284,7 +293,7 @@ Help on method_descriptor:
 sort(self, /, *, key=None, reverse=False)
     Stable sort *IN PLACE*.
 \end{lstlisting}
-Dokumentacija ni nič kaj preveč izčrpna, vidimo pa lahko, da metoda sort sprejema tudi dva opcijska argumenta, in sicer \texttt{key}, ki je privzeto enak vrednosti \texttt{None} in \texttt{reverse}, ki je privzeto enak vrednosti \texttt{False}. Opcijski argumenti so tisti argumenti, ki imajo nastavljene \emph{privzete} \angl{default} vrednosti. Če ob klicu ne specificiramo drugačnih vrednosti, bodo pač uporabljene privzete vrednosti. Privzete vrednosti pa lahko \emph{povozimo}, tako da specificiramo drugačne vrednosti. Vrstni red urejanja bi lahko spremenili tako, da bi argument \texttt{reverse} nastavili na vrednost \texttt{True}. V našem primeru takole:
+Dokumentacija ni nič kaj preveč izčrpna, vidimo pa lahko, da metoda sort sprejema tudi dva opcijska argumenta, in sicer \texttt{key}, ki je privzeto enak vrednosti \texttt{None} in \texttt{reverse}, ki je privzeto enak vrednosti \texttt{False}. Opcijski argumenti so tisti argumenti, ki imajo nastavljene \emph{privzete} \angl{default} vrednosti. Če ob klicu ne podamo drugačnih vrednosti, bodo uporabljene privzete vrednosti. Privzete vrednosti pa lahko \emph{povozimo}, tako da specificiramo drugačne vrednosti. Vrstni red urejanja bi lahko spremenili tako, da bi argument \texttt{reverse} nastavili na vrednost \texttt{True}. V našem primeru takole:
 \begin{lstlisting}[language=Python]
 >>> dolzine.sort(reverse=True)
 >>> dolzine
@@ -307,7 +316,7 @@ print("3. mesto", dolzine[2])
 \end{lstlisting}
 \end{resitev}
 
-V dokumentaciji metode \texttt{sort} smo videli, da ta sprejema tudi izbirni argument \texttt{key}, s katerim lahko določimo, preko katerega naj funkcija sortira. Če bi želeli npr. sortirati seznam po absolutnih vrednostih, bi argumentu \texttt{key} priredili funkcijo \texttt{abs}. Takole:
+V dokumentaciji metode \texttt{sort} smo videli, da ta sprejema tudi izbirni argument \texttt{key}. Temu argumentu lahko podamo ime funkcije, ki naj se nad posameznim elementom pokliče pred primerjanjem.\footnote{Sortiranje elementov temelji na primerjanju elementov med seboj glede na relacijo \texttt{<}.}. Če bi želeli npr. sortirati seznam po absolutnih vrednostih, bi argumentu \texttt{key} priredili funkcijo \texttt{abs}. Takole:
 \begin{lstlisting}[language=Python]
 >>> seznam = [-100, 10, -1, -5, 50]
 >>> seznam.sort(key=abs)
@@ -334,7 +343,7 @@ Funkcija torej vrne sortiran seznam, izhodiščni seznam pa je ostal nespremenje
 
 \section{Seznami seznamov}
 
-Vemo že veliko več kot prej, še vedno pa ne vemo kdo je skočil največ in komu moramo podeliti medaljo. Poleg dolžin bi si namreč v ta namen morali beležiti tudi imena tekmovalcev skakalcev. To lahko rešimo tako, da imamo pač dva seznama, tj. seznam dolžin in seznam tekmovalcev. Na istoležnem indeksu imamo v obeh seznamih podatke o istem skakalcu. Takole:
+Vemo že veliko več kot prej, še vedno pa ne vemo kdo je skočil največ in komu moramo podeliti medaljo. Poleg dolžin bi si namreč v ta namen morali beležiti tudi imena tekmovalcev skakalcev. To lahko rešimo tako, da imamo dva seznama, tj. seznam dolžin in seznam tekmovalcev. Na istoležnem indeksu imamo v obeh seznamih podatke o istem skakalcu. Takole:
 \begin{lstlisting}[language=Python]
 >>> dolzine = [121.4, 143.1, 105.2, 99.3]
 >>> skakalci = ["Andrej", "Bojan", "Cene", "Dejan"]
@@ -359,12 +368,18 @@ Kasneje bomo za take primere sicer uporabljali malo drugačno strukturo (zapis p
 >>> skoki[0]
 [121.4, "Andrej"]
 \end{lstlisting}
-Seznam, ki vsebuje podatke o ničtem skakalcu. Kako pa bi prišlo do njegovega imena? Z uporabo verižnega indeksiranja oziroma tako, da po indeksiranju zunanjega seznama pač še enkrat indeksiramo notranji seznam:
+Seznam, ki vsebuje podatke o ničtem skakalcu. Kako pa bi prišli do njegovega imena? Z uporabo verižnega indeksiranja oziroma tako, da po indeksiranju zunanjega seznama še enkrat indeksiramo notranji seznam:
 \begin{lstlisting}[language=Python]
 >>> skoki[0][1]
 "Andrej"
 \end{lstlisting}
-Kaj se bo zgodilo, če tak seznam sortiramo? Nad ugnezdenimi seznami bo za sortiranje uporabljena relacija \texttt{<}, ki smo jo v tem poglavju v povezavi s primerjanjem seznamov že srečali. Rekli smo, da relacija manjše sezname med seboj primerja leksikografsko. Najprej primerja ničti element prvega seznam z ničtim drugega. Če sta enaka, primerja prvi element prvega seznama s prvim elementom drugega seznama in tako naprej. Če bomo torej v ugnezdene sezname na ničto mesto dali dolžine na prvo mesto pa imena, bo sortiranje izvedeno po dolžinah. Po imenih bo sortiranje potekalo samo v primeru, če bosta dolžini pri dveh podseznamih enaki. Poskusimo:
+To bi lahko naredili tudi na nekoliko daljši način, tako da najprej dostopamo do ugnezdenega seznama (podseznama), ki vsebuje dolžino in ime, potem pa še do imena.
+\begin{lstlisting}[language=Python]
+>>> podseznam = skoki[0]
+>>> podseznam[1]
+"Andrej"
+\end{lstlisting}
+Kaj se bo zgodilo, če seznam takih podseznamov sortiramo? Nad podseznami oziroma ugnezdenimi seznami bo za sortiranje uporabljena relacija \texttt{<}, ki smo jo v tem poglavju v povezavi s primerjanjem seznamov že srečali. Rekli smo, da relacija manjše sezname med seboj primerja leksikografsko. Najprej primerja ničti element prvega seznam z ničtim drugega. Če sta enaka, primerja prvi element prvega seznama s prvim elementom drugega seznama in tako naprej. Če bomo torej v ugnezdene sezname na ničto mesto dali dolžine na prvo mesto pa imena, bo sortiranje izvedeno po dolžinah. Po imenih bo sortiranje potekalo samo v primeru, če bosta dolžini pri dveh podseznamih enaki. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> skoki.sort(reverse=True)
 >>> skoki
@@ -408,18 +423,18 @@ print("3. mesto:", skoki[2][1],
 
 \section{Generiranje seznamov s funkcijo \texttt{range}}
 
-Do zdaj smo sezname generirali oziroma dopolnjevali na podlagi vrednosti, ki jih je podal uporabnik. Taki seznami so lahko vsebovali poljubne elemente -- pač tisto, kar je uporabnik vnesel.
+Do zdaj smo sezname generirali oziroma dopolnjevali na podlagi vrednosti, ki jih je podal uporabnik. Taki seznami so lahko vsebovali poljubne elemente -- tisto, kar je uporabnik vnesel.
 
 V določenih primerih želimo imeti sezname s števili v podanem razponu. Praktično uporabo takih seznamov bomo podrobneje spoznali v naslednjem poglavju, zaenkrat pa si poglejmo, kako jih lahko generiramo.
 
-Generiranje seznamov v podanem razponu omogoča vgrajena funkcija \texttt{range}. Funkcijo \texttt{range} lahko uporabljamo na tri različne načine, in sicer preko podajanja sledečih argumentov:
+Generiranje seznamov v podanem razponu omogoča vgrajena funkcija \texttt{range}. Funkcijo \texttt{range} lahko pokličemo na tri različne načine, in sicer preko podajanja sledečih argumentov:
 \begin{itemize}
 \item \texttt{start}: določa začetek seznama (celo število),
 \item \texttt{stop}: določa konec seznama (celo število),
 \item \texttt{step}: določa korak (celo število).
 \end{itemize}
 
-Pri prvem načinu uporabe funkciji \texttt{range} podamo zgolj argument \texttt{stop}. V tem primeru bomo dobili seznam vrednosti od 0 do argumenta \texttt{stop}--1 s korakom 1. Poskusimo:
+Pri prvem načinu klica funkciji \texttt{range} podamo zgolj argument \texttt{stop}. V tem primeru bomo dobili seznam vrednosti od 0 do argumenta \texttt{stop}--1 s korakom 1. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> razpon = range(10)
 >>> razpon
@@ -430,7 +445,7 @@ Tale izpis je malo čuden. Poklicali smo funkcijo \texttt{range} in dobili \text
 >>> type(razpon)
 <class 'range'>
 \end{lstlisting}
-Rezultat funkcije \texttt{range} torej pripada podatkovnemu tipu oziroma \emph{razredu} \texttt{range}, ki nam vrednosti iz razpona vrača sproti, ko jih pač potrebujemo. Zakaj tako? Funkcija \texttt{range} je varčna in ponavadi ni nobene potrebe po tem, da bi morali celoten razpon ustvariti naenkrat, ampak naenkrat potrebujemo samo en element iz razpona. S tem, ko funkcija \texttt{range} ustvari objekt, ki nam po potrebi vrne želeni element, varčuje tako s procesorjevim časom (hitrost), saj je generiranje dolgih seznamov zamudno, kot tudi s pomnilniškim prostorom, saj dolgi seznami zasedejo veliko prostora. Še vedno pa lahko nad rezultatom funkcije \texttt{range} delamo podobne stvari, kot nad seznami. Lahko jih npr. indeksiramo:
+Rezultat funkcije \texttt{range} torej pripada podatkovnemu tipu oziroma \emph{razredu} \texttt{range}, ki nam vrednosti iz razpona vrača sproti, ko jih potrebujemo. Zakaj tako? Funkcija \texttt{range} je varčna in ponavadi ni nobene potrebe po tem, da bi morali celoten razpon ustvariti naenkrat, ampak naenkrat potrebujemo samo en element iz razpona. S tem, ko funkcija \texttt{range} ustvari objekt, ki nam po potrebi vrne želeni element, varčuje tako s procesorjevim časom (hitrost), saj je generiranje dolgih seznamov zamudno, kot tudi s pomnilniškim prostorom, saj dolgi seznami zasedejo veliko prostora. Še vedno pa lahko nad rezultatom funkcije \texttt{range} delamo podobne stvari, kot nad seznami. Lahko jih npr. indeksiramo:
 \begin{lstlisting}[language=Python]
 >>> razpon[2]
 2
@@ -449,7 +464,7 @@ Poleg tega funkcija \texttt{print}, kot smo videli že zgoraj, ne izpiše vredno
 >>> type(seznam)
 <class 'list'>
 \end{lstlisting}
-Za to pa ponavadi ni potrebe. Primerjajmo ekonomičnost funkcije \texttt{range} in generiranja običajnega seznama. To lahko poskusimo tako, da s funkcijo \texttt{range} naredimo nek relativno velik razpon števil. Npr. od 0 do $10^8$-1:
+Za to pa ponavadi ni potrebe. Primerjajmo ekonomičnost generiranja razpona števil z uporabo funkcije \texttt{range} in generiranja običajnega seznama. To lahko poskusimo tako, da s funkcijo \texttt{range} naredimo nek relativno velik razpon števil. Npr. od 0 do $10^8$-1:
 \begin{lstlisting}[language=Python]
 >>> razpon = range(10**8)
 \end{lstlisting}
@@ -568,7 +583,7 @@ Vse zgoraj naštete kombinacije lahko seveda po mili volji kombiniramo. Če bi n
 >>> seznam[9:2:-1]
 [9, 8, 7, 6, 5, 4, 3]
 \end{lstlisting}
-Če bi želeli iti od konca, do nekega indeksa proti začetku, bi to lahko podali kot \texttt{seznam[:stop:-1]}, npr.
+Če bi želeli iti od konca do nekega indeksa proti začetku, bi to lahko podali kot \texttt{seznam[:stop:-1]}, npr.
 \begin{lstlisting}[language=Python]
 >>> seznam = list(range(10))
 >>> seznam[:1:-1]
@@ -582,7 +597,7 @@ Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj
 \end{zgled}
 
 \begin{resitev}
-Podobno kot prej bomo seznam prebrali in uredili. Zmagovalce lahko zdaj izpišemo v eni vrstici. Tokrat bo program za razliko od prej deloval tudi v primeru, če bo sodnik vnesel manj kot 3 skoke. Rezine pač režejo dokler gre in primeru da razpon preseže indekse seznama, napake ne javljajo.
+Podobno kot prej bomo seznam prebrali in uredili. Zmagovalce lahko zdaj izpišemo v eni vrstici. Tokrat bo program za razliko od prej deloval tudi v primeru, če bo sodnik vnesel manj kot 3 skoke. Rezine režejo dokler gre in primeru da razpon preseže indekse seznama, napake ne javljajo.
 \begin{lstlisting}[language=Python,numbers=left]
 dolzine = eval(input("Vnesi dolžine: "))
 dolzine.sort(reverse=True)
@@ -641,7 +656,7 @@ else: # če smo prisli do konca brez break-a
 \end{lstlisting}
 Program bi sicer lahko nekoliko pohitrili, saj se nam ni treba premikati do konca niza, ampak je dovolj, da končamo, ko števec \texttt{i} pride do polovice niza. Pogoj v zanki \texttt{while} bi torej lahko spremenili v \texttt{i < len(niz)//2}.
 
-Do bistveno lepše rešitve pa pridemo, če uporabimo rezine. Niz je palindrom, če se bere naprej enako kot nazaj. Torej mora biti naprej prebran niz (\texttt{niz}) enak nazaj prebranemu niz (\texttt{niz[::-1]}). Program je torej sledeč:
+Do bistveno lepše rešitve pa pridemo, če uporabimo rezine. Niz je palindrom, če se bere naprej enako kot nazaj. Torej mora biti naprej prebrani niz (\texttt{niz}) enak nazaj prebranemu nizu (\texttt{niz[::-1]}). Program je torej sledeč:
 \begin{lstlisting}[language=Python,numbers=left]
 niz = input("Vpiši niz: ")
 if niz == niz[::-1]:
@@ -652,11 +667,11 @@ else:
 \end{resitev}
 
 \section{Sprehajanje čez sezname}
-Do zdaj smo se temu sicer izogibali, ampak pri delu s seznami je ena izmed najpogostejši operacij sprehajanje nad seznami. Kako narediti tak sprehod? Zgoraj smo se z zanko \texttt{while} sprehajali nad indeksi niza. Podoben sprehod bi lahko naredili tudi nad seznami. Posamezen element seznama bi lahko izpisali npr. takole:
+Do zdaj smo se temu sicer izogibali, ampak pri delu s seznami je ena izmed najpogostejši operacij sprehajanje čez sezname. Kako narediti tak sprehod? Zgoraj smo se z zanko \texttt{while} sprehajali čez indekse niza. Podoben sprehod bi lahko naredili tudi čez sezname. Posamezen element seznama bi lahko izpisali npr. takole:
 \begin{lstlisting}[language=Python]
 i = 0
 while i < len(seznam):
     print(seznam[i])
     i += 1
 \end{lstlisting}
-Sprehajamo se torej po indeksih od začetka (0) do konca seznama (len(seznam)-1). Zgornja koda je sicer popolnoma pravilna, ni pa najlepša, saj je sprehajanju nad seznami in seznamu podobnimi podatki v Pythonu namenjena posebna zanka, zanka \texttt{for}.
+Sprehajamo se torej po indeksih od začetka (0) do konca seznama (len(seznam)-1). Zgornja koda je sicer popolnoma pravilna, ni pa najlepša, saj je sprehajanju čez sezname in čez seznamu podobnimi podatki v Pythonu namenjena posebna zanka, zanka \texttt{for}.

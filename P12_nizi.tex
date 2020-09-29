@@ -144,7 +144,7 @@ def odstrani(niz, podniz):
     return niz.replace(podniz, "", 1)
 \end{lstlisting}
 
-Pogosto uporabljeni metodi za spreminjanje nizov sta še metodi \texttt{upper} in \texttt{lower}, ki spremenita vse črke niza v velike oziroma male. Ker Python loči med velikimi in malimi črkami, lahko ti dve metodi uporabi, kadar te ločitve ne želimo imeti in vse pač spremenimo bodisi v velike bodisi v male črke. Povadimo na naslednjem zgledu.
+Pogosto uporabljeni metodi za spreminjanje nizov sta še metodi \texttt{upper} in \texttt{lower}, ki spremenita vse črke niza v velike oziroma male. Ker Python loči med velikimi in malimi črkami, lahko ti dve metodi uporabimo, kadar te ločitve ne želimo imeti in vse pač spremenimo bodisi v velike bodisi v male črke. Povadimo na naslednjem zgledu.
 
 \begin{zgled}
 Napiši funkcijo \texttt{palindrom}, ki kot argument sprejme niz in vrne \texttt{True}, če je niz palindrom in \texttt{False}, če ni. Pri tem naj funkcija ne loči med malimi in velikimi črkami.
@@ -286,7 +286,7 @@ Rezultate lahko sicer zaokrožujemo z vgrajeno funkcijo \text{round}, ki ji kot 
 >>> "{:5.1f} cm = {:5.2f} m".format(cm, cm/100)
 ' 12.7 cm =  0.13 m'
 \end{lstlisting}
-Kaj smo s tem povedali? Z dvopičjem povemo, da želimo izpis malo oblikovati. Število 5 podaja (najmanjše) število mest, ki naj jih izpis zasede. Iz izpisa je vidno, da je metoda format pred posamezno število vstavila presledek, saj je izpisano število dolgo 4 znake, mi pa smo povedali, da naj bo izpis dolg 5 znakov. Če bi bilo naše število daljše od 5 znakov, rezanja ne bi bilo, ampak bi \texttt{format} pač izpisal vse znake. Za piko smo podali število decimalk, ki naj bodo v izpisu. Pri centimetrih smo uporabili 1, pri metrih pa 2 decimalki. Oznaka \texttt{f} pomeni, da formatiramo decimalno število \angl{float}. Oblikovanje celih števil in nizov je enostavneje. V tem primeru podamo število mest, ki naj jih število (minimalno) zavzame. 
+Kaj smo s tem povedali? Z dvopičjem povemo, da želimo izpis malo oblikovati. Število 5 podaja (najmanjše) število mest, ki naj jih izpis zasede. Iz izpisa je vidno, da je metoda format pred posamezno število vstavila presledek, saj je izpisano število dolgo 4 znake, mi pa smo povedali, da naj bo izpis dolg 5 znakov. Če bi bilo naše število daljše od 5 znakov, rezanja ne bi bilo, ampak bi \texttt{format} izpisal vse znake. Za piko smo podali število decimalk, ki naj bodo v izpisu. Pri centimetrih smo uporabili 1, pri metrih pa 2 decimalki. Oznaka \texttt{f} pomeni, da formatiramo decimalno število \angl{float}. Oblikovanje celih števil in nizov je enostavneje. V tem primeru podamo število mest, ki naj jih število (minimalno) zavzame. 
 \begin{lstlisting}[language=Python]
 >>> "{:3}: {:15}...{:5.2f}°C".format(1, "Ljubljana", 25.3)
 '  1: Ljubljana      ...25.30°C'

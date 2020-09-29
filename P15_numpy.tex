@@ -46,7 +46,7 @@ Lahko pa vektorju prištejemo skalar:
 array([11, 12, 13]) 
 \end{lstlisting}
 Nad strukturami tipa \texttt{ndarray} lahko za razliko od seznamov uporabimo tudi druge aritmetične operatorje. Poskusimo:
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python,escapechar=~]
 >>> X*Y
 array([ 4, 10, 18])
 >>> X/Y
@@ -54,7 +54,7 @@ array([0.25, 0.4 , 0.5 ])
 >>> X-Y
 array([-3, -3, -3])
 >>> X**5
-array([  1,  32, 243], dtype=int32)
+array([  1,  32, 243], dtype=int32)~\footnote{Pri potenciranju izpis vsebuje tudi atribut \texttt{dtype}, ki podaja podatkovni tip rezultata. V tem primeru je to 32-bitni \texttt{int}. Tak rezultat smo sicer dobili tudi pri množenju, odštevanju in seštevanju, le da Python v teh primerih tega ni posebej izpisal. Atribut je spremenljivka, ki pripada določenemu objektu, podobno kot je metoda funkcija, ki pripada določenemu objektu.}~
 >>> X/10
 array([0.1, 0.2, 0.3])
 \end{lstlisting}
@@ -110,7 +110,7 @@ Rekli smo torej, da želimo imeti 5000 točk na intervalu, ki se začne s točko
 TypeError: only size-1 arrays can be converted to
 Python scalars
 \end{lstlisting}
-Funkcije modula \texttt{math} torej nad vektorji ne moremo vektorsko izvajati, ampak se moramo spet zateči k zanki \texttt{for}. Izkaže pa se, da knjižnica NumPy vsebuje tudi matematične funkcije, ki zamenjujejo tiste iz modula \texttt{math}, poleg tega pa podpirajo vektorski način izvajanja. Nad celotnim vektorjem jih torej lahko izvedemo z enim samim klicem. Poskusimo:
+Funkcije modula \texttt{math} torej nad seznami ne moremo vektorsko izvajati\footnote{Vektorsko izvajanje pomeni, da isto operacijo izvedemo nad vsemi elementi seznama (seznamov), ki si ga (jih) lahko v tem primeru interpretiramo kot vektor (vektorje).}, ampak se moramo spet zateči k zanki \texttt{for}. Izkaže pa se, da knjižnica NumPy vsebuje tudi matematične funkcije, ki zamenjujejo tiste iz modula \texttt{math}, poleg tega pa podpirajo vektorski način izvajanja. Nad celotnim vektorjem jih torej lahko izvedemo z enim samim klicem. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> np.log2(X)
 array([-9.96578428, -8.96578428, -8.38082178, ...,
@@ -163,7 +163,7 @@ array([[1, 2, 3],
        [4, 5, 6],
        [7, 8, 9]])
 \end{lstlisting}
-Na prvi pogled nič kaj presenetljivega, ampak če smo si lahko strukturo \texttt{ndarray}, ki smo jo dobili iz navadnega seznama, interpretirali kot vektor, lahko na strukturo \texttt{ndarray}, ki jo dobimo iz ugnezdenih seznamov, gledamo kot na matriko oziroma na dvodimenzionalno strukturo, ki ima podatke zapisane v vrsticah (dimenzija 0) in stolpcih (dimenzija 1). Indeksiramo jo lahko tako kot običajne ugnezdene sezname. Do ugnezdenega podseznama na npr. indeksu 1, lahko pridemo takole:
+Na prvi pogled nič kaj presenetljivega, ampak če smo si lahko strukturo \texttt{ndarray}, ki smo jo dobili iz navadnega seznama, interpretirali kot vektor, lahko na strukturo \texttt{ndarray}, ki jo dobimo iz ugnezdenih seznamov, gledamo kot na matriko oziroma na dvodimenzionalno strukturo, ki ima podatke zapisane v vrsticah (dimenzija 0) in stolpcih (dimenzija 1). Pri tem velja omejitev, da morajo biti vsi ugezdeni seznami enako dolgi. Tako dobljeno matriko lahko indeksiramo kot običajne ugnezdene sezname. Do ugnezdenega podseznama na npr. indeksu 1, lahko pridemo takole:
 \begin{lstlisting}[language=Python]
 >>> A[1]
 array([4, 5, 6])
@@ -232,7 +232,7 @@ Za izračun vsote elementov, določitev minimalnega in maksimalnega elementa lah
 >>> np.sum(A)
 45
 \end{lstlisting}
-Včasih želimo določeno operacijo izvesti le nad npr. vrsticami ali stolpci matrike. V tem primeru lahko pri uporabi zgornjih funkcij podamo še vrednost izbirnega argumenta \texttt{axis}. Če ta argument nastavimo na vrednost 0, se bomo tekom operacije znebili dimenzije 0 (vrstic), kar pomeni, da bomo dobili rezultat izvedbe operacije po stolpcih. %(minimum iščemo po vrsticah, stolpci pa ostajajo fiksni).
+Včasih želimo določeno operacijo izvesti le nad npr. vrsticami ali stolpci matrike. V tem primeru lahko pri uporabi zgornjih funkcij posebej podamo še vrednost argumenta \texttt{axis}. Če ta argument nastavimo na vrednost 0, se bomo tekom operacije znebili dimenzije 0 (vrstic), kar pomeni, da bomo dobili rezultat izvedbe operacije po stolpcih. %(minimum iščemo po vrsticah, stolpci pa ostajajo fiksni).
 \begin{lstlisting}[language=Python]
 >>> A = np.array([[1,2,3],[4,5,6],[7,8,9]])
 >>> np.min(A, axis=0)
@@ -299,7 +299,7 @@ array([[180.3,  87.3],
        [170. ,  56.5],
        [156. ,  55.3]])
 \end{lstlisting}
-Do težav lahko pride, kadar datoteka vsebuje tudi podatke, ki niso številskega tipa. Ena izmed glavnih omejitev strukture \texttt{ndarray} je namreč ta, da zahteva, da vsi njeni podatki pripadajo enakemu podatkovnemu tipu. Podatkovni tip strukture lahko preverimo preko atributa\footnote{Atribut je spremenljivka, ki pripada določenemu objekt, podobno kot je metoda funkcija, ki pripada določenemu objektu.} \texttt{dtype}.  
+Do težav lahko pride, kadar datoteka vsebuje tudi podatke, ki niso številskega tipa. Ena izmed glavnih omejitev strukture \texttt{ndarray} je namreč ta, da zahteva, da vsi njeni podatki pripadajo enakemu podatkovnemu tipu. Podatkovni tip strukture lahko preverimo preko atributa\footnote{Atribut je spremenljivka, ki pripada določenemu objektu, podobno kot je metoda funkcija, ki pripada določenemu objektu.} \texttt{dtype}.  
 \begin{lstlisting}[numbers=left]
 >>> A1.dtype # do atributov dostopamo brez oklepajev
 dtype('float64')
@@ -407,8 +407,8 @@ array([['ime', 'višina', 'teža'],
        ['Ana', '170', '56.5'],
        ['Katja', '156', '55.3']], dtype='<U6')
 \end{lstlisting}
-S tem se seveda spet odpovemo zmožnostim računanja, saj se z nizi kaj veliko pač računati ne da. 
+S tem se seveda spet odpovemo zmožnostim računanja, saj se z nizi kaj veliko računati ne da. 
 
 \section{Omejitve knjižnice NumPy}
 
-Knjižnica NumPy je torej idealna za delo z numeričnimi podatki. Do problema pa pride, kadar naši podatki poleg numeričnih vrednosti vsebujejo tudi nize, ki jih ne moremo obravnavati kot števila. To so lahko zgolj imena stolpcev ali pa tudi drugi podatki. Pri plačah smo se npr. srečali s podatki o mesecu, v zgornjih primerih pa s podatki o imenu osebe. Ko pridemo do takih podatkov moramo skleniti kompromis. Lahko se jim odpovemo z njihovo pretvorbo v \texttt{np.nan}, kar ponavadi ne pride v upoštev. Lahko vse podatke zapišemo v obliki nizov, s čimer se odpovemo zmožnostim računanja. Možna alternativa je tudi, da numerične podatke shranimo v drugo strukturo kot nenumerične. To nam načeloma povzroči dodatno delo, je pa seveda izvedljivo. V vsakem primeru so komplikacije neizogibne. Lahko pa v takem primeru uporabimo knjižnico Pandas, ki je namenjena delu z večjimi količinami podatkov, omogoča učinkovito predstavitev različnih podatkovnih tipov in ne izključuje uporabe knjižnice NumPy pri hitrem računanju, temveč to dopolnjuje.
+Knjižnica NumPy je torej idealna za delo z numeričnimi podatki, iz česar izhaja tudi njeno ime. Do problema pa pride, kadar naši podatki poleg numeričnih vrednosti vsebujejo tudi nize, ki jih ne moremo obravnavati kot števila. To so lahko zgolj imena stolpcev ali pa tudi drugi podatki. Pri plačah smo se npr. srečali s podatki o mesecu, v zgornjih primerih pa s podatki o imenu osebe. Ko pridemo do takih podatkov moramo skleniti kompromis. Lahko se jim odpovemo z njihovo pretvorbo v \texttt{np.nan}, kar ponavadi ne pride v poštev. Lahko vse podatke zapišemo v obliki nizov, s čimer se odpovemo zmožnostim računanja. Možna alternativa je tudi, da numerične podatke shranimo v drugo strukturo kot nenumerične. To nam načeloma povzroči dodatno delo, je pa seveda izvedljivo. V vsakem primeru so komplikacije neizogibne. Lahko pa v takem primeru uporabimo knjižnico Pandas, ki je namenjena delu z večjimi količinami podatkov, omogoča učinkovito predstavitev različnih podatkovnih tipov in ne izključuje uporabe knjižnice NumPy pri hitrem računanju, temveč to dopolnjuje.

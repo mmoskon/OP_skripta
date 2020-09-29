@@ -1,4 +1,4 @@
-from place_beri_2 import uvozi_place # funkcija za uvoz
+from place_beri import uvozi_place # funkcija za uvoz
 import matplotlib.pyplot as plt
 
 # uvozi podatke v slovar
@@ -21,7 +21,7 @@ for m in mesec[::12]: # vzamemo vsako 12-to oznako
     oznake.append(m[:4]) # vzamemo samo podatek o letu
 
 # vsaka 12-ta lokacija
-lokacije = range(0, len(m), 12) 
+lokacije = range(0, len(mesec), 12) 
 
 plt.xticks(lokacije, oznake)
 

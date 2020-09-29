@@ -42,7 +42,7 @@ Povadimo sprehajanje še na zgledu.
 Napiši program, ki od uporabnika preko funkcije \texttt{eval} prebere seznam in izpiše najmanjši element seznama (brez uporabe funkcije \texttt{min}). 
 \end{zgled}
 \begin{resitev}
-Najmanjši element bomo našli tako, da se bomo z zanko \texttt{for} sprehodili čez seznam in si zapomnili element, ki je pač najmanjši. Kako pa vemo, da je nek element najmanjši, če ostalih še nismo pregledali? Težko. Vemo pa, če je nek element manjši od vseh elementov, ki smo jih pregledali preden smo do njega prišli. Nalogo lahko rešimo tako, da naredimo predpostavko, da je najmanjši ničti element v seznamu. Potem naredimo sprehod čez celoten seznam. Če bomo našli kakšen element, ki je manjši od trenutno najmanjšega, bomo trenutno najmanjši element postavili na tega, ki je očitno manjši. To bomo nadaljevali, dokler ne pridemo do konca seznama.
+Najmanjši element bomo našli tako, da se bomo z zanko \texttt{for} sprehodili čez seznam in si zapomnili element, ki je najmanjši. Kako pa vemo, da je nek element najmanjši, če ostalih še nismo pregledali? Težko. Vemo pa, če je nek element manjši od vseh elementov, ki smo jih pregledali preden smo do njega prišli. Nalogo lahko rešimo tako, da naredimo predpostavko, da je najmanjši ničti element v seznamu. Potem naredimo sprehod čez celoten seznam. Če bomo našli kakšen element, ki je manjši od trenutno najmanjšega, bomo trenutno najmanjši element postavili na tega, ki je očitno manjši. To bomo nadaljevali, dokler ne pridemo do konca seznama.
 \begin{lstlisting}[language=Python,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
@@ -66,7 +66,7 @@ for i in range(n+1):
     print(i)
 \end{lstlisting}
 
-Zanko \texttt{for} bi lahko na podoben način uporabili za sprehajanje po indeksih seznama. Indekse in vrednosti v seznamu na posameznih indeksih bi lahko izpisali takole:
+Zanko \texttt{for} bi lahko na podoben način uporabili za sprehajanje po indeksih seznama. Indekse in vrednosti v seznamu na posameznih indeksih bi lahko izpisali takole:\footnote{V tem primeru bi lahko uporabili tudi funkcijo \texttt{enumerate}, s katero se lahko hkrati sprehajamo čez indekse in vrednosti na teh indeksih.}
 \begin{lstlisting}[language=Python]
 for i in range(len(seznam)):
     print(i, seznam[i])
@@ -128,7 +128,7 @@ print(najmanjsi_i)
 \end{resitev}
 
 \section{Spreminjanje elementov seznama z zanko \texttt{for}}
-Kaj pa v primeru da želimo seznam v zanki spremeniti, npr. da želimo vse negativne vrednosti seznama spremeniti v pozitivne (izračunati želimo absolutne vrednosti elementov seznama in seznam skladno s tem posodobiti). Žal funkcije \texttt{abs} nad seznamom ne moremo pognati (napaka), zato moramo izračunati absolutno vrednost vsakega elementa posebej, pri čemer lahko to rešimo z uporabo zanke \texttt{for}. Poskusimo z običajnim sprehodom čez elemente seznama.
+Kaj pa v primeru da želimo seznam v zanki spremeniti, npr. da želimo vse negativne vrednosti seznama spremeniti v pozitivne (izračunati želimo absolutne vrednosti elementov seznama in seznam skladno s tem posodobiti). Žal funkcije \texttt{abs} nad seznamom ne moremo direktno pognati (napaka)\footnote{Določeno funkcijo lahko nad vsemi elementi seznama posredno poženemo z uporabo funkcije \texttt{eval}.}, zato moramo izračunati absolutno vrednost vsakega elementa posebej, pri čemer lahko to rešimo z uporabo zanke \texttt{for}. Poskusimo z običajnim sprehodom čez elemente seznama.
 \begin{lstlisting}[language=Python]
 >>> seznam = [-1, 10, -5, 15, 0, -3]
 >>> for element in seznam:
@@ -158,12 +158,12 @@ Elemente smo torej uspešno postavili na njihove absolutne vrednosti, na kar nak
 >>> print(seznam)
 [1, 10, 5, 15, 0, 3]
 \end{lstlisting}
-Zdaj se je seznam seveda spremenil, saj smo absolutne vrednosti direktno prirejali seznamu na posameznem indeksu.
+Zdaj se je seznam spremenil, saj smo absolutne vrednosti direktno prirejali seznamu na posameznem indeksu.
 
 \section{Zanka \texttt{for} ali zanka \texttt{while}?}
-Vidimo, da so naši programi z uporabo zanke \texttt{for} v določenih veliko krajši in lepši kot v primeru uporabe zanke \texttt{while}. Poleg tega nam pri uporabi zanke \texttt{for} ni potrebno skrbeti, da bo program za vedno obtičal v zanki (neskončna zanka). Zakaj bi torej sploh uporabljali zanko \texttt{while}? Izkaže se, da je zanka \texttt{while} bolj splošna kot zanka \texttt{for} in da lahko z njo rešimo določene probleme, ki jih z zanko \texttt{for} ne moremo. Kako bi npr. z zanko \texttt{for} od sodnika smučarskih skokov brali dolžine skokov, dokler sodnik ne vnese števila 0? Koliko ponovitev bi morali narediti? Kako bi z zanko \texttt{for} odštevali manjše število od večjega, dokler števili ne bi postali enaki? Odgovor je enostaven. Težko.
+Vidimo, da so naši programi z uporabo zanke \texttt{for} v določenih primerih veliko krajši in lepši kot v primeru uporabe zanke \texttt{while}. Poleg tega nam pri uporabi zanke \texttt{for} ni potrebno skrbeti, da bo program za vedno obtičal v zanki (neskončna zanka). Zakaj bi torej sploh uporabljali zanko \texttt{while}? Izkaže se, da je zanka \texttt{while} bolj splošna kot zanka \texttt{for} in da lahko z njo rešimo določene probleme, ki jih z zanko \texttt{for} ne moremo. Kako bi npr. z zanko \texttt{for} od sodnika smučarskih skokov brali dolžine skokov, dokler sodnik ne vnese števila 0? Koliko ponovitev bi morali narediti? Kako bi z zanko \texttt{for} odštevali manjše število od večjega, dokler števili ne bi postali enaki? Odgovor je enostaven. Težko.
 
-Vprašajmo se, kaj je skupnega primerom, kjer zanka \texttt{for} odpove. V obeh zgornjih primerih je število ponovitev, ki jih bo morala zanka narediti, vnaprej težko predvidljivo. V splošnem velja, da zanko \texttt{while} uporabljamo, kadar število ponovitev zanke težko podamo vnaprej, lahko pa oblikujemo pogoj, ki bo določil, do kdaj naj se zanka izvaja. V primeru, da je število ponovitev predvidljivo (npr. podan je razpon štetja ali pa seznam s fiksno dolžino, čez katerega se sprehajao) pa je kot nalašč zanka \texttt{for}.
+Vprašajmo se, kaj je skupnega primerom, kjer zanka \texttt{for} odpove. V obeh zgornjih primerih je število ponovitev, ki jih bo morala zanka narediti, vnaprej težko predvidljivo. V splošnem velja, da zanko \texttt{while} uporabljamo, kadar število ponovitev zanke težko podamo vnaprej, lahko pa oblikujemo pogoj, ki bo določil, do kdaj naj se zanka izvaja. V primeru, da je število ponovitev predvidljivo (npr. podan je razpon štetja ali pa seznam s fiksno dolžino, čez katerega se sprehajajo) pa je kot nalašč zanka \texttt{for}.
 
 \section{Stavek \texttt{break}}
 
@@ -185,6 +185,15 @@ Potek izvedbe kode iz primera prikazuje slika \ref{img:for2}.
     \label{img:for2}
 \end{figure}
 
+Stavek \texttt{break} bi lahko uporabili pri iskanju določenega števila v seznamu celih števil (če smo pozabili, da obstaja operator \texttt{in}). Če element najdemo, lahko iskanje prekinemo s stavkom \texttt{break}:
+\begin{lstlisting}[language=Python,numbers=left]
+st = int(input("Vnesi število: "))
+for el in sez:
+    if st == el:
+        print("Število najdeno!")
+        break
+\end{lstlisting}
+S tem smo se izognili večkratnemu izpisovanju, da smo število našli (če bi seznam vseboval več pojavitev iskanega števila, bi brez uporabe stavka \texttt{break}, izpis podali za vsako pojavitev), poleg tega pa smo program nekoliko pohitrili, saj zanko izvaja samo dokler je to potrebno. Kdaj pa podali izpis, da števila ni v seznamu? 
 
 \section{Veja \texttt{else}}
 
@@ -202,7 +211,18 @@ else: # samo če zanka ni bila prekinjena z break
 ...
 \end{lstlisting}
 
-Veja \texttt{else} se bo kot pri zanki \texttt{while} izvedla samo v primeru, ko zanka ni bila prekinjena s stavkom \texttt{break}. Demonstrirajmo uporabo koncepta na zgledu s tujimi števili.
+Veja \texttt{else} se bo kot pri zanki \texttt{while} izvedla samo v primeru, ko zanka ni bila prekinjena s stavkom \texttt{break}. Vrnimo se na primer z iskanjem števil v seznamu. Če število v seznamu najdemo, lahko to izpišemo in zanko prekinemo. V primeru, da smo prišli do konca seznama in števila nismo našli, števila v seznamu ni. In točno v tem primeru se bo izvedla \texttt{else} veja zanke. Primer lahhko torej dopolnimo takole:
+\begin{lstlisting}[language=Python,numbers=left]
+st = int(input("Vnesi število: "))
+for el in sez:
+    if st == el:
+        print("Število najdeno!")
+        break
+else:
+    print("Števila ni v seznamu!")
+\end{lstlisting}
+
+Demonstrirajmo uporabo stavka \texttt{break} in veje \texttt{else} še na zgledu s tujimi števili.
 
 \begin{zgled}
 Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta števili tuji. Števili sta tuji, če nimata nobenega skupnega delitelja, ki je večji od 1.
@@ -231,7 +251,7 @@ else: # ali se je zanka odvrtela do konca
 
 \section{Gnezdenje zank}
 
-Podobno kot smo gnezdili stavke \texttt{if} lahko gnezidmo tudi zanke. To pomeni, da bomo zanko izvajali znotraj druge zanke. Primer gnezdenja zanke \texttt{for} prikazuje spodnji izsek kode:
+Podobno kot smo gnezdili stavke \texttt{if} lahko gnezdimo tudi zanke. To pomeni, da bomo zanko izvajali znotraj druge zanke. Primer gnezdenja zanke \texttt{for} prikazuje spodnji izsek kode:
 \begin{lstlisting}[language=Python]
 >>> for i in range(5):
         for j in range(5):
@@ -252,7 +272,7 @@ Podobno kot smo gnezdili stavke \texttt{if} lahko gnezidmo tudi zanke. To pomeni
 4 3
 4 4
 \end{lstlisting}
-Notraja zanka \texttt{for} torej za vsako iteracijo zunanje zanke izvede enako število ponovitev.
+Notranja zanka \texttt{for} torej za vsako iteracijo zunanje zanke izvede enako število ponovitev.
 
 Potrenirajmo na zgledu.
 
@@ -267,7 +287,7 @@ n = int(input("Vnesi število: "))
 for i in range(1, n+1): # zunanja zanka
     for j in range(1, n+1): # notranja zanka
         print(i*j) # izpis produkta
-    print() #nova vrstica
+    print() #prazna vrstica
 \end{lstlisting}
 V primeru, da uporabnik vpiše število 3, bo izpis sledeč:
 \begin{lstlisting}[language=Python]
@@ -282,6 +302,29 @@ V primeru, da uporabnik vpiše število 3, bo izpis sledeč:
 3
 6
 9
+\end{lstlisting}
+Dopolnimo program, tako da bo pred izpisom produkta podal še izračun:
+\begin{lstlisting}[language=Python]
+n = int(input("Vnesi število: "))
+
+for i in range(1, n+1): # zunanja zanka
+    for j in range(1, n+1): # notranja zanka
+        print(str(i)+"*"+str(j)+"="+str(i*j))
+    print() #prazna vrstica
+\end{lstlisting}
+V primeru, da uporabnik vpiše število 3, bo zdaj izpis sledeč:
+\begin{lstlisting}[language=Python]
+1*1=1
+1*2=2
+1*3=3
+
+2*1=2
+2*2=4
+2*3=6
+
+3*1=3
+3*2=6
+3*3=9
 \end{lstlisting}
 \end{resitev}
 
@@ -306,7 +349,7 @@ V zgornjih primerih je bila notranja zanka neodvisna od tega, kako daleč se je 
 3 4
 4 4
 \end{lstlisting}
-V prvi iteraciji zunanje zanke, se torej notranja zanka izvede petkrat, v drugi štirikrat, v tretji trikrat, v četrti dvakrat, v peti pa zgolj enkrat. Kasnejša kot je iteracija zunanje zanke, manjše je število ponovitev ugnezdene zanke. 
+V prvi iteraciji zunanje zanke, se torej notranja zanka izvede petkrat, v drugi štirikrat, v tretji trikrat, v četrti dvakrat, v peti pa zgolj enkrat. Kasnejša kot je iteracija zunanje zanke, manjše je število ponovitev ugnezdene zanke. Če bi v zgornjem primeru števili, ki ju izpisujemo, predstavljali oznako ekip, bi celoten izpis predstavljal vse pare ekip (brez ponovitev), ki lahko med seboj tekmujejo. 
 
 Povadimo tako gnezdenje še na primeru s tujimi števili.
 \begin{zgled}
@@ -341,7 +384,7 @@ Ugnezdena zanka je v tem primeru odvisna od tega kako daleč je naš program pri
 
 Tole sicer ni neposredno povezano z zanko \texttt{for}, bo pa služilo kot osnova za dopolnitev zgleda s poštevanko. 
 
-Povedali smo že, da funkcije sprejemajo argumente, ki jih ob klicu pač podamo. V določenih primerih pa imajo funkcije tudi t.i. \emph{izbirne} ali \emph{opcijske} argumente, za katere velja da imajo (pred)nastavljeno \emph{privzeto} vrednost. V primeru, da vrednosti teh argumentov eksplicitno ne podamo, bodo ti nastavljeni na njihove privzete vrednosti. V primeru, da vrednosti tem argumentom podamo, bomo s tem \emph{povozili} privzete vrednosti in uporabljene bodo podane (naše) vrednosti.
+Povedali smo že, da funkcije sprejemajo argumente, ki jih ob klicu podamo. V določenih primerih imajo funkcije tudi t.i. \emph{izbirne} ali \emph{opcijske} argumente, za katere velja da imajo (pred)nastavljeno \emph{privzeto} vrednost. V primeru, da vrednosti teh argumentov eksplicitno ne podamo, bodo ti nastavljeni na njihove privzete vrednosti. V primeru, da vrednosti tem argumentom podamo, bomo s tem \emph{povozili} privzete vrednosti in uporabljene bodo podane (naše) vrednosti.
 
 Poglejmo si dva izbirna argumenta funkcije \texttt{print} in primer njune uporabe. Do dokumentacije funkcije \texttt{print} lahko pridemo preko funkcije \texttt{help}:
 \begin{lstlisting}[language=Python]
@@ -349,15 +392,19 @@ Poglejmo si dva izbirna argumenta funkcije \texttt{print} in primer njune uporab
 Help on built-in function print in module builtins:
 
 print(...)
-    print(value, ..., sep=' ', end='\n', file=sys.stdout, 
-    flush=False)
+    print(value, ..., sep=' ', end='\n', 
+    file=sys.stdout, flush=False)
     
-    Prints the values to a stream, or to sys.stdout by default.
+    Prints the values to a stream, or to sys.stdout by 
+    default.
+    
     Optional keyword arguments:
-    file:  a file-like object (stream); defaults to the current 
-    sys.stdout.
-    sep:   string inserted between values, default a space.
-    end:   string appended after the last value, default a newline.
+    file:  a file-like object (stream); defaults to the 
+    current sys.stdout.
+    sep:   string inserted between values, default a 
+    space.
+    end:   string appended after the last value, default 
+    a newline.
     flush: whether to forcibly flush the stream.
 \end{lstlisting}
 Zaenkrat nas bosta zanimala predvsem argumenta \texttt{sep} in \texttt{end}. Funkcija \texttt{print} deluje tako, da sprejme poljubno število številk, nizov in še česa drugega, to med seboj združi in izpiše na zaslon. Pri tem argument \texttt{sep} določa, s čim naj podane številke, nize in še kaj drugega med seboj združi. Privzeto je ta argument postavljen na vrednost \texttt{' '}, kar vidimo iz zgleda klica funkcije (\texttt{sep=' '}). To pomeni, da bo izpis narejen tako, da bodo med podanimi argumenti za izpis vstavljeni presledki. Povadimo:

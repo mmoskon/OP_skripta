@@ -15,7 +15,7 @@ openright, % Each chapter will start on a recto page.
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb,mathtools} % Math
+\usepackage{amsmath,amsthm,amssymb,mathtools} % Math
 \usepackage{multirow}
 \usepackage{alltt}
 \usepackage[normalem]{ulem}
@@ -58,8 +58,33 @@ openright, % Each chapter will start on a recto page.
 \newcommand{\pc}{\downarrow}
 \newcommand{\imp}{\rightarrow}
 
-\newtheorem{zgled}{Zgled}
-\newtheorem{resitev}{Rešitev}
+
+
+%\usepackage{mdframed}
+%\usepackage{xcolor}
+
+\newtheorem{zgled1}{Zgled}
+\newtheorem{resitev1}{Rešitev}
+
+%\newenvironment{zgled}%
+%  {\begin{mdframed}[backgroundcolor=lightgray]\begin{zgled1}}%
+%  {\end{zgled1}\end{mdframed}}
+
+%\newenvironment{resitev}%
+%  {\begin{mdframed}[backgroundcolor=lightgray]\begin{resitev1}}%
+%  {\end{resitev1}\end{mdframed}}
+
+\newenvironment{zgled}%
+  {\begin{zgled1}}%
+  {\end{zgled1}}
+
+\newenvironment{resitev}%
+  {\begin{resitev1}}%
+  {\end{resitev1}
+  \begin{flushright}$\triangle$\end{flushright}}
+
+
+
 \newcommand{\angl}[1]{(angl. \emph{#1})}
 
 

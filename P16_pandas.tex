@@ -2,7 +2,7 @@
 
 \section{Delo s podatki}
 
-Podatkovne vede \angl{data sciences}, ki se ukvarjajo z manipulacijo in analizo podatkov, so v današnjem času postale nepogrešljive na različnih področjih ne samo znanosti, temveč tudi različnih vej gospodarstva (npr. ciljno oglaševanje, organizacija dela, planiranje procesov) in negospodarstva (npr. zdravstvo in medicina). Podatkovne vede namreč na podlagi zajema in analize (večjih količin) podatkov nudijo podporo procesom odločanja, s čimer lahko razpoložljive vire izkoristimo bolj učinkovito. Kdor zna delati s podatki ima danes službo zagotovljeno, še posebej, če zna ta znanja uporabiti na svojem primarnem strokovnem področju, kot je npr. kemija. 
+Podatkovne vede \angl{data science}, ki se ukvarjajo z manipulacijo in analizo podatkov, so v današnjem času postale nepogrešljive na različnih področjih ne samo znanosti, temveč tudi različnih vej gospodarstva (npr. ciljno oglaševanje, organizacija dela, planiranje procesov) in negospodarstva (npr. zdravstvo in medicina). Podatkovne vede namreč na podlagi zajema in analize (večjih količin) podatkov nudijo podporo procesom odločanja, s čimer lahko razpoložljive vire izkoristimo bolj učinkovito. Kdor zna delati s podatki ima danes službo zagotovljeno, še posebej, če zna ta znanja uporabiti na svojem primarnem strokovnem področju, kot je npr. kemija. 
 
 Če za bolj resno analizo in manipulacijo podatkov uporabljamo programski jezik Python, bomo slej ko prej pristali na uporabi knjižnice pandas \angl{Python Data Analysis Library}, ki predstavlja moderno in hitro orodje za delo z večjimi količinami podatkov. Delo s knjižnico pandas je namreč v današnjem času postalo sinonim za delo z večjimi količinami podatkov v jeziku Python. V tem poglavju si bomo pogledali par primerov uporabe knjižnice pandas, ki zgolj nakazujejo prednosti uporabe te knjižnice. 
 
@@ -112,7 +112,7 @@ Lahko bi dostopali tudi do več stolpcev naenkrat, tako da pri indeksiranju poda
 [148 rows x 2 columns]
 \end{lstlisting}
 
-Kaj pa, če želimo priti do določenih vrstic? V tem primeru uporabimo metodo \texttt{loc}, ki ji znotraj oglatih oklepajev podamo oznako oziroma \texttt{index} vrstice. Ko smo prej izpisali tabelo, se je pred stolpcem \texttt{mesec} izpisal dodaten stolpec oznak. Ko tabelo preberemo, ima ta stolpcev vrednosti od 0 do števila vrstic $-$ 1, lahko pa \texttt{index} nastavimo tudi na kaj drugega. Do 0-te vrstice bi torej prišli takole:
+Kaj pa, če želimo priti do določenih vrstic? V tem primeru uporabimo metodo \texttt{loc}, ki ji znotraj oglatih oklepajev podamo oznako oziroma \texttt{index} vrstice. Ko smo prej izpisali tabelo, se je pred stolpcem \texttt{mesec} izpisal dodaten stolpec oznak. Ko tabelo preberemo, ima ta stolpec vrednosti od 0 do števila vrstic $-$ 1, lahko pa \texttt{index} nastavimo tudi na kaj drugega. Do 0-te vrstice bi torej prišli takole:
 \begin{lstlisting}[language=python]
 >>> df.loc[0]
 mesec          2014M01
@@ -138,7 +138,7 @@ mesec
 2014M02  Zasebni sektor  1406.47   922.19
 2014M03    Javni sektor  1741.44  1133.47
 \end{lstlisting}
-Zdaj bi do vrstico metodi \texttt{loc} podali kar mesec, ki nas zanima:
+Zdaj bomo metodi \texttt{loc} podali kar mesec, ki nas zanima:
 \begin{lstlisting}[language=python]
 >>> df2.loc['2018M01']
                  sektor    bruto     neto
@@ -147,7 +147,7 @@ mesec
 2018M01  Zasebni sektor  1526.94  997.06
 \end{lstlisting}
 
-Zadnji način indeksiranja, ki je neodvisen od oznak vrstic in stolpcev, uporablja metodo \texttt{iloc}. Tej podamo številko vrstice lahko pa tudi stolpca. Takole:
+Zadnji način indeksiranja, ki je neodvisen od oznak vrstic in stolpcev, uporablja metodo \texttt{iloc}. Tej podamo številko (indeks) vrstice lahko pa tudi stolpca. Podobno kot pri indeksiranju strukture \texttt{ndarray}. Takole:
 \begin{lstlisting}[language=python]
 >>> df.iloc[1]
 mesec            2014M01
@@ -246,7 +246,7 @@ Problem dobljenega grafa je, da z isto linijo prikazuje javni in zasebni sektor 
 df_javni= df[df['sektor']=='Javni sektor'] 
 df_zasebni = df[df['sektor']=='Zasebni sektor']
 \end{lstlisting}
-Zdaj izrišemo oba sektorja. Če ju hočemo narisati na skupnem grafu, oziroma isti osi \angl{axis}, moramo to eksplicitno podati. Najprej pridobimo trenutno os preko funkcije \texttt{gca}:
+Zdaj izrišemo oba sektorja. Če ju hočemo narisati na skupnem grafu, oziroma isti osi \angl{axis}, moramo to eksplicitno podati. Najprej pridobimo trenutno os preko funkcije \texttt{gca} \angl{get current axis}:
 \begin{lstlisting}[language=python]
 ax = plt.gca()
 \end{lstlisting}
@@ -254,10 +254,10 @@ Potem os podamo pri risanju, skupaj z ostalimi argumenti. Graf lahko dopolnimo �
 \begin{lstlisting}[language=python]
 df_javni.plot(x='mesec',
               y=['neto','bruto'],
-              ax = ax)
+              ax = ax) # podamo os ax
 df_zasebni.plot(x='mesec',
                 y=['neto','bruto'],
-                ax = ax)
+                ax = ax) # podamo isto os ax
 plt.legend(['Javni sektor (neto)',
           'Javni sektor (bruto)',
           'Zasebni sektor (neto)',

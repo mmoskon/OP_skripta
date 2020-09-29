@@ -56,7 +56,7 @@ Graf, ki smo ga narisali tako, prikazuje slika \ref{img:plt2}.
     \caption{Črtni graf, pri čemer smo podali koordinate točk na obeh oseh.}
     \label{img:plt2}
 \end{figure}
-Na sliki je prikazan samo zadnji graf. Kam je izginil prejšnji? Kot smo že omenili knjižnica Matplotlib grafe riše na risalni površini v ozadju. Te prikaže, ko pokličemo funkcijo \texttt{show}, hkrati pa takrat risalno površino tudi počisti. Če hočemo na isti sliki prikazati več grafov, bomo pred klicanjem funkcije \texttt{show} pač narisali več grafov. Poskusimo to kar na zgledu s plačami, in sicer bi radi narisali podatke o povprečnih bruto plačah. Predpostavljali bomo, da smo funkcijo \texttt{uvozi\_place} shranili v program \texttt{place\_beri.py} in da se ta program nahaja v naši trenutni delovni mapi. Najprej bomo uvozili funkcijo za uvoz podatkov o plačah zraven pa še knjižnico Matplotlib:
+Na sliki je prikazan samo zadnji graf. Kam je izginil prejšnji? Kot smo že omenili knjižnica Matplotlib grafe riše na risalni površini v ozadju. Te prikaže, ko pokličemo funkcijo \texttt{show}, hkrati pa takrat risalno površino tudi počisti. Če hočemo na isti sliki prikazati več grafov, bomo pred klicanjem funkcije \texttt{show} narisali več grafov. Poskusimo to kar na zgledu s plačami, in sicer bi radi narisali podatke o povprečnih bruto plačah. Predpostavljali bomo, da smo funkcijo \texttt{uvozi\_place} shranili v program \texttt{place\_beri.py} in da se ta program nahaja v naši trenutni delovni mapi. Najprej bomo uvozili funkcijo za uvoz podatkov o plačah zraven pa še knjižnico Matplotlib:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> from place_beri import uvozi_place
 >>> import matplotlib.pyplot as plt
@@ -205,7 +205,7 @@ ZZ = place['Zasebni sektor']['bruto']
 
 
 # dodaj oznake
-plt.xlabel("mesec")
+plt.xlabel("leto") # zdaj prikazujemo samo leta
 plt.ylabel("znesek [EUR]")
 plt.title("Povprečne mesečne plače")
 plt.legend(['Javni sektor', 'Zasebni sektor'])
@@ -224,7 +224,7 @@ plt.show() # prikaži graf
 Rezultat izvedbe programa prikazuje slika \ref{img:plt5}.
 \begin{figure}
     \includegraphics[width=\linewidth]{img/plt5.png}
-    \caption{Izris podatkov o plačah s prilagojenimi oznakami na osi $x$.}
+    \caption{Izris podatkov o plačah s prilagojenimi oznakami na osi $x$. Namesto podatkov o mesecu smo izpisali podatke o letu.}
     \label{img:plt5}
 \end{figure}
 
@@ -435,7 +435,7 @@ Kaj je narobe tokrat? Tokrat problem ni programerski, ampak matematični, saj lo
     Y_2.append(log2(x))
 \end{lstlisting}
 Podobno naredimo še za naravni in desetiški logaritem in stvar narišemo. Celotna rešitev bo sledeča:
-\begin{lstlisting}[language=Python,numbers=left]
+\begin{lstlisting}[language=Python,numbers=left,escapechar=~]
 from math import log2, log, log10
 import matplotlib.pyplot as plt
 
@@ -446,7 +446,7 @@ Y_e = []
 Y_10 = []
 
 for x in X:
-    Y_2.append(log2(x)) # dvojšiki
+    Y_2.append(log2(x)) # dvojiški
     Y_e.append(log(x)) # naravni
     Y_10.append(log10(x)) # desetiški
 
@@ -459,7 +459,7 @@ plt.legend()
 
 plt.show()
 \end{lstlisting}
-Graf, ki ga na ta način dobimo, prikazuje slika \ref{img:plt8}. 
+Graf, ki ga na ta način dobimo, prikazuje slika \ref{img:plt8}.\footnote{Oznake posameznih linij (\texttt{label}) smo podali med simboloma \texttt{\$}. S tem smo povedali, da podajamo zapis, ki ga bo Matplotlib pretvoril v enačbo. Zapis \texttt{\$log\_2(x)\$} bo Matplotlib tako izpisal kot $log_2(x)$. Pri takem načinu podajanja enačb moramo upoštevati pravila pisanja enačb v jeziku LaTeX, kjer je podčrtaj (\texttt{\_}) simbol za podpisan tekst.} 
 \begin{figure}
     \includegraphics[width=\linewidth]{img/plt8.png}
     \caption{Osnovni izris logaritemskih funkcij.}

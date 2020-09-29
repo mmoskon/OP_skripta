@@ -14,7 +14,7 @@ plt.plot(MJ, ZJ) # riši javni sektor
 plt.plot(MZ, ZZ) # riši zasebni sektor
 
 # dodaj oznake
-plt.xlabel("mesec")
+plt.xlabel("leto") # zdaj prikazujemo samo leta
 plt.ylabel("znesek [EUR]")
 plt.title("Povprečne mesečne plače")
 plt.legend(['Javni sektor', 'Zasebni sektor'])
