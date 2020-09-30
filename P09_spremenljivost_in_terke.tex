@@ -226,7 +226,7 @@ imena = ["Janez", "Ana", "Nika"]
 visine = [1.8, 1.65, 1.66]
 mase = [75, 60, 55]
 \end{lstlisting}
-Elementi vseh treh seznamov torej na indeksu 0 pripadajo Janezu, na indeksu 1 Ani in na indeksu 2 Niki. Kaj imajo ti seznami skupnega? Indekse! Čez take podatke bi se torej lahko sprehodili tako, da se sprehajamo po indeksih in ne direktno po elementih. Naredimo torej sprehod z znako \texttt{for} od indeksa 0 do dolžine seznama - 1. Dolžine katerega seznama? Ni važno, saj so vsi enko dolgi (oziroma vsaj smiselno bi bilo, da so). To bi lahko naredili takole:  
+Elementi vseh treh seznamov torej na indeksu 0 pripadajo Janezu, na indeksu 1 Ani in na indeksu 2 Niki. Kaj imajo ti seznami skupnega? Indekse! Čez take podatke bi se torej lahko sprehodili tako, da se sprehajamo po indeksih in ne direktno po elementih. Naredimo torej sprehod z zanko \texttt{for} od indeksa 0 do dolžine seznama - 1. Dolžine katerega seznama? Ni važno, saj so vsi enako dolgi (oziroma vsaj smiselno bi bilo, da so). To bi lahko naredili takole:  
 \begin{lstlisting}[language=Python]
 for i in range(len(imena)):
     ime = imena[i]
@@ -294,7 +294,7 @@ Funkcijam, ki kot argumente sprejemajo spremenljive podatkovne tipe, spremenjeni
 
 Najprej si poglejmo kako se lotiti pisanja in uporabe funkcije, ki sprejema nespremenljive podatke.
 \begin{zgled}
-Napiši funkcijo \texttt{dodaj\_AT\_niz}, ki sprejme dve nukleotidini zaporedji zapisani kot niza in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{'ATCG'} in \texttt{'AATGGAATGG'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
+Napiši funkcijo \texttt{dodaj\_AT\_niz}, ki sprejme dve nukleotidni zaporedji zapisani kot niza in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{'ATCG'} in \texttt{'AATGGAATGG'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
 \end{zgled}
 
 \begin{resitev}
@@ -319,7 +319,7 @@ Na tak način smo vrednost spremenljivke \texttt{zaporedje1} spremenili.
 
 Poglejmo si še kakšne so razlike pri delu s spremenljivimi podatki.
 \begin{zgled}
-Napiši funkcijo \texttt{dodaj\_AT\_seznam}, ki sprejme dve nukleotidini zaporedji zapisani kot seznama enoznakovnih nizov (baz) in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{['A','T','C','G']} in \texttt{'A','A','T','G','G','A','A','T','G','G'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
+Napiši funkcijo \texttt{dodaj\_AT\_seznam}, ki sprejme dve nukleotidni zaporedji zapisani kot seznama enoznakovnih nizov (baz) in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{['A','T','C','G']} in \texttt{'A','A','T','G','G','A','A','T','G','G'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
 \end{zgled}
 \begin{resitev}
 Navodilo naloge je praktično enako kot prej, le da tokrat namesto nespremenljivih podatkovnih tipov uporabljamo spremenljive. To pomeni, da ni potrebe po tem, da funkcija vrača spremenjen rezultat, saj se bodo spremembe odražale že preko podanega argumenta. Koda je torej sledeča:
