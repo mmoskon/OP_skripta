@@ -26,7 +26,27 @@ openright, % Each chapter will start on a recto page.
 \usepackage{lmodern}
 
 %\usepackage{amsthm}
-\usepackage{color}
+%\usepackage{color}
+\usepackage{xcolor}
+
+{\lccode`\?=`\p \lccode`\!=`\t  \lowercase{\gdef\ignorept#1?!{#1}}}
+\def\divbyccvv#1{\expandafter\ignorept\the\dimexpr#1pt/255\relax}
+
+\def\defineCMYKcolor#1#2{\defineCMYKcolorA{#1}#2,} 
+\def\defineCMYKcolorA#1#2,#3,#4,#5,{\edef\tmp{\noexpand\definecolor{#1}{cmyk}%
+      {\divbyccvv{#2},\divbyccvv{#3},\divbyccvv{#4},\divbyccvv{#5}}}\tmp
+}
+
+
+%C 15
+%M 100
+%Y 84
+%K 0
+%\defineCMYKcolor{chapter_col}{15, 100, 84, 0} % svetlejsa
+\definecolor{chapter_col}{rgb}{0.851, 0, 0.161} % temnejsa
+
+
+%\definecolor{chapter_col}{cmyk}{0.0588, 0.3922, 0.3294, 0}
 
 \usepackage{listings}
 
@@ -138,7 +158,21 @@ openright, % Each chapter will start on a recto page.
   \renewcommand{\chaptitlefont}{\sffamily \bfseries\LARGE}
 }
 
-\chapterstyle{hangnum}
+\makechapterstyle{colors}{%
+   \renewcommand*{\chapnumfont}{\chaptitlefont} % allow for 99 chapters!
+   \settowidth{\chapindent}{\chapnumfont 999}
+   \renewcommand*{\printchaptername}{}
+   \renewcommand*{\chapternamenum}{}
+   \renewcommand*{\chapnumfont}{\chaptitlefont}
+   \renewcommand*{\printchapternum}{%
+\noindent\llap{\makebox[\chapindent][l]{%
+           \chapnumfont \thechapter}}}
+         \renewcommand*{\afterchapternum}{}
+  \renewcommand{\chaptitlefont}{\sffamily \bfseries\LARGE\color{chapter_col}}
+}
+
+%\chapterstyle{hangnum}
+\chapterstyle{colors}
 
 
 \setsecheadstyle{\normalfont\large\bfseries}
@@ -234,6 +268,9 @@ pdfauthor={Miha Moskon} % author
 
 %\usepackage{draftwatermark}
 %\SetWatermarkText{Osnutek}
+
+
+
 
 %% THE DOCUMENT
 %%% Where all the important stuff is included!
