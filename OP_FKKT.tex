@@ -302,14 +302,21 @@ pdfauthor={Miha Moskon} % author
 {°}{{$^{\circ}$}}1% 
 }
 
+\newif\iffrontFRI
+\frontFRIfalse
+%\frontFRItrue
+
 
 
 \begin{document}
 
 \selectlanguage{slovene}
 
-\frontmatter
 
+
+
+\frontmatter
+\iffrontFRI
 \maketitle
 
 Naslovno stran (stran i) in stran z ISBN in CIP informacijo (stran ii) bo založba nadomestila z novo postavljeno stranjo!
@@ -319,6 +326,17 @@ Naslovno stran (stran i) in stran z ISBN in CIP informacijo (stran ii) bo založ
 ISBN stran
 
 \clearpage
+\else
+
+\include{naslovnica}
+
+\clearpage
+\ 
+\clearpage
+
+
+\fi
+
 
 \tableofcontents*
 
