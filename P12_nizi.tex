@@ -53,7 +53,7 @@ Napiši funkcijo \texttt{odstrani}, ki sprejme dva niza in iz prvega niza odstra
 V funkciji moramo najprej preveriti, če in kje se v nizu nahaja podniz. To lahko naredimo tako, da se sprehajamo od začetka do konca niza in režemo rezine dolžine podniza. Da lahko delamo rezine, se moramo seveda sprehajati po indeksih niza. To bi izgledalo nekako takole:
 \begin{lstlisting}[language=Python]
 >>> niz = "abeceda"
->>> pondiz = "ece"
+>>> podniz = "ece"
 >>> for i in range(len(niz)):
 	niz[i:i+len(podniz)]
 'abe'
@@ -315,7 +315,7 @@ Zdaj lahko uporabo formatiranja demonstriramo na celotnem zgledu:
 
 \section{Formatiranje nizov in \emph{f-Strings}}
 
-Novejša in hitrejša alternativa metodi \texttt{format} je formatiranje nizov zapisanih v obliki, ki ji rečemo \emph{f-niz} oziroma \emph{f-Strings}. Tovrstne nize zapisujemo tako, da pred začetkom niza (pred navednice) zapišemo črtko \texttt{f}. Python bo to razumel kot niz, ki ga mora še dodatno oblikovati. V osnovi tak niz zapišemo takole:
+Novejša in hitrejša alternativa metodi \texttt{format} je formatiranje nizov zapisanih v obliki, ki ji rečemo \emph{f-niz} oziroma \emph{f-Strings}. Tovrstne nize zapisujemo tako, da pred začetkom niza (pred navednice) zapišemo črko \texttt{f}. Python bo to razumel kot niz, ki ga mora še dodatno oblikovati. V osnovi tak niz zapišemo takole:
 \begin{lstlisting}[language=Python]
 >>> f'niz'
 'niz'
