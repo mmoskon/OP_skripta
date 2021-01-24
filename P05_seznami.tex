@@ -388,11 +388,11 @@ Kaj se bo zgodilo, če seznam takih podseznamov sortiramo? Nad podseznami ozirom
 \end{lstlisting}
 Ker smo zdaj sortirali dolžine skokov skupaj z imeni tekmovalcev, informacije o tem kdo je skočil koliko nismo izgubili in lahko izpišemo zmagovalce, ki se nahajajo v prvih treh podseznamih na indeksu 1:
 \begin{lstlisting}[language=Python]
->>> skoki[0,1]
+>>> skoki[0][1]
 'Bojan'
->>> skoki[1,1]
+>>> skoki[1][1]
 'Andrej'
->>> skoki[2,1]
+>>> skoki[2][1]
 'Cene'
 \end{lstlisting}
 To so zmagovalci. Zapišimo celoten zgled.
