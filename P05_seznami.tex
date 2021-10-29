@@ -128,7 +128,7 @@ True
 >>> [1,3,3] < [1,2,3]
 False
 \end{lstlisting}
-Primerjalni operatorji nad seznami delujejo podobno kot nad nizi, in sicer gre za leksikografsko primerjanje. Leksikografsko primerjanje je npr. uporabljeno pri sortiranju besed v slovarju. Deluje tako, da med seboj primerjamo istoležne elemente seznama, dokler ne pridemo do neenakosti oziroma do konca enega izmed obeh seznamov. V zgornjem primeru smo prišli do konca prvega seznama. Ker je nekaj kar ne obstaja načeloma manjše kot nekaj kar obstaja, je Python vrnil, da je prvi seznam manjši od drugega. V drugem primeru se je primerjanje ustavilo pri elementih na indeksu 1, saj sta elementa na tem indeksu različna. Ker 3 ni manjše od 2, je Python ugotovil, da prvi seznam ni manjši od drugega in vrnil rezultat \texttt{False}.
+Primerjalni operatorji nad seznami delujejo podobno kot nad nizi, in sicer gre za leksikografsko primerjanje. Leksikografsko primerjanje je npr. uporabljeno pri sortiranju besed v slovarju. Deluje tako, da med seboj primerjamo istoležne elemente seznama, dokler ne pridemo do neenakosti oziroma do konca enega izmed obeh seznamov. V zgornjem primeru smo prišli do konca prvega seznama. Ker je nekaj, kar ne obstaja, načeloma manjše kot nekaj, kar obstaja, je Python vrnil, da je prvi seznam manjši od drugega. V drugem primeru se je primerjanje ustavilo pri elementih na indeksu 1, saj sta elementa na tem indeksu različna. Ker 3 ni manjše od 2, je Python ugotovil, da prvi seznam ni manjši od drugega in vrnil rezultat \texttt{False}.
 
 \section{Spreminjanje in brisanje elementov seznama}
 
@@ -162,7 +162,7 @@ Nad seznami lahko uporabimo še druge vgrajene funkcije. Nekatere izmed njih bom
 
 Nad seznami lahko torej uporabljamo vgrajene funkcije, ki so v Pythonu na voljo. Te funkcije lahko sicer uporabimo na poljubnem podatku, ki ni nujno seznam. Obstaja poseben nabor funkcij, ki pa jih lahko uporabljamo samo nad seznami. 
 
-Tem funkcijam pravimo \emph{metode seznamov}. V splošnem se izraz \emph{metode} uporablja za posebno družino funkcij, ki pripadajo določenemu \emph{objektu}. Kaj je objekt ne bomo podrobneje razlagali. Lahko pa povemo, da so seznami objekti (pravzaprav je skoraj vse v Pythonu objekt). Kakorkoli že, metode so tiste funkcije, ki pripadajo določenemu objektu. Do posamezne metode seznama lahko pridemo s spodnjim klicem:
+Tem funkcijam pravimo \emph{metode seznamov}. V splošnem se izraz \emph{metode} uporablja za posebno družino funkcij, ki pripadajo določenemu \emph{objektu}. Kaj je objekt, ne bomo podrobneje razlagali. Lahko pa povemo, da so seznami objekti (pravzaprav je skoraj vse v Pythonu objekt). Kakorkoli že, metode so tiste funkcije, ki pripadajo določenemu objektu. Do posamezne metode seznama lahko pridemo s spodnjim klicem:
 \begin{lstlisting}[language=Python]
 ime_seznama.ime_metode(argumenti)
 \end{lstlisting}
@@ -174,7 +174,7 @@ Klic metode je torej podoben klicu običajne funkcije, le da moramo pred imenom 
 \end{lstlisting}
 se pojavijo imena metod, ki jih lahko nad seznamom uporabimo: \texttt{append}, \texttt{copy}, \texttt{clear} itd.
 
-Metode torej razširjajo vgrajene funkcije okolja Python in so vezane na točno določen podatkovni tip, kateremu izbrani objekt pripada. Če bi npr. enako stvar kot zgoraj poskusili z nizom, bi dobili drug seznam metod, ki jih lahko poženemo nad nizom. Metodam kot argument za razliko od vgrajenih funkcij ni potrebno podati seznama (ali pa niza) nad katerim jih želimo izvesti, saj smo seznam (ali pa niz) podali že pred piko -- že s samim klicem smo povedali nad čim želimo metodo pognati. Metode vseeno velikokrat vsebujejo določene argumente, ki določijo kaj in kako naj metoda nad izbranim objektom naredi. 
+Metode torej razširjajo vgrajene funkcije okolja Python in so vezane na točno določen podatkovni tip, kateremu izbrani objekt pripada. Če bi npr. enako stvar kot zgoraj poskusili z nizom, bi dobili drug seznam metod, ki jih lahko poženemo nad nizom. Metodam kot argument za razliko od vgrajenih funkcij ni potrebno podati seznama (ali pa niza), nad katerim jih želimo izvesti, saj smo seznam (ali pa niz) podali že pred piko -- že s samim klicem smo povedali, nad čim želimo metodo pognati. Metode vseeno velikokrat vsebujejo določene argumente, ki določijo, kaj in kako naj metoda nad izbranim objektom naredi. 
 
 Prav tako kot obstaja kar veliko vgrajenih funkcij, obstaja tudi veliko metod nad seznami. Natančneje si bomo v nadaljevanju tega poglavja pogledali tiste, ki jih uporabljamo pogosteje.
 
