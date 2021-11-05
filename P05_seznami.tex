@@ -2,7 +2,7 @@
 
 \section{Sekvenčni podatkovni tipi}
 
-Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (en) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnavati ločeno, kar nas bo pripeljalo do ogromne količine nepregledne ponavljajoče se kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno koliko meritev bomo imeli in koliko spremenljivk bo potrebno definirati (koliko bo skakalcev, koliko je genov v opazovani celici) in zato težko povemo koliko spremenljivk moramo posebej obravnavati. K sreči pa obstajajo t.i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Prednost uporabe sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
+Podatkovni tipi, ki smo jih srečali do sedaj, so bili večinoma namenjeni temu, da vanje shranimo posamezen (en) podatek. V spremenljivko, ki je pripadala podatkovnemu tipu \texttt{int}, smo npr. lahko shranili eno število. V določenih primerih pa se srečamo z veliko količino med seboj podobnih podatkov, nad katerimi želimo izvajati enake ali podobne operacije. V praksi bi to lahko pomenilo, da izvajamo ponavljajoče meritve enake količine, npr. dolžine skoka smučarjev skakalcev. Kaj narediti v takem primeru? Na podlagi našega dosedanjega znanja bi lahko za vsakega skakalca definirali svojo spremenljivko, kar pa ne bi bila ravno najboljša rešitev. Prvi problem tega pristopa bi bil, da je lahko skakalcev zelo veliko. V primeru skakalcev bi bila stvar mogoče še lahko obvladljiva, kaj pa če npr. merimo prisotnost transkriptov genov v celici, ki ima par tisoč genov? Drugi problem je ta, da moramo vsako izmed spremenljivk obravnavati ločeno, kar nas bo pripeljalo do ogromne količine nepregledne ponavljajoče se kode. Tretji problem tega pristopa je, da včasih ne vemo čisto točno, koliko meritev bomo imeli in koliko spremenljivk bo potrebno definirati (koliko bo skakalcev, koliko je genov v opazovani celici), in zato težko povemo, koliko spremenljivk moramo posebej obravnavati. K sreči pa obstajajo t.~i. \emph{sekvenčni podatkovni tipi}, v katere lahko shranjujemo večjo količino podatkov oziroma več kot en podatek. Prednost uporabe sekvenčnih podatkovnih tipov je ta, da lahko podatke sproti dodajamo in ne potrebujemo vnaprej definirati števila podatkov, ki jih bomo na koncu imeli. Mimogrede, tudi nizi so sekvenčni podatkovni tipi, saj lahko vanje shranjujemo večjo količino podatkov, ki v tem primeru predstavljajo znake oziroma enočrkovne nize. 
 
 \section{Kaj so seznami?}
 
@@ -597,7 +597,7 @@ Napiši program, ki ga bo lahko uporabil sodnik smučarskih skokov. Programu naj
 \end{zgled}
 
 \begin{resitev}
-Podobno kot prej bomo seznam prebrali in uredili. Zmagovalce lahko zdaj izpišemo v eni vrstici. Tokrat bo program za razliko od prej deloval tudi v primeru, če bo sodnik vnesel manj kot 3 skoke. Rezine režejo dokler gre in primeru da razpon preseže indekse seznama, napake ne javljajo.
+Podobno kot prej bomo seznam prebrali in uredili. Zmagovalce lahko zdaj izpišemo v eni vrstici. Tokrat bo program za razliko od prej deloval tudi v primeru, če bo sodnik vnesel manj kot 3 skoke. Rezine režejo, dokler gre, in v primeru da razpon preseže indekse seznama, napake ne javljajo.
 \begin{lstlisting}[language=Python,numbers=left]
 dolzine = eval(input("Vnesi dolžine: "))
 dolzine.sort(reverse=True)
@@ -606,7 +606,7 @@ print(dolzine[:3])
 \end{resitev}
 
 \section{Indeksiranje nizov}
-Kot smo že omenili lahko podobno kot sezname indeksiramo tudi nize. Prav tako lahko nad nizi izvajamo rezine. Povadimo najprej rezinjenje.
+Kot smo že omenili, lahko podobno kot sezname indeksiramo tudi nize. Prav tako lahko nad nizi izvajamo rezine. Povadimo najprej rezinjenje.
 
 \begin{zgled}
 Napiši program, ki bo od uporabnika prebral dve zaporedji nukleotidnih baz (zapisani kot niza) in med njima na sredini izvedel križanje, tako da bo sestavil dve novi zaporedji nukleotidnih baz in jih izpisal.
@@ -638,7 +638,7 @@ Iz zgornjega zgleda vidimo še eno prednost tega, da \texttt{stop} v rezino ni v
 Povadimo zdaj še običajno indeksiranje, ki ga bomo potem pohitrili z rezinami.
 
 \begin{zgled}
-Palindrom je niz, ki se na enak način bere naprej kot nazaj. Napiši program, ki od uporabnika prebere niz in izpiše, če podani niz je oziroma ni palindrom.
+Palindrom je niz, ki se na enak način bere naprej kot nazaj. Napiši program, ki od uporabnika prebere niz in izpiše, ali podani niz je oziroma ni palindrom.
 \end{zgled}
 
 \begin{resitev}

@@ -17,7 +17,7 @@ Potek izvedbe osnovne oblike zanke \texttt{for} ponazarja slika \ref{img:for1}
     \caption{Potek izvedbe osnovne oblike zanke \texttt{for}.}
     \label{img:for1}
 \end{figure}
-Izvajanje zanke torej ponavljamo vse dokler je v seznamu (ali nizu) še kakšen element, pri čemer se spremenljivka \texttt{element} pomika od začetka proti koncu seznama (ali niza). Če bi npr. želeli izpisati vse elemente v seznamu, pri čemer bi vsak element izpisali v svoji vrstici, bi to lahko naredili takole:
+Izvajanje zanke torej ponavljamo, vse dokler je v seznamu (ali nizu) še kakšen element, pri čemer se spremenljivka \texttt{element} pomika od začetka proti koncu seznama (ali niza). Če bi npr. želeli izpisati vse elemente v seznamu, pri čemer bi vsak element izpisali v svoji vrstici, bi to lahko naredili takole:
 \begin{lstlisting}[language=Python]
 >>> seznam = [1,2,3]
 >>> for element in seznam:
@@ -42,7 +42,7 @@ Povadimo sprehajanje še na zgledu.
 Napiši program, ki od uporabnika preko funkcije \texttt{eval} prebere seznam in izpiše najmanjši element seznama (brez uporabe funkcije \texttt{min}). 
 \end{zgled}
 \begin{resitev}
-Najmanjši element bomo našli tako, da se bomo z zanko \texttt{for} sprehodili čez seznam in si zapomnili element, ki je najmanjši. Kako pa vemo, da je nek element najmanjši, če ostalih še nismo pregledali? Težko. Vemo pa, če je nek element manjši od vseh elementov, ki smo jih pregledali preden smo do njega prišli. Nalogo lahko rešimo tako, da naredimo predpostavko, da je najmanjši ničti element v seznamu. Potem naredimo sprehod čez celoten seznam. Če bomo našli kakšen element, ki je manjši od trenutno najmanjšega, bomo trenutno najmanjši element postavili na tega, ki je očitno manjši. To bomo nadaljevali, dokler ne pridemo do konca seznama.
+Najmanjši element bomo našli tako, da se bomo z zanko \texttt{for} sprehodili čez seznam in si zapomnili element, ki je najmanjši. Kako pa vemo, da je nek element najmanjši, če ostalih še nismo pregledali? Težko. Vemo pa, ali je nek element manjši od vseh elementov, ki smo jih pregledali, preden smo do njega prišli. Nalogo lahko rešimo tako, da naredimo predpostavko, da je najmanjši ničti element v seznamu. Potem naredimo sprehod čez celoten seznam. Če bomo našli kakšen element, ki je manjši od trenutno najmanjšega, bomo trenutno najmanjši element postavili na tega, ki je očitno manjši. To bomo nadaljevali, dokler ne pridemo do konca seznama.
 \begin{lstlisting}[language=Python,numbers=left]
 seznam = eval(input("Vnesi seznam: "))
 
@@ -71,7 +71,7 @@ Zanko \texttt{for} bi lahko na podoben način uporabili za sprehajanje po indeks
 for i in range(len(seznam)):
     print(i, seznam[i])
 \end{lstlisting}
-Tokrat funkciji \texttt{range} kot argument \texttt{stop} podamo dolžino seznama, kar pomeni, da bo funkcija zgenerirala razpon elementov v intervalu od 0 do \texttt{len(seznam)-1}, kar je ravno razpon indeksov seznama. Tudi zato torej argument \texttt{stop} v interval ni vključen in zato funkcija \texttt{range} (tudi) deluje kakor deluje.
+Tokrat funkciji \texttt{range} kot argument \texttt{stop} podamo dolžino seznama, kar pomeni, da bo funkcija zgenerirala razpon elementov v intervalu od 0 do \texttt{len(seznam)-1}, kar je ravno razpon indeksov seznama. Tudi zato torej argument \texttt{stop} v interval ni vključen in zato funkcija \texttt{range} (tudi) deluje, kakor deluje.
 
 \section{Sprehajanje čez elemente ali čez indekse?}
 Zgornji program bo poleg indeksa izpisal še vrednost elementa, ki se nahaja na posameznem indeksu. Ali bi lahko do indeksa elementov prišli tudi v primeru, ko se sprehajamo neposredno po elementih seznama? Težko. Zato v primeru, ko informacijo o indeksu potrebujemo, izvajamo zanko čez indekse in ne čez elemente.  
@@ -163,7 +163,7 @@ Zdaj se je seznam spremenil, saj smo absolutne vrednosti direktno prirejali sezn
 \section{Zanka \texttt{for} ali zanka \texttt{while}?}
 Vidimo, da so naši programi z uporabo zanke \texttt{for} v določenih primerih veliko krajši in lepši kot v primeru uporabe zanke \texttt{while}. Poleg tega nam pri uporabi zanke \texttt{for} ni potrebno skrbeti, da bo program za vedno obtičal v zanki (neskončna zanka). Zakaj bi torej sploh uporabljali zanko \texttt{while}? Izkaže se, da je zanka \texttt{while} bolj splošna kot zanka \texttt{for} in da lahko z njo rešimo določene probleme, ki jih z zanko \texttt{for} ne moremo. Kako bi npr. z zanko \texttt{for} od sodnika smučarskih skokov brali dolžine skokov, dokler sodnik ne vnese števila 0? Koliko ponovitev bi morali narediti? Kako bi z zanko \texttt{for} odštevali manjše število od večjega, dokler števili ne bi postali enaki? Odgovor je enostaven. Težko.
 
-Vprašajmo se, kaj je skupnega primerom, kjer zanka \texttt{for} odpove. V obeh zgornjih primerih je število ponovitev, ki jih bo morala zanka narediti, vnaprej težko predvidljivo. V splošnem velja, da zanko \texttt{while} uporabljamo, kadar število ponovitev zanke težko podamo vnaprej, lahko pa oblikujemo pogoj, ki bo določil, do kdaj naj se zanka izvaja. V primeru, da je število ponovitev predvidljivo (npr. podan je razpon štetja ali pa seznam s fiksno dolžino, čez katerega se sprehajajo) pa je kot nalašč zanka \texttt{for}.
+Vprašajmo se, kaj je skupnega primerom, kjer zanka \texttt{for} odpove. V obeh zgornjih primerih je število ponovitev, ki jih bo morala zanka narediti, vnaprej težko predvidljivo. V splošnem velja, da zanko \texttt{while} uporabljamo, kadar število ponovitev zanke težko podamo vnaprej, lahko pa oblikujemo pogoj, ki bo določil, do kdaj naj se zanka izvaja. V primeru, da je število ponovitev predvidljivo (npr. podan je razpon štetja ali pa seznam s fiksno dolžino, čez katerega se sprehajajo), pa je kot nalašč zanka \texttt{for}.
 
 \section{Stavek \texttt{break}}
 
@@ -193,7 +193,7 @@ for el in sez:
         print("Število najdeno!")
         break
 \end{lstlisting}
-S tem smo se izognili večkratnemu izpisovanju, da smo število našli (če bi seznam vseboval več pojavitev iskanega števila, bi brez uporabe stavka \texttt{break}, izpis podali za vsako pojavitev), poleg tega pa smo program nekoliko pohitrili, saj zanko izvaja samo dokler je to potrebno. Kdaj pa podali izpis, da števila ni v seznamu? 
+S tem smo se izognili večkratnemu izpisovanju, da smo število našli (če bi seznam vseboval več pojavitev iskanega števila, bi brez uporabe stavka \texttt{break} izpis podali za vsako pojavitev), poleg tega pa smo program nekoliko pohitrili, saj zanko izvaja samo, dokler je to potrebno. Kdaj pa bi podali izpis, da števila ni v seznamu? 
 
 \section{Veja \texttt{else}}
 
@@ -225,7 +225,7 @@ else:
 Demonstrirajmo uporabo stavka \texttt{break} in veje \texttt{else} še na zgledu s tujimi števili.
 
 \begin{zgled}
-Napiši program, ki od uporabnika prebere dve celi števili in izpiše, če sta števili tuji. Števili sta tuji, če nimata nobenega skupnega delitelja, ki je večji od 1.
+Napiši program, ki od uporabnika prebere dve celi števili in izpiše, ali sta števili tuji. Števili sta tuji, če nimata nobenega skupnega delitelja, ki je večji od 1.
 \end{zgled}
 \begin{resitev}
 Program bo strukturiran zelo podobno kot v primeru zanke \texttt{while}, le da bomo tokrat razpon števil, čez katera se sprehaja kandidat, ustvarili z uporabo funkcije \texttt{range}. 
@@ -251,7 +251,7 @@ else: # ali se je zanka odvrtela do konca
 
 \section{Gnezdenje zank}
 
-Podobno kot smo gnezdili stavke \texttt{if} lahko gnezdimo tudi zanke. To pomeni, da bomo zanko izvajali znotraj druge zanke. Primer gnezdenja zanke \texttt{for} prikazuje spodnji izsek kode:
+Podobno kot smo gnezdili stavke \texttt{if}, lahko gnezdimo tudi zanke. To pomeni, da bomo zanko izvajali znotraj druge zanke. Primer gnezdenja zanke \texttt{for} prikazuje spodnji izsek kode:
 \begin{lstlisting}[language=Python]
 >>> for i in range(5):
         for j in range(5):
@@ -349,14 +349,14 @@ V zgornjih primerih je bila notranja zanka neodvisna od tega, kako daleč se je 
 3 4
 4 4
 \end{lstlisting}
-V prvi iteraciji zunanje zanke, se torej notranja zanka izvede petkrat, v drugi štirikrat, v tretji trikrat, v četrti dvakrat, v peti pa zgolj enkrat. Kasnejša kot je iteracija zunanje zanke, manjše je število ponovitev ugnezdene zanke. Če bi v zgornjem primeru števili, ki ju izpisujemo, predstavljali oznako ekip, bi celoten izpis predstavljal vse pare ekip (brez ponovitev), ki lahko med seboj tekmujejo. 
+V prvi iteraciji zunanje zanke se torej notranja zanka izvede petkrat, v drugi štirikrat, v tretji trikrat, v četrti dvakrat, v peti pa zgolj enkrat. Kasnejša kot je iteracija zunanje zanke, manjše je število ponovitev ugnezdene zanke. Če bi v zgornjem primeru števili, ki ju izpisujemo, predstavljali oznako ekip, bi celoten izpis predstavljal vse pare ekip (brez ponovitev), ki lahko med seboj tekmujejo. 
 
 Povadimo tako gnezdenje še na primeru s tujimi števili.
 \begin{zgled}
 Napiši program, ki od uporabnika prebere celo število in izpiše vsa števila, ki so podanemu številu tuja in so od njega manjša. 
 \end{zgled}
 \begin{resitev}
-Kandidati, ki jih moramo torej obravnavati, se gibljejo v razponu od števila 1 (ki je vsem številom tuje število) do števila \texttt{n-1}, pri čemer je \texttt{n} število, ki ga je vnesel uporabnik. Kako za posameznega kandidata preverimo, če je tuj številu \texttt{n}? Podobno kot prej -- tako da se sprehodimo od števila 2, do manjšega od obeh števil. Če smo našli kakšnega delitelja, si števili očitno nista tuji.
+Kandidati, ki jih moramo torej obravnavati, se gibljejo v razponu od števila 1 (ki je vsem številom tuje število) do števila \texttt{n-1}, pri čemer je \texttt{n} število, ki ga je vnesel uporabnik. Kako za posameznega kandidata preverimo, če je tuj številu \texttt{n}? Podobno kot prej -- tako da se sprehodimo od števila 2 do manjšega od obeh števil. Če smo našli kakšnega delitelja, si števili očitno nista tuji.
 \begin{lstlisting}[language=Python,numbers=left]
 n = int(input("Vnesi število: "))
 
@@ -377,14 +377,14 @@ for kandidat in range(1, n): # razpon cez kandidate
         print(kandidat)
 \end{lstlisting}
 \end{resitev}
-Ugnezdena zanka je v tem primeru odvisna od tega kako daleč je naš program prišel z zunanjo zanko. Mimogrede, na podoben način bi lahko gnezdili tudi zanko \texttt{while}. 
+Ugnezdena zanka je v tem primeru odvisna od tega, kako daleč je naš program prišel z zunanjo zanko. Mimogrede, na podoben način bi lahko gnezdili tudi zanko \texttt{while}. 
 
 
 \section{Izbirni argumenti funkcij in izbirni argumenti funkcije \texttt{print}}
 
 Tole sicer ni neposredno povezano z zanko \texttt{for}, bo pa služilo kot osnova za dopolnitev zgleda s poštevanko. 
 
-Povedali smo že, da funkcije sprejemajo argumente, ki jih ob klicu podamo. V določenih primerih imajo funkcije tudi t.i. \emph{izbirne} ali \emph{opcijske} argumente, za katere velja da imajo (pred)nastavljeno \emph{privzeto} vrednost. V primeru, da vrednosti teh argumentov eksplicitno ne podamo, bodo ti nastavljeni na njihove privzete vrednosti. V primeru, da vrednosti tem argumentom podamo, bomo s tem \emph{povozili} privzete vrednosti in uporabljene bodo podane (naše) vrednosti.
+Povedali smo že, da funkcije sprejemajo argumente, ki jih ob klicu podamo. V določenih primerih imajo funkcije tudi t.~i. \emph{izbirne} ali \emph{opcijske} argumente, za katere velja, da imajo (pred)nastavljeno \emph{privzeto} vrednost. V primeru, da vrednosti teh argumentov eksplicitno ne podamo, bodo ti nastavljeni na njihove privzete vrednosti. V primeru, da vrednosti tem argumentom podamo, bomo s tem \emph{povozili} privzete vrednosti in uporabljene bodo podane (naše) vrednosti.
 
 Poglejmo si dva izbirna argumenta funkcije \texttt{print} in primer njune uporabe. Do dokumentacije funkcije \texttt{print} lahko pridemo preko funkcije \texttt{help}:
 \begin{lstlisting}[language=Python]
