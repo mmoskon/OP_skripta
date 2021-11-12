@@ -47,7 +47,7 @@ Kaj pa se zgodi, če spremenljivko priredimo drugi spremenljivki, na primer tako
 >>> seznam1 = [1,2,3]
 >>> seznam2 = seznam1
 \end{lstlisting}
-Nekaj podobnega smo srečali že pri klicu funkcije. Spomnimo se, da Python v takem primeru naredi t.i. \textit{plitvo kopijo} spremenljivke. To pomeni, da vrednost v pomnilniku dobi novo ime. Do dejanskega (\textit{globokega}) kopiranja vrednosti v tem primeru ne pride. To lahko ponazorimo s sliko \ref{img:spremenljivost_2}.
+Nekaj podobnega smo srečali že pri klicu funkcije. Spomnimo se, da Python v takem primeru naredi t.~i. \textit{plitvo kopijo} spremenljivke. To pomeni, da vrednost v pomnilniku dobi novo ime. Do dejanskega (\textit{globokega}) kopiranja vrednosti v tem primeru ne pride. To lahko ponazorimo s sliko \ref{img:spremenljivost_2}.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/spremenljivost_2.pdf}
@@ -241,7 +241,7 @@ Kako pa bi lahko iz treh seznamov naredili seznam terk, s katerim smo delali zgo
 >>> meritve
 <zip object at 0x0000019A2A865D48>
 \end{lstlisting}
-Tale izpis je malo čuden, ampak ni z njim nič narobe. Funkcija \texttt{zip} je t.i. \emph{iterator}, ki dejanski element seznama terk vrne, šele ko ga potrebujemo, oziroma posamezne elemente seznama vrača sproti. Če bi želeli imeti lepši izpis, bi lahko do njega prišli tako, da rezultat funkcije \texttt{zip} eksplicitno pretvorimo v seznam s funkcijo \texttt{list}:
+Tale izpis je malo čuden, ampak ni z njim nič narobe. Funkcija \texttt{zip} je t.~i. \emph{iterator}, ki dejanski element seznama terk vrne, šele ko ga potrebujemo, oziroma posamezne elemente seznama vrača sproti. Če bi želeli imeti lepši izpis, bi lahko do njega prišli tako, da rezultat funkcije \texttt{zip} eksplicitno pretvorimo v seznam s funkcijo \texttt{list}:
 \begin{lstlisting}[language=Python]
 >>> meritve = list(zip(imena, visine, mase))
 >>> meritve

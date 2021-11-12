@@ -2,13 +2,13 @@
 
 \section{Zakaj pisati v datoteke in brati iz njih?}
 
-Programi, ki smo jih napisali do zdaj, so podatke hranili le za čas svojega izvajanja v t.i. \emph{delovnem pomnilniku}. Ko se je nek program končal, so ti podatki izginili in ko smo program ponovno zagnali, smo morali te podatke ponovno zgenerirati, npr. tako, da smo jih prebrali od uporabnika (če smo bolj natančni, so podatki izginili, ko smo resetirali okolje IDLE npr. z zagonom drugega ali istega programa). Ko smo torej dopolnjevali telefonski imenik z novimi vnosi, se je imenik ob končanju programa izbrisal in dodani vnosi so izginili. To običajno predstavlja problem zaradi več razlogov:
+Programi, ki smo jih napisali do zdaj, so podatke hranili le za čas svojega izvajanja v t.~i. \emph{delovnem pomnilniku}. Ko se je nek program končal, so ti podatki izginili in ko smo program ponovno zagnali, smo morali te podatke ponovno zgenerirati, npr. tako, da smo jih prebrali od uporabnika (če smo bolj natančni, so podatki izginili, ko smo resetirali okolje IDLE npr. z zagonom drugega ali istega programa). Ko smo torej dopolnjevali telefonski imenik z novimi vnosi, se je imenik ob končanju programa izbrisal in dodani vnosi so izginili. To običajno predstavlja problem zaradi več razlogov:
 \begin{itemize}
     \item Ko se program neha izvajati, podatki izginejo. V primeru imenika se ta torej ob vsakem ponovnem zagonu programa resetira na začetno, npr. prazno, vsebino.
     \item Nimamo varnostnih kopij podatkov. Če se npr. telefon, ki uporablja naš imenik, ugasne, moramo celotno vsebino imenika ustvariti od začetka.
     \item Podatkov, ki smo jih ustvarili v enem programu, ne moremo oziroma težko uporabljamo v drugih programih. 
 \end{itemize}
-Na srečo lahko podatke v svojih programih iz delovnega pomnilnika oziroma iz vsebine spremenljivk kadarkoli shranimo v t.i. \emph{trajni pomnilnik} oziroma po domače na \emph{disk}. S tem omogočimo njihovo trajno hrambo, kar pomeni, da lahko do teh podatkov pridemo tudi po zaključku izvajanja programa, na disku podatki ostanejo tudi po izklopu računalnika, do njih pa lahko pridemo tudi iz drugih programov. 
+Na srečo lahko podatke v svojih programih iz delovnega pomnilnika oziroma iz vsebine spremenljivk kadarkoli shranimo v t.~i. \emph{trajni pomnilnik} oziroma po domače na \emph{disk}. S tem omogočimo njihovo trajno hrambo, kar pomeni, da lahko do teh podatkov pridemo tudi po zaključku izvajanja programa, na disku podatki ostanejo tudi po izklopu računalnika, do njih pa lahko pridemo tudi iz drugih programov. 
 
 Kako pa podatke shranimo na disk? Podobno, kot smo do zdaj na disk shranjevali naše programe v obliki datotek s končnico \texttt{py}, lahko v (druge) datoteke shranjujemo tudi podatke, s katerimi delamo. 
 
@@ -41,7 +41,7 @@ FileNotFoundError: [Errno 2] No such file or directory:
 \end{lstlisting}
 Python pravi, da datoteke ne najde, čeprav smo jo pravkar ustvarili. Problem je v tem, da Python datoteko išče v svoji trenutni \emph{delovni mapi}, ki očitno ni enaka tisti, kamor smo mi shranili svojo datoteko\footnote{Do trenutne delovne mape lahko pridemo preko funkcije \texttt{getcwd} iz vgrajenega modula \texttt{os}.}. Problem bi lahko rešili na dva načina.
 
-Prvi način je, da Pythonu podamo \emph{absolutno pot} do lokacije datoteke. Pythonu smo do datoteke v gornjem primeru podali t.i. \emph{relativno pot}, kar pomeni, da bo datoteko iskal relativno glede na trenutno delovno mapo. Če je njegova delovna mapa npr. \texttt{C:$\backslash$Windows$\backslash$system32}, pričakuje, da se datoteka nahaja tu. Lahko pa Pythonu podamo celotno oziroma \texttt{absolutno} pot. Če smo datoteko npr. shranili v mapo \texttt{C:$\backslash$Programiranje}, jo zdaj lahko odpremo takole:
+Prvi način je, da Pythonu podamo \emph{absolutno pot} do lokacije datoteke. Pythonu smo do datoteke v gornjem primeru podali t.~i. \emph{relativno pot}, kar pomeni, da bo datoteko iskal relativno glede na trenutno delovno mapo. Če je njegova delovna mapa npr. \texttt{C:$\backslash$Windows$\backslash$system32}, pričakuje, da se datoteka nahaja tu. Lahko pa Pythonu podamo celotno oziroma \texttt{absolutno} pot. Če smo datoteko npr. shranili v mapo \texttt{C:$\backslash$Programiranje}, jo zdaj lahko odpremo takole:
 \begin{lstlisting}[language=Python, showstringspaces=false]
 >>> open('C:\\Programiranje\\stevila.txt')
 <_io.TextIOWrapper
