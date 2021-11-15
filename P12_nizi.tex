@@ -262,7 +262,7 @@ Beli prostor lahko torej odstranjujemo na različne načine. V določenih primer
 
 Funkcija \texttt{print} podane argumente združi v niz, ki ga izpiše na zaslon. Pri tem med argumente vstavi presledke (\texttt{sep = " "}), na koncu izpisa pa gre v novo vrstico (\texttt{end = "$\backslash$n"}). Privzeto delovanje lahko spremenimo, tako da nastavimo (povozimo) privzete vrednosti izbirnima argumentom \texttt{sep} in \texttt{end}. 
 
-Včasih pa to ni dovolj in bi bili radi z izpisovanjem nekoliko bolj ustvarjalni. V tem primeru lahko uporabimo metodo \texttt{format}. Metodo \texttt{format} pokličemo nad nizom, ki vsebuje t.i. fiksne dele in dele, ki jih bo metoda zamenjala z argumenti, ki jih bomo podali ob klicu. Slednje znotraj niza označimo z zavitimi oklepaji (\texttt{\{} in \texttt{\}}). Osnovni primer uporabe je sledeč:
+Včasih pa to ni dovolj in bi bili radi z izpisovanjem nekoliko bolj ustvarjalni. V tem primeru lahko uporabimo metodo \texttt{format}. Metodo \texttt{format} pokličemo nad nizom, ki vsebuje t.~i. fiksne dele in dele, ki jih bo metoda zamenjala z argumenti, ki jih bomo podali ob klicu. Slednje znotraj niza označimo z zavitimi oklepaji (\texttt{\{} in \texttt{\}}). Osnovni primer uporabe je sledeč:
 \begin{lstlisting}[language=Python]
 >>> m = 1
 >>> "{} meter/ov/a je {} centimeter/ov/a".format(m, m*100)

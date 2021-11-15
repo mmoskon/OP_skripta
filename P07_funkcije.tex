@@ -8,7 +8,7 @@ Funkcije nam omogočajo, da osnovne korake za reševanje programa vgradimo v eno
 
 Zgled s praštevili pa nam je posredno razodel še eno veliko prednost uporabe funkcij. Isto kodo, tj. preverjanje ali je neko število praštevilo, bomo poklicali večkrat, vsakič seveda z drugim argumentom, tj. številom, ki je kandidat za praštevilo. Funkcije nam torej omogočajo tudi to, da lahko isti kos kode večkrat pokličemo brez tega, da bi jo vključevali v zanke ali pa kopirali v vse dele programa, kjer jo potrebujemo. 
 
-To kodo bi lahko delili tudi z drugimi programerji. Če smo npr. napisali zelo dobro funkcijo za iskanje praštevil in smo nad njo nadvse navdušeni, hkrati pa vemo, da bi bila lahko koristna tudi za druge iskalce praštevil, lahko funkcijo enostavno zapakiramo v t.i. modul, ki ga objavimo na internetu. 
+To kodo bi lahko delili tudi z drugimi programerji. Če smo npr. napisali zelo dobro funkcijo za iskanje praštevil in smo nad njo nadvse navdušeni, hkrati pa vemo, da bi bila lahko koristna tudi za druge iskalce praštevil, lahko funkcijo enostavno zapakiramo v t.~i. modul, ki ga objavimo na internetu. 
 
 \section{Kako definiramo funkcijo?}
 
@@ -44,7 +44,7 @@ Do zdaj smo funkcije vedno klicali tako, da so imenu funkcije sledili oklepaji, 
 Ko smo funkcijo definirali se torej koda znotraj funkcije sploh ni izvedla. Izvedla se je zgolj njena definicija, ki nam je njeno ime umestila v imenski prostor (podobno, kot če smo nekemu imenu -- sprememnljivki, priredili neko vrednost). Dejanska izvedba stavkov znotraj funkcije pa se je izvršila šele, ko smo funkcijo poklicali. Mimogrede, če bi v funkciji imeli napako, kot je npr. uporaba nedefinirane spremenljivke, bi jo Python našel šele ob klicu funkcije.
 
 \section{Globalni imenski prostor}
-Vsakič, ko v Pythonu definiramo novo spremenljivko, se ime, preko katerega bomo dostopali do vrednosti te spremenljivke, shrani v t.i. \emph{imenski prostor}. Podobno se zgodi ob definiciji funkcije, le da se v tem primeru za imenom funkcije skriva vsebina funkcije, ki se bo izvedla, ko jo bomo poklicali. Ko npr. definiramo spremenljivki \texttt{x} in \texttt{y} z uporabo kode
+Vsakič, ko v Pythonu definiramo novo spremenljivko, se ime, preko katerega bomo dostopali do vrednosti te spremenljivke, shrani v t.~i. \emph{imenski prostor}. Podobno se zgodi ob definiciji funkcije, le da se v tem primeru za imenom funkcije skriva vsebina funkcije, ki se bo izvedla, ko jo bomo poklicali. Ko npr. definiramo spremenljivki \texttt{x} in \texttt{y} z uporabo kode
 \begin{lstlisting}[language=Python]
 >>> x = 5
 >>> y = 7
@@ -57,7 +57,7 @@ se v imenskem prostoru pojavita imeni \texttt{x} in \texttt{y}, za katerimi se s
 \end{figure}
 Preko imen \texttt{x} in \texttt{y} lahko zdaj dostopamo do vrednosti, ki se skrivajo v ozadju, ne da bi se morali zavedati kje konkretno v pomnilniku so te vrednosti shranjene, kar nam bistveno olajša življenje.
 
-Definicije novih imen, pa naj gre za imena spremenljivk ali funkcij, ki jih ustvarimo izven funkcij, se shranijo v t.i. \emph{globalni imenski prostor}. Zato tem imenom pogosto rečemo kar globalna imena, spremenljivkam pa \emph{globalne spremenljivke}. Če obstaja globalni imenski prostor pa bo verjetno obstajal tudi lokalni. Poglejmo si, kaj se zgodi, ko funkcijo pokličemo.
+Definicije novih imen, pa naj gre za imena spremenljivk ali funkcij, ki jih ustvarimo izven funkcij, se shranijo v t.~i. \emph{globalni imenski prostor}. Zato tem imenom pogosto rečemo kar globalna imena, spremenljivkam pa \emph{globalne spremenljivke}. Če obstaja globalni imenski prostor pa bo verjetno obstajal tudi lokalni. Poglejmo si, kaj se zgodi, ko funkcijo pokličemo.
 
 \section{Kaj se zgodi ob klicu funkcije in lokalni imenski prostor}
 Kot smo že omenili, se ob definiciji funkcije v globalnem imenskem prostoru ustvari novo ime, ki je enako imenu funkcije. To kaže na samo funkcijo, tako da bomo lahko le-to kasneje preko imena tudi poklicali. Situacijo po definiciji funkcije \texttt{sestej} prikazuje slika \ref{img:imenski_prostor_2}. \begin{figure}

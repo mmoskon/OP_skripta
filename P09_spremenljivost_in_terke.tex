@@ -25,7 +25,7 @@ Določeni podatkovni tipi v Pythonu so spremenljivi \angl{mutable}, določeni pa
 \bigskip
 
 \section{Kaj se zgodi ob prirejanju spremenljivk?}
-Kaj se zgodi, ko spremenljivki priredimo neko vrednost že vemo. V imenskem prostoru, kjer spremenljivko definiramo, se pojavijo imena, ki smo jih dodelili spremenljivkam, v pomnilniku pa se ustvarijo vrednosti, na katere ta imena kažejo. Zaporedje prireditvenih stavkov
+Kaj se zgodi, ko spremenljivki priredimo neko vrednost, že vemo. V imenskem prostoru, kjer spremenljivko definiramo, se pojavijo imena, ki smo jih dodelili spremenljivkam, v pomnilniku pa se ustvarijo vrednosti, na katere ta imena kažejo. Zaporedje prireditvenih stavkov
 \begin{lstlisting}[language=Python]
 >>> i = 1
 >>> niz = 'ABC'
@@ -47,7 +47,7 @@ Kaj pa se zgodi, če spremenljivko priredimo drugi spremenljivki, na primer tako
 >>> seznam1 = [1,2,3]
 >>> seznam2 = seznam1
 \end{lstlisting}
-Nekaj podobnega smo srečali že pri klicu funkcije. Spomnimo se, da Python v takem primeru naredi t.i. \textit{plitvo kopijo} spremenljivke. To pomeni, da vrednost v pomnilniku dobi novo ime. Do dejanskega (\textit{globokega}) kopiranja vrednosti v tem primeru ne pride. To lahko ponazorimo s sliko \ref{img:spremenljivost_2}.
+Nekaj podobnega smo srečali že pri klicu funkcije. Spomnimo se, da Python v takem primeru naredi t.~i. \textit{plitvo kopijo} spremenljivke. To pomeni, da vrednost v pomnilniku dobi novo ime. Do dejanskega (\textit{globokega}) kopiranja vrednosti v tem primeru ne pride. To lahko ponazorimo s sliko \ref{img:spremenljivost_2}.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/spremenljivost_2.pdf}
@@ -57,7 +57,7 @@ Nekaj podobnega smo srečali že pri klicu funkcije. Spomnimo se, da Python v ta
 Na tak način je delovanje tako s časovnega stališča (hitrost) kot tudi s prostorskega stališča (poraba pomnilnika) bolj varčno. 
 
 \section{Kaj se zgodi ob spreminjanju vrednosti spremenljivk?}
-Kaj pa se zgodi, če vrednost nove (ali pa stare) spremenljivke spremenimo? Vse skupaj zavisi od tega ali je podatek, ki ga spreminjamo spremenljiv ali ne. Spomnimo se. Spremenljiv podatek lahko spreminjamo, ko pa pokusimo spremeniti nespremenljiv podatek, se ustvari njegova kopija (globoka), ki odraža narejeno spremembo. Če npr. uporabimo operator \texttt{+=}, bo v primeru spremenljivega podatka spremenjen obstoječ podatek, v primeru nespremenljivega podatka pa bo ustvarjen nov podatek, ki bo odražal narejeno spremembo. 
+Kaj pa se zgodi, če vrednost nove (ali pa stare) spremenljivke spremenimo? Vse skupaj zavisi od tega, ali je podatek, ki ga spreminjamo, spremenljiv ali ne. Spomnimo se. Spremenljiv podatek lahko spreminjamo, ko pa pokusimo spremeniti nespremenljiv podatek, se ustvari njegova kopija (globoka), ki odraža narejeno spremembo. Če npr. uporabimo operator \texttt{+=}, bo v primeru spremenljivega podatka spremenjen obstoječ podatek, v primeru nespremenljivega podatka pa bo ustvarjen nov podatek, ki bo odražal narejeno spremembo. 
 
 Kaj pa se zgodi v primeru, da na podatek kaže več imen, kot v scenariju zgoraj. Ali se bo po izvedbi spodnje kode sprememba odražala tudi preko drugih imen podatka? Poglejmo si spodnjo kodo.
 \begin{lstlisting}[language=Python]
@@ -71,17 +71,17 @@ Kaj pa se zgodi v primeru, da na podatek kaže več imen, kot v scenariju zgoraj
 >>> seznam2 = seznam1
 >>> seznam2 += [4]
 \end{lstlisting}
-Zanima nas ali se po spreminjanju spremenljivk \texttt{j}, \texttt{niz2} in \texttt{seznam2} spremembe odražajo tudi na spremenljivkah \texttt{i}, \textbf{niz1} in \texttt{seznam1}. Odgovor ni enostaven da ali ne. Odgovor je namreč odvisen od spremenljivosti podatka, ki ga spreminjamo. Situacijo po spreminjanju podatka z operatorjem \texttt{+=} prikazuje slika \ref{img:spremenljivost_3}.
+Zanima nas, ali se po spreminjanju spremenljivk \texttt{j}, \texttt{niz2} in \texttt{seznam2} spremembe odražajo tudi na spremenljivkah \texttt{i}, \texttt{niz1} in \texttt{seznam1}. Odgovor ni enostaven da ali ne. Odgovor je namreč odvisen od spremenljivosti podatka, ki ga spreminjamo. Situacijo po spreminjanju podatka z operatorjem \texttt{+=} prikazuje slika \ref{img:spremenljivost_3}.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/spremenljivost_3.pdf}
     \caption{Ob spreminjanju spremenljivih podatkov se spremenijo vse plitve kopije podatka.}
     \label{img:spremenljivost_3}
 \end{figure}
-V primeru, da je podatek spremenljiv, se torej sprememba odraža na vseh spremenljivkah, ki predstavljajo plitve kopije tega podatka. S tem ko v zgornjem zgledu spreminjamo spremenljivko \texttt{seznam2}, spreminjamo tudi spremenljivko \texttt{seznam1}. Po drugi strani spreminjanje spremenljivk \texttt{j} in \texttt{niz2} ustvari globoko kopijo spremenljivk \texttt{j} in \texttt{niz2}, ki odraža narejeno spremembo. Globoka kopija predstavlja nov podatek, tj. podatek ki se razlikuje od tistega, na katerega kažeta imeni \texttt{i} in \texttt{niz1}. Posledica tega je, da spreminjanje vrednosti spremenljivk \texttt{j} in \texttt{niz2} na vrednostih spremenljivk \texttt{i} in \texttt{niz1} ne vplivajo, saj pripadajo nespremenljivim podatkovnim tipom.
+V primeru, da je podatek spremenljiv, se torej sprememba odraža na vseh spremenljivkah, ki predstavljajo plitve kopije tega podatka. S tem ko v zgornjem zgledu spreminjamo spremenljivko \texttt{seznam2}, spreminjamo tudi spremenljivko \texttt{seznam1}. Po drugi strani spreminjanje spremenljivk \texttt{j} in \texttt{niz2} ustvari globoko kopijo spremenljivk \texttt{j} in \texttt{niz2}, ki odraža narejeno spremembo. Globoka kopija predstavlja nov podatek, tj. podatek, ki se razlikuje od tistega, na katerega kažeta imeni \texttt{i} in \texttt{niz1}. Posledica tega je, da spreminjanje vrednosti spremenljivk \texttt{j} in \texttt{niz2} na vrednosti spremenljivk \texttt{i} in \texttt{niz1} ne vplivajo, saj pripadajo nespremenljivim podatkovnim tipom.
 
 \section{Ali funkcije spreminjajo vrednosti svojim argumentom?}
-Spomnimo se, da se ob klicu funkcije ustvari lokalni imenski prostor funkcije. V lokalnem imenskem prostoru se ob klicu spremenljivkam, ki nastopajo kot argumenti funkcije, priredijo vrednosti, s katerimi smo funkcijo poklicali. V primeru, da smo funkcijo poklicali z globalnimi spremenljivkami, se argumentom funkcije priredi plitva kopija teh spremenljivk. Vprašanje pa je ali se bodo ob spreminjanju argumentov funkcije spremembe odražale tudi izven funkcije, torej po tem, ko se bo funkcija že končala. Vprašanje lahko ponazorimo s spodnjim zgledom.
+Spomnimo se, da se ob klicu funkcije ustvari lokalni imenski prostor funkcije. V lokalnem imenskem prostoru se ob klicu spremenljivkam, ki nastopajo kot argumenti funkcije, priredijo vrednosti, s katerimi smo funkcijo poklicali. V primeru, da smo funkcijo poklicali z globalnimi spremenljivkami, se argumentom funkcije priredi plitva kopija teh spremenljivk. Vprašanje pa je, ali se bodo ob spreminjanju argumentov funkcije spremembe odražale tudi izven funkcije, torej po tem, ko se bo funkcija že končala. Vprašanje lahko ponazorimo s spodnjim zgledom.
 
 \begin{zgled}
 Kakšna je vrednost spremenljivk \texttt{st1}, \texttt{niz1} in \texttt{seznam1} po izvedbi spodnje kode in kakšen bo izpis programa?
@@ -107,7 +107,7 @@ print(seznam1)
 \end{zgled}
 
 \begin{resitev}
-Ob klicu funkcije spremenljivki, s katerima funkcijo pokličemo, dobita plitvi kopiji z imeni \texttt{a} in \texttt{b} v lokalnem imenskem prostoru funkcije. Znotraj funkcije plitvo kopijo z imenom \texttt{a} spreminjamo. V primeru, da je spremenljivka spremenljivega podatkovnega tipa (npr. seznam) se spreminja obstoječ podatek, na katerega kaže tudi globalna spremenljivka, kar pomeni, da se bo sprememba odražala tudi izven funkcije. V primeru, da je spremenljivka nespremenljivega podatkovnega tipa, se ustvari globoka kopija podatka, ki bo odražala narejeno spremembo. Spremeni se torej zgolj spremenljivka, ki je definirana znotraj funkcije, ta sprememba pa izven funkcije ne bo vidna. 
+Ob klicu funkcije spremenljivki, s katerima funkcijo pokličemo, dobita plitvi kopiji z imeni \texttt{a} in \texttt{b} v lokalnem imenskem prostoru funkcije. Znotraj funkcije plitvo kopijo z imenom \texttt{a} spreminjamo. V primeru, da je spremenljivka spremenljivega podatkovnega tipa (npr. seznam), se spreminja obstoječ podatek, na katerega kaže tudi globalna spremenljivka, kar pomeni, da se bo sprememba odražala tudi izven funkcije. V primeru, da je spremenljivka nespremenljivega podatkovnega tipa, se ustvari globoka kopija podatka, ki bo odražala narejeno spremembo. Spremeni se torej zgolj spremenljivka, ki je definirana znotraj funkcije, ta sprememba pa izven funkcije ne bo vidna. 
 
 Spremenljivki \texttt{i} in \texttt{niz1} se torej po klicu funkcije ne bosta spremenili, spremenljivka \texttt{seznam1} pa se bo spremenila. Po izvedbi programa bo izpis sledeč:
 
@@ -129,7 +129,7 @@ Zdaj, ko vemo, kaj je to spremenljivost, lahko razložimo tudi, kaj so terke \an
 
 \section{Uporaba terk}
 
-Terko definiramo z navadnimi oklepaji, tj. \texttt{(} in \texttt{)}, znotraj katerih naštejemo elemente. Terko treh elementov, bi lahko definirali na primer takole:
+Terko definiramo z navadnimi oklepaji, tj. \texttt{(} in \texttt{)}, znotraj katerih naštejemo elemente. Terko treh elementov bi lahko definirali na primer takole:
 \begin{lstlisting}[language=Python]
 >>> terka=("Janez", 1.8, 75)
 \end{lstlisting}
@@ -141,7 +141,7 @@ Tudi, če bi elemente našteli brez oklepajev, bi dobili terko. Takole:
 >>> type(terka)
 <class 'tuple'>
 \end{lstlisting}
-Python je ob naštevanju elementov z vejicami ugotovil, da želimo imeti terko in jo naredil. Python ima nekoliko težav, ko želimo narediti terko dolžine 1, saj si v tem primeru oklepaje razlaga kot operator, ki določa prioriteto. V primeru, da znotraj oklepajev damo zgolj eno npr. celo število, bomo torej dobili podatek, ki pripada podatkovnemu tipu \texttt{int} in ne \texttt{tuple}:
+Python je ob naštevanju elementov z vejicami ugotovil, da želimo imeti terko, in jo naredil. Python ima nekoliko težav, ko želimo narediti terko dolžine 1, saj si v tem primeru oklepaje razlaga kot operator, ki določa prioriteto. V primeru, da znotraj oklepajev damo zgolj eno npr. celo število, bomo torej dobili podatek, ki pripada podatkovnemu tipu \texttt{int} in ne \texttt{tuple}:
 \begin{lstlisting}[language=Python]
 >>> terka=(1)
 >>> terka
@@ -199,7 +199,7 @@ Do posameznih elementov terke smo torej prišli z njihovim indeksiranjem. Terke 
 \begin{lstlisting}[language=Python]
 (spremenljivka1, spremenljivka2,...) = terka
 \end{lstlisting}
-Paziti moramo le na to, da terka na levi strani vsebuje enako število elementov kot terka na desni strani prireditvenega stavka. Kaj smo v zgornjem stavku pravzaprav naredili? Naredili smo terko spremenljivk, ki smo ji priredili terko na desni strani. Ker terki spremenljivk nismo dali nobenega imena, je v imenski prostor nismo shranili in zato tudi ni shranjena nikjer v pomnilniku. So pa v pomnilniku ostale spremenljivke, v katere smo razpakirali terko na desni. Kot smo videli že zgoraj pa lahko oklepaje pri definiciji tudi izpustimo. Torej lahko napišemo tudi nekaj takega
+Paziti moramo le na to, da terka na levi strani vsebuje enako število elementov kot terka na desni strani prireditvenega stavka. Kaj smo v zgornjem stavku pravzaprav naredili? Naredili smo terko spremenljivk, ki smo ji priredili terko na desni strani. Ker terki spremenljivk nismo dali nobenega imena, je v imenski prostor nismo shranili in zato tudi ni shranjena nikjer v pomnilniku. So pa v pomnilniku ostale spremenljivke, v katere smo razpakirali terko na desni. Kot smo videli že zgoraj, pa lahko oklepaje pri definiciji tudi izpustimo. Torej lahko napišemo tudi nekaj takega
 \begin{lstlisting}[language=Python]
 spremenljivka1, spremenljivka2,... = terka
 \end{lstlisting}
@@ -220,7 +220,7 @@ for ime, visina, masa in meritve:
 \end{lstlisting}
 
 \section{Pakiranje seznamov v sezname terk}
-Seznami terk, kot smo jih srečali zgoraj, torej predstavljajo lep način zapisovanja podatkov, ko želimo pri posamezni entiteti imeti več podatkov. Dejstvo pa je, da velikokrat podatkov ne dobimo v taki obliki, ampak dobimo za vsako količino svoj seznam. Pri tem so seznami med seboj poravnani, kar pomeni, da istoležni elementi v vseh seznamih pripadajo isti entiteti. Elementi na indeksu 0 torej pripadajo entiteti 0, elementi na indeksu 1 entiteti 1 itd. V primeru imen, višin in mas, bi torej imeli tri sezname v obliki 
+Seznami terk, kot smo jih srečali zgoraj, torej predstavljajo lep način zapisovanja podatkov, ko želimo pri posamezni entiteti imeti več podatkov. Dejstvo pa je, da velikokrat podatkov ne dobimo v taki obliki, ampak dobimo za vsako količino svoj seznam. Pri tem so seznami med seboj poravnani, kar pomeni, da istoležni elementi v vseh seznamih pripadajo isti entiteti. Elementi na indeksu 0 torej pripadajo entiteti 0, elementi na indeksu 1 entiteti 1 itd. V primeru imen, višin in mas bi torej imeli tri sezname v obliki 
 \begin{lstlisting}[language=Python]
 imena = ["Janez", "Ana", "Nika"]
 visine = [1.8, 1.65, 1.66]
@@ -241,7 +241,7 @@ Kako pa bi lahko iz treh seznamov naredili seznam terk, s katerim smo delali zgo
 >>> meritve
 <zip object at 0x0000019A2A865D48>
 \end{lstlisting}
-Tale izpis je malo čuden, ampak ni z njim nič narobe. Funkcija \texttt{zip} je t.i. \emph{iterator}, ki dejanski element seznama terk vrne, šele ko ga potrebujemo, oziroma posamezne elemente seznama vrača sproti. Če bi želeli imeti lepši izpis, bi lahko do njega prišli tako, da rezultat funkcije \texttt{zip} eksplicitno pretvorimo v seznam s funkcijo \texttt{list}:
+Tale izpis je malo čuden, ampak ni z njim nič narobe. Funkcija \texttt{zip} je t.~i. \emph{iterator}, ki dejanski element seznama terk vrne, šele ko ga potrebujemo, oziroma posamezne elemente seznama vrača sproti. Če bi želeli imeti lepši izpis, bi lahko do njega prišli tako, da rezultat funkcije \texttt{zip} eksplicitno pretvorimo v seznam s funkcijo \texttt{list}:
 \begin{lstlisting}[language=Python]
 >>> meritve = list(zip(imena, visine, mase))
 >>> meritve
@@ -257,7 +257,7 @@ for ime, visina, masa in zip(imena, visine, mase):
 \section{Zahteva po nespremenljivosti}
 V določenih primerih Python zahteva uporabo nespremenljivih podatkovnih tipov. Nespremenljive podatkovne tipe moramo uporabiti, kadar želimo podatke shranjevati v množico (\texttt{set}) in kadar želimo nek podatek uporabiti kot ključ (\texttt{key}) slovarja (\texttt{dict}). Če želimo v takem primeru uporabiti več elementov, moramo namesto po seznamu poseči po terki. V teh primerih je torej uporaba terk obvezna. Več o množicah in slovarjih bomo izvedeli prav kmalu.
 
-Drug primer, v katerem bi nespremenljivost bila zaželena (ne pa obvezna), je, ko ne želimo, da funkcija spremeni vrednosti podanega argumenta. Kot smo videli lahko funkcije spreminjajo vrednosti svojih argumentov, tako da bodo spremembe vidne tudi izven funkcij. Če bi radi zagotovilo, da se podan argument izven funkcije zagotovo ne bo spremenil, namesto spremenljivega seznama enostavno uporabimo nespremenljivo terko. V tem kontekstu si poglejmo spodnji zgled.
+Drug primer, v katerem bi nespremenljivost bila zaželena (ne pa obvezna), je, ko ne želimo, da funkcija spremeni vrednosti podanega argumenta. Kot smo videli, lahko funkcije spreminjajo vrednosti svojih argumentov, tako da bodo spremembe vidne tudi izven funkcij. Če bi radi zagotovilo, da se podani argument izven funkcije zagotovo ne bo spremenil, namesto spremenljivega seznama enostavno uporabimo nespremenljivo terko. V tem kontekstu si poglejmo spodnji zgled.
 
 \begin{zgled}
 Kakšna je vrednost spremenljivk \texttt{seznam1} in \texttt{terka1}  po izvedbi spodnje kode in kakšen bo izpis programa?
@@ -292,9 +292,9 @@ Po izvedbi funkcije \texttt{spremeni} ima spremenljivka \texttt{seznam1} spremen
 
 Funkcijam, ki kot argumente sprejemajo spremenljive podatkovne tipe, spremenjenih vhodnih argumentov ni potrebno vračati, saj se bodo spremembe odražale tudi izven funkcije. Funkcije, ki kot argumente sprejemajo nespremenljive podatkovne tipe, morajo spremenjene vhodne argumente eksplicitno vrniti, saj so spremenjene vrednosti sicer za vedno izgubljene. Oba načina si poglejmo v spodnjih zgledih.
 
-Najprej si poglejmo kako se lotiti pisanja in uporabe funkcije, ki sprejema nespremenljive podatke.
+Najprej si poglejmo, kako se lotiti pisanja in uporabe funkcije, ki sprejema nespremenljive podatke.
 \begin{zgled}
-Napiši funkcijo \texttt{dodaj\_AT\_niz}, ki sprejme dve nukleotidni zaporedji zapisani kot niza in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{'ATCG'} in \texttt{'AATGGAATGG'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
+Napiši funkcijo \texttt{dodaj\_AT\_niz}, ki sprejme dve nukleotidni zaporedji, zapisani kot niza, in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju, kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{'ATCG'} in \texttt{'AATGGAATGG'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
 \end{zgled}
 
 \begin{resitev}
@@ -317,9 +317,9 @@ Klic funkcije moramo izvesti na tak način, da bo spremenila vrednost prve sprem
 Na tak način smo vrednost spremenljivke \texttt{zaporedje1} spremenili.
 \end{resitev}
 
-Poglejmo si še kakšne so razlike pri delu s spremenljivimi podatki.
+Poglejmo si še, kakšne so razlike pri delu s spremenljivimi podatki.
 \begin{zgled}
-Napiši funkcijo \texttt{dodaj\_AT\_seznam}, ki sprejme dve nukleotidni zaporedji zapisani kot seznama enoznakovnih nizov (baz) in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{['A','T','C','G']} in \texttt{'A','A','T','G','G','A','A','T','G','G'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
+Napiši funkcijo \texttt{dodaj\_AT\_seznam}, ki sprejme dve nukleotidni zaporedji, zapisani kot seznama enoznakovnih nizov (baz), in v prvo zaporedje doda vse ponovitve baz \texttt{A} in \texttt{T} v enakem zaporedju, kot nastopajo v drugem nizu. Funkcijo uporabi na zaporedjih \texttt{['A','T','C','G']} in \texttt{'A','A','T','G','G','A','A','T','G','G'}, tako da bo prvo zaporedje po njeni izvedbi spremenjeno.
 \end{zgled}
 \begin{resitev}
 Navodilo naloge je praktično enako kot prej, le da tokrat namesto nespremenljivih podatkovnih tipov uporabljamo spremenljive. To pomeni, da ni potrebe po tem, da funkcija vrača spremenjen rezultat, saj se bodo spremembe odražale že preko podanega argumenta. Koda je torej sledeča:
@@ -329,13 +329,13 @@ def dodaj_AT_seznam(zaporedje1, zaporedje2):
         if baza in 'AT':
             zaporedje1.append(baza)
 \end{lstlisting}
-Tokrat funkcija ne vrača ničesar uporabnega, zato njenega rezultata nima smisla ničemur prirejati. Vse kar potrebujemo je klic funkcije z ustreznimi argumenti:
+Tokrat funkcija ne vrača ničesar uporabnega, zato njenega rezultata nima smisla ničemur prirejati. Vse, kar potrebujemo, je klic funkcije z ustreznimi argumenti:
 \begin{lstlisting}[language=Python]
 >>> zaporedje1 = ['A','T','C','G']
 >>> zaporedje2 = ['A','A','T','G','G','A','A','T','G','G']
 >>> dodaj_AT_seznam(zaporedje1, zaporedje2) 
 \end{lstlisting}
-Prepričajmo se, če je vrednost spremenljivke \texttt{zaporedje1} res spremenjena:
+Prepričajmo se, ali je vrednost spremenljivke \texttt{zaporedje1} res spremenjena:
 \begin{lstlisting}[language=Python]
 >>> zaporedje1
 ['A', 'T', 'C', 'G', 'A', 'A', 'T', 'A', 'A', 'T']

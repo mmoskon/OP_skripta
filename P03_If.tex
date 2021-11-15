@@ -59,7 +59,7 @@ Kaj pravzaprav predstavlja pogoj za izvedbo pogojnega dela stavka? Kot je razvid
 
 \subsection{Primerjalni operatorji in podatkovni tip \texttt{bool}}
 
-Prva skupina operatorjev, ki jih bomo uporabljali pri pisanju pogojev so t.i. \emph{primerjalni operatorji}, ki jih poznamo že iz matematike. To so npr. operator enakosti \texttt{==} (ker je enojni enačaj uporabljen za prirejanje, moramo za primerjanje uporabiti dvojni enačaj), operator neenakosti \texttt{!=}, večji \texttt{>}, večji ali enak \texttt{>=} itd. Poskusimo:
+Prva skupina operatorjev, ki jih bomo uporabljali pri pisanju pogojev so t.~i. \emph{primerjalni operatorji}, ki jih poznamo že iz matematike. To so npr. operator enakosti \texttt{==} (ker je enojni enačaj uporabljen za prirejanje, moramo za primerjanje uporabiti dvojni enačaj), operator neenakosti \texttt{!=}, večji \texttt{>}, večji ali enak \texttt{>=} itd. Poskusimo:
 \begin{lstlisting}[language=Python]
 >>> 1 == 1
 True
@@ -151,7 +151,7 @@ Spet vidimo, da je znak \texttt{"b"} nekaj drugega kot znak \texttt{"B"} in da P
 
 \subsection{Združevanje rezultatov primerjanja}
 
-Pri reševanju naloge z izpisovanjem podatkov o ITM imamo še vedno težave s primerom, kjer morata biti izpolnjena dva pogoja hkrati (\texttt{ITM >= 18.5} in \texttt{ITM <= 25}). Končen pogoj za izvedbo izpisa \texttt{Tvoja telesna masa je ustrezna}, moramo torej sestaviti iz dveh pogojev. Za ta namen lahko uporabimo t.i. \emph{logične operatorje}, ki omogočajo medsebojno združevanje več spremenljivk tipa \texttt{bool}. Osnovna logična operatorja, ki ju bomo uporabljali v takem primeru sta operator \texttt{and} in operator \texttt{or}. Njuno delovanje lahko ponazorimo s spodnjo tabelo:
+Pri reševanju naloge z izpisovanjem podatkov o ITM imamo še vedno težave s primerom, kjer morata biti izpolnjena dva pogoja hkrati (\texttt{ITM >= 18.5} in \texttt{ITM <= 25}). Končen pogoj za izvedbo izpisa \texttt{Tvoja telesna masa je ustrezna}, moramo torej sestaviti iz dveh pogojev. Za ta namen lahko uporabimo t.~i. \emph{logične operatorje}, ki omogočajo medsebojno združevanje več spremenljivk tipa \texttt{bool}. Osnovna logična operatorja, ki ju bomo uporabljali v takem primeru sta operator \texttt{and} in operator \texttt{or}. Njuno delovanje lahko ponazorimo s spodnjo tabelo:
 
 \begin{tabular}{cc|cc}
      \texttt{pogoj1} & \texttt{pogoj2}  & \texttt{pogoj1 and pogoj2} & \texttt{pogoj1 or pogoj2}\\
