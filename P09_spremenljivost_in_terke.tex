@@ -47,17 +47,17 @@ Kaj pa se zgodi, če spremenljivko priredimo drugi spremenljivki, na primer tako
 >>> seznam1 = [1,2,3]
 >>> seznam2 = seznam1
 \end{lstlisting}
-Nekaj podobnega smo srečali že pri klicu funkcije. Spomnimo se, da Python v takem primeru naredi t.~i. \textit{plitvo kopijo} spremenljivke. To pomeni, da vrednost v pomnilniku dobi novo ime. Do dejanskega (\textit{globokega}) kopiranja vrednosti v tem primeru ne pride. To lahko ponazorimo s sliko \ref{img:spremenljivost_2}.
+Nekaj podobnega smo srečali že pri klicu funkcije. Spomnimo se, da Python v takem primeru ne ustvari novih objektov v pomnilniku, ampak naredi povezavo na že obstoječe vrednosti. Imeni si v tem primeru torej delita isto (ne enako) vrednost in kažeta na isto pomnilniško lokacijo. Z drugimi besedami to pomeni, da pri prirejanju spremenljivke drugi spremenljivki vrednost v pomnilniku dobi novo ime. Do dejanskega kopiranja vrednosti v tem primeru ne pride \footnote{Dejansko kopiranje spremenljivke bi lahko izvedli z uporabo vgrajenih funkcij \texttt{copy} oziroma \texttt{deepcopy}. Medtem ko prva naredi kopijo podanega objekta, druga naredi kopije tudi vseh objektov, ki jih podani objekt vsebuje.}. To lahko ponazorimo s sliko \ref{img:spremenljivost_2}.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/spremenljivost_2.pdf}
-    \caption{Ob prireditvi spremenljivke drugi spremenljivki se ustvari plitva kopija spremenljivke.}
+    \caption{Ob prireditvi spremenljivke drugi spremenljivki se obstoječa vrednost v pomnilniku dobi dodatno (novo) ime.}
     \label{img:spremenljivost_2}
 \end{figure}
 Na tak način je delovanje tako s časovnega stališča (hitrost) kot tudi s prostorskega stališča (poraba pomnilnika) bolj varčno. 
 
 \section{Kaj se zgodi ob spreminjanju vrednosti spremenljivk?}
-Kaj pa se zgodi, če vrednost nove (ali pa stare) spremenljivke spremenimo? Vse skupaj zavisi od tega, ali je podatek, ki ga spreminjamo, spremenljiv ali ne. Spomnimo se. Spremenljiv podatek lahko spreminjamo, ko pa pokusimo spremeniti nespremenljiv podatek, se ustvari njegova kopija (globoka), ki odraža narejeno spremembo. Če npr. uporabimo operator \texttt{+=}, bo v primeru spremenljivega podatka spremenjen obstoječ podatek, v primeru nespremenljivega podatka pa bo ustvarjen nov podatek, ki bo odražal narejeno spremembo. 
+Kaj pa se zgodi, če vrednost nove (ali pa stare) spremenljivke spremenimo? Vse skupaj zavisi od tega, ali je podatek, ki ga spreminjamo, spremenljiv ali ne. Spomnimo se. Spremenljiv podatek lahko spreminjamo, ko pa pokusimo spremeniti nespremenljiv podatek, se ustvari njegova kopija, ki odraža narejeno spremembo. Če npr. uporabimo operator \texttt{+=}, bo v primeru spremenljivega podatka spremenjen obstoječ podatek, v primeru nespremenljivega podatka pa bo ustvarjen nov podatek, ki bo odražal narejeno spremembo. 
 
 Kaj pa se zgodi v primeru, da na podatek kaže več imen, kot v scenariju zgoraj. Ali se bo po izvedbi spodnje kode sprememba odražala tudi preko drugih imen podatka? Poglejmo si spodnjo kodo.
 \begin{lstlisting}[language=Python]
@@ -75,13 +75,13 @@ Zanima nas, ali se po spreminjanju spremenljivk \texttt{j}, \texttt{niz2} in \te
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/spremenljivost_3.pdf}
-    \caption{Ob spreminjanju spremenljivih podatkov se spremenijo vse plitve kopije podatka.}
+    \caption{Ob spreminjanju spremenljivega podatka se spremembe odražajo na vseh imenih, ki so povezana s tem podatkom.}
     \label{img:spremenljivost_3}
 \end{figure}
-V primeru, da je podatek spremenljiv, se torej sprememba odraža na vseh spremenljivkah, ki predstavljajo plitve kopije tega podatka. S tem ko v zgornjem zgledu spreminjamo spremenljivko \texttt{seznam2}, spreminjamo tudi spremenljivko \texttt{seznam1}. Po drugi strani spreminjanje spremenljivk \texttt{j} in \texttt{niz2} ustvari globoko kopijo spremenljivk \texttt{j} in \texttt{niz2}, ki odraža narejeno spremembo. Globoka kopija predstavlja nov podatek, tj. podatek, ki se razlikuje od tistega, na katerega kažeta imeni \texttt{i} in \texttt{niz1}. Posledica tega je, da spreminjanje vrednosti spremenljivk \texttt{j} in \texttt{niz2} na vrednosti spremenljivk \texttt{i} in \texttt{niz1} ne vplivajo, saj pripadajo nespremenljivim podatkovnim tipom.
+V primeru, da je podatek spremenljiv, se torej sprememba odraža na vseh spremenljivkah (imenih), ki so povezane s tem podatkom. S tem ko v zgornjem zgledu spreminjamo spremenljivko \texttt{seznam2}, spreminjamo tudi spremenljivko \texttt{seznam1}. Po drugi strani spreminjanje spremenljivk \texttt{j} in \texttt{niz2} ustvari kopijo podatka za spremenljivkama \texttt{j} in \texttt{niz2}, ki odraža narejeno spremembo. Kopija torej predstavlja nov podatek, tj. podatek, ki se razlikuje od tistega, na katerega kažeta imeni \texttt{i} in \texttt{niz1}. Posledica tega je, da spreminjanje vrednosti spremenljivk \texttt{j} in \texttt{niz2} na vrednosti spremenljivk \texttt{i} in \texttt{niz1} ne vplivajo, saj pripadajo nespremenljivim podatkovnim tipom.
 
 \section{Ali funkcije spreminjajo vrednosti svojim argumentom?}
-Spomnimo se, da se ob klicu funkcije ustvari lokalni imenski prostor funkcije. V lokalnem imenskem prostoru se ob klicu spremenljivkam, ki nastopajo kot argumenti funkcije, priredijo vrednosti, s katerimi smo funkcijo poklicali. V primeru, da smo funkcijo poklicali z globalnimi spremenljivkami, se argumentom funkcije priredi plitva kopija teh spremenljivk. Vprašanje pa je, ali se bodo ob spreminjanju argumentov funkcije spremembe odražale tudi izven funkcije, torej po tem, ko se bo funkcija že končala. Vprašanje lahko ponazorimo s spodnjim zgledom.
+Spomnimo se, da se ob klicu funkcije ustvari lokalni imenski prostor funkcije. V lokalnem imenskem prostoru se ob klicu spremenljivkam, ki nastopajo kot argumenti funkcije, priredijo vrednosti, s katerimi smo funkcijo poklicali (podatek, na katerega kažejo globalne spremenljivke, dobi novo ime v obliki lokalne spremenljivke). Pomembno vprašanje je, ali se bodo ob spreminjanju argumentov funkcije spremembe odražale tudi izven funkcije, torej po tem, ko se bo funkcija že končala. Vprašanje lahko ponazorimo s spodnjim zgledom.
 
 \begin{zgled}
 Kakšna je vrednost spremenljivk \texttt{st1}, \texttt{niz1} in \texttt{seznam1} po izvedbi spodnje kode in kakšen bo izpis programa?
@@ -107,7 +107,7 @@ print(seznam1)
 \end{zgled}
 
 \begin{resitev}
-Ob klicu funkcije spremenljivki, s katerima funkcijo pokličemo, dobita plitvi kopiji z imeni \texttt{a} in \texttt{b} v lokalnem imenskem prostoru funkcije. Znotraj funkcije plitvo kopijo z imenom \texttt{a} spreminjamo. V primeru, da je spremenljivka spremenljivega podatkovnega tipa (npr. seznam), se spreminja obstoječ podatek, na katerega kaže tudi globalna spremenljivka, kar pomeni, da se bo sprememba odražala tudi izven funkcije. V primeru, da je spremenljivka nespremenljivega podatkovnega tipa, se ustvari globoka kopija podatka, ki bo odražala narejeno spremembo. Spremeni se torej zgolj spremenljivka, ki je definirana znotraj funkcije, ta sprememba pa izven funkcije ne bo vidna. 
+Ob klicu funkcije se lokalni spremenljivki \texttt{a} in \texttt{b} povežeta z vrednostmi za globalnima spremenljivkama, s katerima smo funkcijo poklicali. Znotraj funkcije spremenljivko z imenom \texttt{a} spreminjamo. V primeru, da je spremenljivka spremenljivega podatkovnega tipa (npr. seznam), se spreminja obstoječ podatek, na katerega kaže tudi globalna spremenljivka, kar pomeni, da se bo sprememba odražala tudi izven funkcije. V primeru, da je spremenljivka nespremenljivega podatkovnega tipa, se ustvari kopija podatka, ki bo odražala narejeno spremembo. Spremeni se torej zgolj spremenljivka, ki je definirana znotraj funkcije, ta sprememba pa izven funkcije ne bo vidna. 
 
 Spremenljivki \texttt{i} in \texttt{niz1} se torej po klicu funkcije ne bosta spremenili, spremenljivka \texttt{seznam1} pa se bo spremenila. Po izvedbi programa bo izpis sledeč:
 
@@ -278,9 +278,9 @@ print(terka1)
 \end{zgled}
 
 \begin{resitev}
-Kot smo videli že prej, se sprememba, ki smo jo nad plitvo kopijo spremenljivke \texttt{seznam1} naredili znotraj funkcije, odraža tudi izven funkcije, saj je seznam spremenljiv podatkovni tip. Ko torej spreminjamo njegovo plitvo kopijo, s tem spreminjamo vse spremenljivke, ki nanj kažejo. 
+Kot smo videli že prej, se sprememba, ki smo jo nad vrednostjo za spremenljivko \texttt{seznam1} naredili znotraj funkcije, odraža tudi izven funkcije, saj je seznam spremenljiv podatkovni tip. Ko torej spreminjamo seznam preko enega izmed njegovih imen, s tem spreminjamo vse spremenljivke, ki na za seznam kažejo. 
 
-Kaj pa se zgodi, ko funkcijo pokličemo s terko. Najprej se ustvari plitva kopija terke v lokalnem imenskem prostoru funkcije (spremenljivka \texttt{a}). Ker je terka nespremenljiv podatkovni tip, je ne moremo spreminjati. Ob njenem spreminjanju se zato ustvari globoka kopija, torej nov podatek v pomnilniku, ki odraža narejeno spremembo. Na ta podatek pa kaže zgolj lokalna spremenljivka \texttt{a}. Ko se funkcija zaključi, njen lokalni imenski prostor skupaj z lokalno spremenljivko \texttt{a} izgine (tako kot tudi spremenjena terka -- globoka kopija terke, s katero smo funkcijo poklicali). V sled temu sprememba, ki smo jo naredili znotraj funkcije, izven funkcije ni vidna.
+Kaj pa se zgodi, ko funkcijo pokličemo s terko. Najprej se na obstoječo terko, ki je že shranjena v pomnilniku in na katero kaže globalna spremenljivka, veže nova lokalna spremenljivka (spremenljivka \texttt{a}). Ker je terka nespremenljiv podatkovni tip, je ne moremo spreminjati. Ob njenem spreminjanju se zato ustvari njena kopija, torej nov podatek v pomnilniku, ki odraža narejeno spremembo. Na ta podatek pa kaže zgolj lokalna spremenljivka \texttt{a}. Ko se funkcija zaključi, njen lokalni imenski prostor skupaj z lokalno spremenljivko \texttt{a} izgine (tako kot tudi spremenjena terka -- kopija terke, s katero smo funkcijo poklicali). V sled temu sprememba, ki smo jo naredili znotraj funkcije, izven funkcije ni vidna.
 
 Po izvedbi funkcije \texttt{spremeni} ima spremenljivka \texttt{seznam1} spremenjeno vrednost (\texttt{[1,2,3,4,5,6]}), spremenljivka \texttt{terka1} pa ostane taka, kot je bila pred klicem funkcije (\texttt{(1,2,3)}). Izpis programa je torej
 \begin{lstlisting}[language=Python]

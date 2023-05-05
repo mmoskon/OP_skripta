@@ -75,18 +75,18 @@ x = 5
 y = 7
 sestej(x,y) # klic funkcije
 \end{lstlisting}
-Vrstice programa od 1, 4 in 5 bi morale biti zdaj že popolnoma jasne. Kaj pa se zgodi, ko program pride do vrstice 6? Ustvari se lokalni imenski prostor funkcije \texttt{sestej}, znotraj katerega bo funkcija ustvarila svoje lokalne spremenljivke. V lokalnem imenskem prostoru se najprej ustvarita lokalni spremenljivki z imeni \texttt{a} in \texttt{b}, ki predstavljata \emph{plitvi} kopiji spremenljivk \texttt{x} in {y}, tj. spremenljivk, s katerimi smo funkcijo poklicali. Enako posledico bi imela prireditev
+Vrstice programa od 1, 4 in 5 bi morale biti zdaj že popolnoma jasne. Kaj pa se zgodi, ko program pride do vrstice 6? Ustvari se lokalni imenski prostor funkcije \texttt{sestej}, znotraj katerega bo funkcija ustvarila svoje lokalne spremenljivke. V lokalnem imenskem prostoru se najprej ustvarita lokalni spremenljivki z imeni \texttt{a} in \texttt{b}, katerima se priredita vrednosti spremenljivk \texttt{x} in {y}, tj. spremenljivk, s katerimi smo funkcijo poklicali. Enako posledico bi imela prireditev
 \begin{lstlisting}[language=Python]
 >>> a = x
 >>> b = y
 \end{lstlisting}
 s to razliko, da bi se imeni \texttt{a} in \texttt{b} ustvarili v globalnem imenskem prostoru.
 
-Plitva kopija pomeni, da vrednost, ki je shranjena v pomnilniku dobi dodatno ime, brez da bi se dejansko kopirala (to bi bila globoka kopija), s čimer smo s pomnilniškim prostorom veliko bolj varčni. O tem bomo še govorili, zaenkrat pa se vrnimo k naši funkciji in njenem lokalnem imenskem prostoru. Situacijo ob klicu funkcije prikazuje slika \ref{img:imenski_prostor_3}.
+Prirejanje vrednosti ene spremenljivki drugi pa je v jeziku Python nekoliko poenostavljeno. Vrednost, ki je že shranjena v pomnilniku v tem primeru namreč zgolj dobi dodatno ime, brez da bi se dejansko kopirala, s čimer smo s pomnilniškim prostorom veliko bolj varčni. Imeni si torej delita isti objekt v pomnilniku. O tem bomo še govorili, zaenkrat pa se vrnimo k naši funkciji in njenem lokalnem imenskem prostoru. Situacijo ob klicu funkcije prikazuje slika \ref{img:imenski_prostor_3}.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{img/imenski_prostor_3.pdf}
-    \caption{Ob klicu funkcije se ustvari njen lokalni imenski prostor znotraj katerega se dodatno ustvarijo plitve kopije vrednosti, s katerimi smo funkcijo poklicali.}
+    \caption{Ob klicu funkcije se ustvari njen lokalni imenski prostor znotraj katerega se ustvarijo lokalna imena, ki kažejo na vrednosti, s katerimi smo funkcijo poklicali.}
     \label{img:imenski_prostor_3}
 \end{figure}
 
