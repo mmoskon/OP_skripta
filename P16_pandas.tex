@@ -2,7 +2,7 @@
 
 \section{Delo s podatki}
 
-Podatkovne vede \angl{data science}, ki se ukvarjajo z manipulacijo in analizo podatkov, so v današnjem času postale nepogrešljive na različnih področjih ne samo znanosti, temveč tudi različnih vej gospodarstva (npr. ciljno oglaševanje, organizacija dela, planiranje procesov) in negospodarstva (npr. zdravstvo in medicina). Podatkovne vede namreč na podlagi zajema in analize (večjih količin) podatkov nudijo podporo procesom odločanja, s čimer lahko razpoložljive vire izkoristimo bolj učinkovito. Kdor zna delati s podatki ima danes službo zagotovljeno, še posebej, če zna ta znanja uporabiti na svojem primarnem strokovnem področju, kot je npr. kemija. 
+Podatkovne vede \angl{data science}, ki se ukvarjajo z manipulacijo in analizo podatkov, so v današnjem času postale nepogrešljive na različnih področjih ne samo znanosti, temveč tudi različnih vej gospodarstva (npr. ciljno oglaševanje, organizacija dela, planiranje procesov) in negospodarstva (npr. zdravstvo in medicina). Podatkovne vede namreč na podlagi zajema in analize (večjih količin) podatkov nudijo podporo procesom odločanja, s čimer lahko razpoložljive vire izkoristimo bolj učinkovito. Kdor zna delati s podatki, ima danes službo zagotovljeno, še posebej, če zna ta znanja uporabiti na svojem primarnem strokovnem področju, kot je npr. kemija. 
 
 Če za bolj resno analizo in manipulacijo podatkov uporabljamo programski jezik Python, bomo slej ko prej pristali na uporabi knjižnice pandas \angl{Python Data Analysis Library}, ki predstavlja moderno in hitro orodje za delo z večjimi količinami podatkov. Delo s knjižnico pandas je namreč v današnjem času postalo sinonim za delo z večjimi količinami podatkov v jeziku Python. V tem poglavju si bomo pogledali par primerov uporabe knjižnice pandas, ki zgolj nakazujejo prednosti uporabe te knjižnice. 
 
@@ -38,7 +38,7 @@ Funkcija \texttt{read\_csv} vrača prebrane podatke v obliki strukture \texttt{d
 3          2014M02\t"Javni sektor"\t1745.63\t1136.41                                                        
 4         2014M02\t"Zasebni sektor"\t1406.47\t922.19  
 \end{lstlisting}
-Tabela še vedno ni \emph{tabela}. Smiselno bi bilo, da prve vrstice z opisom vsebine datoteke, izpustimo (to smo naredili tudi prej), tako da izbirnemu argumentu \texttt{skiprows} priredimo vrednost 2. Zakaj bomo tokrat izpustili 2 vrstici, ko smo datoteko brali z metodo \texttt{read} pa smo izpustili 3? Struktura \texttt{dataframe} bo prvo prebrano vrstico (za izpuščenima dvema vrsticama) uporabila kot glavo tabele. Druga stvar, ki jo moralo našemu bralniku nastaviti je še ločilo oziroma separator, ki je v tem primeru tabulator oziroma znak \texttt{'$\backslash$t'}. Tega nastavimo preko argumenta \texttt{sep}. Poskusimo datoteko še enkrat prebrati:
+Tabela še vedno ni \emph{tabela}. Smiselno bi bilo, da prve vrstice z opisom vsebine datoteke, izpustimo (to smo naredili tudi prej), tako da izbirnemu argumentu \texttt{skiprows} priredimo vrednost 2. Zakaj bomo tokrat izpustili 2 vrstici, ko smo datoteko brali z metodo \texttt{read} pa smo izpustili 3? Struktura \texttt{dataframe} bo prvo prebrano vrstico (za izpuščenima dvema vrsticama) uporabila kot glavo tabele. Druga stvar, ki jo moralo našemu bralniku nastaviti, je še ločilo oziroma separator, ki je v tem primeru tabulator oziroma znak \texttt{'$\backslash$t'}. Tega nastavimo preko argumenta \texttt{sep}. Poskusimo datoteko še enkrat prebrati:
 \begin{lstlisting}[language=python]
 >>> df = pd.read_csv('place.csv', 
                      encoding="cp1250", 
